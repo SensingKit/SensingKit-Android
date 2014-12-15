@@ -53,12 +53,11 @@ SensingKitLibInterface mSensingKitLib = SensingKitLib.getSensingKitLib(this);
 
 ```
 mSensingKitLib.subscribeToSensor(SensorModuleType, new SKSensorDataListener() {
-                @Override
-                public void onDataReceived(final SensorModuleType moduleType, final DataInterface data) {
-                    System.out.println(data);
-                }
-
-            });
+    @Override
+    public void onDataReceived(final SensorModuleType moduleType, final DataInterface data) {
+        System.out.println(data);  // Print data
+    }
+});
 ```
 
 
@@ -74,19 +73,7 @@ mSensingKitLib.stopContinuousSensingWithSensor(SensorModuleType);
 
 - The following sensor modules are currently supported in SensingKit-Android, (located in SensorModuleType enum):
 
-    — ACCELEROMETER
-    — GRAVITY
-    — LINEAR_ACCELERATION
-    — GYROSCOPE
-    — ROTATION
-    — MAGNETOMETER
-    — AMBIENT_TEMPERATURE
-    — STEP_DETECTOR
-    — STEP_COUNTER
-    — LIGHT
-    — LOCATION
-    — ACTIVITY
-    — BATTERY
+ACCELEROMETER, GRAVITY, LINEAR\_ACCELERATION, GYROSCOPE, ROTATION, MAGNETOMETER, AMBIENT\_TEMPERATURE, STEP\_DETECTOR, STEP\_COUNTER, LIGHT, LOCATION, ACTIVITY, BATTERY
 
 
 For a compete description of our API, please refer to the [project website](http://www.sensingkit.org).
