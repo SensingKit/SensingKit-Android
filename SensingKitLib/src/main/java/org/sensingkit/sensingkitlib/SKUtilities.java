@@ -19,38 +19,21 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.model;
+package org.sensingkit.sensingkitlib;
 
-import org.sensingkit.sensingkitlib.modules.SensorModuleType;
+import android.content.Context;
+import android.content.pm.PackageManager;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+public final class SKUtilities {
+    private static final String TAG = "SensingKitUtilities";
 
-public class DataWriter {
+    public static boolean checkPermission(Context context, String permission) throws SKException {
 
-    public DataWriter() {
-
-        // Create current folder
-        String fullFolder = "sdcard" + "/Crowd/" + getFolder();
-        File folder = new File(fullFolder);
-
-        if (!folder.exists()) {
-            folder.mkdir();
+        if (context == null) {
+            throw new SKException(TAG, "Context cannot be null.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-    }
-
-    private String getFolder() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
-        return dateFormat.format(new Date());
-    }
-
-    public void write(String dataPacket, final SensorModuleType SensorModuleType)
-    {
-        //String filename = SensorModuleUtilities.getSensorFilename(sensorModuleType);
-
-        /// TODO: Change this
-        System.out.println("OK");
+        int res = context.checkCallingOrSelfPermission(permission);
+        return (res == PackageManager.PERMISSION_GRANTED);
     }
 }

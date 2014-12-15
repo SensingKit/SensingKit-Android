@@ -19,38 +19,24 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.model;
+package org.sensingkit.sensingkitlib.model.data;
 
-import org.sensingkit.sensingkitlib.modules.SensorModuleType;
+public class GyroscopeData extends AbstractData {
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+    private static final String TAG = "GyroscopeData";
 
-public class DataWriter {
+    protected float x;
+    protected float y;
+    protected float z;
 
-    public DataWriter() {
-
-        // Create current folder
-        String fullFolder = "sdcard" + "/Crowd/" + getFolder();
-        File folder = new File(fullFolder);
-
-        if (!folder.exists()) {
-            folder.mkdir();
-        }
-
+    public GyroscopeData(long timestamp, float x, float y, float z) {
+        this.timestamp = timestamp;
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
-    private String getFolder() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
-        return dateFormat.format(new Date());
-    }
-
-    public void write(String dataPacket, final SensorModuleType SensorModuleType)
-    {
-        //String filename = SensorModuleUtilities.getSensorFilename(sensorModuleType);
-
-        /// TODO: Change this
-        System.out.println("OK");
+    public String getDataInString() {
+        return String.format("%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
     }
 }

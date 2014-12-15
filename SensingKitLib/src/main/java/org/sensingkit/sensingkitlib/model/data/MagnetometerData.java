@@ -19,23 +19,24 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.modules;
+package org.sensingkit.sensingkitlib.model.data;
 
-import android.content.Context;
+public class MagnetometerData extends AbstractData {
 
-import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.model.ModelManager;
-import org.sensingkit.sensingkitlib.model.SensorDataBuffer;
+    private static final String TAG = "MagnetometerData";
 
-public abstract class AbstractSensor implements SensorInterface {
+    protected float x;
+    protected float y;
+    protected float z;
 
-    private static final String TAG = "AbstractSensor";
+    public MagnetometerData(long timestamp, float x, float y, float z) {
+        this.timestamp = timestamp;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
 
-    protected SensorDataBuffer mSensorDataBuffer;
-
-    protected AbstractSensor(final Context context, final SensorType sensorType) throws SKException {
-
-        ModelManager modelManager = ModelManager.getModelManager(context);
-        mSensorDataBuffer = modelManager.createSensorDataBuffer(sensorType);
+    public String getDataInString() {
+        return String.format("%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
     }
 }

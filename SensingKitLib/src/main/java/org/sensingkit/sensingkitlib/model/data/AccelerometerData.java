@@ -19,12 +19,25 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.model;
+package org.sensingkit.sensingkitlib.model.data;
 
-public abstract class AbstractSensorData implements SensorDataInterface
-{
-    private static final String TAG = "AbstractSensorData";
+public class AccelerometerData extends AbstractData {
 
-    protected long timestamp;
+    private static final String TAG = "AccelerometerData";
+
+    protected float x;
+    protected float y;
+    protected float z;
+
+    public AccelerometerData(long timestamp, float x, float y, float z) {
+        this.timestamp = timestamp;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    public String getDataInString() {
+        return String.format("%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
+    }
 
 }

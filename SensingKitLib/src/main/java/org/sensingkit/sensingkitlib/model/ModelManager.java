@@ -26,12 +26,13 @@ import android.os.Handler;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
-import org.sensingkit.sensingkitlib.SensingKitUtilities;
-import org.sensingkit.sensingkitlib.modules.SensorType;
+import org.sensingkit.sensingkitlib.SKUtilities;
+import org.sensingkit.sensingkitlib.modules.SensorModuleType;
 
 import java.util.ArrayList;
 
 public class ModelManager {
+
     private static final String TAG = "ModelManager";
 
     private static ModelManager sModelManager;
@@ -43,6 +44,7 @@ public class ModelManager {
     Handler mHandler = new Handler();
 
     public static ModelManager getModelManager(final Context context) throws SKException {
+
         if (context == null) {
             throw new SKException(TAG, "Context cannot be null.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
@@ -55,9 +57,10 @@ public class ModelManager {
     }
 
     private ModelManager(final Context context) throws SKException {
+
         mApplicationContext = context;
         mDataWriter = new DataWriter();
-        mDataBufferList = new ArrayList<SensorDataBuffer>(10);  // TODO: Make this '10' const dynamic
+        mDataBufferList = new ArrayList<>(10);  // TODO: Make this '10' const dynamic
 
         if (!checkExternalStoragePermission()) {
             throw new SKException(TAG, "External Storage permission does not exist.", SKExceptionErrorCode.UNKNOWN_ERROR);
@@ -66,7 +69,7 @@ public class ModelManager {
 
     private boolean checkExternalStoragePermission() throws SKException {
 
-        return SensingKitUtilities.checkPermission(
+        return SKUtilities.checkPermission(
                 mApplicationContext,
                 "android.permission.WRITE_EXTERNAL_STORAGE");
     }
@@ -79,10 +82,10 @@ public class ModelManager {
         }
     };
 
-    public SensorDataBuffer createSensorDataBuffer(final SensorType sensorType) {
+    public SensorDataBuffer createSensorDataBuffer(final SensorModuleType SensorModuleType) {
 
         // Create the data buffer
-        SensorDataBuffer dataBuffer = new SensorDataBuffer(sensorType);
+        SensorDataBuffer dataBuffer = new SensorDataBuffer(SensorModuleType);
 
         // Add it to the list
         mDataBufferList.add(dataBuffer);
@@ -96,10 +99,10 @@ public class ModelManager {
 
             // Prepare data
             String dataPacket = dataBuffer.flush();
-            SensorType sensorType = dataBuffer.mSensorType;
+            SensorModuleType SensorModuleType = dataBuffer.mSKSensorModuleType;
 
             // Write data
-            mDataWriter.write(dataPacket, sensorType);
+            mDataWriter.write(dataPacket, SensorModuleType);
         }
     }
 

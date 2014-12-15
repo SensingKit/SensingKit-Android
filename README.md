@@ -11,7 +11,7 @@ An Android library that provides Continuous Sensing functionality to your applic
 ./gradlew build
 ```
 
-- Create an app/libs directory inside your project and copy the generated SensingKitLib/build/outputs/aar/SensingKitLib.aar file there.
+- Create an app/libs directory inside your project and copy the generated SensingKitLib/build/outputs/aar/SensingKitLib-release.aar (or the equivalent debug) file there.
 
 - Edit your app/build.gradle file and add a flatDir entry as shown bellow:
 
@@ -29,8 +29,8 @@ repositories {
 ```
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'org.sensingkit:SensingKitLib:0.1@aar'
-    compile 'com.android.support:appcompat-v7:19.+'
+    compile 'org.sensingkit:SensingKitLib-release:0.1@aar'
+    compile 'com.android.support:appcompat-v7:21.0.3’
 }
 ```
 
@@ -43,16 +43,51 @@ dependencies {
 ```
 import org.sensingkit.sensingkitlib.SensingKitLib;
 
-SensingKitLib mSensingKitLib = SensingKitLib.getSensingKitLib(this);
+SensingKitLibInterface mSensingKitLib = SensingKitLib.getSensingKitLib(this);
 ```
+
+
+- Register a sensor data listener as shown bellow:
+
+
+
+```
+mSensingKitLib.subscribeToSensor(SensorModuleType, new SKSensorDataListener() {
+                @Override
+                public void onDataReceived(final SensorModuleType moduleType, final DataInterface data) {
+                    System.out.println(data);
+                }
+
+            });
+```
+
 
 
 - You can Start and Stop the Continuous Sensing using the following commands:
 
 ```
-mSensingKitLib.startSensing();
-mSensingKitLib.stopSensing();
+mSensingKitLib.startContinuousSensingWithSensor(SensorModuleType);
+mSensingKitLib.stopContinuousSensingWithSensor(SensorModuleType);
 ```
+
+
+
+- The following sensor modules are currently supported in SensingKit-Android, (located in SensorModuleType enum):
+
+    — ACCELEROMETER
+    — GRAVITY
+    — LINEAR_ACCELERATION
+    — GYROSCOPE
+    — ROTATION
+    — MAGNETOMETER
+    — AMBIENT_TEMPERATURE
+    — STEP_DETECTOR
+    — STEP_COUNTER
+    — LIGHT
+    — LOCATION
+    — ACTIVITY
+    — BATTERY
+
 
 For a compete description of our API, please refer to the [project website](http://www.sensingkit.org).
 

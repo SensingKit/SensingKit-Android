@@ -19,38 +19,22 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.model;
+package org.sensingkit.sensingkitlib.model.data;
 
-import org.sensingkit.sensingkitlib.modules.SensorModuleType;
+public class StepCounterData extends AbstractData {
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+    private static final String TAG = "StepCounterData";
 
-public class DataWriter {
+    protected float steps;
 
-    public DataWriter() {
+    public StepCounterData(long timestamp, float steps) {
 
-        // Create current folder
-        String fullFolder = "sdcard" + "/Crowd/" + getFolder();
-        File folder = new File(fullFolder);
-
-        if (!folder.exists()) {
-            folder.mkdir();
-        }
-
+        this.timestamp = timestamp;
+        this.steps = steps;
     }
 
-    private String getFolder() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
-        return dateFormat.format(new Date());
+    public String getDataInString() {
+        return String.format("%d,%f", this.timestamp, this.steps);
     }
 
-    public void write(String dataPacket, final SensorModuleType SensorModuleType)
-    {
-        //String filename = SensorModuleUtilities.getSensorFilename(sensorModuleType);
-
-        /// TODO: Change this
-        System.out.println("OK");
-    }
 }

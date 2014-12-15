@@ -21,37 +21,38 @@
 
 package org.sensingkit.sensingkitlib.model;
 
-import org.sensingkit.sensingkitlib.modules.SensorType;
+import org.sensingkit.sensingkitlib.model.data.DataInterface;
+import org.sensingkit.sensingkitlib.modules.SensorModuleType;
 
 import java.util.ArrayList;
 
 public class SensorDataBuffer {
-    protected SensorType mSensorType;
-    protected ArrayList<SensorDataInterface> dataBuffer;
+    protected SensorModuleType mSKSensorModuleType;
+    protected ArrayList<DataInterface> dataBuffer;
 
     private final static String sNewLine = "\n";
 
-    public SensorDataBuffer(final SensorType sensorType) {
-        mSensorType = sensorType;
+    public SensorDataBuffer(final SensorModuleType SensorModuleType) {
+        mSKSensorModuleType = SensorModuleType;
         initBuffer();
     }
 
     private void initBuffer() {
-        dataBuffer = new ArrayList<SensorDataInterface>(100);  // TODO: Make this '100' const dynamic
+        dataBuffer = new ArrayList<DataInterface>(100);  // TODO: Make this '100' const dynamic
     }
 
-    public void addData(SensorDataInterface data) {
+    public void addData(DataInterface data) {
         dataBuffer.add(data);
     }
 
-    public SensorType getMotionSensorType() {
-        return mSensorType;
+    public SensorModuleType getMotionSensorType() {
+        return mSKSensorModuleType;
     }
 
     public String flush() {
 
         // keep a ref to the current dataBuffer
-        ArrayList<SensorDataInterface> dataBuffer = this.dataBuffer;
+        ArrayList<DataInterface> dataBuffer = this.dataBuffer;
 
         // create new buffer
         initBuffer();
@@ -60,7 +61,7 @@ public class SensorDataBuffer {
         return bufferInString(dataBuffer);
     }
 
-    protected String bufferInString(ArrayList<SensorDataInterface> dataBuffer) {
+    protected String bufferInString(ArrayList<DataInterface> dataBuffer) {
 
         // Calculate capacity
         int capacity = dataBuffer.size() * 60;  // TODO: Make this '60' const dynamic
@@ -69,7 +70,7 @@ public class SensorDataBuffer {
         StringBuilder sb = new StringBuilder(capacity);
 
         // Add SensorDara
-        for (SensorDataInterface sensorData : dataBuffer) {
+        for (DataInterface sensorData : dataBuffer) {
             sb.append(sensorData.getDataInString());
             sb.append(sNewLine);
         }

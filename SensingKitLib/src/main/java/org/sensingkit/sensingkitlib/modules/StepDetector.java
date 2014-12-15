@@ -19,21 +19,26 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib;
+package org.sensingkit.sensingkitlib.modules;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
+import android.hardware.SensorEvent;
 
-public final class SensingKitUtilities {
-    private static final String TAG = "SensingKitUtilities";
+import org.sensingkit.sensingkitlib.SKException;
+import org.sensingkit.sensingkitlib.model.data.AbstractData;
+import org.sensingkit.sensingkitlib.model.data.StepDetectorData;
 
-    public static boolean checkPermission(Context context, String permission) throws SKException {
+public class StepDetector extends AbstractNativeSensorModule {
 
-        if (context == null) {
-            throw new SKException(TAG, "Context cannot be null.", SKExceptionErrorCode.UNKNOWN_ERROR);
-        }
+    private static final String TAG = "StepDetector";
 
-        int res = context.checkCallingOrSelfPermission(permission);
-        return (res == PackageManager.PERMISSION_GRANTED);
+    public StepDetector(final Context context) throws SKException {
+        super(context, SensorModuleType.STEP_DETECTOR);
     }
+
+    protected AbstractData buildData(SensorEvent event)
+    {
+        return new StepDetectorData(event.timestamp);
+    }
+
 }

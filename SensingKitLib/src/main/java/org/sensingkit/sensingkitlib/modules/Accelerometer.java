@@ -19,38 +19,26 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.model;
+package org.sensingkit.sensingkitlib.modules;
 
-import org.sensingkit.sensingkitlib.modules.SensorModuleType;
+import android.content.Context;
+import android.hardware.SensorEvent;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.sensingkit.sensingkitlib.SKException;
+import org.sensingkit.sensingkitlib.model.data.AbstractData;
+import org.sensingkit.sensingkitlib.model.data.AccelerometerData;
 
-public class DataWriter {
+public class Accelerometer extends AbstractNativeSensorModule {
 
-    public DataWriter() {
+    private static final String TAG = "Accelerometer";
 
-        // Create current folder
-        String fullFolder = "sdcard" + "/Crowd/" + getFolder();
-        File folder = new File(fullFolder);
-
-        if (!folder.exists()) {
-            folder.mkdir();
-        }
-
+    public Accelerometer(final Context context) throws SKException {
+        super(context, SensorModuleType.ACCELEROMETER);
     }
 
-    private String getFolder() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
-        return dateFormat.format(new Date());
-    }
-
-    public void write(String dataPacket, final SensorModuleType SensorModuleType)
+    protected AbstractData buildData(SensorEvent event)
     {
-        //String filename = SensorModuleUtilities.getSensorFilename(sensorModuleType);
-
-        /// TODO: Change this
-        System.out.println("OK");
+        return new AccelerometerData(event.timestamp, event.values[0], event.values[1], event.values[2]);
     }
+
 }

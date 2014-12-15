@@ -19,35 +19,16 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.modules;
+package org.sensingkit.sensingkitlib.model.data;
 
-import android.hardware.Sensor;
+public abstract class AbstractData implements DataInterface
+{
+    private static final String TAG = "AbstractData";
 
-public final class SensorUtilities {
+    protected long timestamp;
 
-    private static final String TAG = "SensorUtilities";
-
-    public static int getSensorType(SensorType motionSensorType) {
-
-        switch (motionSensorType) {
-            case ACCELEROMETER:
-                return Sensor.TYPE_ACCELEROMETER;
-
-            default:
-                return -1;
-        }
-
-    }
-
-    public static String getSensorFilename(SensorType sensorType) {
-
-        switch (sensorType) {
-            case ACCELEROMETER:
-                return "Accelerometer.csv";
-
-            default:
-                return null;
-        }
+    public String toString() {
+        return this.getDataInString();
     }
 
 }

@@ -19,17 +19,18 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.modules;
+package org.sensingkit.sensingkitlib.model.data;
 
-import android.content.Context;
+public class StepDetectorData extends AbstractData {
 
-import org.sensingkit.sensingkitlib.SKException;
+    private static final String TAG = "StepDetectorData";
 
-public class AccelerometerMotionSensor extends AbstractMotionSensor {
+    public StepDetectorData(long timestamp) {
 
-    private static final String TAG = "AccelerometerMotionSensor";
+        this.timestamp = timestamp;
+    }
 
-    public AccelerometerMotionSensor(final Context context) throws SKException {
-        super(context, SensorType.ACCELEROMETER);
+    public String getDataInString() {
+        return String.format("%d", this.timestamp);
     }
 }

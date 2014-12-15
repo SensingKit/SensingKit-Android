@@ -19,28 +19,13 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.model;
+package org.sensingkit.sensingkitlib;
 
-public class AccelerometerMotionSensorData extends AbstractMotionSensorData {
+import org.sensingkit.sensingkitlib.model.data.DataInterface;
+import org.sensingkit.sensingkitlib.modules.SensorModuleType;
 
-    private static final String TAG = "AccelerometerMotionSensorData";
+public interface SKSensorDataListener {
 
-    protected float x;
-    protected float y;
-    protected float z;
+    public void onDataReceived(final SensorModuleType moduleType, final DataInterface data);
 
-    public AccelerometerMotionSensorData(long timestamp, float x, float y, float z) {
-        this.timestamp = timestamp;
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
-
-    public String getDataInString() {
-        return String.format("%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
-    }
-
-    public String toString() {
-        return this.getDataInString();
-    }
 }

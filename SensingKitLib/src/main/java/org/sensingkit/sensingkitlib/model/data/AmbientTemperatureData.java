@@ -19,8 +19,20 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.model;
+package org.sensingkit.sensingkitlib.model.data;
 
-public interface SensorDataInterface {
-    public String getDataInString();
+public class AmbientTemperatureData extends AbstractData {
+
+    private static final String TAG = "AmbientTemperatureData";
+
+    protected float temperature;
+
+    public AmbientTemperatureData(long timestamp, float temperature) {
+        this.timestamp = timestamp;
+        this.temperature = temperature;
+    }
+
+    public String getDataInString() {
+        return String.format("%d,%f", this.timestamp, this.temperature);
+    }
 }

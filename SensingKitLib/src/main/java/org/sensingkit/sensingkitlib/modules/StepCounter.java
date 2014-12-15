@@ -21,5 +21,24 @@
 
 package org.sensingkit.sensingkitlib.modules;
 
-public interface SensorInterface {
+import android.content.Context;
+import android.hardware.SensorEvent;
+
+import org.sensingkit.sensingkitlib.SKException;
+import org.sensingkit.sensingkitlib.model.data.AbstractData;
+import org.sensingkit.sensingkitlib.model.data.StepCounterData;
+
+public class StepCounter extends AbstractNativeSensorModule {
+
+    private static final String TAG = "StepCounter";
+
+    public StepCounter(final Context context) throws SKException {
+        super(context, SensorModuleType.STEP_COUNTER);
+    }
+
+    protected AbstractData buildData(SensorEvent event)
+    {
+        return new StepCounterData(event.timestamp, event.values[0]);
+    }
+
 }

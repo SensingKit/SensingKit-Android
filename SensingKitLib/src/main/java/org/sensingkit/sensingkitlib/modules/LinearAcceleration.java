@@ -19,9 +19,25 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.model;
+package org.sensingkit.sensingkitlib.modules;
 
-public abstract class AbstractMotionSensorData extends AbstractSensorData
-{
-    private static final String TAG = "AbstractMotionSensorData";
+import android.content.Context;
+import android.hardware.SensorEvent;
+
+import org.sensingkit.sensingkitlib.SKException;
+import org.sensingkit.sensingkitlib.model.data.AbstractData;
+import org.sensingkit.sensingkitlib.model.data.LinearAccelerationData;
+
+public class LinearAcceleration extends AbstractNativeSensorModule {
+
+    private static final String TAG = "LinearAcceleration";
+
+    public LinearAcceleration(final Context context) throws SKException {
+        super(context, SensorModuleType.LINEAR_ACCELERATION);
+    }
+
+    protected AbstractData buildData(SensorEvent event)
+    {
+        return new LinearAccelerationData(event.timestamp, event.values[0], event.values[1], event.values[2]);
+    }
 }

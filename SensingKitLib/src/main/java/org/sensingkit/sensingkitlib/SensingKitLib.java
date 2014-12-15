@@ -24,11 +24,11 @@ package org.sensingkit.sensingkitlib;
 import android.content.Context;
 import android.os.PowerManager;
 
-import org.sensingkit.sensingkitlib.model.ModelManager;
-import org.sensingkit.sensingkitlib.modules.SensorManager;
+import org.sensingkit.sensingkitlib.modules.SensorModuleType;
+import org.sensingkit.sensingkitlib.modules.SensorModuleManager;
 
-@SuppressWarnings("unused")
-public class SensingKitLib {
+public class SensingKitLib implements SensingKitLibInterface {
+
     private static final String TAG = "SensingKitLib";
 
     private static SensingKitLib sSensingKitLib;
@@ -36,11 +36,10 @@ public class SensingKitLib {
     private final Context mApplicationContext;
     private PowerManager.WakeLock mWakeLock;
 
-    private ModelManager mModelManager;
-    private SensorManager mSensorManager;
+    private SensorModuleManager mSensorModuleManager;
 
     @SuppressWarnings("unused")
-    public static SensingKitLib getSensingKitLib(final Context context) throws SKException {
+    public static SensingKitLibInterface getSensingKitLib(final Context context) throws SKException {
         if (context == null) {
             throw new SKException(TAG, "Context cannot be null", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
@@ -54,9 +53,42 @@ public class SensingKitLib {
 
     private SensingKitLib(final Context context) throws SKException {
         mApplicationContext = context;
-        mModelManager = ModelManager.getModelManager(context);
-        mSensorManager = SensorManager.getSensorManager(context);
+        mSensorModuleManager = SensorModuleManager.getSensorManager(context);
     }
+
+    public void getDataFromSensor(SensorModuleType moduleType) throws SKException {
+        mSensorModuleManager.getDataFromSensor(moduleType);
+    }
+
+    public void subscribeToSensor(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
+        mSensorModuleManager.subscribeToSensor(moduleType, dataListener);
+    }
+
+    public void unsubscribeFromSensor(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
+        mSensorModuleManager.unsubscribeFromSensor(moduleType, dataListener);
+    }
+
+    public void unsubscribeAllFromSensor(SensorModuleType moduleType) throws SKException {
+        mSensorModuleManager.unsubscribeAllFromSensor(moduleType);
+    }
+
+    public void startContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException {
+        mSensorModuleManager.startContinuousSensingWithSensor(moduleType);
+    }
+
+    public void stopContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException {
+        mSensorModuleManager.stopContinuousSensingWithSensor(moduleType);
+    }
+
+    public void pauseContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException {
+        mSensorModuleManager.pauseContinuousSensingWithSensor(moduleType);
+    }
+
+    public void unpauseContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException {
+        mSensorModuleManager.unpauseContinuousSensingWithSensor(moduleType);
+    }
+
+    //region Wake Lock methods
 
     private void acquireWakeLock() {
         if ((mWakeLock == null) || (!mWakeLock.isHeld())) {
@@ -72,35 +104,11 @@ public class SensingKitLib {
         }
     }
 
-    @SuppressWarnings("unused")
-    public void startSensing() throws SKException {
-        if (checkWakeLockPermission()) {
-            acquireWakeLock();
-        } else {
-            throw new SKException(TAG, "WakeLock permission does not exist.", SKExceptionErrorCode.UNKNOWN_ERROR);
-        }
-
-        // Start Sensing
-        mSensorManager.startSensing();
-
-        // Start Auto Flushing
-        mModelManager.startAutoFlushing();
-    }
-
-    @SuppressWarnings("unused")
-    public void stopSensing() {
-        // Stop Sensing
-        mSensorManager.stopSensing();
-
-        // Stop Auto Flushing
-        mModelManager.stopAutoFlushing();
-
-        releaseWakeLock();
-    }
-
     private boolean checkWakeLockPermission() throws SKException {
-        return SensingKitUtilities.checkPermission(
+        return SKUtilities.checkPermission(
                 mApplicationContext,
                 "android.permission.WAKE_LOCK");
     }
+
+    //endregion
 }

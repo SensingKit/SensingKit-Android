@@ -19,38 +19,25 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.model;
+package org.sensingkit.sensingkitlib.modules;
 
-import org.sensingkit.sensingkitlib.modules.SensorModuleType;
+import android.content.Context;
+import android.hardware.SensorEvent;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.sensingkit.sensingkitlib.SKException;
+import org.sensingkit.sensingkitlib.model.data.AbstractData;
+import org.sensingkit.sensingkitlib.model.data.RotationData;
 
-public class DataWriter {
+public class Rotation extends AbstractNativeSensorModule {
 
-    public DataWriter() {
+    private static final String TAG = "Rotation";
 
-        // Create current folder
-        String fullFolder = "sdcard" + "/Crowd/" + getFolder();
-        File folder = new File(fullFolder);
-
-        if (!folder.exists()) {
-            folder.mkdir();
-        }
-
+    public Rotation(final Context context) throws SKException {
+        super(context, SensorModuleType.ROTATION);
     }
 
-    private String getFolder() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
-        return dateFormat.format(new Date());
-    }
-
-    public void write(String dataPacket, final SensorModuleType SensorModuleType)
+    protected AbstractData buildData(SensorEvent event)
     {
-        //String filename = SensorModuleUtilities.getSensorFilename(sensorModuleType);
-
-        /// TODO: Change this
-        System.out.println("OK");
+        return new RotationData(event.timestamp, event.values[0], event.values[1], event.values[2], event.values[3], event.values[4]);
     }
 }
