@@ -3,6 +3,24 @@
 An Android library that provides Continuous Sensing functionality to your applications. For more information, please refer to the [project website](http://www.sensingkit.org).
 
 
+## Supported Sensors
+
+The following sensor modules are currently supported in SensingKit-Android, (located in [SensorModuleType](SensingKitLib/src/main/java/org/sensingkit/sensingkitlib/modules/SensorModuleType.java) enum):
+
+- Accelerometer
+- Gravity
+- Linear Acceleration
+- Gyroscope
+- Rotation
+- Magnetometer
+- Ambient Temperature
+- Step Detector
+- Step Counter
+- Light
+- Location
+- Activity
+- Battery
+
 ## Configuring the Library
 
 - Build the library using the command:
@@ -40,7 +58,7 @@ dependencies {
 
 
 
-```
+```java
 import org.sensingkit.sensingkitlib.SensingKitLib;
 
 SensingKitLibInterface mSensingKitLib = SensingKitLib.getSensingKitLib(this);
@@ -51,7 +69,7 @@ SensingKitLibInterface mSensingKitLib = SensingKitLib.getSensingKitLib(this);
 
 
 
-```
+```java
 mSensingKitLib.subscribeToSensor(SensorModuleType, new SKSensorDataListener() {
     @Override
     public void onDataReceived(final SensorModuleType moduleType, final DataInterface data) {
@@ -64,16 +82,11 @@ mSensingKitLib.subscribeToSensor(SensorModuleType, new SKSensorDataListener() {
 
 - You can Start and Stop the Continuous Sensing using the following commands:
 
-```
+```java
 mSensingKitLib.startContinuousSensingWithSensor(SensorModuleType);
 mSensingKitLib.stopContinuousSensingWithSensor(SensorModuleType);
 ```
 
-
-
-- The following sensor modules are currently supported in SensingKit-Android, (located in SensorModuleType enum):
-
-ACCELEROMETER, GRAVITY, LINEAR\_ACCELERATION, GYROSCOPE, ROTATION, MAGNETOMETER, AMBIENT\_TEMPERATURE, STEP\_DETECTOR, STEP\_COUNTER, LIGHT, LOCATION, ACTIVITY, BATTERY
 
 
 For a compete description of our API, please refer to the [project website](http://www.sensingkit.org).
