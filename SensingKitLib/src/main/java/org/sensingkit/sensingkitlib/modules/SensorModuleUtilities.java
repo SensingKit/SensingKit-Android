@@ -28,7 +28,56 @@ public final class SensorModuleUtilities {
 
     private static final String TAG = "SensorModuleUtilities";
 
-    /*public static String getSensorFilename(SensorModuleType SensorModuleType) throws SKException {
+    public static String getSensorModuleInString(SensorModuleType moduleType) throws SKException {
+
+        switch (moduleType) {
+
+            case ACCELEROMETER:
+                return "Accelerometer";
+
+            case GRAVITY:
+                return "Gravity";
+
+            case LINEAR_ACCELERATION:
+                return "Linear Acceleration";
+
+            case GYROSCOPE:
+                return "Gyroscope";
+
+            case ROTATION:
+                return "Rotation";
+
+            case MAGNETOMETER:
+                return "Magnetometer";
+
+            case AMBIENT_TEMPERATURE:
+                return "Ambient Temperature";
+
+            case STEP_DETECTOR:
+                return "Step Detector";
+
+            case STEP_COUNTER:
+                return "Step Counter";
+
+            case LIGHT:
+                return "Light";
+
+            case LOCATION:
+                return "Location";
+
+            case ACTIVITY:
+                return "Activity";
+
+            case BATTERY:
+                return "Battery";
+
+            default:
+                throw new SKException(TAG, "Unknown SensorModule", SKExceptionErrorCode.UNKNOWN_ERROR);
+        }
+
+    }
+
+    /*public static String getSensorModuleFilename(SensorModuleType SensorModuleType) throws SKException {
 
         switch (SensorModuleType) {
 

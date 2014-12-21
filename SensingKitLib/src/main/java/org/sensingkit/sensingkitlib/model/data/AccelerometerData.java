@@ -40,4 +40,19 @@ public class AccelerometerData extends AbstractData {
         return String.format("%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
     }
 
+    @SuppressWarnings("unused")
+    public float getX() {
+        return this.x;
+    }
+
+    @SuppressWarnings("unused")
+    public float getY() {
+        return this.y;
+    }
+
+    @SuppressWarnings("unused")
+    public float getZ() {
+        return this.z;
+    }
+
 }

@@ -35,4 +35,10 @@ public class AmbientTemperatureData extends AbstractData {
     public String getDataInString() {
         return String.format("%d,%f", this.timestamp, this.temperature);
     }
+
+    @SuppressWarnings("unused")
+    public float getTemperature() {
+        return this.temperature;
+    }
+
 }

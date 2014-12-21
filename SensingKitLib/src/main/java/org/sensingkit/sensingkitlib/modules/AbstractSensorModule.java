@@ -34,7 +34,7 @@ public abstract class AbstractSensorModule implements SensorModuleInterface {
 
     private static final String TAG = "AbstractSensorModule";
 
-    private final Context mApplicationContext;
+    protected final Context mApplicationContext;
     protected SensorModuleType moduleType;
     protected boolean isSensing = false;
     protected List<SKSensorDataListener> callbackList;
@@ -62,6 +62,10 @@ public abstract class AbstractSensorModule implements SensorModuleInterface {
         }
 
         // Register the callback
+        if (this.callbackList.contains(callback)) {
+            throw new SKException(TAG, "Callback already registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
+        }
+
         this.callbackList.add(callback);
     }
 

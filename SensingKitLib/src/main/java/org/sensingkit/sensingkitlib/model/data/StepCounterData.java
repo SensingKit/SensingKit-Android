@@ -37,4 +37,9 @@ public class StepCounterData extends AbstractData {
         return String.format("%d,%f", this.timestamp, this.steps);
     }
 
+    @SuppressWarnings("unused")
+    public float getSteps() {
+        return this.steps;
+    }
+
 }

@@ -37,4 +37,9 @@ public class LightData extends AbstractData {
         return String.format("%d,%f", this.timestamp, this.light);
     }
 
+    @SuppressWarnings("unused")
+    public float getLight() {
+        return this.light;
+    }
+
 }

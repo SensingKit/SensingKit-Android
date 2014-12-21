@@ -21,16 +21,73 @@
 
 package org.sensingkit.sensingkitlib.model.data;
 
+import com.google.android.gms.location.DetectedActivity;
+
 public class ActivityData extends AbstractData {
 
     private static final String TAG = "ActivityData";
 
-    public ActivityData(long timestamp) {
+    protected int activityType;
+    protected int confidence;
+
+    public ActivityData(long timestamp, int activityType, int confidence) {
 
         this.timestamp = timestamp;
+        this.activityType = activityType;
+        this.confidence = confidence;
     }
 
     public String getDataInString() {
-        return String.format("%d", this.timestamp);
+        return String.format("%d,%d,%s,%d", this.timestamp, this.activityType, getActivityString(), this.confidence);
     }
+
+    @SuppressWarnings("unused")
+    public int getActivityType() {
+        return this.activityType;
+    }
+
+    @SuppressWarnings("unused")
+    public int getConfidence() {
+        return this.confidence;
+    }
+
+    @SuppressWarnings("unused")
+    public String getActivityString() {
+        return getNameFromActivityType(this.activityType);
+    }
+
+    public static String getNameFromActivityType(int activityType) {
+
+        switch (activityType) {
+
+            case DetectedActivity.IN_VEHICLE:
+                return "in_vehicle";
+
+            case DetectedActivity.ON_BICYCLE:
+                return "on_bicycle";
+
+            case DetectedActivity.ON_FOOT:
+                return "on_foot";
+
+            case DetectedActivity.STILL:
+                return "still";
+
+            case DetectedActivity.UNKNOWN:
+                return "unknown";
+
+            case DetectedActivity.TILTING:
+                return "tilting";
+
+            case DetectedActivity.WALKING:
+                return "walking";
+
+            case DetectedActivity.RUNNING:
+                return "running";
+
+            default:
+                return "unsupported";
+        }
+
+    }
+
 }

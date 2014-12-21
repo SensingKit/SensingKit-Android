@@ -43,4 +43,30 @@ public class RotationData extends AbstractData {
     public String getDataInString() {
         return String.format("%d,%f,%f,%f,%f,%f", this.timestamp, this.x, this.y, this.z, this.cos, this.headingAccuracy);
     }
+
+    @SuppressWarnings("unused")
+    public float getX() {
+        return this.x;
+    }
+
+    @SuppressWarnings("unused")
+     public float getY() {
+        return this.y;
+    }
+
+    @SuppressWarnings("unused")
+    public float getZ() {
+        return this.z;
+    }
+
+    @SuppressWarnings("unused")
+    public float getCos() {
+        return this.cos;
+    }
+
+    @SuppressWarnings("unused")
+    public float getHeadingAccuracy() {
+        return this.headingAccuracy;
+    }
+
 }

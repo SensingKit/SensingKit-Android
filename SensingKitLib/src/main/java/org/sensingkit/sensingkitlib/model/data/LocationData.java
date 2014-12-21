@@ -21,17 +21,28 @@
 
 package org.sensingkit.sensingkitlib.model.data;
 
+import android.location.Location;
+
+
 public class LocationData extends AbstractData {
 
     private static final String TAG = "LocationData";
 
-    public LocationData(long timestamp) {
+    protected Location location;
+
+    public LocationData(long timestamp, Location location) {
 
         this.timestamp = timestamp;
+        this.location = location;
     }
 
     public String getDataInString() {
-        return String.format("%d", this.timestamp);
+        return String.format("%d,%s", this.timestamp, this.location);
+    }
+
+    @SuppressWarnings("unused")
+    public Location getLocation() {
+        return location;
     }
 
 }
