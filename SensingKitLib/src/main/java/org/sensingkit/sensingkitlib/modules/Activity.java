@@ -39,7 +39,6 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
 import org.sensingkit.sensingkitlib.model.data.ActivityData;
 import org.sensingkit.sensingkitlib.model.data.DataInterface;
-import org.sensingkit.sensingkitlib.model.data.LocationData;
 
 public class Activity extends AbstractGoogleServicesSensorModule {
 
