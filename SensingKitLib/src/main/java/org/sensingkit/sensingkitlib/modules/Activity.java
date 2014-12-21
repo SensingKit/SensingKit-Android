@@ -127,6 +127,7 @@ public class Activity extends AbstractGoogleServicesSensorModule {
 
         mActivityRecognition.removeActivityUpdates(mClient, mRecognitionPendingIntent);
         mRecognitionPendingIntent.cancel();
+        mRecognitionPendingIntent = null;
     }
 
     private void registerLocalBroadcastManager() {
