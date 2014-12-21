@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.model.data;
 
 public abstract class AbstractData implements DataInterface
 {
+    @SuppressWarnings("unused")
     private static final String TAG = "AbstractData";
 
     protected long timestamp;

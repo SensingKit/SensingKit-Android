@@ -30,6 +30,7 @@ import org.sensingkit.sensingkitlib.model.data.StepCounterData;
 
 public class StepCounter extends AbstractNativeSensorModule {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "StepCounter";
 
     public StepCounter(final Context context) throws SKException {

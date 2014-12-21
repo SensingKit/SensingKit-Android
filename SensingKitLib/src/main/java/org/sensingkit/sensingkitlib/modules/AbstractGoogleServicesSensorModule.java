@@ -33,6 +33,7 @@ import org.sensingkit.sensingkitlib.SKException;
 
 public abstract class AbstractGoogleServicesSensorModule extends AbstractSensorModule implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "AbstractGoogleServicesSensorModule";
 
     protected GoogleApiClient mClient;

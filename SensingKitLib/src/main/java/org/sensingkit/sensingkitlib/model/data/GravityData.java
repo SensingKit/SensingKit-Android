@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.model.data;
 
 public class GravityData extends AbstractData {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "GravityData";
 
     protected float x;

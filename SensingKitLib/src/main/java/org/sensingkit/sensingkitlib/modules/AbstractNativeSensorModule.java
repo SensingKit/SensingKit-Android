@@ -36,6 +36,7 @@ import org.sensingkit.sensingkitlib.model.data.DataInterface;
 
 public abstract class AbstractNativeSensorModule extends AbstractSensorModule {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "AbstractNativeSensorModule";
 
     private final SensorManager mSensorManager;

@@ -30,6 +30,7 @@ import org.sensingkit.sensingkitlib.model.data.AccelerometerData;
 
 public class Accelerometer extends AbstractNativeSensorModule {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "Accelerometer";
 
     public Accelerometer(final Context context) throws SKException {

@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.model.data;
 
 public class LightData extends AbstractData {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "LightData";
 
     protected float light;

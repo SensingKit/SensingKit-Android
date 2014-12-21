@@ -22,4 +22,8 @@
 package org.sensingkit.sensingkitlib.modules;
 
 public class Battery {
+
+    @SuppressWarnings("unused")
+    private static final String TAG = "Battery";
+
 }

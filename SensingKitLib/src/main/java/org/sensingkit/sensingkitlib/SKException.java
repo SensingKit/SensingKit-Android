@@ -22,6 +22,7 @@
 package org.sensingkit.sensingkitlib;
 
 public class SKException extends Exception {
+
     private final SKExceptionErrorCode errorCode;
     private final String TAG;
 

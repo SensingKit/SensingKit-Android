@@ -42,6 +42,7 @@ import org.sensingkit.sensingkitlib.model.data.DataInterface;
 
 public class Activity extends AbstractGoogleServicesSensorModule {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "Activity";
 
     private ActivityRecognitionApi mActivityRecognition;

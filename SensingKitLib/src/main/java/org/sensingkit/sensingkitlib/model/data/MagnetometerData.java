@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.model.data;
 
 public class MagnetometerData extends AbstractData {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "MagnetometerData";
 
     protected float x;

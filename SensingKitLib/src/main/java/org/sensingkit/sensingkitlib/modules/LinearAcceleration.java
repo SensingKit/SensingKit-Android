@@ -30,6 +30,7 @@ import org.sensingkit.sensingkitlib.model.data.LinearAccelerationData;
 
 public class LinearAcceleration extends AbstractNativeSensorModule {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "LinearAcceleration";
 
     public LinearAcceleration(final Context context) throws SKException {

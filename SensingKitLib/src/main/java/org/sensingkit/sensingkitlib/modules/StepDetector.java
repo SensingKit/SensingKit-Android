@@ -30,6 +30,7 @@ import org.sensingkit.sensingkitlib.model.data.StepDetectorData;
 
 public class StepDetector extends AbstractNativeSensorModule {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "StepDetector";
 
     public StepDetector(final Context context) throws SKException {

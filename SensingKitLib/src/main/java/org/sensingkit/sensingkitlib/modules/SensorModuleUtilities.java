@@ -26,6 +26,7 @@ import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 
 public final class SensorModuleUtilities {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "SensorModuleUtilities";
 
     public static String getSensorModuleInString(SensorModuleType moduleType) throws SKException {

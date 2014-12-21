@@ -25,6 +25,7 @@ import com.google.android.gms.location.DetectedActivity;
 
 public class ActivityData extends AbstractData {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "ActivityData";
 
     protected int activityType;

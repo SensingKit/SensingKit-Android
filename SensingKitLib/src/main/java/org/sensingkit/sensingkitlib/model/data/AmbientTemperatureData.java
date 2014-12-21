@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.model.data;
 
 public class AmbientTemperatureData extends AbstractData {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "AmbientTemperatureData";
 
     protected float temperature;

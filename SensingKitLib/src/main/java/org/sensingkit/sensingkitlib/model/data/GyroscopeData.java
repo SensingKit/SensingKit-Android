@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.model.data;
 
 public class GyroscopeData extends AbstractData {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "GyroscopeData";
 
     protected float x;

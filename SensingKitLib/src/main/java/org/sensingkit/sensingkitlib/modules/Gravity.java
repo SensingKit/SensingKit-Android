@@ -30,6 +30,7 @@ import org.sensingkit.sensingkitlib.model.data.GravityData;
 
 public class Gravity extends AbstractNativeSensorModule {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "Gravity";
 
     public Gravity(final Context context) throws SKException {

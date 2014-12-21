@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.model.data;
 
 public class LinearAccelerationData extends AbstractData {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "LinearAccelerationData";
 
     protected float x;

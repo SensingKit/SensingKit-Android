@@ -36,6 +36,7 @@ import org.sensingkit.sensingkitlib.model.data.LocationData;
 
 public class Location extends AbstractGoogleServicesSensorModule implements LocationListener {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "Location";
 
     public Location(final Context context) throws SKException {

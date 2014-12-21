@@ -30,6 +30,7 @@ import org.sensingkit.sensingkitlib.model.data.MagnetometerData;
 
 public class Magnetometer extends AbstractNativeSensorModule {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "Magnetometer";
 
     public Magnetometer(final Context context) throws SKException {

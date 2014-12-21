@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.model.data;
 
 public class StepCounterData extends AbstractData {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "StepCounterData";
 
     protected float steps;

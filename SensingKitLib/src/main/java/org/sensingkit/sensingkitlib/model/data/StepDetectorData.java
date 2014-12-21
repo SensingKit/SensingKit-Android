@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.model.data;
 
 public class StepDetectorData extends AbstractData {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "StepDetectorData";
 
     public StepDetectorData(long timestamp) {

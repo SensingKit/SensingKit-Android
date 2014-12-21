@@ -33,6 +33,7 @@ import java.util.ArrayList;
 
 public class ModelManager {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "ModelManager";
 
     private static ModelManager sModelManager;

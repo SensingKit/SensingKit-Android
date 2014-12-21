@@ -24,13 +24,12 @@ package org.sensingkit.sensingkitlib.modules;
 import android.app.IntentService;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
 import com.google.android.gms.location.ActivityRecognitionResult;
-import com.google.android.gms.location.DetectedActivity;
 
 public class ActivityRecognitionIntentService extends IntentService {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "ActivityRecognitionIntentService";
 
     public static final String RECOGNITION_RESULT = "result";

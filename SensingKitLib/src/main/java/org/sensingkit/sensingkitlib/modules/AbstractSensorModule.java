@@ -32,6 +32,7 @@ import java.util.List;
 
 public abstract class AbstractSensorModule implements SensorModuleInterface {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "AbstractSensorModule";
 
     protected final Context mApplicationContext;

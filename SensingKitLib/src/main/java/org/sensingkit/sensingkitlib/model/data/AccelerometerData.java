@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.model.data;
 
 public class AccelerometerData extends AbstractData {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "AccelerometerData";
 
     protected float x;

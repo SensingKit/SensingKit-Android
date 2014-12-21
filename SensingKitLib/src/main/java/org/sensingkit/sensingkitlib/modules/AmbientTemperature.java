@@ -30,6 +30,7 @@ import org.sensingkit.sensingkitlib.model.data.AmbientTemperatureData;
 
 public class AmbientTemperature extends AbstractNativeSensorModule {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "AmbientTemperature";
 
     public AmbientTemperature(final Context context) throws SKException {

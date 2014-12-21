@@ -25,6 +25,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 
 public final class SKUtilities {
+
+    @SuppressWarnings("unused")
     private static final String TAG = "SensingKitUtilities";
 
     public static boolean checkPermission(Context context, String permission) throws SKException {

@@ -30,6 +30,7 @@ import org.sensingkit.sensingkitlib.model.data.RotationData;
 
 public class Rotation extends AbstractNativeSensorModule {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "Rotation";
 
     public Rotation(final Context context) throws SKException {

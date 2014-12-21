@@ -29,6 +29,7 @@ import org.sensingkit.sensingkitlib.modules.SensorModuleManager;
 
 public class SensingKitLib implements SensingKitLibInterface {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "SensingKitLib";
 
     private static SensingKitLib sSensingKitLib;

@@ -26,6 +26,7 @@ import org.sensingkit.sensingkitlib.SKSensorDataListener;
 
 public interface SensorModuleInterface {
 
+    @SuppressWarnings("unused")
     public SensorModuleType getSensorType();
 
     public boolean startSensing();

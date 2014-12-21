@@ -30,6 +30,7 @@ import org.sensingkit.sensingkitlib.model.data.LightData;
 
 public class Light extends AbstractNativeSensorModule {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "Light";
 
     public Light(final Context context) throws SKException {

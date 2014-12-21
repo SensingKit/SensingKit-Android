@@ -30,6 +30,7 @@ import org.sensingkit.sensingkitlib.model.data.GyroscopeData;
 
 public class Gyroscope extends AbstractNativeSensorModule {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "Gyroscope";
 
     public Gyroscope(final Context context) throws SKException {

@@ -33,6 +33,7 @@ import org.sensingkit.sensingkitlib.modules.SensorModuleUtilities;
 
 public class SensorModuleManager {
 
+    @SuppressWarnings("unused")
     private static final String TAG = "SensorModuleManager";
 
     private static final int TOTAL_SENSOR_MODULES = 13;
