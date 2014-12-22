@@ -90,7 +90,7 @@ mSensingKitLib.stopContinuousSensingWithSensor(SensorModuleType);
 
 
 
-For a compete description of our API, please refer to the [project website](http://www.sensingkit.org).
+For a complete description of our API, please refer to the [project website](http://www.sensingkit.org).
 
 ## License
 
