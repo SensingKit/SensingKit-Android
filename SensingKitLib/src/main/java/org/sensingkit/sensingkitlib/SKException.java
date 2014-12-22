@@ -32,10 +32,12 @@ public class SKException extends Exception {
         this.errorCode = errorCode;
     }
 
+    @SuppressWarnings("unused")
     public SKExceptionErrorCode getErrorCode() {
         return this.errorCode;
     }
 
+    @SuppressWarnings("unused")
     public String getTAG() {
         return this.TAG;
     }

@@ -36,6 +36,7 @@ public abstract class AbstractData implements DataInterface
         return this.getDataInString();
     }
 
+    @SuppressWarnings("unused")
     public long getTimestamp() {
         return timestamp;
     }

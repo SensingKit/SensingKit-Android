@@ -38,8 +38,8 @@ public abstract class AbstractGoogleServicesSensorModule extends AbstractSensorM
 
     protected GoogleApiClient mClient;
 
-    protected AbstractGoogleServicesSensorModule(final Context context, final SensorModuleType sensorType) throws SKException {
-        super(context, sensorType);
+    protected AbstractGoogleServicesSensorModule(final Context context, final SensorModuleType sensorModuleType) throws SKException {
+        super(context, sensorModuleType);
 
 
     }
