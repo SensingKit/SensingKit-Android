@@ -30,7 +30,8 @@ public class LightData extends AbstractData {
 
     public LightData(long timestamp, float light) {
 
-        this.timestamp = timestamp;
+        super(timestamp);
+
         this.light = light;
     }
 

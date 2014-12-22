@@ -29,7 +29,9 @@ public class AmbientTemperatureData extends AbstractData {
     protected float temperature;
 
     public AmbientTemperatureData(long timestamp, float temperature) {
-        this.timestamp = timestamp;
+
+        super(timestamp);
+
         this.temperature = temperature;
     }
 

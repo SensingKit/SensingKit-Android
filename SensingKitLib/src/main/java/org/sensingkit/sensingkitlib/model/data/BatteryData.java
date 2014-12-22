@@ -21,17 +21,160 @@
 
 package org.sensingkit.sensingkitlib.model.data;
 
+import android.os.BatteryManager;
+
+import static android.os.BatteryManager.*;
+
 public class BatteryData extends AbstractData {
 
     @SuppressWarnings("unused")
     private static final String TAG = "BatteryData";
 
-    public BatteryData(long timestamp) {
+    private float level;
+    private int temperature;
+    private int voltage;
+    private int plugged;
+    private int status;
+    private int health;
 
-        this.timestamp = timestamp;
+    public BatteryData(long timestamp, int level, int scale, int temperature, int voltage, int plugged, int status, int health) {
+
+        super(timestamp);
+
+        // Calculate the level: level/scale
+        if (level >= 0 && scale > 0) {
+            this.level = level / (float)scale;
+        }
+        else {
+            this.level = 0;
+        }
+
+        this.temperature = temperature;
+        this.voltage = voltage;
+        this.plugged = plugged;
+        this.status = status;
+        this.health = health;
     }
 
     public String getDataInString() {
-        return String.format("%d", this.timestamp);
+        return String.format("%d,%f,%d,%d,%s,%s,%s", this.timestamp, this.level, this.temperature, this.voltage, getPluggedString(), getBatteryStatusString(), getBatteryHealthString());
     }
+
+    @SuppressWarnings("unused")
+    public float getLevel() {
+        return this.level;
+    }
+
+    @SuppressWarnings("unused")
+    public int getTemperature() {
+        return this.temperature;
+    }
+
+    @SuppressWarnings("unused")
+    public int getVoltage() {
+        return this.voltage;
+    }
+
+    @SuppressWarnings("unused")
+    public int getPlugged() {
+        return this.plugged;
+    }
+
+    @SuppressWarnings("unused")
+    public int getBatteryStatus() {
+        return this.status;
+    }
+
+    @SuppressWarnings("unused")
+    public int getBatteryHealth() {
+        return this.health;
+    }
+
+    @SuppressWarnings("unused")
+    public String getPluggedString() {
+        return getPluggedString(this.plugged);
+    }
+
+    @SuppressWarnings("unused")
+    public String getBatteryStatusString() {
+        return getBatteryStatusString(this.status);
+    }
+
+    @SuppressWarnings("unused")
+    public String getBatteryHealthString() {
+        return getBatteryHealthString(this.health);
+    }
+
+    private static String getPluggedString(int pluggedType) {
+
+        switch (pluggedType) {
+
+            case BATTERY_PLUGGED_USB:
+                return "usb";
+
+            case BATTERY_PLUGGED_AC:
+                return "ac";
+
+            case BATTERY_PLUGGED_WIRELESS:
+                return "wireless";
+
+            default:
+                return "unknown";
+        }
+    }
+
+    private static String getBatteryStatusString(int status) {
+
+        switch (status) {
+
+            case BatteryManager.BATTERY_STATUS_CHARGING:
+                return "charging";
+
+            case BatteryManager.BATTERY_STATUS_DISCHARGING:
+                return "discharging";
+
+            case BatteryManager.BATTERY_STATUS_FULL:
+                return "full";
+
+            case BatteryManager.BATTERY_STATUS_NOT_CHARGING:
+                return "not Charging";
+
+            case BatteryManager.BATTERY_STATUS_UNKNOWN:
+                return "unknown";
+
+            default:
+                return "unsupported";
+        }
+    }
+
+    private String getBatteryHealthString(int health) {
+
+        switch (health) {
+
+            case BatteryManager.BATTERY_HEALTH_COLD:
+                return "cold";
+
+            case BatteryManager.BATTERY_HEALTH_DEAD:
+                return "dead";
+
+            case BatteryManager.BATTERY_HEALTH_GOOD:
+                return "good";
+
+            case BatteryManager.BATTERY_HEALTH_OVERHEAT:
+                return "over heat";
+
+            case BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE:
+                return "over voltage";
+
+            case BatteryManager.BATTERY_HEALTH_UNKNOWN:
+                return "unknown";
+
+            case BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE:
+                return "failure";
+
+            default:
+                return "unsupported";
+        }
+    }
+
 }

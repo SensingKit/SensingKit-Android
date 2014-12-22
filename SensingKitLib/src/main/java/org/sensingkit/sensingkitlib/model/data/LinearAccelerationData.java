@@ -31,7 +31,9 @@ public class LinearAccelerationData extends AbstractData {
     protected float z;
 
     public LinearAccelerationData(long timestamp, float x, float y, float z) {
-        this.timestamp = timestamp;
+
+        super(timestamp);
+
         this.x = x;
         this.y = y;
         this.z = z;

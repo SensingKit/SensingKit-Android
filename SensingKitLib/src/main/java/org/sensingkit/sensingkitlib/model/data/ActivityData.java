@@ -33,7 +33,8 @@ public class ActivityData extends AbstractData {
 
     public ActivityData(long timestamp, int activityType, int confidence) {
 
-        this.timestamp = timestamp;
+        super(timestamp);
+
         this.activityType = activityType;
         this.confidence = confidence;
     }

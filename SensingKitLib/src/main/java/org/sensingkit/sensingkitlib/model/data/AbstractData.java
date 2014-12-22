@@ -28,6 +28,10 @@ public abstract class AbstractData implements DataInterface
 
     protected long timestamp;
 
+    public AbstractData(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public String toString() {
         return this.getDataInString();
     }

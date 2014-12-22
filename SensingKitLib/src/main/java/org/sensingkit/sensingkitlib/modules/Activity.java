@@ -63,6 +63,7 @@ public class Activity extends AbstractGoogleServicesSensorModule {
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
+
                 ActivityRecognitionResult result = intent.getParcelableExtra(ActivityRecognitionIntentService.RECOGNITION_RESULT);
 
                 // Get the most probable activity from the list of activities in the update

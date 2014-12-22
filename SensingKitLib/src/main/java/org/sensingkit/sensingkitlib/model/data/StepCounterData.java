@@ -30,7 +30,8 @@ public class StepCounterData extends AbstractData {
 
     public StepCounterData(long timestamp, float steps) {
 
-        this.timestamp = timestamp;
+        super(timestamp);
+
         this.steps = steps;
     }
 

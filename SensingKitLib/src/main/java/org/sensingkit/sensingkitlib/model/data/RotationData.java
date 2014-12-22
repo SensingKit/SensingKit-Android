@@ -33,7 +33,9 @@ public class RotationData extends AbstractData {
     protected float headingAccuracy;
 
     public RotationData(long timestamp, float x, float y, float z, float cos, float headingAccuracy) {
-        this.timestamp = timestamp;
+
+        super(timestamp);
+
         this.x = x;
         this.y = y;
         this.z = z;

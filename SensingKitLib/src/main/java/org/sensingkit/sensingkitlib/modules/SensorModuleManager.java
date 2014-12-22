@@ -154,9 +154,8 @@ public class SensorModuleManager {
                 break;
 
             case BATTERY:
-                throw new SKException(TAG, "SensorModule will be supported soon.", SKExceptionErrorCode.UNKNOWN_ERROR);
-                //sensorModule = new Battery(mApplicationContext);
-                //break;
+                sensorModule = new Battery(mApplicationContext);
+                break;
 
             default:
                 throw new SKException(TAG, "Unknown SensorModule", SKExceptionErrorCode.UNKNOWN_ERROR);

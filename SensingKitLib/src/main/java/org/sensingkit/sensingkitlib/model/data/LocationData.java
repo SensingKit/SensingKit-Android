@@ -33,7 +33,8 @@ public class LocationData extends AbstractData {
 
     public LocationData(long timestamp, Location location) {
 
-        this.timestamp = timestamp;
+        super(timestamp);
+
         this.location = location;
     }
 

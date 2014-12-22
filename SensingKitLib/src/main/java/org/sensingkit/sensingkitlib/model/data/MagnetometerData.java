@@ -31,7 +31,9 @@ public class MagnetometerData extends AbstractData {
     protected float z;
 
     public MagnetometerData(long timestamp, float x, float y, float z) {
-        this.timestamp = timestamp;
+
+        super(timestamp);
+
         this.x = x;
         this.y = y;
         this.z = z;

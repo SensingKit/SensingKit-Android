@@ -31,7 +31,9 @@ public class GyroscopeData extends AbstractData {
     protected float z;
 
     public GyroscopeData(long timestamp, float x, float y, float z) {
-        this.timestamp = timestamp;
+
+        super(timestamp);
+
         this.x = x;
         this.y = y;
         this.z = z;

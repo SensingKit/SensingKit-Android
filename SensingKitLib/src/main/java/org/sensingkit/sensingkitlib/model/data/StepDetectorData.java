@@ -28,7 +28,7 @@ public class StepDetectorData extends AbstractData {
 
     public StepDetectorData(long timestamp) {
 
-        this.timestamp = timestamp;
+        super(timestamp);
     }
 
     public String getDataInString() {
