@@ -130,7 +130,7 @@ public class SensorModuleManager {
                 break;
 
             case AMBIENT_TEMPERATURE:
-                sensorModule = new Accelerometer(mApplicationContext);
+                sensorModule = new AmbientTemperature(mApplicationContext);
                 break;
 
             case STEP_DETECTOR:
