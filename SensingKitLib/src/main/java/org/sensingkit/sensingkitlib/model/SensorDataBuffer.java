@@ -38,7 +38,7 @@ public class SensorDataBuffer {
     }
 
     private void initBuffer() {
-        dataBuffer = new ArrayList<DataInterface>(100);  // TODO: Make this '100' const dynamic
+        dataBuffer = new ArrayList<>(100);  // TODO: Make this '100' const dynamic
     }
 
     public void addData(DataInterface data) {
