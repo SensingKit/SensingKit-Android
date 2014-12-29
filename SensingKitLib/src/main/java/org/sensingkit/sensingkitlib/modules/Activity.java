@@ -76,7 +76,7 @@ public class Activity extends AbstractGoogleServicesSensorModule {
                 int confidence = mostProbableActivity.getConfidence();
 
                 // Build the data object
-                DataInterface data = new ActivityData(result.getTime(), activityType, confidence);
+                DataInterface data = new ActivityData(System.currentTimeMillis(), activityType, confidence);
 
                 // CallBack with data as parameter
                 for (SKSensorDataListener callback : callbackList) {

@@ -39,7 +39,7 @@ public class Light extends AbstractNativeSensorModule {
 
     protected AbstractData buildData(SensorEvent event)
     {
-        return new LightData(event.timestamp, event.values[0]);
+        return new LightData(System.currentTimeMillis(), event.values[0]);
     }
 
 }

@@ -39,6 +39,6 @@ public class LinearAcceleration extends AbstractNativeSensorModule {
 
     protected AbstractData buildData(SensorEvent event)
     {
-        return new LinearAccelerationData(event.timestamp, event.values[0], event.values[1], event.values[2]);
+        return new LinearAccelerationData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
     }
 }

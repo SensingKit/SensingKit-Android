@@ -39,6 +39,6 @@ public class AmbientTemperature extends AbstractNativeSensorModule {
 
     protected AbstractData buildData(SensorEvent event)
     {
-        return new AmbientTemperatureData(event.timestamp, event.values[0]);
+        return new AmbientTemperatureData(System.currentTimeMillis(), event.values[0]);
     }
 }

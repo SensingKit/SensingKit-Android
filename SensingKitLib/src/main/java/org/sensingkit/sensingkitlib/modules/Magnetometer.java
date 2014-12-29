@@ -39,6 +39,6 @@ public class Magnetometer extends AbstractNativeSensorModule {
 
     protected AbstractData buildData(SensorEvent event)
     {
-        return new MagnetometerData(event.timestamp, event.values[0], event.values[1], event.values[2]);
+        return new MagnetometerData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
     }
 }

@@ -39,7 +39,7 @@ public class StepCounter extends AbstractNativeSensorModule {
 
     protected AbstractData buildData(SensorEvent event)
     {
-        return new StepCounterData(event.timestamp, event.values[0]);
+        return new StepCounterData(System.currentTimeMillis(), event.values[0]);
     }
 
 }

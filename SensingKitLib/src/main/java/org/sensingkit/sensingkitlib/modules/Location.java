@@ -78,7 +78,7 @@ public class Location extends AbstractGoogleServicesSensorModule implements Loca
     public void onLocationChanged(android.location.Location location) {
 
         // Build the data object
-        DataInterface data = new LocationData(location.getTime(), location);
+        DataInterface data = new LocationData(System.currentTimeMillis(), location);
 
         // CallBack with data as parameter
         for (SKSensorDataListener callback : callbackList) {

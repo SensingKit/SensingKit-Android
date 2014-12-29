@@ -39,7 +39,7 @@ public class StepDetector extends AbstractNativeSensorModule {
 
     protected AbstractData buildData(SensorEvent event)
     {
-        return new StepDetectorData(event.timestamp);
+        return new StepDetectorData(System.currentTimeMillis());
     }
 
 }
