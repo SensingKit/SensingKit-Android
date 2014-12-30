@@ -40,7 +40,7 @@ public class Location extends AbstractGoogleServicesSensorModule implements Loca
     private static final String TAG = "Location";
 
     public Location(final Context context) throws SKException {
-        super(context, SensorModuleType.ACTIVITY);
+        super(context, SensorModuleType.LOCATION);
 
         mClient = new GoogleApiClient.Builder(context)
                 .addApi(LocationServices.API)
