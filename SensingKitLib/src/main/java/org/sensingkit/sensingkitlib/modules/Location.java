@@ -84,9 +84,12 @@ public class Location extends AbstractGoogleServicesSensorModule implements Loca
         // If there is a significant change
         if (shouldPostSensorData(data)) {
 
-            // CallBack with data as parameter
-            for (SKSensorDataListener callback : callbackList) {
-                callback.onDataReceived(moduleType, data);
+            if (callbackList != null) {
+
+                // CallBack with data as parameter
+                for (SKSensorDataListener callback : callbackList) {
+                    callback.onDataReceived(moduleType, data);
+                }
             }
         }
     }

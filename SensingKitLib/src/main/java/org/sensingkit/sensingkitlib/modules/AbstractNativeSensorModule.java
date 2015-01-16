@@ -64,9 +64,12 @@ public abstract class AbstractNativeSensorModule extends AbstractSensorModule {
                 // If there is a significant change
                 if (shouldPostSensorData(data)) {
 
-                    // CallBack with data as parameter
-                    for (SKSensorDataListener callback : callbackList) {
-                        callback.onDataReceived(sensorType, data);
+                    if (callbackList != null) {
+
+                        // CallBack with data as parameter
+                        for (SKSensorDataListener callback : callbackList) {
+                            callback.onDataReceived(sensorType, data);
+                        }
                     }
                 }
             }

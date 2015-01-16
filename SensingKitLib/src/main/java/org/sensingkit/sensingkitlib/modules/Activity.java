@@ -82,11 +82,15 @@ public class Activity extends AbstractGoogleServicesSensorModule {
                 // Build the data object
                 AbstractData data = new ActivityData(System.currentTimeMillis(), activityType, confidence);
 
+                // If there is a significant change
                 if (shouldPostSensorData(data)) {
 
-                    // CallBack with data as parameter
-                    for (SKSensorDataListener callback : callbackList) {
-                        callback.onDataReceived(moduleType, data);
+                    if (callbackList != null) {
+
+                        // CallBack with data as parameter
+                        for (SKSensorDataListener callback : callbackList) {
+                            callback.onDataReceived(moduleType, data);
+                        }
                     }
                 }
             }
