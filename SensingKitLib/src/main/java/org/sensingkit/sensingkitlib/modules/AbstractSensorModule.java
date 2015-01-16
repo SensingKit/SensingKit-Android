@@ -26,6 +26,7 @@ import android.content.Context;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
+import org.sensingkit.sensingkitlib.model.data.AbstractData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,5 +86,7 @@ public abstract class AbstractSensorModule implements SensorModuleInterface {
            this.callbackList.clear();
        }
     }
+
+    protected abstract boolean shouldPostSensorData(AbstractData data);
 
 }

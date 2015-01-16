@@ -42,4 +42,10 @@ public class StepCounter extends AbstractNativeSensorModule {
         return new StepCounterData(System.currentTimeMillis(), event.values[0]);
     }
 
+    protected boolean shouldPostSensorData(AbstractData data) {
+
+        // Always post sensor data
+        return true;
+    }
+
 }

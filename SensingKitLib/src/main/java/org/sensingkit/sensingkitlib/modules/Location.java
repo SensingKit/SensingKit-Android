@@ -31,6 +31,7 @@ import com.google.android.gms.location.LocationServices;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
+import org.sensingkit.sensingkitlib.model.data.AbstractData;
 import org.sensingkit.sensingkitlib.model.data.DataInterface;
 import org.sensingkit.sensingkitlib.model.data.LocationData;
 
@@ -100,4 +101,11 @@ public class Location extends AbstractGoogleServicesSensorModule implements Loca
         LocationServices.FusedLocationApi.removeLocationUpdates(mClient, this);
 
     }
+
+    protected boolean shouldPostSensorData(AbstractData data) {
+
+        // Always post sensor data
+        return true;
+    }
+    
 }

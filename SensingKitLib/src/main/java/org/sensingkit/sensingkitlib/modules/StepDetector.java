@@ -42,4 +42,10 @@ public class StepDetector extends AbstractNativeSensorModule {
         return new StepDetectorData(System.currentTimeMillis());
     }
 
+    protected boolean shouldPostSensorData(AbstractData data) {
+
+        // Always post sensor data
+        return true;
+    }
+
 }

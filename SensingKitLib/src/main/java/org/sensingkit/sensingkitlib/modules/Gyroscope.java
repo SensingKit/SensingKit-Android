@@ -41,4 +41,10 @@ public class Gyroscope extends AbstractNativeSensorModule {
     {
         return new GyroscopeData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
     }
+
+    protected boolean shouldPostSensorData(AbstractData data) {
+
+        // Always post sensor data
+        return true;
+    }
 }

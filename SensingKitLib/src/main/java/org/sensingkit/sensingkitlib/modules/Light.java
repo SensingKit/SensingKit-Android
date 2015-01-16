@@ -30,6 +30,8 @@ import org.sensingkit.sensingkitlib.model.data.LightData;
 
 public class Light extends AbstractNativeSensorModule {
 
+    private float lastLightSensed = Float.MAX_VALUE;
+
     @SuppressWarnings("unused")
     private static final String TAG = "Light";
 
@@ -40,6 +42,28 @@ public class Light extends AbstractNativeSensorModule {
     protected AbstractData buildData(SensorEvent event)
     {
         return new LightData(System.currentTimeMillis(), event.values[0]);
+    }
+
+    protected boolean shouldPostSensorData(AbstractData data) {
+
+        // Only post when light value changes
+
+        float light = ((LightData)data).getLight();
+
+        boolean shouldPost = (lastLightSensed != light);
+
+        if (shouldPost) {
+            this.lastLightSensed = light;
+        }
+
+        return shouldPost;
+    }
+
+    public void stopSensing() {
+
+        super.stopSensing();
+
+        lastLightSensed = Float.MAX_VALUE;
     }
 
 }

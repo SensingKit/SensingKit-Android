@@ -41,4 +41,10 @@ public class Rotation extends AbstractNativeSensorModule {
     {
         return new RotationData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2], event.values[3], event.values[4]);
     }
+
+    protected boolean shouldPostSensorData(AbstractData data) {
+
+        // Always post sensor data
+        return true;
+    }
 }
