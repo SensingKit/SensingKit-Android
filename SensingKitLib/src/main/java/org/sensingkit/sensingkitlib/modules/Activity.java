@@ -39,7 +39,6 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
 import org.sensingkit.sensingkitlib.model.data.AbstractData;
 import org.sensingkit.sensingkitlib.model.data.ActivityData;
-import org.sensingkit.sensingkitlib.model.data.DataInterface;
 
 public class Activity extends AbstractGoogleServicesSensorModule {
 
@@ -49,6 +48,10 @@ public class Activity extends AbstractGoogleServicesSensorModule {
     private ActivityRecognitionApi mActivityRecognition;
     private PendingIntent mRecognitionPendingIntent;
     private BroadcastReceiver broadcastReceiver;
+
+    // Last data sensed
+    private int lastActivityTypeSensed = Integer.MAX_VALUE;
+    private int lastConfidenceSensed = Integer.MAX_VALUE;
 
     public Activity(final Context context) throws SKException {
         super(context, SensorModuleType.ACTIVITY);
@@ -77,11 +80,14 @@ public class Activity extends AbstractGoogleServicesSensorModule {
                 int confidence = mostProbableActivity.getConfidence();
 
                 // Build the data object
-                DataInterface data = new ActivityData(System.currentTimeMillis(), activityType, confidence);
+                AbstractData data = new ActivityData(System.currentTimeMillis(), activityType, confidence);
 
-                // CallBack with data as parameter
-                for (SKSensorDataListener callback : callbackList) {
-                    callback.onDataReceived(moduleType, data);
+                if (shouldPostSensorData(data)) {
+
+                    // CallBack with data as parameter
+                    for (SKSensorDataListener callback : callbackList) {
+                        callback.onDataReceived(moduleType, data);
+                    }
                 }
             }
         };
@@ -104,6 +110,10 @@ public class Activity extends AbstractGoogleServicesSensorModule {
         mClient.disconnect();
 
         this.isSensing = false;
+
+        // Clear last sensed values
+        lastActivityTypeSensed = Integer.MAX_VALUE;
+        lastConfidenceSensed = Integer.MAX_VALUE;
     }
 
     @Override
@@ -144,8 +154,22 @@ public class Activity extends AbstractGoogleServicesSensorModule {
 
     protected boolean shouldPostSensorData(AbstractData data) {
 
-        // Always post sensor data
-        return true;
+        // Only post when specific values changed
+
+        int activityType = ((ActivityData)data).getActivityType();
+        int confidence = ((ActivityData)data).getConfidence();
+
+        // Ignore Temperature and Voltage
+        boolean shouldPost = (lastActivityTypeSensed != activityType ||
+                              lastConfidenceSensed != confidence );
+
+        if (shouldPost) {
+
+            this.lastActivityTypeSensed = activityType;
+            this.lastConfidenceSensed = confidence;
+        }
+
+        return shouldPost;
     }
 
 }
