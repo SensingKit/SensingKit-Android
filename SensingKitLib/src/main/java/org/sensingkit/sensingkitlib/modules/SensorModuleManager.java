@@ -29,8 +29,6 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
 
-import org.sensingkit.sensingkitlib.modules.SensorModuleUtilities;
-
 public class SensorModuleManager {
 
     @SuppressWarnings("unused")

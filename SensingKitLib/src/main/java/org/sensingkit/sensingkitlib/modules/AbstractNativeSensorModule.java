@@ -32,7 +32,6 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
 import org.sensingkit.sensingkitlib.model.data.AbstractData;
-import org.sensingkit.sensingkitlib.model.data.DataInterface;
 
 public abstract class AbstractNativeSensorModule extends AbstractSensorModule {
 
