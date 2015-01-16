@@ -63,6 +63,7 @@ public class Light extends AbstractNativeSensorModule {
 
         super.stopSensing();
 
+        // Clear last sensed values
         lastLightSensed = Float.MAX_VALUE;
     }
 

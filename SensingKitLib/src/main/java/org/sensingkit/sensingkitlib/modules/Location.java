@@ -107,5 +107,5 @@ public class Location extends AbstractGoogleServicesSensorModule implements Loca
         // Always post sensor data
         return true;
     }
-    
+
 }

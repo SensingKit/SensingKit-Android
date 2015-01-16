@@ -30,7 +30,9 @@ public class BatteryData extends AbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = "BatteryData";
 
-    private float level;
+    //private float level;
+    private int level;
+    private int scale;
     private int temperature;
     private int voltage;
     private int plugged;
@@ -41,14 +43,8 @@ public class BatteryData extends AbstractData {
 
         super(timestamp);
 
-        // Calculate the level: level/scale
-        if (level >= 0 && scale > 0) {
-            this.level = level / (float)scale;
-        }
-        else {
-            this.level = 0;
-        }
-
+        this.level = level;
+        this.scale = scale;
         this.temperature = temperature;
         this.voltage = voltage;
         this.plugged = plugged;
@@ -57,12 +53,29 @@ public class BatteryData extends AbstractData {
     }
 
     public String getDataInString() {
-        return String.format("%d,%f,%d,%d,%s,%s,%s", this.timestamp, this.level, this.temperature, this.voltage, getPluggedString(), getBatteryStatusString(), getBatteryHealthString());
+        return String.format("%d,%f,%d,%d,%s,%s,%s", this.timestamp, this.getLevelRatio(), this.temperature, this.voltage, getPluggedString(), getBatteryStatusString(), getBatteryHealthString());
     }
 
     @SuppressWarnings("unused")
-    public float getLevel() {
+    public float getLevelRatio() {
+
+        // Calculate the level: level/scale
+        if (level >= 0 && scale > 0) {
+            return level / (float)scale;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public int getLevel() {
         return this.level;
+    }
+
+    @SuppressWarnings("unused")
+    public int getScale() {
+        return this.scale;
     }
 
     @SuppressWarnings("unused")

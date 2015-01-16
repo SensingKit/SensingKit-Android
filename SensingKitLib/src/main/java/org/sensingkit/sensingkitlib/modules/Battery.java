@@ -30,9 +30,17 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
 import org.sensingkit.sensingkitlib.model.data.AbstractData;
 import org.sensingkit.sensingkitlib.model.data.BatteryData;
-import org.sensingkit.sensingkitlib.model.data.DataInterface;
 
 public class Battery extends AbstractSensorModule {
+
+    // Last data sensed
+    private int lastLevelSensed = Integer.MAX_VALUE;
+    private int lastScaleSensed = Integer.MAX_VALUE;
+    private int lastTemperatureSensed = Integer.MAX_VALUE;
+    private int lastVoltageSensed = Integer.MAX_VALUE;
+    private int lastPluggedSensed = Integer.MAX_VALUE;
+    private int lastStatusSensed = Integer.MAX_VALUE;
+    private int lastHealthSensed = Integer.MAX_VALUE;
 
     @SuppressWarnings("unused")
     private static final String TAG = "Battery";
@@ -56,11 +64,14 @@ public class Battery extends AbstractSensorModule {
                 int health = intent.getIntExtra("health", 0);
 
                 // Build the data object
-                DataInterface data = new BatteryData(System.currentTimeMillis(), level, scale, temperature, voltage, plugged, status, health);
+                AbstractData data = new BatteryData(System.currentTimeMillis(), level, scale, temperature, voltage, plugged, status, health);
 
-                // CallBack with data as parameter
-                for (SKSensorDataListener callback : callbackList) {
-                    callback.onDataReceived(moduleType, data);
+                if (shouldPostSensorData(data)) {
+
+                    // CallBack with data as parameter
+                    for (SKSensorDataListener callback : callbackList) {
+                        callback.onDataReceived(moduleType, data);
+                    }
                 }
             }
         };
@@ -80,6 +91,15 @@ public class Battery extends AbstractSensorModule {
         unregisterLocalBroadcastManager();
 
         this.isSensing = false;
+
+        // Clear last sensed values
+        lastLevelSensed = Integer.MAX_VALUE;
+        lastScaleSensed = Integer.MAX_VALUE;
+        lastTemperatureSensed = Integer.MAX_VALUE;
+        lastVoltageSensed = Integer.MAX_VALUE;
+        lastPluggedSensed = Integer.MAX_VALUE;
+        lastStatusSensed = Integer.MAX_VALUE;
+        lastHealthSensed = Integer.MAX_VALUE;
     }
 
     private void registerLocalBroadcastManager() {
@@ -93,8 +113,35 @@ public class Battery extends AbstractSensorModule {
 
     protected boolean shouldPostSensorData(AbstractData data) {
 
-        // Always post sensor data
-        return true;
+        // Only post when specific values changed
+
+        int level = ((BatteryData)data).getLevel();
+        int scale = ((BatteryData)data).getScale();
+        int temperature = ((BatteryData)data).getTemperature();
+        int voltage = ((BatteryData)data).getVoltage();
+        int plugged = ((BatteryData)data).getPlugged();
+        int status = ((BatteryData)data).getBatteryStatus();
+        int health = ((BatteryData)data).getBatteryHealth();
+
+        // Ignore Temperature and Voltage
+        boolean shouldPost = (lastLevelSensed != level ||
+                              lastScaleSensed != scale ||
+                              lastPluggedSensed != plugged ||
+                              lastStatusSensed != status ||
+                              lastHealthSensed != health );
+
+        if (shouldPost) {
+
+            this.lastLevelSensed = level;
+            this.lastScaleSensed = scale;
+            this.lastTemperatureSensed = temperature;
+            this.lastVoltageSensed = voltage;
+            this.lastPluggedSensed = plugged;
+            this.lastStatusSensed = status;
+            this.lastHealthSensed = health;
+        }
+
+        return shouldPost;
     }
 
 }
