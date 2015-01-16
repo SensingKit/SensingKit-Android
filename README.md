@@ -5,7 +5,7 @@ An Android library that provides Continuous Sensing functionality to your applic
 
 ## Supported Sensors
 
-The following sensor modules are currently supported in SensingKit-Android, (located in [SensorModuleType](SensingKitLib/src/main/java/org/sensingkit/sensingkitlib/modules/SensorModuleType.java) enum):
+The following sensor modules are currently supported in SensingKit-Android, (listed in [SensorModuleType](SensingKitLib/src/main/java/org/sensingkit/sensingkitlib/modules/SensorModuleType.java) enum):
 
 - Accelerometer
 - Gravity
