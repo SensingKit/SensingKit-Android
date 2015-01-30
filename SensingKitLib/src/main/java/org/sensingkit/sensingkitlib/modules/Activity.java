@@ -70,17 +70,17 @@ public class Activity extends AbstractGoogleServicesSensorModule {
 
                 ActivityRecognitionResult result = intent.getParcelableExtra(ActivityRecognitionIntentService.RECOGNITION_RESULT);
 
-                // Get the most probable activity from the list of activities in the update
-                DetectedActivity mostProbableActivity = result.getMostProbableActivity();
+                // Get activity from the list of activities
+                DetectedActivity activity = getActivity(result);
 
                 // Get the type of activity
-                int activityType = mostProbableActivity.getType();
+                int activityType = activity.getType();
 
                 // Get the confidence percentage for the most probable activity
-                int confidence = mostProbableActivity.getConfidence();
+                int confidence = activity.getConfidence();
 
                 // Build the data object
-                AbstractData data = new ActivityData(System.currentTimeMillis(), activityType, confidence);
+                AbstractData data = new ActivityData(result.getTime(), activityType, confidence);
 
                 // If there is a significant change
                 if (shouldPostSensorData(data)) {
@@ -95,6 +95,33 @@ public class Activity extends AbstractGoogleServicesSensorModule {
                 }
             }
         };
+    }
+
+    private DetectedActivity getActivity(ActivityRecognitionResult result) {
+
+        // Get the most probable activity from the list of activities in the result
+        DetectedActivity mostProbableActivity = result.getMostProbableActivity();
+
+        // If the activity is ON_FOOT, choose between WALKING or RUNNING
+        if (mostProbableActivity.getType() == DetectedActivity.ON_FOOT) {
+
+            // Iterate through all possible activities. The activities are sorted by most probable activity first.
+            for (DetectedActivity activity : result.getProbableActivities()) {
+
+                if (activity.getType() == DetectedActivity.WALKING || activity.getType() == DetectedActivity.RUNNING) {
+                    return activity;
+                }
+            }
+
+            // It is ON_FOOT, but not sure if it is WALKING or RUNNING
+            Log.i(TAG, "Activity ON_FOOT, but not sure if it is WALKING or RUNNING.");
+            return mostProbableActivity;
+        }
+        else
+        {
+            return mostProbableActivity;
+        }
+
     }
 
     public boolean startSensing() {
