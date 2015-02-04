@@ -34,5 +34,6 @@ public enum SensorModuleType {
     LIGHT,
     LOCATION,
     ACTIVITY,
-    BATTERY
+    BATTERY,
+    SCREEN_STATUS
 }

@@ -72,6 +72,9 @@ public final class SensorModuleUtilities {
             case BATTERY:
                 return "Battery";
 
+            case SCREEN_STATUS:
+                return "Screen Status";
+
             default:
                 throw new SKException(TAG, "Unknown SensorModule", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
