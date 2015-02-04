@@ -43,6 +43,7 @@ public class RotationData extends AbstractData {
         this.headingAccuracy = headingAccuracy;
     }
 
+    @Override
     public String getDataInString() {
         return String.format("%d,%f,%f,%f,%f,%f", this.timestamp, this.x, this.y, this.z, this.cos, this.headingAccuracy);
     }

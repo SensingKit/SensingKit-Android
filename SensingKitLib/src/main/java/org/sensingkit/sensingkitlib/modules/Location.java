@@ -50,6 +50,7 @@ public class Location extends AbstractGoogleServicesSensorModule implements Loca
                 .build();
     }
 
+    @Override
     public boolean startSensing() {
 
         this.isSensing = true;
@@ -59,6 +60,7 @@ public class Location extends AbstractGoogleServicesSensorModule implements Loca
         return true;
     }
 
+    @Override
     public void stopSensing() {
 
         unregisterForLocationUpdates();
@@ -109,6 +111,7 @@ public class Location extends AbstractGoogleServicesSensorModule implements Loca
 
     }
 
+    @Override
     protected boolean shouldPostSensorData(AbstractData data) {
 
         // Always post sensor data

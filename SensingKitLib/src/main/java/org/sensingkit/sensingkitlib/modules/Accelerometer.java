@@ -37,11 +37,13 @@ public class Accelerometer extends AbstractNativeSensorModule {
         super(context, SensorModuleType.ACCELEROMETER);
     }
 
+    @Override
     protected AbstractData buildData(SensorEvent event)
     {
         return new AccelerometerData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
     }
 
+    @Override
     protected boolean shouldPostSensorData(AbstractData data) {
 
         // Always post sensor data

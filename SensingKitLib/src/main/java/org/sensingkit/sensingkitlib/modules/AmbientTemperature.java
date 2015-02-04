@@ -37,11 +37,13 @@ public class AmbientTemperature extends AbstractNativeSensorModule {
         super(context, SensorModuleType.AMBIENT_TEMPERATURE);
     }
 
+    @Override
     protected AbstractData buildData(SensorEvent event)
     {
         return new AmbientTemperatureData(System.currentTimeMillis(), event.values[0]);
     }
 
+    @Override
     protected boolean shouldPostSensorData(AbstractData data) {
 
         // Always post sensor data

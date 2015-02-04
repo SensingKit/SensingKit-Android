@@ -39,11 +39,13 @@ public class Light extends AbstractNativeSensorModule {
         super(context, SensorModuleType.LIGHT);
     }
 
+    @Override
     protected AbstractData buildData(SensorEvent event)
     {
         return new LightData(System.currentTimeMillis(), event.values[0]);
     }
 
+    @Override
     protected boolean shouldPostSensorData(AbstractData data) {
 
         // Only post when light value changes

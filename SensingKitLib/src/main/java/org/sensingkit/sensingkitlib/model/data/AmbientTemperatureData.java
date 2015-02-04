@@ -35,6 +35,7 @@ public class AmbientTemperatureData extends AbstractData {
         this.temperature = temperature;
     }
 
+    @Override
     public String getDataInString() {
         return String.format("%d,%f", this.timestamp, this.temperature);
     }

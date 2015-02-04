@@ -39,6 +39,7 @@ public class ScreenStatusData extends AbstractData {
         this.status = status;
     }
 
+    @Override
     public String getDataInString() {
         return String.format("%d,%s", this.timestamp, this.getStatusString());
     }

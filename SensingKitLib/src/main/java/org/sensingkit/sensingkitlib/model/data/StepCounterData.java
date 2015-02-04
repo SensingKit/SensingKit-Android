@@ -35,6 +35,7 @@ public class StepCounterData extends AbstractData {
         this.steps = steps;
     }
 
+    @Override
     public String getDataInString() {
         return String.format("%d,%f", this.timestamp, this.steps);
     }

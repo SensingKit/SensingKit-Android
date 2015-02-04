@@ -37,11 +37,13 @@ public class StepDetector extends AbstractNativeSensorModule {
         super(context, SensorModuleType.STEP_DETECTOR);
     }
 
+    @Override
     protected AbstractData buildData(SensorEvent event)
     {
         return new StepDetectorData(System.currentTimeMillis());
     }
 
+    @Override
     protected boolean shouldPostSensorData(AbstractData data) {
 
         // Always post sensor data

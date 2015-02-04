@@ -38,6 +38,7 @@ public class LocationData extends AbstractData {
         this.location = location;
     }
 
+    @Override
     public String getDataInString() {
         return String.format("%d,%s", this.timestamp, this.location);
     }

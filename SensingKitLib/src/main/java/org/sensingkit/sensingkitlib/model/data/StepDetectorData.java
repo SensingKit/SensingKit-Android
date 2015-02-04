@@ -31,6 +31,7 @@ public class StepDetectorData extends AbstractData {
         super(timestamp);
     }
 
+    @Override
     public String getDataInString() {
         return String.format("%d", this.timestamp);
     }

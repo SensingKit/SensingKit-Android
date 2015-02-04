@@ -124,6 +124,7 @@ public class Activity extends AbstractGoogleServicesSensorModule {
 
     }
 
+    @Override
     public boolean startSensing() {
 
         this.isSensing = true;
@@ -133,6 +134,7 @@ public class Activity extends AbstractGoogleServicesSensorModule {
         return true;
     }
 
+    @Override
     public void stopSensing() {
 
         unregisterIntent();
@@ -183,6 +185,7 @@ public class Activity extends AbstractGoogleServicesSensorModule {
         manager.unregisterReceiver(broadcastReceiver);
     }
 
+    @Override
     protected boolean shouldPostSensorData(AbstractData data) {
 
         // Only post when specific values changed

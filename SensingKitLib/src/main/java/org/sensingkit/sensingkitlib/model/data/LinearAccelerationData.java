@@ -39,6 +39,7 @@ public class LinearAccelerationData extends AbstractData {
         this.z = z;
     }
 
+    @Override
     public String getDataInString() {
         return String.format("%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
     }

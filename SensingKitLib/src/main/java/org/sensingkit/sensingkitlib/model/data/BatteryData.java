@@ -52,6 +52,7 @@ public class BatteryData extends AbstractData {
         this.health = health;
     }
 
+    @Override
     public String getDataInString() {
         return String.format("%d,%f,%d,%d,%s,%s,%s", this.timestamp, this.getLevelRatio(), this.temperature, this.voltage, getPluggedString(), getBatteryStatusString(), getBatteryHealthString());
     }

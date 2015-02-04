@@ -76,6 +76,7 @@ public abstract class AbstractNativeSensorModule extends AbstractSensorModule {
         };
     }
 
+    @Override
     public boolean startSensing() {
 
         this.isSensing = true;
@@ -83,6 +84,7 @@ public abstract class AbstractNativeSensorModule extends AbstractSensorModule {
         return mSensorManager.registerListener(mSensorEventListener, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
+    @Override
     public void stopSensing() {
 
         mSensorManager.unregisterListener(mSensorEventListener);

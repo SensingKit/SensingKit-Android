@@ -35,6 +35,7 @@ public class LightData extends AbstractData {
         this.light = light;
     }
 
+    @Override
     public String getDataInString() {
         return String.format("%d,%f", this.timestamp, this.light);
     }

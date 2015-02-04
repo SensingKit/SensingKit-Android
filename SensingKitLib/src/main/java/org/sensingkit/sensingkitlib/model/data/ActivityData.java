@@ -39,6 +39,7 @@ public class ActivityData extends AbstractData {
         this.confidence = confidence;
     }
 
+    @Override
     public String getDataInString() {
         return String.format("%d,%d,%s,%d", this.timestamp, this.activityType, getActivityString(), this.confidence);
     }

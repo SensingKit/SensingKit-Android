@@ -81,6 +81,7 @@ public class Battery extends AbstractSensorModule {
         };
     }
 
+    @Override
     public boolean startSensing() {
 
         this.isSensing = true;
@@ -90,6 +91,7 @@ public class Battery extends AbstractSensorModule {
         return true;
     }
 
+    @Override
     public void stopSensing() {
 
         unregisterLocalBroadcastManager();
@@ -115,6 +117,7 @@ public class Battery extends AbstractSensorModule {
         mApplicationContext.unregisterReceiver(broadcastReceiver);
     }
 
+    @Override
     protected boolean shouldPostSensorData(AbstractData data) {
 
         // Only post when specific values changed
