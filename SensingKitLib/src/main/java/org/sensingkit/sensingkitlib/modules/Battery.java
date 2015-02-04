@@ -33,6 +33,9 @@ import org.sensingkit.sensingkitlib.model.data.BatteryData;
 
 public class Battery extends AbstractSensorModule {
 
+    @SuppressWarnings("unused")
+    private static final String TAG = "Battery";
+
     // Last data sensed
     private int lastLevelSensed = Integer.MAX_VALUE;
     private int lastScaleSensed = Integer.MAX_VALUE;
@@ -41,9 +44,6 @@ public class Battery extends AbstractSensorModule {
     private int lastPluggedSensed = Integer.MAX_VALUE;
     private int lastStatusSensed = Integer.MAX_VALUE;
     private int lastHealthSensed = Integer.MAX_VALUE;
-
-    @SuppressWarnings("unused")
-    private static final String TAG = "Battery";
 
     private BroadcastReceiver broadcastReceiver;
 
