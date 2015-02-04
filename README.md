@@ -20,6 +20,7 @@ The following sensor modules are currently supported in SensingKit-Android, (lis
 - Location
 - Activity
 - Battery
+- Screen Status
 
 ## Configuring the Library
 
