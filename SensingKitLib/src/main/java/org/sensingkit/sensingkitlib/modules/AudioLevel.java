@@ -94,9 +94,11 @@ public class AudioLevel extends AbstractSensorModule {
         int bufferReadResult;
 
         do {
+
+            // read buffer
             bufferReadResult = audioRecord.read(buffer, 0, bufferSize);
 
-            // read the audio level
+            // get max audio level
             int level = getMaxAbs(buffer);
 
             // Build the data object
