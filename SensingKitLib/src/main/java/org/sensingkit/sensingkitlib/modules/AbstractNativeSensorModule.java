@@ -30,7 +30,6 @@ import android.os.Build;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
-import org.sensingkit.sensingkitlib.SKSensorDataListener;
 import org.sensingkit.sensingkitlib.model.data.AbstractData;
 
 public abstract class AbstractNativeSensorModule extends AbstractSensorModule {

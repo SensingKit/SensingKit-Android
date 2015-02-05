@@ -30,9 +30,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKSensorDataListener;
 import org.sensingkit.sensingkitlib.model.data.AbstractData;
-import org.sensingkit.sensingkitlib.model.data.DataInterface;
 import org.sensingkit.sensingkitlib.model.data.LocationData;
 
 public class Location extends AbstractGoogleServicesSensorModule implements LocationListener {
