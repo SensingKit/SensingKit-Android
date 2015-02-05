@@ -75,6 +75,9 @@ public final class SensorModuleUtilities {
             case SCREEN_STATUS:
                 return "Screen Status";
 
+            case AUDIO_LEVEL:
+                return "Audio Level";
+
             default:
                 throw new SKException(TAG, "Unknown SensorModule", SKExceptionErrorCode.UNKNOWN_ERROR);
         }

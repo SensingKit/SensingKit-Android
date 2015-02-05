@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014. Queen Mary University of London
+ * Copyright (c) 2015. Queen Mary University of London
  * Kleomenis Katevas, k.katevas@qmul.ac.uk
  *
  * This file is part of SensingKit-Android library.
@@ -19,22 +19,30 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.modules;
+package org.sensingkit.sensingkitlib.model.data;
 
-public enum SensorModuleType {
-    ACCELEROMETER,
-    GRAVITY,
-    LINEAR_ACCELERATION,
-    GYROSCOPE,
-    ROTATION,
-    MAGNETOMETER,
-    AMBIENT_TEMPERATURE,
-    STEP_DETECTOR,
-    STEP_COUNTER,
-    LIGHT,
-    LOCATION,
-    ACTIVITY,
-    BATTERY,
-    SCREEN_STATUS,
-    AUDIO_LEVEL
+public class AudioLevelData extends AbstractData {
+
+    @SuppressWarnings("unused")
+    private static final String TAG = "AudioLevelData";
+
+    protected int level;
+
+    public AudioLevelData(long timestamp, int level) {
+
+        super(timestamp);
+
+        this.level = level;
+    }
+
+    @Override
+    public String getDataInString() {
+        return String.format("%d,%d", this.timestamp, this.level);
+    }
+
+    @SuppressWarnings("unused")
+    public int getLevel() {
+        return this.level;
+    }
+
 }
