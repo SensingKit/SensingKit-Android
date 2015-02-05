@@ -36,5 +36,6 @@ public enum SensorModuleType {
     ACTIVITY,
     BATTERY,
     SCREEN_STATUS,
+    AUDIO_RECORDER,
     AUDIO_LEVEL
 }

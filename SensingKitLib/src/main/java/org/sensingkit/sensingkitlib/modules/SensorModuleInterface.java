@@ -29,7 +29,7 @@ public interface SensorModuleInterface {
     @SuppressWarnings("unused")
     public SensorModuleType getSensorType();
 
-    public boolean startSensing();
+    public boolean startSensing() throws SKException;
     public void stopSensing();
     public boolean isSensing();
 

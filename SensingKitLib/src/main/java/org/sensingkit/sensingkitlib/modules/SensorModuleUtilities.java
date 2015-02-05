@@ -75,6 +75,9 @@ public final class SensorModuleUtilities {
             case SCREEN_STATUS:
                 return "Screen Status";
 
+            case AUDIO_RECORDER:
+                return "Audio Recorder";
+
             case AUDIO_LEVEL:
                 return "Audio Level";
 
