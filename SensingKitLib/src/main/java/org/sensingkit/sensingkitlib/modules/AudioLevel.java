@@ -25,7 +25,6 @@ import android.content.Context;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-import android.os.Handler;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
@@ -39,14 +38,10 @@ public class AudioLevel extends AbstractSensorModule {
 
 
     private static final int sampleRate = 8000;
-    private static final int bufferSizeFactor = 10;
+    private static final int bufferSizeFactor = 5;
     int bufferSize = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT) * bufferSizeFactor;
 
     private AudioRecord audioRecord;
-
-    private Handler handler = new Handler();
-
-    private int maxLevel = 0;
 
     public AudioLevel(final Context context) throws SKException {
         super(context, SensorModuleType.AUDIO_LEVEL);
@@ -81,10 +76,6 @@ public class AudioLevel extends AbstractSensorModule {
         thread.setPriority(Thread.currentThread().getThreadGroup().getMaxPriority());
         thread.start();
 
-        // read max level and run the callbacks
-        handler.removeCallbacks(callBackRunnable);
-        handler.postDelayed(callBackRunnable, 25);
-
         return true;
     }
 
@@ -92,8 +83,6 @@ public class AudioLevel extends AbstractSensorModule {
     public void stopSensing() {
 
         audioRecord.stop();
-
-        handler.removeCallbacks(callBackRunnable);
 
         this.isSensing = false;
     }
@@ -109,19 +98,8 @@ public class AudioLevel extends AbstractSensorModule {
 
             int level = getMaxAbs(buffer);
 
-            if (level > this.maxLevel) {
-                this.maxLevel = level;
-            }
-        }
-        while (bufferReadResult > 0 && audioRecord.getRecordingState() == AudioRecord.RECORDSTATE_RECORDING);
-    }
-
-    private Runnable callBackRunnable = new Runnable() {
-
-        public void run() {
-
             // Build the data object
-            AbstractData data = new AudioLevelData(System.currentTimeMillis(), maxLevel);
+            AbstractData data = new AudioLevelData(System.currentTimeMillis(), level);
 
             // If there is a significant change
             if (shouldPostSensorData(data)) {
@@ -135,14 +113,9 @@ public class AudioLevel extends AbstractSensorModule {
                 }
             }
 
-            // Reset the max level
-            maxLevel = 0;
-
-            // Repeat the call after X ms
-            handler.postDelayed(this, 500);
         }
-
-    };
+        while (bufferReadResult > 0 && audioRecord.getRecordingState() == AudioRecord.RECORDSTATE_RECORDING);
+    }
 
     // Get the Max Abs of the raw data
     private int getMaxAbs(short[] raw) {
