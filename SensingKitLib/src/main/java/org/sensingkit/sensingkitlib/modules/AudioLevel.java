@@ -96,22 +96,14 @@ public class AudioLevel extends AbstractSensorModule {
         do {
             bufferReadResult = audioRecord.read(buffer, 0, bufferSize);
 
+            // read the audio level
             int level = getMaxAbs(buffer);
 
             // Build the data object
             AbstractData data = new AudioLevelData(System.currentTimeMillis(), level);
 
-            // If there is a significant change
-            if (shouldPostSensorData(data)) {
-
-                if (callbackList != null) {
-
-                    // CallBack with data as parameter
-                    for (SKSensorDataListener callback : callbackList) {
-                        callback.onDataReceived(moduleType, data);
-                    }
-                }
-            }
+            // Submit sensor data object
+            submitSensorData(data);
 
         }
         while (bufferReadResult > 0 && audioRecord.getRecordingState() == AudioRecord.RECORDSTATE_RECORDING);

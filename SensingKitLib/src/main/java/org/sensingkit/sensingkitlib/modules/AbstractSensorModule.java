@@ -87,6 +87,21 @@ public abstract class AbstractSensorModule implements SensorModuleInterface {
        }
     }
 
+    protected void submitSensorData(AbstractData data) {
+
+        // If there is a significant change
+        if (shouldPostSensorData(data)) {
+
+            if (callbackList != null) {
+
+                // CallBack with data as parameter
+                for (SKSensorDataListener callback : callbackList) {
+                    callback.onDataReceived(moduleType, data);
+                }
+            }
+        }
+    }
+
     protected abstract boolean shouldPostSensorData(AbstractData data);
 
 }

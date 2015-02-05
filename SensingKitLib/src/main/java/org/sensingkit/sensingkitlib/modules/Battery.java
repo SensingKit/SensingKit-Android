@@ -66,17 +66,8 @@ public class Battery extends AbstractSensorModule {
                 // Build the data object
                 AbstractData data = new BatteryData(System.currentTimeMillis(), level, scale, temperature, voltage, plugged, status, health);
 
-                // If there is a significant change
-                if (shouldPostSensorData(data)) {
-
-                    if (callbackList != null) {
-
-                        // CallBack with data as parameter
-                        for (SKSensorDataListener callback : callbackList) {
-                            callback.onDataReceived(moduleType, data);
-                        }
-                    }
-                }
+                // Submit sensor data object
+                submitSensorData(data);
             }
         };
     }

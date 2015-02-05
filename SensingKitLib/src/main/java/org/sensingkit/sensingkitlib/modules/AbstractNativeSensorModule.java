@@ -61,17 +61,8 @@ public abstract class AbstractNativeSensorModule extends AbstractSensorModule {
                 // Build the data object
                 AbstractData data = buildData(event);
 
-                // If there is a significant change
-                if (shouldPostSensorData(data)) {
-
-                    if (callbackList != null) {
-
-                        // CallBack with data as parameter
-                        for (SKSensorDataListener callback : callbackList) {
-                            callback.onDataReceived(sensorType, data);
-                        }
-                    }
-                }
+                // Submit sensor data object
+                submitSensorData(data);
             }
         };
     }

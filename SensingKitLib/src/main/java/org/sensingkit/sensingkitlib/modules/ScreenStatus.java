@@ -53,25 +53,15 @@ public class ScreenStatus extends AbstractSensorModule {
                     status = ScreenStatusData.SCREEN_OFF;
                 } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
                     status = ScreenStatusData.SCREEN_ON;
-                }
-                else {
+                } else {
                     status = ScreenStatusData.SCREEN_UNKNOWN;
                 }
 
                 // Build the data object
                 AbstractData data = new ScreenStatusData(System.currentTimeMillis(), status);
 
-                // If there is a significant change
-                if (shouldPostSensorData(data)) {
-
-                    if (callbackList != null) {
-
-                        // CallBack with data as parameter
-                        for (SKSensorDataListener callback : callbackList) {
-                            callback.onDataReceived(moduleType, data);
-                        }
-                    }
-                }
+                // Submit sensor data object
+                submitSensorData(data);
             }
         };
     }
