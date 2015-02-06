@@ -26,9 +26,9 @@ public class GravityData extends AbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = "GravityData";
 
-    protected float x;
-    protected float y;
-    protected float z;
+    protected final float x;
+    protected final float y;
+    protected final float z;
 
     public GravityData(long timestamp, float x, float y, float z) {
 

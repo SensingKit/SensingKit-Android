@@ -28,8 +28,8 @@ public class ActivityData extends AbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = "ActivityData";
 
-    protected int activityType;
-    protected int confidence;
+    protected final int activityType;
+    protected final int confidence;
 
     public ActivityData(long timestamp, int activityType, int confidence) {
 

@@ -26,9 +26,9 @@ public class AccelerometerData extends AbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = "AccelerometerData";
 
-    protected float x;
-    protected float y;
-    protected float z;
+    protected final float x;
+    protected final float y;
+    protected final float z;
 
     public AccelerometerData(long timestamp, float x, float y, float z) {
 

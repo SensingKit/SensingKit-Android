@@ -38,7 +38,8 @@ public class AudioLevel extends AbstractSensorModule {
 
     private static final int sampleRate = 8000;
     private static final int bufferSizeFactor = 5;
-    int bufferSize = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT) * bufferSizeFactor;
+
+    private final int bufferSize = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT) * bufferSizeFactor;
 
     private AudioRecord audioRecord;
 

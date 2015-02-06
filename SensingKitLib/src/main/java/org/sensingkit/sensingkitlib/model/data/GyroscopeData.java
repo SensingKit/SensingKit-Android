@@ -26,9 +26,9 @@ public class GyroscopeData extends AbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = "GyroscopeData";
 
-    protected float x;
-    protected float y;
-    protected float z;
+    protected final float x;
+    protected final float y;
+    protected final float z;
 
     public GyroscopeData(long timestamp, float x, float y, float z) {
 

@@ -37,11 +37,11 @@ public abstract class AbstractSensorModule implements SensorModuleInterface {
     private static final String TAG = "AbstractSensorModule";
 
     protected final Context mApplicationContext;
-    protected SensorModuleType moduleType;
+    protected final SensorModuleType moduleType;
     protected boolean isSensing = false;
     protected List<SKSensorDataListener> callbackList;
 
-    protected AbstractSensorModule(final Context context, final SensorModuleType moduleType) throws SKException {
+    protected AbstractSensorModule(final Context context, final SensorModuleType moduleType) {
 
         this.mApplicationContext = context;
         this.moduleType = moduleType;

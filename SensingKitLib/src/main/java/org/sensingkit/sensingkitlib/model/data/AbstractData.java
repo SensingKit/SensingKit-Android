@@ -26,7 +26,7 @@ public abstract class AbstractData implements DataInterface
     @SuppressWarnings("unused")
     private static final String TAG = "AbstractData";
 
-    protected long timestamp;
+    protected final long timestamp;
 
     public AbstractData(long timestamp) {
         this.timestamp = timestamp;

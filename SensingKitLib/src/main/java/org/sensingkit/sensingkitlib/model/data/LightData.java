@@ -26,7 +26,7 @@ public class LightData extends AbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = "LightData";
 
-    protected float light;
+    protected final float light;
 
     public LightData(long timestamp, float light) {
 

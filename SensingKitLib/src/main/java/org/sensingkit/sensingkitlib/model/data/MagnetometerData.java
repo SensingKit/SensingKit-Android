@@ -26,9 +26,9 @@ public class MagnetometerData extends AbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = "MagnetometerData";
 
-    protected float x;
-    protected float y;
-    protected float z;
+    protected final float x;
+    protected final float y;
+    protected final float z;
 
     public MagnetometerData(long timestamp, float x, float y, float z) {
 

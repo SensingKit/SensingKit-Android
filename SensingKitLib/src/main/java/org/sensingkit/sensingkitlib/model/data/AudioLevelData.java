@@ -26,7 +26,7 @@ public class AudioLevelData extends AbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = "AudioLevelData";
 
-    protected int level;
+    protected final int level;
 
     public AudioLevelData(long timestamp, int level) {
 

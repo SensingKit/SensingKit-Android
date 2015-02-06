@@ -30,7 +30,7 @@ public class ScreenStatusData extends AbstractData {
     public static final int SCREEN_ON = 1;
     public static final int SCREEN_UNKNOWN = 2;
 
-    private int status;
+    protected final int status;
 
     public ScreenStatusData(long timestamp, int status) {
 

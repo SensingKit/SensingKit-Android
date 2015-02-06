@@ -30,14 +30,13 @@ public class BatteryData extends AbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = "BatteryData";
 
-    //private float level;
-    private int level;
-    private int scale;
-    private int temperature;
-    private int voltage;
-    private int plugged;
-    private int status;
-    private int health;
+    protected final int level;
+    protected final int scale;
+    protected final int temperature;
+    protected final int voltage;
+    protected final int plugged;
+    protected final int status;
+    protected final int health;
 
     public BatteryData(long timestamp, int level, int scale, int temperature, int voltage, int plugged, int status, int health) {
 

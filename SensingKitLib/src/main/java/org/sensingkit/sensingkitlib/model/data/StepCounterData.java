@@ -26,7 +26,7 @@ public class StepCounterData extends AbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = "StepCounterData";
 
-    protected float steps;
+    protected final float steps;
 
     public StepCounterData(long timestamp, float steps) {
 

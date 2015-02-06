@@ -26,7 +26,7 @@ public class AmbientTemperatureData extends AbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = "AmbientTemperatureData";
 
-    protected float temperature;
+    protected final float temperature;
 
     public AmbientTemperatureData(long timestamp, float temperature) {
 

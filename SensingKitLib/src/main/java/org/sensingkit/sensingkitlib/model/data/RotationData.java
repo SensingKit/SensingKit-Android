@@ -26,11 +26,11 @@ public class RotationData extends AbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = "GyroscopeData";
 
-    protected float x;
-    protected float y;
-    protected float z;
-    protected float cos;
-    protected float headingAccuracy;
+    protected final float x;
+    protected final float y;
+    protected final float z;
+    protected final float cos;
+    protected final float headingAccuracy;
 
     public RotationData(long timestamp, float x, float y, float z, float cos, float headingAccuracy) {
 

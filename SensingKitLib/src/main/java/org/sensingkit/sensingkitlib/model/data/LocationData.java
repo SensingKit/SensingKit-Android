@@ -29,7 +29,7 @@ public class LocationData extends AbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = "LocationData";
 
-    protected Location location;
+    protected final Location location;
 
     public LocationData(long timestamp, Location location) {
 
