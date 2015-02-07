@@ -87,6 +87,8 @@ public abstract class AbstractSensorModule implements SensorModuleInterface {
        }
     }
 
+    protected abstract boolean shouldPostSensorData(AbstractData data);
+
     protected void submitSensorData(AbstractData data) {
 
         // If there is a significant change
@@ -101,7 +103,5 @@ public abstract class AbstractSensorModule implements SensorModuleInterface {
             }
         }
     }
-
-    protected abstract boolean shouldPostSensorData(AbstractData data);
 
 }
