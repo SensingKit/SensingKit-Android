@@ -26,6 +26,6 @@ import org.sensingkit.sensingkitlib.modules.SensorModuleType;
 
 public interface SKSensorDataListener {
 
-    public void onDataReceived(final SensorModuleType moduleType, final DataInterface data);
+    public void onDataReceived(final SensorModuleType moduleType, final DataInterface moduleData);
 
 }

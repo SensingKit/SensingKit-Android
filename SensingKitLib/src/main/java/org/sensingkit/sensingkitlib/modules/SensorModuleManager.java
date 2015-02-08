@@ -28,6 +28,9 @@ import android.util.SparseArray;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
+import org.sensingkit.sensingkitlib.model.data.DataInterface;
+
+import java.util.ArrayList;
 
 public class SensorModuleManager {
 
@@ -39,8 +42,7 @@ public class SensorModuleManager {
     private static SensorModuleManager sSensorModuleManager;
     private final Context mApplicationContext;
 
-    private SparseArray<AbstractSensorModule> mSensors;
-
+    private final SparseArray<AbstractSensorModule> mSensors;
 
     public static SensorModuleManager getSensorManager(final Context context) throws SKException {
 
@@ -63,7 +65,9 @@ public class SensorModuleManager {
         mSensors = new SparseArray<>(TOTAL_SENSOR_MODULES);
     }
 
-    protected void registerSensorModule(SensorModuleType moduleType) throws SKException {
+    public void registerSensorModule(SensorModuleType moduleType) throws SKException {
+
+        Log.i(TAG, "Register sensor: " + SensorModuleUtilities.getSensorModuleInString(moduleType) + ".");
 
         if (isSensorModuleRegistered(moduleType)) {
             throw new SKException(TAG, "SensorModule is already registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
@@ -75,20 +79,38 @@ public class SensorModuleManager {
         mSensors.put(sensorIndex, sensorModule);
     }
 
-    protected void deregisterSensorModule(SensorModuleType moduleType) throws SKException {
+    public void deregisterSensorModule(SensorModuleType moduleType) throws SKException {
+
+        Log.i(TAG, "Deregister sensor: " + SensorModuleUtilities.getSensorModuleInString(moduleType) + ".");
 
         if (!isSensorModuleRegistered(moduleType)) {
             throw new SKException(TAG, "SensorModule is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        // Unregister the SensorModule
+        if (isSensorModuleSensing(moduleType)) {
+            throw new SKException(TAG, "SensorModule is currently sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
+        }
+
+        // Clear all Callbacks from that sensor
+        getSensorModule(moduleType).clearCallbacks();
+
+        // Deregister the SensorModule
         int sensorIndex = moduleType.ordinal();
         mSensors.delete(sensorIndex);
     }
 
-    protected boolean isSensorModuleRegistered(SensorModuleType moduleType) throws SKException {
+    public boolean isSensorModuleRegistered(SensorModuleType moduleType) throws SKException {
 
         return (getSensorModule(moduleType) != null);
+    }
+
+    public boolean isSensorModuleSensing(SensorModuleType moduleType) throws SKException {
+
+        if (!isSensorModuleRegistered(moduleType)) {
+            throw new SKException(TAG, "SensorModule is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
+        }
+
+        return getSensorModule(moduleType).isSensing();
     }
 
     protected AbstractSensorModule getSensorModule(SensorModuleType moduleType) {
@@ -176,23 +198,29 @@ public class SensorModuleManager {
         return sensorModule;
     }
 
-    public void getDataFromSensor(SensorModuleType moduleType) throws SKException {
+    public DataInterface getDataFromSensor(SensorModuleType moduleType) throws SKException {
+
+        Log.i(TAG, "Get data from sensor: " + SensorModuleUtilities.getSensorModuleInString(moduleType) + ".");
+
+        if (!isSensorModuleRegistered(moduleType)) {
+            throw new SKException(TAG, "SensorModule is not registered", SKExceptionErrorCode.UNKNOWN_ERROR);
+        }
+
         throw new SKException(TAG, "This feature is not supported just yet!", SKExceptionErrorCode.UNKNOWN_ERROR);
     }
 
-    public void subscribeToSensor(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
+    public void subscribeSensorDataListener(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
 
         Log.i(TAG, "Subscribe to sensor: " + SensorModuleUtilities.getSensorModuleInString(moduleType) + ".");
 
         if (!isSensorModuleRegistered(moduleType)) {
-            registerSensorModule(moduleType);
+            throw new SKException(TAG, "SensorModule is not registered", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        AbstractSensorModule sensorModule = getSensorModule(moduleType);
-        sensorModule.registerCallback(dataListener);
+        getSensorModule(moduleType).registerCallback(dataListener);
     }
 
-    public void unsubscribeFromSensor(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
+    public void unsubscribeSensorDataListener(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
 
         Log.i(TAG, "Unsubscribe from sensor: " + SensorModuleUtilities.getSensorModuleInString(moduleType) + ".");
 
@@ -200,11 +228,10 @@ public class SensorModuleManager {
             throw new SKException(TAG, "SensorModule is not registered", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        AbstractSensorModule sensorModule = getSensorModule(moduleType);
-        sensorModule.unregisterCallback(dataListener);
+        getSensorModule(moduleType).unregisterCallback(dataListener);
     }
 
-    public void unsubscribeAllFromSensor(SensorModuleType moduleType) throws SKException {
+    public void unsubscribeAllSensorDataListeners(SensorModuleType moduleType) throws SKException {
 
         Log.i(TAG, "Unsubscribe from all sensors.");
 
@@ -212,8 +239,7 @@ public class SensorModuleManager {
             throw new SKException(TAG, "SensorModule is not registered", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        AbstractSensorModule sensorModule = getSensorModule(moduleType);
-        sensorModule.clearCallbacks();
+        getSensorModule(moduleType).clearCallbacks();
     }
 
     public void startContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException {
@@ -221,17 +247,15 @@ public class SensorModuleManager {
         Log.i(TAG, "Start sensing with sensor: " + SensorModuleUtilities.getSensorModuleInString(moduleType) + ".");
 
         if (!isSensorModuleRegistered(moduleType)) {
-            registerSensorModule(moduleType);
+            throw new SKException(TAG, "SensorModule is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        SensorModuleInterface sensorModule = getSensorModule(moduleType);
-
-        if (sensorModule.isSensing()) {
+        if (isSensorModuleSensing(moduleType)) {
             throw new SKException(TAG, "SensorModule is already sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
         // Start Sensing
-        sensorModule.startSensing();
+        getSensorModule(moduleType).startSensing();
     }
 
     public void stopContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException {
@@ -242,54 +266,14 @@ public class SensorModuleManager {
             throw new SKException(TAG, "SensorModule is not registered", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        SensorModuleInterface sensorModule = getSensorModule(moduleType);
-
-        if (!sensorModule.isSensing()) {
+        if (!isSensorModuleSensing(moduleType)) {
             throw new SKException(TAG, "SensorModule is already not sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        // Stop Sensing
-        sensorModule.stopSensing();
-
-        // Clear all callbacks
-        sensorModule.clearCallbacks();
-
-        // Deregister the module
-        deregisterSensorModule(moduleType);
-    }
-
-    // keeps sensor registered, keeps callbacks alive
-    public void pauseContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException {
-
-        Log.i(TAG, "Pause sensor: " + SensorModuleUtilities.getSensorModuleInString(moduleType) + ".");
-
-        if (!isSensorModuleRegistered(moduleType)) {
-            throw new SKException(TAG, "SensorModule is not registered", SKExceptionErrorCode.UNKNOWN_ERROR);
-        }
-
         SensorModuleInterface sensorModule = getSensorModule(moduleType);
-
-        if (!sensorModule.isSensing()) {
-            throw new SKException(TAG, "SensorModule is already not sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
-        }
 
         // Stop Sensing
         sensorModule.stopSensing();
-    }
-
-    // Continue from Pause
-    public void unpauseContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException {
-
-        Log.i(TAG, "Unpause sensor: " + SensorModuleUtilities.getSensorModuleInString(moduleType) + ".");
-
-        SensorModuleInterface sensorModule = getSensorModule(moduleType);
-
-        if (sensorModule.isSensing()) {
-            throw new SKException(TAG, "SensorModule is already sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
-        }
-
-        // Start Sensing
-        sensorModule.startSensing();
     }
 
 }

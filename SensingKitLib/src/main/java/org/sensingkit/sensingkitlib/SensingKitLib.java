@@ -24,8 +24,10 @@ package org.sensingkit.sensingkitlib;
 import android.content.Context;
 import android.os.PowerManager;
 
+import org.sensingkit.sensingkitlib.model.data.DataInterface;
 import org.sensingkit.sensingkitlib.modules.SensorModuleType;
 import org.sensingkit.sensingkitlib.modules.SensorModuleManager;
+
 
 public class SensingKitLib implements SensingKitLibInterface {
 
@@ -41,6 +43,7 @@ public class SensingKitLib implements SensingKitLibInterface {
 
     @SuppressWarnings("unused")
     public static SensingKitLibInterface getSensingKitLib(final Context context) throws SKException {
+
         if (context == null) {
             throw new SKException(TAG, "Context cannot be null", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
@@ -57,36 +60,54 @@ public class SensingKitLib implements SensingKitLibInterface {
         mSensorModuleManager = SensorModuleManager.getSensorManager(context);
     }
 
-    public void getDataFromSensor(SensorModuleType moduleType) throws SKException {
-        mSensorModuleManager.getDataFromSensor(moduleType);
+    @Override
+    public void registerSensorModule(SensorModuleType moduleType) throws SKException {
+        mSensorModuleManager.registerSensorModule(moduleType);
     }
 
-    public void subscribeToSensor(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
-        mSensorModuleManager.subscribeToSensor(moduleType, dataListener);
+    @Override
+    public void deregisterSensorModule(SensorModuleType moduleType) throws SKException {
+        mSensorModuleManager.deregisterSensorModule(moduleType);
     }
 
-    public void unsubscribeFromSensor(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
-        mSensorModuleManager.unsubscribeFromSensor(moduleType, dataListener);
+    @Override
+    public boolean isSensorModuleRegistered(SensorModuleType moduleType) throws SKException {
+        return mSensorModuleManager.isSensorModuleRegistered(moduleType);
     }
 
-    public void unsubscribeAllFromSensor(SensorModuleType moduleType) throws SKException {
-        mSensorModuleManager.unsubscribeAllFromSensor(moduleType);
+    @Override
+    public DataInterface getDataFromSensor(SensorModuleType moduleType) throws SKException {
+        return mSensorModuleManager.getDataFromSensor(moduleType);
     }
 
+    @Override
+    public void subscribeSensorDataListener(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
+        mSensorModuleManager.subscribeSensorDataListener(moduleType, dataListener);
+    }
+
+    @Override
+    public void unsubscribeSensorDataListener(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
+        mSensorModuleManager.unsubscribeSensorDataListener(moduleType, dataListener);
+    }
+
+    @Override
+    public void unsubscribeAllSensorDataListeners(SensorModuleType moduleType) throws SKException {
+        mSensorModuleManager.unsubscribeAllSensorDataListeners(moduleType);
+    }
+
+    @Override
     public void startContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException {
         mSensorModuleManager.startContinuousSensingWithSensor(moduleType);
     }
 
+    @Override
     public void stopContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException {
         mSensorModuleManager.stopContinuousSensingWithSensor(moduleType);
     }
 
-    public void pauseContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException {
-        mSensorModuleManager.pauseContinuousSensingWithSensor(moduleType);
-    }
-
-    public void unpauseContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException {
-        mSensorModuleManager.unpauseContinuousSensingWithSensor(moduleType);
+    @Override
+    public boolean isSensorModuleSensing(SensorModuleType moduleType) throws SKException {
+        return mSensorModuleManager.isSensorModuleSensing(moduleType);
     }
 
     //region Wake Lock methods

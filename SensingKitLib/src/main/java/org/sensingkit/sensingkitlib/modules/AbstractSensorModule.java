@@ -29,7 +29,6 @@ import org.sensingkit.sensingkitlib.SKSensorDataListener;
 import org.sensingkit.sensingkitlib.model.data.AbstractData;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public abstract class AbstractSensorModule implements SensorModuleInterface {
 
@@ -39,7 +38,7 @@ public abstract class AbstractSensorModule implements SensorModuleInterface {
     protected final Context mApplicationContext;
     protected final SensorModuleType moduleType;
     protected boolean isSensing = false;
-    protected List<SKSensorDataListener> callbackList;
+    protected ArrayList<SKSensorDataListener> mSensorDataListeners;
 
     protected AbstractSensorModule(final Context context, final SensorModuleType moduleType) {
 
@@ -59,31 +58,37 @@ public abstract class AbstractSensorModule implements SensorModuleInterface {
     public void registerCallback(SKSensorDataListener callback) throws SKException {
 
         // Init the list
-        if (this.callbackList == null) {
-            this.callbackList = new ArrayList<>();
+        if (this.mSensorDataListeners == null) {
+            this.mSensorDataListeners = new ArrayList<>();
         }
 
         // Register the callback
-        if (this.callbackList.contains(callback)) {
-            throw new SKException(TAG, "Callback already registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
+        if (this.mSensorDataListeners.contains(callback)) {
+            throw new SKException(TAG, "SKSensorDataListener already registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        this.callbackList.add(callback);
+        this.mSensorDataListeners.add(callback);
     }
 
     public void unregisterCallback(SKSensorDataListener callback) throws SKException {
 
         // Unregister the callback
-        if (this.callbackList == null || !this.callbackList.remove(callback)) {
-            throw new SKException(TAG, "Callback is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
+        if (this.mSensorDataListeners == null || !this.mSensorDataListeners.remove(callback)) {
+            throw new SKException(TAG, "SKSensorDataListener is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
+        }
+
+        // Delete the callBackList if it is empty
+        if (this.mSensorDataListeners.size() == 0) {
+            this.mSensorDataListeners = null;
         }
     }
 
     public void clearCallbacks() throws SKException {
 
        // Clear all callbacks
-       if (this.callbackList != null) {
-           this.callbackList.clear();
+       if (this.mSensorDataListeners != null) {
+           this.mSensorDataListeners.clear();
+           this.mSensorDataListeners = null;
        }
     }
 
@@ -94,10 +99,10 @@ public abstract class AbstractSensorModule implements SensorModuleInterface {
         // If there is a significant change
         if (shouldPostSensorData(data)) {
 
-            if (callbackList != null) {
+            if (mSensorDataListeners != null) {
 
                 // CallBack with data as parameter
-                for (SKSensorDataListener callback : callbackList) {
+                for (SKSensorDataListener callback : mSensorDataListeners) {
                     callback.onDataReceived(moduleType, data);
                 }
             }

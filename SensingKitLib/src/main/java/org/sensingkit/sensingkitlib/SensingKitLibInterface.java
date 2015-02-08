@@ -21,40 +21,41 @@
 
 package org.sensingkit.sensingkitlib;
 
+import org.sensingkit.sensingkitlib.model.data.DataInterface;
 import org.sensingkit.sensingkitlib.modules.SensorModuleType;
 
+@SuppressWarnings("unused")
 public interface SensingKitLibInterface {
 
-    /* One Shot Sensing */
+    /** Sensor Registration */
 
-    @SuppressWarnings("unused")
-    public void getDataFromSensor(SensorModuleType moduleType) throws SKException;
+    public void registerSensorModule(SensorModuleType moduleType) throws SKException;
 
-    /* Continuous Sensing */
+    public void deregisterSensorModule(SensorModuleType moduleType) throws SKException;
 
-    @SuppressWarnings("unused")
-    public void subscribeToSensor(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException;
+    public boolean isSensorModuleRegistered(SensorModuleType moduleType) throws SKException;
 
-    @SuppressWarnings("unused")
-    public void unsubscribeFromSensor(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException;
+    /** Configuration */
+    // TODO: Add Configuration
 
-    @SuppressWarnings("unused")
-    public void unsubscribeAllFromSensor(SensorModuleType moduleType) throws SKException;
 
-    @SuppressWarnings("unused")
+    /** One Shot Sensing */
+
+    public DataInterface getDataFromSensor(SensorModuleType moduleType) throws SKException;
+
+
+    /** Continuous Sensing */
+
+    public void subscribeSensorDataListener(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException;
+
+    public void unsubscribeSensorDataListener(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException;
+
+    public void unsubscribeAllSensorDataListeners(SensorModuleType moduleType) throws SKException;
+
     public void startContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException;
 
-    @SuppressWarnings("unused")
     public void stopContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException;
 
-    @SuppressWarnings("unused")
-    public void pauseContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException;
-
-    @SuppressWarnings("unused")
-    public void unpauseContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException;
-
-    // Configuration
-
-    // TODO: Add Configuration
+    public boolean isSensorModuleSensing(SensorModuleType moduleType) throws SKException;
 
 }
