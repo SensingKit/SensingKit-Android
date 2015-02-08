@@ -32,7 +32,7 @@ import org.sensingkit.sensingkitlib.model.data.ScreenStatusData;
 
 public class ScreenStatus extends AbstractSensorModule {
 
-    private BroadcastReceiver broadcastReceiver;
+    private final BroadcastReceiver broadcastReceiver;
 
     @SuppressWarnings("unused")
     private static final String TAG = "ScreenStatus";

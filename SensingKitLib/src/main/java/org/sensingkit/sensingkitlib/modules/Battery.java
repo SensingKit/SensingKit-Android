@@ -44,7 +44,7 @@ public class Battery extends AbstractSensorModule {
     private int lastStatusSensed = Integer.MAX_VALUE;
     private int lastHealthSensed = Integer.MAX_VALUE;
 
-    private BroadcastReceiver broadcastReceiver;
+    private final BroadcastReceiver broadcastReceiver;
 
     public Battery(final Context context) throws SKException {
         super(context, SensorModuleType.BATTERY);
