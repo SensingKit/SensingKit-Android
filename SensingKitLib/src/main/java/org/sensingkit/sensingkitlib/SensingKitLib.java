@@ -110,6 +110,16 @@ public class SensingKitLib implements SensingKitLibInterface {
         return mSensorModuleManager.isSensorModuleSensing(moduleType);
     }
 
+    @Override
+    public long getCurrentTimeMillis() {
+        return SKUtilities.getCurrentTimeMillis();
+    }
+
+    @Override
+    public long getNanoTime() {
+        return SKUtilities.getNanoTime();
+    }
+
     //region Wake Lock methods
 
     private void acquireWakeLock() {

@@ -38,4 +38,12 @@ public final class SKUtilities {
         int res = context.checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
     }
+
+    public static long getCurrentTimeMillis() {
+        return System.currentTimeMillis();
+    }
+
+    public static long getNanoTime() {
+        return System.nanoTime();
+    }
 }

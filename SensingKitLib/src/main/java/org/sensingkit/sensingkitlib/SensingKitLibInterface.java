@@ -58,4 +58,10 @@ public interface SensingKitLibInterface {
 
     public boolean isSensorModuleSensing(SensorModuleType moduleType) throws SKException;
 
+    /** Time */
+
+    public long getCurrentTimeMillis();
+
+    public long getNanoTime();
+
 }
