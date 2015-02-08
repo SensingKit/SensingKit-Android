@@ -87,34 +87,4 @@ public final class SensorModuleUtilities {
 
     }
 
-    /*public static String getSensorModuleFilename(SensorModuleType SensorModuleType) throws SKException {
-
-        switch (SensorModuleType) {
-
-            case ACCELEROMETER:
-                return "Accelerometer.csv";
-
-            case STEP_DETECTOR:
-                return "Step_Detector.csv";
-
-            case STEP_COUNTER:
-                return "Step_Counter.csv";
-
-            case LIGHT:
-                return "Light.csv";
-
-            case LOCATION:
-                return "Location.csv";
-
-            case ACTIVITY:
-                return "Activity.csv";
-
-            case BATTERY:
-                return "Battery.csv";
-
-            default:
-                throw new SKException(TAG, "Not a native SensorModule", SKExceptionErrorCode.UNKNOWN_ERROR);
-        }
-    }*/
-
 }
