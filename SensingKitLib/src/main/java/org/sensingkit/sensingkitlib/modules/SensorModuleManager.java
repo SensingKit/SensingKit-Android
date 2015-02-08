@@ -91,7 +91,7 @@ public class SensorModuleManager {
         }
 
         // Clear all Callbacks from that sensor
-        getSensorModule(moduleType).clearCallbacks();
+        getSensorModule(moduleType).unsubscribeAllSensorDataListeners();
 
         // Deregister the SensorModule
         int sensorIndex = moduleType.ordinal();
@@ -216,7 +216,7 @@ public class SensorModuleManager {
             throw new SKException(TAG, "SensorModule is not registered", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        getSensorModule(moduleType).registerCallback(dataListener);
+        getSensorModule(moduleType).subscribeSensorDataListener(dataListener);
     }
 
     public void unsubscribeSensorDataListener(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
@@ -227,7 +227,7 @@ public class SensorModuleManager {
             throw new SKException(TAG, "SensorModule is not registered", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        getSensorModule(moduleType).unregisterCallback(dataListener);
+        getSensorModule(moduleType).unsubscribeSensorDataListener(dataListener);
     }
 
     public void unsubscribeAllSensorDataListeners(SensorModuleType moduleType) throws SKException {
@@ -238,7 +238,7 @@ public class SensorModuleManager {
             throw new SKException(TAG, "SensorModule is not registered", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        getSensorModule(moduleType).clearCallbacks();
+        getSensorModule(moduleType).unsubscribeAllSensorDataListeners();
     }
 
     public void startContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException {

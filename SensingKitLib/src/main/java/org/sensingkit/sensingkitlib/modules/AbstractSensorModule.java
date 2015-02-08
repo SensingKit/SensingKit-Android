@@ -59,7 +59,7 @@ public abstract class AbstractSensorModule implements SensorModuleInterface {
         return SensorModuleUtilities.getSensorModuleInString(moduleType);
     }
 
-    public void registerCallback(SKSensorDataListener callback) throws SKException {
+    public void subscribeSensorDataListener(SKSensorDataListener callback) throws SKException {
 
         // Init the list
         if (this.mSensorDataListeners == null) {
@@ -74,7 +74,7 @@ public abstract class AbstractSensorModule implements SensorModuleInterface {
         this.mSensorDataListeners.add(callback);
     }
 
-    public void unregisterCallback(SKSensorDataListener callback) throws SKException {
+    public void unsubscribeSensorDataListener(SKSensorDataListener callback) throws SKException {
 
         // Unregister the callback
         if (this.mSensorDataListeners == null || !this.mSensorDataListeners.remove(callback)) {
@@ -87,7 +87,7 @@ public abstract class AbstractSensorModule implements SensorModuleInterface {
         }
     }
 
-    public void clearCallbacks() throws SKException {
+    public void unsubscribeAllSensorDataListeners() throws SKException {
 
        // Clear all callbacks
        if (this.mSensorDataListeners != null) {

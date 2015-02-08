@@ -33,8 +33,8 @@ public interface SensorModuleInterface {
     public void stopSensing();
     public boolean isSensing();
 
-    public void registerCallback(SKSensorDataListener callback) throws SKException;
-    public void unregisterCallback(SKSensorDataListener callback) throws SKException;
-    public void clearCallbacks() throws SKException;
+    public void subscribeSensorDataListener(SKSensorDataListener callback) throws SKException;
+    public void unsubscribeSensorDataListener(SKSensorDataListener callback) throws SKException;
+    public void unsubscribeAllSensorDataListeners() throws SKException;
 
 }
