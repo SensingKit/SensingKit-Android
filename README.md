@@ -60,7 +60,7 @@ dependencies {
 
 ## How to Use this Library
 
-- import and init SensingKit into your class as shown bellow:
+- import and init SensingKit into your Activity class as shown bellow:
 
 ```java
 import org.sensingkit.sensingkitlib.SensingKitLib;
@@ -69,14 +69,14 @@ SensingKitLibInterface mSensingKitLib = SensingKitLib.getSensingKitLib(this);
 ```
 
 
-- Register a sensor module as shown bellow:
+- Register a sensor module (e.g. a Light sensor) as shown bellow:
 
 ```java
 mSensingKitLib.registerSensorModule(SensorModuleType.LIGHT);
 ```
 
 
-- Subscribe a sensor data listener as shown bellow:
+- Subscribe a sensor data listener:
 
 ```java
 mSensingKitLib.subscribeSensorDataListener(SensorModuleType.LIGHT, new SKSensorDataListener() {
@@ -86,6 +86,14 @@ mSensingKitLib.subscribeSensorDataListener(SensorModuleType.LIGHT, new SKSensorD
     }
 });
 ```
+
+
+- You can cast the data object into the actual sensor data object in order to access all the sensor data properties:
+ 
+```java
+LightData lightData = (LightData)moduleData;
+```
+
 
 
 - You can Start and Stop the Continuous Sensing using the following commands:
