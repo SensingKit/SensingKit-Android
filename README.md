@@ -44,6 +44,7 @@ repositories {
 }
 ```
 
+
 - In the same app/build.gradle file, add SensingKitLib as a dependency as shown below:
 
 ```
@@ -55,11 +56,10 @@ dependencies {
 }
 ```
 
+
 ## How to Use this Library
 
 - import and init SensingKit into your class as shown bellow:
-
-
 
 ```java
 import org.sensingkit.sensingkitlib.SensingKitLib;
@@ -68,28 +68,31 @@ SensingKitLibInterface mSensingKitLib = SensingKitLib.getSensingKitLib(this);
 ```
 
 
-- Register a sensor data listener as shown bellow:
-
-
+- Register a sensor module as shown bellow:
 
 ```java
-mSensingKitLib.subscribeToSensor(SensorModuleType, new SKSensorDataListener() {
+mSensingKitLib.registerSensorModule(SensorModuleType.LIGHT);
+```
+
+
+- Subscribe a sensor data listener as shown bellow:
+
+```java
+mSensingKitLib.subscribeSensorDataListener(SensorModuleType.LIGHT, new SKSensorDataListener() {
     @Override
-    public void onDataReceived(final SensorModuleType moduleType, final DataInterface data) {
+    public void onDataReceived(final SensorModuleType moduleType, final DataInterface moduleData) {
         System.out.println(data);  // Print data
     }
 });
 ```
 
 
-
 - You can Start and Stop the Continuous Sensing using the following commands:
 
 ```java
-mSensingKitLib.startContinuousSensingWithSensor(SensorModuleType);
-mSensingKitLib.stopContinuousSensingWithSensor(SensorModuleType);
+mSensingKitLib.startContinuousSensingWithSensor(SensorModuleType.LIGHT);
+mSensingKitLib.stopContinuousSensingWithSensor(SensorModuleType.LIGHT);
 ```
-
 
 
 For a complete description of our API, please refer to the [project website](http://www.sensingkit.org).
