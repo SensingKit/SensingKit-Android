@@ -81,7 +81,7 @@ mSensingKitLib.registerSensorModule(SensorModuleType.LIGHT);
 mSensingKitLib.subscribeSensorDataListener(SensorModuleType.LIGHT, new SKSensorDataListener() {
     @Override
     public void onDataReceived(final SensorModuleType moduleType, final DataInterface moduleData) {
-        System.out.println(data);  // Print data
+        System.out.println(moduleData);  // Print data
     }
 });
 ```
