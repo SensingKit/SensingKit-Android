@@ -30,7 +30,6 @@ import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
 import org.sensingkit.sensingkitlib.model.data.DataInterface;
 
-import java.util.ArrayList;
 
 public class SensorModuleManager {
 
