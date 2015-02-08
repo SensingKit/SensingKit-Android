@@ -72,13 +72,11 @@ public class Battery extends AbstractSensorModule {
     }
 
     @Override
-    public boolean startSensing() {
+    public void startSensing() {
 
         this.isSensing = true;
 
         registerLocalBroadcastManager();
-
-        return true;
     }
 
     @Override

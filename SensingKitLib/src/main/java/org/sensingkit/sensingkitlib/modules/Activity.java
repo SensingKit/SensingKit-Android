@@ -115,13 +115,11 @@ public class Activity extends AbstractGoogleServicesSensorModule {
     }
 
     @Override
-    public boolean startSensing() {
+    public void startSensing() {
 
         this.isSensing = true;
 
         mClient.connect();
-
-        return true;
     }
 
     @Override

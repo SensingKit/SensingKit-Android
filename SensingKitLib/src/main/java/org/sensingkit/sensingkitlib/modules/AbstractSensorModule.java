@@ -55,6 +55,10 @@ public abstract class AbstractSensorModule implements SensorModuleInterface {
         return this.moduleType;
     }
 
+    public String getSensorName() throws SKException {
+        return SensorModuleUtilities.getSensorModuleInString(moduleType);
+    }
+
     public void registerCallback(SKSensorDataListener callback) throws SKException {
 
         // Init the list

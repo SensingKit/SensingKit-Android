@@ -58,7 +58,7 @@ public class AudioRecorder extends AbstractSensorModule {
     }
 
     @Override
-    public boolean startSensing() throws SKException {
+    public void startSensing() throws SKException {
 
         this.isSensing = true;
 
@@ -70,8 +70,6 @@ public class AudioRecorder extends AbstractSensorModule {
         }
 
         recorder.start();
-
-        return true;
     }
 
     @Override

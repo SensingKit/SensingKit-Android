@@ -29,7 +29,7 @@ public interface SensorModuleInterface {
 
     public SensorModuleType getSensorType();
 
-    public boolean startSensing() throws SKException;
+    public void startSensing() throws SKException;
     public void stopSensing();
     public boolean isSensing();
 

@@ -58,7 +58,7 @@ public class AudioLevel extends AbstractSensorModule {
     }
 
     @Override
-    public boolean startSensing() {
+    public void startSensing() {
 
         this.isSensing = true;
 
@@ -75,8 +75,6 @@ public class AudioLevel extends AbstractSensorModule {
         // Set priority to max and start the thread that reads the audio level
         thread.setPriority(Thread.currentThread().getThreadGroup().getMaxPriority());
         thread.start();
-
-        return true;
     }
 
     @Override
