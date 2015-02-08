@@ -21,6 +21,7 @@ The following sensor modules are currently supported in SensingKit-Android, (lis
 - Activity
 - Battery
 - Screen Status
+- Audio Recorder
 - Audio Level
 
 ## Configuring the Library
