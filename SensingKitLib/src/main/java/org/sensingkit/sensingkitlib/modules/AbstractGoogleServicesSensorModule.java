@@ -54,16 +54,12 @@ public abstract class AbstractGoogleServicesSensorModule extends AbstractSensorM
     @Override
     public void onConnectionSuspended(int cause) {
         // Ignore, will try to reconnect automatically
-
-        Log.i(TAG, "Connection Suspended with cause: " + cause);
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
         // At least one of the API client connect attempts failed
         // No client is connected
-
-        Log.i(TAG, "Connection Failed with result: " + result);
     }
 
 }
