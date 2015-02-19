@@ -40,7 +40,12 @@ public class Rotation extends AbstractNativeSensorModule {
     @Override
     protected AbstractData buildData(SensorEvent event)
     {
-        return new RotationData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2], event.values[3], event.values[4]);
+        if (event.values.length >= 6) {
+            return new RotationData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2], event.values[3], event.values[4]);
+        }
+        else {
+            return new RotationData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
+        }
     }
 
     @Override
