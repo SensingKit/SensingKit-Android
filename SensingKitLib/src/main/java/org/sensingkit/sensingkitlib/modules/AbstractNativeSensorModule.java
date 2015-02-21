@@ -21,6 +21,7 @@
 
 package org.sensingkit.sensingkitlib.modules;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -88,6 +89,7 @@ public abstract class AbstractNativeSensorModule extends AbstractSensorModule {
 
     protected abstract AbstractData buildData(SensorEvent event);
 
+    @SuppressLint("InlinedApi")  // There is a check in STEP_DETECTOR and STEP_COUNTER
     private static int getSensorType(SensorModuleType sensorType) throws SKException{
 
         switch (sensorType) {
