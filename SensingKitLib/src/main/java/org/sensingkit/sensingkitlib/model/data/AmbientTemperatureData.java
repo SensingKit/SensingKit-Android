@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.model.data;
 
+import java.util.Locale;
+
 public class AmbientTemperatureData extends AbstractData {
 
     @SuppressWarnings("unused")
@@ -37,7 +39,7 @@ public class AmbientTemperatureData extends AbstractData {
 
     @Override
     public String getDataInString() {
-        return String.format("%d,%f", this.timestamp, this.temperature);
+        return String.format(Locale.US, "%d,%f", this.timestamp, this.temperature);
     }
 
     @SuppressWarnings("unused")

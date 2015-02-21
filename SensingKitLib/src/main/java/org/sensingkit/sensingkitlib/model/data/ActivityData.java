@@ -23,6 +23,8 @@ package org.sensingkit.sensingkitlib.model.data;
 
 import com.google.android.gms.location.DetectedActivity;
 
+import java.util.Locale;
+
 public class ActivityData extends AbstractData {
 
     @SuppressWarnings("unused")
@@ -41,7 +43,7 @@ public class ActivityData extends AbstractData {
 
     @Override
     public String getDataInString() {
-        return String.format("%d,%d,%s,%d", this.timestamp, this.activityType, getActivityString(), this.confidence);
+        return String.format(Locale.US, "%d,%d,%s,%d", this.timestamp, this.activityType, getActivityString(), this.confidence);
     }
 
     @SuppressWarnings("unused")

@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.model.data;
 
+import java.util.Locale;
+
 public class RotationData extends AbstractData {
 
     @SuppressWarnings("unused")
@@ -49,7 +51,7 @@ public class RotationData extends AbstractData {
 
     @Override
     public String getDataInString() {
-        return String.format("%d,%f,%f,%f,%f,%f", this.timestamp, this.x, this.y, this.z, this.cos, this.headingAccuracy);
+        return String.format(Locale.US, "%d,%f,%f,%f,%f,%f", this.timestamp, this.x, this.y, this.z, this.cos, this.headingAccuracy);
     }
 
     @SuppressWarnings("unused")

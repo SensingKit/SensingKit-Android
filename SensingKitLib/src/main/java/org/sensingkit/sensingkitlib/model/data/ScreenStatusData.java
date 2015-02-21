@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.model.data;
 
+import java.util.Locale;
+
 public class ScreenStatusData extends AbstractData {
 
     @SuppressWarnings("unused")
@@ -41,7 +43,7 @@ public class ScreenStatusData extends AbstractData {
 
     @Override
     public String getDataInString() {
-        return String.format("%d,%s", this.timestamp, this.getStatusString());
+        return String.format(Locale.US, "%d,%s", this.timestamp, this.getStatusString());
     }
 
     @SuppressWarnings("unused")

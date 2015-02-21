@@ -23,6 +23,8 @@ package org.sensingkit.sensingkitlib.model.data;
 
 import android.os.BatteryManager;
 
+import java.util.Locale;
+
 import static android.os.BatteryManager.*;
 
 public class BatteryData extends AbstractData {
@@ -53,7 +55,7 @@ public class BatteryData extends AbstractData {
 
     @Override
     public String getDataInString() {
-        return String.format("%d,%f,%d,%d,%s,%s,%s", this.timestamp, this.getLevelRatio(), this.temperature, this.voltage, getPluggedString(), getBatteryStatusString(), getBatteryHealthString());
+        return String.format(Locale.US, "%d,%f,%d,%d,%s,%s,%s", this.timestamp, this.getLevelRatio(), this.temperature, this.voltage, getPluggedString(), getBatteryStatusString(), getBatteryHealthString());
     }
 
     @SuppressWarnings("unused")

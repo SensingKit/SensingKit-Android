@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.model.data;
 
+import java.util.Locale;
+
 public class AudioLevelData extends AbstractData {
 
     @SuppressWarnings("unused")
@@ -37,7 +39,7 @@ public class AudioLevelData extends AbstractData {
 
     @Override
     public String getDataInString() {
-        return String.format("%d,%d", this.timestamp, this.level);
+        return String.format(Locale.US, "%d,%d", this.timestamp, this.level);
     }
 
     @SuppressWarnings("unused")

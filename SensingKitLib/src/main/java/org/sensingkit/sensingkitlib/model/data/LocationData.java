@@ -23,6 +23,8 @@ package org.sensingkit.sensingkitlib.model.data;
 
 import android.location.Location;
 
+import java.util.Locale;
+
 
 public class LocationData extends AbstractData {
 
@@ -40,7 +42,7 @@ public class LocationData extends AbstractData {
 
     @Override
     public String getDataInString() {
-        return String.format("%d,%s", this.timestamp, this.location);
+        return String.format(Locale.US, "%d,%s", this.timestamp, this.location);
     }
 
     @SuppressWarnings("unused")

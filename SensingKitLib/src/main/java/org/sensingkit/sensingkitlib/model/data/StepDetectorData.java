@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.model.data;
 
+import java.util.Locale;
+
 public class StepDetectorData extends AbstractData {
 
     @SuppressWarnings("unused")
@@ -33,7 +35,7 @@ public class StepDetectorData extends AbstractData {
 
     @Override
     public String getDataInString() {
-        return String.format("%d", this.timestamp);
+        return String.format(Locale.US, "%d", this.timestamp);
     }
 
 }

@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.model.data;
 
+import java.util.Locale;
+
 public class MagnetometerData extends AbstractData {
 
     @SuppressWarnings("unused")
@@ -41,7 +43,7 @@ public class MagnetometerData extends AbstractData {
 
     @Override
     public String getDataInString() {
-        return String.format("%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
+        return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
     }
 
     @SuppressWarnings("unused")
