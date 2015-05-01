@@ -27,14 +27,14 @@ import org.sensingkit.sensingkitlib.SKSensorDataListener;
 @SuppressWarnings("unused")
 public interface SensorModuleInterface {
 
-    public SensorModuleType getSensorType();
+    SensorModuleType getSensorType();
 
-    public void startSensing() throws SKException;
-    public void stopSensing();
-    public boolean isSensing();
+    void startSensing() throws SKException;
+    void stopSensing();
+    boolean isSensing();
 
-    public void subscribeSensorDataListener(SKSensorDataListener callback) throws SKException;
-    public void unsubscribeSensorDataListener(SKSensorDataListener callback) throws SKException;
-    public void unsubscribeAllSensorDataListeners() throws SKException;
+    void subscribeSensorDataListener(SKSensorDataListener callback) throws SKException;
+    void unsubscribeSensorDataListener(SKSensorDataListener callback) throws SKException;
+    void unsubscribeAllSensorDataListeners() throws SKException;
 
 }

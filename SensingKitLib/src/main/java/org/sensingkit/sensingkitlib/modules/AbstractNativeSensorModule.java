@@ -72,7 +72,7 @@ public abstract class AbstractNativeSensorModule extends AbstractSensorModule {
 
         this.isSensing = true;
 
-        boolean status = mSensorManager.registerListener(mSensorEventListener, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        boolean status = mSensorManager.registerListener(mSensorEventListener, mSensor, SensorManager.SENSOR_DELAY_FASTEST);
 
         if (!status) {
             throw new SKException(TAG, "SensorModule '" + getSensorName() + "' could not be started.", SKExceptionErrorCode.UNKNOWN_ERROR);

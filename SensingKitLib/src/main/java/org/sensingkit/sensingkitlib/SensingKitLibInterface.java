@@ -29,11 +29,11 @@ public interface SensingKitLibInterface {
 
     /** Sensor Registration */
 
-    public void registerSensorModule(SensorModuleType moduleType) throws SKException;
+    void registerSensorModule(SensorModuleType moduleType) throws SKException;
 
-    public void deregisterSensorModule(SensorModuleType moduleType) throws SKException;
+    void deregisterSensorModule(SensorModuleType moduleType) throws SKException;
 
-    public boolean isSensorModuleRegistered(SensorModuleType moduleType) throws SKException;
+    boolean isSensorModuleRegistered(SensorModuleType moduleType) throws SKException;
 
     /** Configuration */
     // TODO: Add Configuration
@@ -41,27 +41,27 @@ public interface SensingKitLibInterface {
 
     /** One Shot Sensing */
 
-    public DataInterface getDataFromSensor(SensorModuleType moduleType) throws SKException;
+    DataInterface getDataFromSensor(SensorModuleType moduleType) throws SKException;
 
 
     /** Continuous Sensing */
 
-    public void subscribeSensorDataListener(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException;
+    void subscribeSensorDataListener(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException;
 
-    public void unsubscribeSensorDataListener(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException;
+    void unsubscribeSensorDataListener(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException;
 
-    public void unsubscribeAllSensorDataListeners(SensorModuleType moduleType) throws SKException;
+    void unsubscribeAllSensorDataListeners(SensorModuleType moduleType) throws SKException;
 
-    public void startContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException;
+    void startContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException;
 
-    public void stopContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException;
+    void stopContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException;
 
-    public boolean isSensorModuleSensing(SensorModuleType moduleType) throws SKException;
+    boolean isSensorModuleSensing(SensorModuleType moduleType) throws SKException;
 
     /** Time */
 
-    public long getCurrentTimeMillis();
+    long getCurrentTimeMillis();
 
-    public long getNanoTime();
+    long getNanoTime();
 
 }
