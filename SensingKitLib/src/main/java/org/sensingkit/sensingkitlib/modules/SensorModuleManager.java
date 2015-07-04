@@ -100,7 +100,8 @@ public class SensorModuleManager {
 
     public boolean isSensorModuleRegistered(SensorModuleType moduleType) throws SKException {
 
-        return (getSensorModule(moduleType) != null);
+        int sensorIndex = moduleType.ordinal();
+        return (mSensors.get(sensorIndex) != null);
     }
 
     public boolean isSensorModuleSensing(SensorModuleType moduleType) throws SKException {
