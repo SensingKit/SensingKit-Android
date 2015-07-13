@@ -60,7 +60,7 @@ dependencies {
 
 ## How to Use this Library
 
-- import and init SensingKit into your Activity class as shown bellow:
+- Import and init SensingKit into your Activity class as shown bellow:
 
 ```java
 import org.sensingkit.sensingkitlib.SensingKitLib;
