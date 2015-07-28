@@ -42,7 +42,7 @@ public class ActivityData extends AbstractData {
     }
 
     @Override
-    public String getDataInString() {
+    public String getDataInCSV() {
         return String.format(Locale.US, "%d,%d,%s,%d", this.timestamp, this.activityType, getActivityString(), this.confidence);
     }
 

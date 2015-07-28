@@ -33,7 +33,7 @@ public abstract class AbstractData implements DataInterface
     }
 
     public String toString() {
-        return this.getDataInString();
+        return this.getDataInCSV();
     }
 
     @SuppressWarnings("unused")

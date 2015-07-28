@@ -54,7 +54,7 @@ public class BatteryData extends AbstractData {
     }
 
     @Override
-    public String getDataInString() {
+    public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%d,%d,%s,%s,%s", this.timestamp, this.getLevelRatio(), this.temperature, this.voltage, getPluggedString(), getBatteryStatusString(), getBatteryHealthString());
     }
 

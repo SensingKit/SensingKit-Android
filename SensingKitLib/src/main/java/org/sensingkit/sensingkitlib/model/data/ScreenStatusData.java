@@ -42,7 +42,7 @@ public class ScreenStatusData extends AbstractData {
     }
 
     @Override
-    public String getDataInString() {
+    public String getDataInCSV() {
         return String.format(Locale.US, "%d,%s", this.timestamp, this.getStatusString());
     }
 

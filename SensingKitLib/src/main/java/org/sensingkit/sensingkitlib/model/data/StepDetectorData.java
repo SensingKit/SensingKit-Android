@@ -34,7 +34,7 @@ public class StepDetectorData extends AbstractData {
     }
 
     @Override
-    public String getDataInString() {
+    public String getDataInCSV() {
         return String.format(Locale.US, "%d", this.timestamp);
     }
 

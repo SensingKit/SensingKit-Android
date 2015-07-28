@@ -23,6 +23,6 @@ package org.sensingkit.sensingkitlib.model.data;
 
 public interface DataInterface {
 
-    String getDataInString();
+    String getDataInCSV();
 
 }
