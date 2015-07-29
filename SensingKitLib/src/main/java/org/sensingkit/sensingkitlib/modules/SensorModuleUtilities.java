@@ -81,6 +81,9 @@ public final class SensorModuleUtilities {
             case AUDIO_LEVEL:
                 return "Audio Level";
 
+            case BLUETOOTH:
+                return "Bluetooth";
+
             default:
                 throw new SKException(TAG, "Unknown SensorModule", SKExceptionErrorCode.UNKNOWN_ERROR);
         }

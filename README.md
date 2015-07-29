@@ -23,6 +23,7 @@ The following sensor modules are currently supported in SensingKit-Android, (lis
 - Screen Status
 - Audio Recorder
 - Audio Level
+- Bluetooth
 
 ## Configuring the Library
 
@@ -51,9 +52,9 @@ repositories {
 ```
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'org.sensingkit:SensingKitLib-release:0.1@aar'
-    compile 'com.android.support:appcompat-v7:21.0.3’
-    compile 'com.google.android.gms:play-services-location:6.5.87'
+    compile 'org.sensingkit:SensingKitLib-release@aar'
+    compile 'com.android.support:appcompat-v7:22.2.1’
+    compile 'com.google.android.gms:play-services-location:7.5.0'
 }
 ```
 
@@ -82,7 +83,7 @@ mSensingKitLib.registerSensorModule(SensorModuleType.LIGHT);
 mSensingKitLib.subscribeSensorDataListener(SensorModuleType.LIGHT, new SKSensorDataListener() {
     @Override
     public void onDataReceived(final SensorModuleType moduleType, final DataInterface moduleData) {
-        System.out.println(moduleData);  // Print data
+        System.out.println(moduleData.getDataInCSV());  // Print data in CSV format
     }
 });
 ```

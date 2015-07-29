@@ -36,7 +36,7 @@ public class SensorModuleManager {
     @SuppressWarnings("unused")
     private static final String TAG = "SensorModuleManager";
 
-    private static final int TOTAL_SENSOR_MODULES = 16;
+    private static final int TOTAL_SENSOR_MODULES = 17;
 
     private static SensorModuleManager sSensorModuleManager;
     private final Context mApplicationContext;
@@ -191,6 +191,10 @@ public class SensorModuleManager {
 
             case AUDIO_LEVEL:
                 sensorModule = new AudioLevel(mApplicationContext);
+                break;
+
+            case BLUETOOTH:
+                sensorModule = new Bluetooth(mApplicationContext);
                 break;
 
             // Don't forget the break; here
