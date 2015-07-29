@@ -21,19 +21,18 @@
 
 package org.sensingkit.sensingkitlib;
 
-import org.sensingkit.sensingkitlib.model.data.DataInterface;
-import org.sensingkit.sensingkitlib.modules.SensorModuleType;
+import org.sensingkit.sensingkitlib.data.SKSensorData;
 
 @SuppressWarnings("unused")
 public interface SensingKitLibInterface {
 
     /** Sensor Registration */
 
-    void registerSensorModule(SensorModuleType moduleType) throws SKException;
+    void registerSensorModule(SKSensorModuleType moduleType) throws SKException;
 
-    void deregisterSensorModule(SensorModuleType moduleType) throws SKException;
+    void deregisterSensorModule(SKSensorModuleType moduleType) throws SKException;
 
-    boolean isSensorModuleRegistered(SensorModuleType moduleType) throws SKException;
+    boolean isSensorModuleRegistered(SKSensorModuleType moduleType) throws SKException;
 
     /** Configuration */
     // TODO: Add Configuration
@@ -41,22 +40,22 @@ public interface SensingKitLibInterface {
 
     /** One Shot Sensing */
 
-    DataInterface getDataFromSensor(SensorModuleType moduleType) throws SKException;
+    SKSensorData getDataFromSensor(SKSensorModuleType moduleType) throws SKException;
 
 
     /** Continuous Sensing */
 
-    void subscribeSensorDataListener(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException;
+    void subscribeSensorDataListener(SKSensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException;
 
-    void unsubscribeSensorDataListener(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException;
+    void unsubscribeSensorDataListener(SKSensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException;
 
-    void unsubscribeAllSensorDataListeners(SensorModuleType moduleType) throws SKException;
+    void unsubscribeAllSensorDataListeners(SKSensorModuleType moduleType) throws SKException;
 
-    void startContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException;
+    void startContinuousSensingWithSensor(SKSensorModuleType moduleType) throws SKException;
 
-    void stopContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException;
+    void stopContinuousSensingWithSensor(SKSensorModuleType moduleType) throws SKException;
 
-    boolean isSensorModuleSensing(SensorModuleType moduleType) throws SKException;
+    boolean isSensorModuleSensing(SKSensorModuleType moduleType) throws SKException;
 
     /** Time */
 

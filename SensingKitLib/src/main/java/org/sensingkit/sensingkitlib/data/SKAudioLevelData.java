@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014. Queen Mary University of London
+ * Copyright (c) 2015. Queen Mary University of London
  * Kleomenis Katevas, k.katevas@qmul.ac.uk
  *
  * This file is part of SensingKit-Android library.
@@ -19,12 +19,34 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib;
+package org.sensingkit.sensingkitlib.data;
 
-import org.sensingkit.sensingkitlib.data.SKSensorData;
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
 
-public interface SKSensorDataListener {
+import java.util.Locale;
 
-    void onDataReceived(final SKSensorModuleType moduleType, final SKSensorData sensorData);
+public class SKAudioLevelData extends SKAbstractData {
+
+    @SuppressWarnings("unused")
+    private static final String TAG = "SKAudioLevelData";
+
+    protected final int level;
+
+    public SKAudioLevelData(long timestamp, int level) {
+
+        super(SKSensorModuleType.AUDIO_LEVEL, timestamp);
+
+        this.level = level;
+    }
+
+    @Override
+    public String getDataInCSV() {
+        return String.format(Locale.US, "%d,%d", this.timestamp, this.level);
+    }
+
+    @SuppressWarnings("unused")
+    public int getLevel() {
+        return this.level;
+    }
 
 }

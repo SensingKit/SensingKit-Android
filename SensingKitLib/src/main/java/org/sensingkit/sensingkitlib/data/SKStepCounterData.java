@@ -19,12 +19,34 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib;
+package org.sensingkit.sensingkitlib.data;
 
-import org.sensingkit.sensingkitlib.data.SKSensorData;
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
 
-public interface SKSensorDataListener {
+import java.util.Locale;
 
-    void onDataReceived(final SKSensorModuleType moduleType, final SKSensorData sensorData);
+public class SKStepCounterData extends SKAbstractData {
+
+    @SuppressWarnings("unused")
+    private static final String TAG = "SKStepCounterData";
+
+    protected final float steps;
+
+    public SKStepCounterData(long timestamp, float steps) {
+
+        super(SKSensorModuleType.STEP_COUNTER, timestamp);
+
+        this.steps = steps;
+    }
+
+    @Override
+    public String getDataInCSV() {
+        return String.format(Locale.US, "%d,%f", this.timestamp, this.steps);
+    }
+
+    @SuppressWarnings("unused")
+    public float getSteps() {
+        return this.steps;
+    }
 
 }

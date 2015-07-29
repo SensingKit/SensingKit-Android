@@ -5,7 +5,7 @@ An Android library that provides Continuous Sensing functionality to your applic
 
 ## Supported Sensors
 
-The following sensor modules are currently supported in SensingKit-Android, (listed in [SensorModuleType](SensingKitLib/src/main/java/org/sensingkit/sensingkitlib/modules/SensorModuleType.java) enum):
+The following sensor modules are currently supported in SensingKit-Android, (listed in [SKSensorModuleType](SensingKitLib/src/main/java/org/sensingkit/sensingkitlib/modules/SKSensorModuleType.java) enum):
 
 - Accelerometer
 - Gravity
@@ -23,6 +23,7 @@ The following sensor modules are currently supported in SensingKit-Android, (lis
 - Screen Status
 - Audio Recorder
 - Audio Level
+- Bluetooth
 
 ## Configuring the Library
 
@@ -51,9 +52,9 @@ repositories {
 ```
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'org.sensingkit:SensingKitLib-release:0.1@aar'
-    compile 'com.android.support:appcompat-v7:21.0.3’
-    compile 'com.google.android.gms:play-services-location:6.5.87'
+    compile 'org.sensingkit:SensingKitLib-release@aar'
+    compile 'com.android.support:appcompat-v7:22.2.1’
+    compile 'com.google.android.gms:play-services-location:7.5.0'
 }
 ```
 
@@ -72,17 +73,17 @@ SensingKitLibInterface mSensingKitLib = SensingKitLib.getSensingKitLib(this);
 - Register a sensor module (e.g. a Light sensor) as shown bellow:
 
 ```java
-mSensingKitLib.registerSensorModule(SensorModuleType.LIGHT);
+mSensingKitLib.registerSensorModule(SKSensorModuleType.LIGHT);
 ```
 
 
 - Subscribe a sensor data listener:
 
 ```java
-mSensingKitLib.subscribeSensorDataListener(SensorModuleType.LIGHT, new SKSensorDataListener() {
+mSensingKitLib.subscribeSensorDataListener(SKSensorModuleType.LIGHT, new SKSensorDataListener() {
     @Override
-    public void onDataReceived(final SensorModuleType moduleType, final DataInterface moduleData) {
-        System.out.println(moduleData);  // Print data
+    public void onDataReceived(final SKSensorModuleType moduleType, final SKSensorData sensorData) {
+        System.out.println(sensorData.getDataInCSV());  // Print data in CSV format
     }
 });
 ```
@@ -91,7 +92,7 @@ mSensingKitLib.subscribeSensorDataListener(SensorModuleType.LIGHT, new SKSensorD
 - You can cast the data object into the actual sensor data object in order to access all the sensor data properties:
  
 ```java
-LightData lightData = (LightData)moduleData;
+SKLightData lightData = (SKLightData)sensorData;
 ```
 
 
@@ -99,8 +100,8 @@ LightData lightData = (LightData)moduleData;
 - You can Start and Stop the Continuous Sensing using the following commands:
 
 ```java
-mSensingKitLib.startContinuousSensingWithSensor(SensorModuleType.LIGHT);
-mSensingKitLib.stopContinuousSensingWithSensor(SensorModuleType.LIGHT);
+mSensingKitLib.startContinuousSensingWithSensor(SKSensorModuleType.LIGHT);
+mSensingKitLib.stopContinuousSensingWithSensor(SKSensorModuleType.LIGHT);
 ```
 
 

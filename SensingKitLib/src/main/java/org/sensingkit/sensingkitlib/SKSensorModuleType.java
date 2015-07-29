@@ -21,10 +21,22 @@
 
 package org.sensingkit.sensingkitlib;
 
-import org.sensingkit.sensingkitlib.data.SKSensorData;
-
-public interface SKSensorDataListener {
-
-    void onDataReceived(final SKSensorModuleType moduleType, final SKSensorData sensorData);
-
+public enum SKSensorModuleType {
+    ACCELEROMETER,
+    GRAVITY,
+    LINEAR_ACCELERATION,
+    GYROSCOPE,
+    ROTATION,
+    MAGNETOMETER,
+    AMBIENT_TEMPERATURE,
+    STEP_DETECTOR,
+    STEP_COUNTER,
+    LIGHT,
+    LOCATION,
+    ACTIVITY,
+    BATTERY,
+    SCREEN_STATUS,
+    AUDIO_RECORDER,
+    AUDIO_LEVEL,
+    BLUETOOTH
 }
