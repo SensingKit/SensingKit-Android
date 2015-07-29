@@ -24,9 +24,9 @@ package org.sensingkit.sensingkitlib;
 import android.content.Context;
 import android.os.PowerManager;
 
-import org.sensingkit.sensingkitlib.model.data.DataInterface;
-import org.sensingkit.sensingkitlib.modules.SensorModuleType;
-import org.sensingkit.sensingkitlib.modules.SensorModuleManager;
+import org.sensingkit.sensingkitlib.model.data.SKDataInterface;
+import org.sensingkit.sensingkitlib.modules.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.modules.SKSensorModuleManager;
 
 
 public class SensingKitLib implements SensingKitLibInterface {
@@ -39,7 +39,7 @@ public class SensingKitLib implements SensingKitLibInterface {
     private final Context mApplicationContext;
     private PowerManager.WakeLock mWakeLock;
 
-    private SensorModuleManager mSensorModuleManager;
+    private SKSensorModuleManager mSensorModuleManager;
 
     @SuppressWarnings("unused")
     public static SensingKitLibInterface getSensingKitLib(final Context context) throws SKException {
@@ -57,56 +57,56 @@ public class SensingKitLib implements SensingKitLibInterface {
 
     private SensingKitLib(final Context context) throws SKException {
         mApplicationContext = context;
-        mSensorModuleManager = SensorModuleManager.getSensorManager(context);
+        mSensorModuleManager = SKSensorModuleManager.getSensorManager(context);
     }
 
     @Override
-    public void registerSensorModule(SensorModuleType moduleType) throws SKException {
+    public void registerSensorModule(SKSensorModuleType moduleType) throws SKException {
         mSensorModuleManager.registerSensorModule(moduleType);
     }
 
     @Override
-    public void deregisterSensorModule(SensorModuleType moduleType) throws SKException {
+    public void deregisterSensorModule(SKSensorModuleType moduleType) throws SKException {
         mSensorModuleManager.deregisterSensorModule(moduleType);
     }
 
     @Override
-    public boolean isSensorModuleRegistered(SensorModuleType moduleType) throws SKException {
+    public boolean isSensorModuleRegistered(SKSensorModuleType moduleType) throws SKException {
         return mSensorModuleManager.isSensorModuleRegistered(moduleType);
     }
 
     @Override
-    public DataInterface getDataFromSensor(SensorModuleType moduleType) throws SKException {
+    public SKDataInterface getDataFromSensor(SKSensorModuleType moduleType) throws SKException {
         return mSensorModuleManager.getDataFromSensor(moduleType);
     }
 
     @Override
-    public void subscribeSensorDataListener(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
+    public void subscribeSensorDataListener(SKSensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
         mSensorModuleManager.subscribeSensorDataListener(moduleType, dataListener);
     }
 
     @Override
-    public void unsubscribeSensorDataListener(SensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
+    public void unsubscribeSensorDataListener(SKSensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
         mSensorModuleManager.unsubscribeSensorDataListener(moduleType, dataListener);
     }
 
     @Override
-    public void unsubscribeAllSensorDataListeners(SensorModuleType moduleType) throws SKException {
+    public void unsubscribeAllSensorDataListeners(SKSensorModuleType moduleType) throws SKException {
         mSensorModuleManager.unsubscribeAllSensorDataListeners(moduleType);
     }
 
     @Override
-    public void startContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException {
+    public void startContinuousSensingWithSensor(SKSensorModuleType moduleType) throws SKException {
         mSensorModuleManager.startContinuousSensingWithSensor(moduleType);
     }
 
     @Override
-    public void stopContinuousSensingWithSensor(SensorModuleType moduleType) throws SKException {
+    public void stopContinuousSensingWithSensor(SKSensorModuleType moduleType) throws SKException {
         mSensorModuleManager.stopContinuousSensingWithSensor(moduleType);
     }
 
     @Override
-    public boolean isSensorModuleSensing(SensorModuleType moduleType) throws SKException {
+    public boolean isSensorModuleSensing(SKSensorModuleType moduleType) throws SKException {
         return mSensorModuleManager.isSensorModuleSensing(moduleType);
     }
 

@@ -19,13 +19,35 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib;
+package org.sensingkit.sensingkitlib.modules;
 
-import org.sensingkit.sensingkitlib.model.data.SKDataInterface;
-import org.sensingkit.sensingkitlib.modules.SKSensorModuleType;
+import android.content.Context;
+import android.hardware.SensorEvent;
 
-public interface SKSensorDataListener {
+import org.sensingkit.sensingkitlib.SKException;
+import org.sensingkit.sensingkitlib.model.data.SKAbstractData;
+import org.sensingkit.sensingkitlib.model.data.SKStepCounterData;
 
-    void onDataReceived(final SKSensorModuleType moduleType, final SKDataInterface moduleData);
+public class SKStepCounter extends SKAbstractNativeSensorModule {
+
+    @SuppressWarnings("unused")
+    private static final String TAG = "SKStepCounter";
+
+    public SKStepCounter(final Context context) throws SKException {
+        super(context, SKSensorModuleType.STEP_COUNTER);
+    }
+
+    @Override
+    protected SKAbstractData buildData(SensorEvent event)
+    {
+        return new SKStepCounterData(System.currentTimeMillis(), event.values[0]);
+    }
+
+    @Override
+    protected boolean shouldPostSensorData(SKAbstractData data) {
+
+        // Always post sensor data
+        return true;
+    }
 
 }

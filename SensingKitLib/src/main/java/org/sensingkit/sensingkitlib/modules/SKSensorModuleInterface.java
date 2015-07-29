@@ -19,13 +19,21 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib;
+package org.sensingkit.sensingkitlib.modules;
 
-import org.sensingkit.sensingkitlib.model.data.SKDataInterface;
-import org.sensingkit.sensingkitlib.modules.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKException;
+import org.sensingkit.sensingkitlib.SKSensorDataListener;
 
-public interface SKSensorDataListener {
+@SuppressWarnings("unused")
+public interface SKSensorModuleInterface {
 
-    void onDataReceived(final SKSensorModuleType moduleType, final SKDataInterface moduleData);
+    SKSensorModuleType getSensorType();
 
+    void startSensing() throws SKException;
+    void stopSensing();
+    boolean isSensing();
+
+    void subscribeSensorDataListener(SKSensorDataListener callback) throws SKException;
+    void unsubscribeSensorDataListener(SKSensorDataListener callback) throws SKException;
+    void unsubscribeAllSensorDataListeners() throws SKException;
 }

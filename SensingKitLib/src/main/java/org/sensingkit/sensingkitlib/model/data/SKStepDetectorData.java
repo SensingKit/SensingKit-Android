@@ -19,13 +19,23 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib;
+package org.sensingkit.sensingkitlib.model.data;
 
-import org.sensingkit.sensingkitlib.model.data.SKDataInterface;
-import org.sensingkit.sensingkitlib.modules.SKSensorModuleType;
+import java.util.Locale;
 
-public interface SKSensorDataListener {
+public class SKStepDetectorData extends SKAbstractData {
 
-    void onDataReceived(final SKSensorModuleType moduleType, final SKDataInterface moduleData);
+    @SuppressWarnings("unused")
+    private static final String TAG = "SKStepDetectorData";
+
+    public SKStepDetectorData(long timestamp) {
+
+        super(timestamp);
+    }
+
+    @Override
+    public String getDataInCSV() {
+        return String.format(Locale.US, "%d", this.timestamp);
+    }
 
 }

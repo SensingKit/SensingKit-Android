@@ -19,13 +19,35 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib;
+package org.sensingkit.sensingkitlib.model.data;
 
-import org.sensingkit.sensingkitlib.model.data.SKDataInterface;
-import org.sensingkit.sensingkitlib.modules.SKSensorModuleType;
+import android.location.Location;
 
-public interface SKSensorDataListener {
+import java.util.Locale;
 
-    void onDataReceived(final SKSensorModuleType moduleType, final SKDataInterface moduleData);
+
+public class SKLocationData extends SKAbstractData {
+
+    @SuppressWarnings("unused")
+    private static final String TAG = "SKLocationData";
+
+    protected final Location location;
+
+    public SKLocationData(long timestamp, Location location) {
+
+        super(timestamp);
+
+        this.location = location;
+    }
+
+    @Override
+    public String getDataInCSV() {
+        return String.format(Locale.US, "%d,%s", this.timestamp, this.location);
+    }
+
+    @SuppressWarnings("unused")
+    public Location getLocation() {
+        return location;
+    }
 
 }

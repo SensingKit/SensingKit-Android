@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014. Queen Mary University of London
+ * Copyright (c) 2015. Queen Mary University of London
  * Kleomenis Katevas, k.katevas@qmul.ac.uk
  *
  * This file is part of SensingKit-Android library.
@@ -19,13 +19,19 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib;
+package org.sensingkit.sensingkitlib.model.data;
 
-import org.sensingkit.sensingkitlib.model.data.SKDataInterface;
-import org.sensingkit.sensingkitlib.modules.SKSensorModuleType;
+public class SKBluetoothData extends SKAbstractData {
 
-public interface SKSensorDataListener {
+    @SuppressWarnings("unused")
+    private static final String TAG = "SKBluetoothData";
 
-    void onDataReceived(final SKSensorModuleType moduleType, final SKDataInterface moduleData);
+    public SKBluetoothData(long timestamp) {
+        super(timestamp);
+    }
 
+    @Override
+    public String getDataInCSV() {
+        return null;
+    }
 }

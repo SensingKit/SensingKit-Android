@@ -73,16 +73,16 @@ SensingKitLibInterface mSensingKitLib = SensingKitLib.getSensingKitLib(this);
 - Register a sensor module (e.g. a Light sensor) as shown bellow:
 
 ```java
-mSensingKitLib.registerSensorModule(SensorModuleType.LIGHT);
+mSensingKitLib.registerSensorModule(SKSensorModuleType.LIGHT);
 ```
 
 
 - Subscribe a sensor data listener:
 
 ```java
-mSensingKitLib.subscribeSensorDataListener(SensorModuleType.LIGHT, new SKSensorDataListener() {
+mSensingKitLib.subscribeSensorDataListener(SKSensorModuleType.LIGHT, new SKSensorDataListener() {
     @Override
-    public void onDataReceived(final SensorModuleType moduleType, final DataInterface moduleData) {
+    public void onDataReceived(final SKSensorModuleType moduleType, final SKDataInterface moduleData) {
         System.out.println(moduleData.getDataInCSV());  // Print data in CSV format
     }
 });
@@ -92,7 +92,7 @@ mSensingKitLib.subscribeSensorDataListener(SensorModuleType.LIGHT, new SKSensorD
 - You can cast the data object into the actual sensor data object in order to access all the sensor data properties:
  
 ```java
-LightData lightData = (LightData)moduleData;
+SKLightData lightData = (SKLightData)moduleData;
 ```
 
 
@@ -100,8 +100,8 @@ LightData lightData = (LightData)moduleData;
 - You can Start and Stop the Continuous Sensing using the following commands:
 
 ```java
-mSensingKitLib.startContinuousSensingWithSensor(SensorModuleType.LIGHT);
-mSensingKitLib.stopContinuousSensingWithSensor(SensorModuleType.LIGHT);
+mSensingKitLib.startContinuousSensingWithSensor(SKSensorModuleType.LIGHT);
+mSensingKitLib.stopContinuousSensingWithSensor(SKSensorModuleType.LIGHT);
 ```
 
 

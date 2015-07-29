@@ -19,13 +19,34 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib;
+package org.sensingkit.sensingkitlib.modules;
 
-import org.sensingkit.sensingkitlib.model.data.SKDataInterface;
-import org.sensingkit.sensingkitlib.modules.SKSensorModuleType;
+import android.content.Context;
+import android.hardware.SensorEvent;
 
-public interface SKSensorDataListener {
+import org.sensingkit.sensingkitlib.SKException;
+import org.sensingkit.sensingkitlib.model.data.SKAbstractData;
+import org.sensingkit.sensingkitlib.model.data.SKGravityData;
 
-    void onDataReceived(final SKSensorModuleType moduleType, final SKDataInterface moduleData);
+public class SKGravity extends SKAbstractNativeSensorModule {
 
+    @SuppressWarnings("unused")
+    private static final String TAG = "SKGravity";
+
+    public SKGravity(final Context context) throws SKException {
+        super(context, SKSensorModuleType.GRAVITY);
+    }
+
+    @Override
+    protected SKAbstractData buildData(SensorEvent event)
+    {
+        return new SKGravityData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
+    }
+
+    @Override
+    protected boolean shouldPostSensorData(SKAbstractData data) {
+
+        // Always post sensor data
+        return true;
+    }
 }

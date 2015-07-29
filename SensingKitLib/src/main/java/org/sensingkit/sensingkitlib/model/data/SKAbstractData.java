@@ -19,13 +19,26 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib;
+package org.sensingkit.sensingkitlib.model.data;
 
-import org.sensingkit.sensingkitlib.model.data.SKDataInterface;
-import org.sensingkit.sensingkitlib.modules.SKSensorModuleType;
+public abstract class SKAbstractData implements SKDataInterface
+{
+    @SuppressWarnings("unused")
+    private static final String TAG = "SKAbstractData";
 
-public interface SKSensorDataListener {
+    protected final long timestamp;
 
-    void onDataReceived(final SKSensorModuleType moduleType, final SKDataInterface moduleData);
+    public SKAbstractData(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String toString() {
+        return this.getDataInCSV();
+    }
+
+    @SuppressWarnings("unused")
+    public long getTimestamp() {
+        return timestamp;
+    }
 
 }

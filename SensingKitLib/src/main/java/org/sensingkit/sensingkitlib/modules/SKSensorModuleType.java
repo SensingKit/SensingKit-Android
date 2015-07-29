@@ -19,13 +19,24 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib;
+package org.sensingkit.sensingkitlib.modules;
 
-import org.sensingkit.sensingkitlib.model.data.SKDataInterface;
-import org.sensingkit.sensingkitlib.modules.SKSensorModuleType;
-
-public interface SKSensorDataListener {
-
-    void onDataReceived(final SKSensorModuleType moduleType, final SKDataInterface moduleData);
-
+public enum SKSensorModuleType {
+    ACCELEROMETER,
+    GRAVITY,
+    LINEAR_ACCELERATION,
+    GYROSCOPE,
+    ROTATION,
+    MAGNETOMETER,
+    AMBIENT_TEMPERATURE,
+    STEP_DETECTOR,
+    STEP_COUNTER,
+    LIGHT,
+    LOCATION,
+    ACTIVITY,
+    BATTERY,
+    SCREEN_STATUS,
+    AUDIO_RECORDER,
+    AUDIO_LEVEL,
+    BLUETOOTH
 }
