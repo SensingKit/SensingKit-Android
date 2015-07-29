@@ -22,6 +22,7 @@
 package org.sensingkit.sensingkitlib.data;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class SKBluetoothData extends SKAbstractData {
 
@@ -39,7 +40,22 @@ public class SKBluetoothData extends SKAbstractData {
 
     @Override
     public String getDataInCSV() {
-        return null;
+
+        // Calculate capacity and init StringBuilder
+        int capacity = 10 * mBluetoothDevices.size();
+        StringBuilder stringBuilder = new StringBuilder(capacity);
+
+        // Add deviceData
+        for (SKBluetoothDeviceData deviceData : mBluetoothDevices) {
+
+            stringBuilder.append(String.format(Locale.US, "%d,%s\n", this.timestamp, deviceData.getDataInCSV()));
+        }
+
+        // Delete last \n
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+
+        // Return in String
+        return stringBuilder.toString();
     }
 
     @SuppressWarnings("unused")
