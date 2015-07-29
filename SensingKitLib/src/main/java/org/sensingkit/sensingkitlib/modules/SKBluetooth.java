@@ -37,6 +37,7 @@ import org.sensingkit.sensingkitlib.data.SKBluetoothDeviceData;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("ResourceType")
 public class SKBluetooth extends SKAbstractSensorModule {
 
     @SuppressWarnings("unused")
