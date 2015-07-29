@@ -31,7 +31,7 @@ import android.os.Build;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
-import org.sensingkit.sensingkitlib.model.data.SKAbstractData;
+import org.sensingkit.sensingkitlib.data.SKAbstractData;
 
 public abstract class SKAbstractNativeSensorModule extends SKAbstractSensorModule {
 

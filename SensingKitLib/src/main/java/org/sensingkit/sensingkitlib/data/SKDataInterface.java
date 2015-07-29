@@ -19,46 +19,10 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.model.data;
+package org.sensingkit.sensingkitlib.data;
 
-import java.util.Locale;
+public interface SKDataInterface {
 
-public class SKGravityData extends SKAbstractData {
-
-    @SuppressWarnings("unused")
-    private static final String TAG = "SKGravityData";
-
-    protected final float x;
-    protected final float y;
-    protected final float z;
-
-    public SKGravityData(long timestamp, float x, float y, float z) {
-
-        super(timestamp);
-
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
-
-    @Override
-    public String getDataInCSV() {
-        return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
-    }
-
-    @SuppressWarnings("unused")
-    public float getX() {
-        return this.x;
-    }
-
-    @SuppressWarnings("unused")
-    public float getY() {
-        return this.y;
-    }
-
-    @SuppressWarnings("unused")
-    public float getZ() {
-        return this.z;
-    }
+    String getDataInCSV();
 
 }

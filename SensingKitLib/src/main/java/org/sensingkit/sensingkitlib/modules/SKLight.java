@@ -25,8 +25,8 @@ import android.content.Context;
 import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.model.data.SKAbstractData;
-import org.sensingkit.sensingkitlib.model.data.SKLightData;
+import org.sensingkit.sensingkitlib.data.SKAbstractData;
+import org.sensingkit.sensingkitlib.data.SKLightData;
 
 public class SKLight extends SKAbstractNativeSensorModule {
 

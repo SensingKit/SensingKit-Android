@@ -19,7 +19,7 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.model.data;
+package org.sensingkit.sensingkitlib.data;
 
 import java.util.Locale;
 

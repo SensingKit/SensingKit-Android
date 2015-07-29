@@ -25,8 +25,8 @@ import android.content.Context;
 import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.model.data.SKAbstractData;
-import org.sensingkit.sensingkitlib.model.data.SKAccelerometerData;
+import org.sensingkit.sensingkitlib.data.SKAbstractData;
+import org.sensingkit.sensingkitlib.data.SKAccelerometerData;
 
 public class SKAccelerometer extends SKAbstractNativeSensorModule {
 

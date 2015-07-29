@@ -36,8 +36,8 @@ import com.google.android.gms.location.DetectedActivity;
 
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.model.data.SKAbstractData;
-import org.sensingkit.sensingkitlib.model.data.SKActivityData;
+import org.sensingkit.sensingkitlib.data.SKAbstractData;
+import org.sensingkit.sensingkitlib.data.SKActivityData;
 
 public class SKActivity extends SKAbstractGoogleServicesSensorModule {
 

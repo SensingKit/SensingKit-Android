@@ -19,46 +19,35 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.model.data;
+package org.sensingkit.sensingkitlib.data;
+
+import android.location.Location;
 
 import java.util.Locale;
 
-public class SKGyroscopeData extends SKAbstractData {
+
+public class SKLocationData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKGyroscopeData";
+    private static final String TAG = "SKLocationData";
 
-    protected final float x;
-    protected final float y;
-    protected final float z;
+    protected final Location location;
 
-    public SKGyroscopeData(long timestamp, float x, float y, float z) {
+    public SKLocationData(long timestamp, Location location) {
 
         super(timestamp);
 
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this.location = location;
     }
 
     @Override
     public String getDataInCSV() {
-        return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
+        return String.format(Locale.US, "%d,%s", this.timestamp, this.location);
     }
 
     @SuppressWarnings("unused")
-    public float getX() {
-        return this.x;
-    }
-
-    @SuppressWarnings("unused")
-    public float getY() {
-        return this.y;
-    }
-
-    @SuppressWarnings("unused")
-    public float getZ() {
-        return this.z;
+    public Location getLocation() {
+        return location;
     }
 
 }

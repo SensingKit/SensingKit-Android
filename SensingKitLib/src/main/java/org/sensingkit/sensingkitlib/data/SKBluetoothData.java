@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014. Queen Mary University of London
+ * Copyright (c) 2015. Queen Mary University of London
  * Kleomenis Katevas, k.katevas@qmul.ac.uk
  *
  * This file is part of SensingKit-Android library.
@@ -19,35 +19,19 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.model.data;
+package org.sensingkit.sensingkitlib.data;
 
-import android.location.Location;
-
-import java.util.Locale;
-
-
-public class SKLocationData extends SKAbstractData {
+public class SKBluetoothData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKLocationData";
+    private static final String TAG = "SKBluetoothData";
 
-    protected final Location location;
-
-    public SKLocationData(long timestamp, Location location) {
-
+    public SKBluetoothData(long timestamp) {
         super(timestamp);
-
-        this.location = location;
     }
 
     @Override
     public String getDataInCSV() {
-        return String.format(Locale.US, "%d,%s", this.timestamp, this.location);
+        return null;
     }
-
-    @SuppressWarnings("unused")
-    public Location getLocation() {
-        return location;
-    }
-
 }

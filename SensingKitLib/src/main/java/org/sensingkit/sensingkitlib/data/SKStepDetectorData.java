@@ -19,32 +19,23 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.model.data;
+package org.sensingkit.sensingkitlib.data;
 
 import java.util.Locale;
 
-public class SKAmbientTemperatureData extends SKAbstractData {
+public class SKStepDetectorData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKAmbientTemperatureData";
+    private static final String TAG = "SKStepDetectorData";
 
-    protected final float temperature;
-
-    public SKAmbientTemperatureData(long timestamp, float temperature) {
+    public SKStepDetectorData(long timestamp) {
 
         super(timestamp);
-
-        this.temperature = temperature;
     }
 
     @Override
     public String getDataInCSV() {
-        return String.format(Locale.US, "%d,%f", this.timestamp, this.temperature);
-    }
-
-    @SuppressWarnings("unused")
-    public float getTemperature() {
-        return this.temperature;
+        return String.format(Locale.US, "%d", this.timestamp);
     }
 
 }

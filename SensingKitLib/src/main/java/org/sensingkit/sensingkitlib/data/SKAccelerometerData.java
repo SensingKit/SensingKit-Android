@@ -19,32 +19,46 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.model.data;
+package org.sensingkit.sensingkitlib.data;
 
 import java.util.Locale;
 
-public class SKLightData extends SKAbstractData {
+public class SKAccelerometerData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKLightData";
+    private static final String TAG = "SKAccelerometerData";
 
-    protected final float light;
+    protected final float x;
+    protected final float y;
+    protected final float z;
 
-    public SKLightData(long timestamp, float light) {
+    public SKAccelerometerData(long timestamp, float x, float y, float z) {
 
         super(timestamp);
 
-        this.light = light;
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
     @Override
     public String getDataInCSV() {
-        return String.format(Locale.US, "%d,%f", this.timestamp, this.light);
+        return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
     }
 
     @SuppressWarnings("unused")
-    public float getLight() {
-        return this.light;
+    public float getX() {
+        return this.x;
+    }
+
+    @SuppressWarnings("unused")
+    public float getY() {
+        return this.y;
+    }
+
+    @SuppressWarnings("unused")
+    public float getZ() {
+        return this.z;
     }
 
 }

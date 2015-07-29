@@ -27,8 +27,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.model.data.SKAbstractData;
-import org.sensingkit.sensingkitlib.model.data.SKScreenStatusData;
+import org.sensingkit.sensingkitlib.data.SKAbstractData;
+import org.sensingkit.sensingkitlib.data.SKScreenStatusData;
 
 public class SKScreenStatus extends SKAbstractSensorModule {
 

@@ -27,8 +27,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.model.data.SKAbstractData;
-import org.sensingkit.sensingkitlib.model.data.SKBatteryData;
+import org.sensingkit.sensingkitlib.data.SKAbstractData;
+import org.sensingkit.sensingkitlib.data.SKBatteryData;
 
 public class SKBattery extends SKAbstractSensorModule {
 

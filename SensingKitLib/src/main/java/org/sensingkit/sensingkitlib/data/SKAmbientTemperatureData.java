@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015. Queen Mary University of London
+ * Copyright (c) 2014. Queen Mary University of London
  * Kleomenis Katevas, k.katevas@qmul.ac.uk
  *
  * This file is part of SensingKit-Android library.
@@ -19,32 +19,32 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.model.data;
+package org.sensingkit.sensingkitlib.data;
 
 import java.util.Locale;
 
-public class SKAudioLevelData extends SKAbstractData {
+public class SKAmbientTemperatureData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKAudioLevelData";
+    private static final String TAG = "SKAmbientTemperatureData";
 
-    protected final int level;
+    protected final float temperature;
 
-    public SKAudioLevelData(long timestamp, int level) {
+    public SKAmbientTemperatureData(long timestamp, float temperature) {
 
         super(timestamp);
 
-        this.level = level;
+        this.temperature = temperature;
     }
 
     @Override
     public String getDataInCSV() {
-        return String.format(Locale.US, "%d,%d", this.timestamp, this.level);
+        return String.format(Locale.US, "%d,%f", this.timestamp, this.temperature);
     }
 
     @SuppressWarnings("unused")
-    public int getLevel() {
-        return this.level;
+    public float getTemperature() {
+        return this.temperature;
     }
 
 }

@@ -19,26 +19,46 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.model.data;
+package org.sensingkit.sensingkitlib.data;
 
-public abstract class SKAbstractData implements SKDataInterface
-{
-    @SuppressWarnings("unused")
-    private static final String TAG = "SKAbstractData";
+import java.util.Locale;
 
-    protected final long timestamp;
-
-    public SKAbstractData(long timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public String toString() {
-        return this.getDataInCSV();
-    }
+public class SKLinearAccelerationData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    public long getTimestamp() {
-        return timestamp;
+    private static final String TAG = "SKLinearAccelerationData";
+
+    protected final float x;
+    protected final float y;
+    protected final float z;
+
+    public SKLinearAccelerationData(long timestamp, float x, float y, float z) {
+
+        super(timestamp);
+
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    @Override
+    public String getDataInCSV() {
+        return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
+    }
+
+    @SuppressWarnings("unused")
+    public float getX() {
+        return this.x;
+    }
+
+    @SuppressWarnings("unused")
+    public float getY() {
+        return this.y;
+    }
+
+    @SuppressWarnings("unused")
+    public float getZ() {
+        return this.z;
     }
 
 }
