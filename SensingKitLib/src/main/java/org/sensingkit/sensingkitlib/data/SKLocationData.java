@@ -23,6 +23,8 @@ package org.sensingkit.sensingkitlib.data;
 
 import android.location.Location;
 
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
+
 import java.util.Locale;
 
 
@@ -35,7 +37,7 @@ public class SKLocationData extends SKAbstractData {
 
     public SKLocationData(long timestamp, Location location) {
 
-        super(timestamp);
+        super(SKSensorModuleType.LOCATION, timestamp);
 
         this.location = location;
     }

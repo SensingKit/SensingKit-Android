@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
+
 import java.util.Locale;
 
 public class SKAmbientTemperatureData extends SKAbstractData {
@@ -32,7 +34,7 @@ public class SKAmbientTemperatureData extends SKAbstractData {
 
     public SKAmbientTemperatureData(long timestamp, float temperature) {
 
-        super(timestamp);
+        super(SKSensorModuleType.AMBIENT_TEMPERATURE, timestamp);
 
         this.temperature = temperature;
     }

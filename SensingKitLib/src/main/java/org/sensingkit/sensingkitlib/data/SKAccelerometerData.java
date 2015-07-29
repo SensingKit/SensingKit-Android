@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
+
 import java.util.Locale;
 
 public class SKAccelerometerData extends SKAbstractData {
@@ -34,7 +36,7 @@ public class SKAccelerometerData extends SKAbstractData {
 
     public SKAccelerometerData(long timestamp, float x, float y, float z) {
 
-        super(timestamp);
+        super(SKSensorModuleType.ACCELEROMETER, timestamp);
 
         this.x = x;
         this.y = y;

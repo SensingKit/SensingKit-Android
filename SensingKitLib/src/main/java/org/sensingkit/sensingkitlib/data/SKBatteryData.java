@@ -23,6 +23,8 @@ package org.sensingkit.sensingkitlib.data;
 
 import android.os.BatteryManager;
 
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
+
 import java.util.Locale;
 
 import static android.os.BatteryManager.*;
@@ -42,7 +44,7 @@ public class SKBatteryData extends SKAbstractData {
 
     public SKBatteryData(long timestamp, int level, int scale, int temperature, int voltage, int plugged, int status, int health) {
 
-        super(timestamp);
+        super(SKSensorModuleType.BATTERY, timestamp);
 
         this.level = level;
         this.scale = scale;

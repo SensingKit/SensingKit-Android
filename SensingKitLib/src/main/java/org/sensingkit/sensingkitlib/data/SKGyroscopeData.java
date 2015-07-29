@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
+
 import java.util.Locale;
 
 public class SKGyroscopeData extends SKAbstractData {
@@ -34,7 +36,7 @@ public class SKGyroscopeData extends SKAbstractData {
 
     public SKGyroscopeData(long timestamp, float x, float y, float z) {
 
-        super(timestamp);
+        super(SKSensorModuleType.GYROSCOPE, timestamp);
 
         this.x = x;
         this.y = y;

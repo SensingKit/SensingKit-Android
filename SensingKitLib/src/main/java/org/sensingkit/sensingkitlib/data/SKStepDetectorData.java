@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
+
 import java.util.Locale;
 
 public class SKStepDetectorData extends SKAbstractData {
@@ -30,7 +32,7 @@ public class SKStepDetectorData extends SKAbstractData {
 
     public SKStepDetectorData(long timestamp) {
 
-        super(timestamp);
+        super(SKSensorModuleType.STEP_DETECTOR, timestamp);
     }
 
     @Override

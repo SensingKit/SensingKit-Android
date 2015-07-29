@@ -23,6 +23,8 @@ package org.sensingkit.sensingkitlib.data;
 
 import com.google.android.gms.location.DetectedActivity;
 
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
+
 import java.util.Locale;
 
 public class SKActivityData extends SKAbstractData {
@@ -35,7 +37,7 @@ public class SKActivityData extends SKAbstractData {
 
     public SKActivityData(long timestamp, int activityType, int confidence) {
 
-        super(timestamp);
+        super(SKSensorModuleType.ACTIVITY, timestamp);
 
         this.activityType = activityType;
         this.confidence = confidence;

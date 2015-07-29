@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
+
 import java.util.Locale;
 
 public class SKMagnetometerData extends SKAbstractData {
@@ -34,7 +36,7 @@ public class SKMagnetometerData extends SKAbstractData {
 
     public SKMagnetometerData(long timestamp, float x, float y, float z) {
 
-        super(timestamp);
+        super(SKSensorModuleType.MAGNETOMETER, timestamp);
 
         this.x = x;
         this.y = y;

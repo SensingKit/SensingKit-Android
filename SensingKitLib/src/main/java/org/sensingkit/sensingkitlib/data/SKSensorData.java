@@ -21,8 +21,12 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
+
+@SuppressWarnings("unused")
 public interface SKSensorData {
 
+    SKSensorModuleType getSensorModuleType();
     String getDataInCSV();
 
 }

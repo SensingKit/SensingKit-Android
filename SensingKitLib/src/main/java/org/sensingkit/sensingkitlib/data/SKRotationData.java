@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
+
 import java.util.Locale;
 
 public class SKRotationData extends SKAbstractData {
@@ -36,7 +38,7 @@ public class SKRotationData extends SKAbstractData {
 
     public SKRotationData(long timestamp, float x, float y, float z, float cos, float headingAccuracy) {
 
-        super(timestamp);
+        super(SKSensorModuleType.ROTATION, timestamp);
 
         this.x = x;
         this.y = y;

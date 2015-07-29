@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
+
 import java.util.Locale;
 
 public class SKStepCounterData extends SKAbstractData {
@@ -32,7 +34,7 @@ public class SKStepCounterData extends SKAbstractData {
 
     public SKStepCounterData(long timestamp, float steps) {
 
-        super(timestamp);
+        super(SKSensorModuleType.STEP_COUNTER, timestamp);
 
         this.steps = steps;
     }
