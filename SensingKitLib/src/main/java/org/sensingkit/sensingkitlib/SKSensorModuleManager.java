@@ -19,17 +19,14 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.modules;
+package org.sensingkit.sensingkitlib;
 
 import android.content.Context;
 import android.util.Log;
 import android.util.SparseArray;
 
-import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
-import org.sensingkit.sensingkitlib.SKSensorDataListener;
 import org.sensingkit.sensingkitlib.data.SKDataInterface;
-
+import org.sensingkit.sensingkitlib.modules.*;
 
 public class SKSensorModuleManager {
 

@@ -27,6 +27,7 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 
 import org.sensingkit.sensingkitlib.SKException;
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKAudioLevelData;
 

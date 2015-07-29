@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.modules;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
 
 @SuppressWarnings("unused")
 public interface SKSensorModuleInterface {

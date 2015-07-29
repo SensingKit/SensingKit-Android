@@ -28,6 +28,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.sensingkit.sensingkitlib.SKException;
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
 
 
 public abstract class SKAbstractGoogleServicesSensorModule extends SKAbstractSensorModule implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {

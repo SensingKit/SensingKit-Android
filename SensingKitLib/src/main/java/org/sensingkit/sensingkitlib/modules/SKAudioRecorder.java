@@ -27,6 +27,7 @@ import android.os.Environment;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 
 import java.io.IOException;

@@ -25,8 +25,6 @@ import android.content.Context;
 import android.os.PowerManager;
 
 import org.sensingkit.sensingkitlib.data.SKDataInterface;
-import org.sensingkit.sensingkitlib.modules.SKSensorModuleType;
-import org.sensingkit.sensingkitlib.modules.SKSensorModuleManager;
 
 
 public class SensingKitLib implements SensingKitLibInterface {

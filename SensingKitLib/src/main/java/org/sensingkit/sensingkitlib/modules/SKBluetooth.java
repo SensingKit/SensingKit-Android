@@ -31,6 +31,7 @@ import android.util.Log;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKBluetoothData;
 
@@ -41,7 +42,7 @@ public class SKBluetooth extends SKAbstractSensorModule {
 
     private BluetoothAdapter mBluetoothAdapter;
 
-    protected SKBluetooth(Context context) throws SKException {
+    public SKBluetooth(Context context) throws SKException {
         super(context, SKSensorModuleType.BLUETOOTH);
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();

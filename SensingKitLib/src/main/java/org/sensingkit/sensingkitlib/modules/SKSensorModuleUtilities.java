@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.modules;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
 
 public final class SKSensorModuleUtilities {
 
