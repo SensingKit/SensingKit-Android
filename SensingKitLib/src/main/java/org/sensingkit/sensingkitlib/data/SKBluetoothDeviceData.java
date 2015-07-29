@@ -21,29 +21,43 @@
 
 package org.sensingkit.sensingkitlib.data;
 
-import java.util.ArrayList;
+import java.util.Locale;
 
-public class SKBluetoothData extends SKAbstractData {
+public class SKBluetoothDeviceData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKBluetoothData";
+    private static final String TAG = "SKBluetoothDeviceData";
 
-    private final ArrayList<SKBluetoothDeviceData> mBluetoothDevices;
+    protected final String name;
+    protected final String address;
+    protected final int rssi;
 
-    public SKBluetoothData(long timestamp, ArrayList<SKBluetoothDeviceData> bluetoothDevices) {
+    public SKBluetoothDeviceData(long timestamp, String name, String address, int rssi) {
 
         super(timestamp);
 
-        this.mBluetoothDevices = bluetoothDevices;
+        this.name = name;
+        this.address = address;
+        this.rssi = rssi;
     }
 
     @Override
     public String getDataInCSV() {
-        return null;
+        return String.format(Locale.US, "%d,%s,%s,%d", this.timestamp, this.name, this.address, this.rssi);
     }
 
     @SuppressWarnings("unused")
-    public ArrayList<SKBluetoothDeviceData> getBluetoothDevices() {
-        return this.mBluetoothDevices;
+    public String getName() {
+        return this.name;
+    }
+
+    @SuppressWarnings("unused")
+    public String getAddress() {
+        return this.address;
+    }
+
+    @SuppressWarnings("unused")
+    public int getRssi() {
+        return this.rssi;
     }
 }

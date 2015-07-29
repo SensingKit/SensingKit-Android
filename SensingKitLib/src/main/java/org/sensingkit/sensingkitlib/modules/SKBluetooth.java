@@ -27,25 +27,29 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.util.Log;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorModuleType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKBluetoothData;
+import org.sensingkit.sensingkitlib.data.SKBluetoothDeviceData;
+
+import java.util.ArrayList;
 
 public class SKBluetooth extends SKAbstractSensorModule {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SKBluetooth";
 
-    private BluetoothAdapter mBluetoothAdapter;
+    private final BluetoothAdapter mBluetoothAdapter;
+    private ArrayList<SKBluetoothDeviceData> mBluetoothDevices;
 
     public SKBluetooth(Context context) throws SKException {
         super(context, SKSensorModuleType.BLUETOOTH);
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mBluetoothDevices = new ArrayList<>();
 
         if (mBluetoothAdapter == null) {
             throw new SKException(TAG, "Bluetooth sensor module is not supported from the device.", SKExceptionErrorCode.UNKNOWN_ERROR);
@@ -71,14 +75,16 @@ public class SKBluetooth extends SKAbstractSensorModule {
                 int rssi = (int) intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
 
                 // Create SKBluetoothDevice and add to mBluetoothDevices array
-                Log.i(TAG, "Device Found: " + name + ", " + address + ", " + rssi);
+                SKBluetoothDeviceData deviceData = new SKBluetoothDeviceData(System.currentTimeMillis(), name, address, rssi);
+                mBluetoothDevices.add(deviceData);
 
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {  // Discovery Finished
 
                 // Build the data object
-                SKAbstractData data = new SKBluetoothData(System.currentTimeMillis());
+                SKAbstractData data = new SKBluetoothData(System.currentTimeMillis(), mBluetoothDevices);
 
                 // Clean the arrayList
+                mBluetoothDevices = new ArrayList<>();
 
                 // Submit sensor data object
                 submitSensorData(data);
@@ -127,6 +133,7 @@ public class SKBluetooth extends SKAbstractSensorModule {
     }
 
     private void registerLocalBroadcastManager() {
+
         // Register receivers for ACTION_FOUND and ACTION_DISCOVERY_FINISHED
         IntentFilter foundFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         IntentFilter finishedFilter = new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
