@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib;
 
-import org.sensingkit.sensingkitlib.data.SKDataInterface;
+import org.sensingkit.sensingkitlib.data.SKSensorData;
 
 @SuppressWarnings("unused")
 public interface SensingKitLibInterface {
@@ -40,7 +40,7 @@ public interface SensingKitLibInterface {
 
     /** One Shot Sensing */
 
-    SKDataInterface getDataFromSensor(SKSensorModuleType moduleType) throws SKException;
+    SKSensorData getDataFromSensor(SKSensorModuleType moduleType) throws SKException;
 
 
     /** Continuous Sensing */

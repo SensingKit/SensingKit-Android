@@ -24,7 +24,7 @@ package org.sensingkit.sensingkitlib;
 import android.content.Context;
 import android.os.PowerManager;
 
-import org.sensingkit.sensingkitlib.data.SKDataInterface;
+import org.sensingkit.sensingkitlib.data.SKSensorData;
 
 
 public class SensingKitLib implements SensingKitLibInterface {
@@ -74,7 +74,7 @@ public class SensingKitLib implements SensingKitLibInterface {
     }
 
     @Override
-    public SKDataInterface getDataFromSensor(SKSensorModuleType moduleType) throws SKException {
+    public SKSensorData getDataFromSensor(SKSensorModuleType moduleType) throws SKException {
         return mSensorModuleManager.getDataFromSensor(moduleType);
     }
 

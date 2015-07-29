@@ -25,7 +25,7 @@ import android.content.Context;
 import android.util.Log;
 import android.util.SparseArray;
 
-import org.sensingkit.sensingkitlib.data.SKDataInterface;
+import org.sensingkit.sensingkitlib.data.SKSensorData;
 import org.sensingkit.sensingkitlib.modules.*;
 
 public class SKSensorModuleManager {
@@ -203,7 +203,7 @@ public class SKSensorModuleManager {
         return sensorModule;
     }
 
-    public SKDataInterface getDataFromSensor(SKSensorModuleType moduleType) throws SKException {
+    public SKSensorData getDataFromSensor(SKSensorModuleType moduleType) throws SKException {
 
         Log.i(TAG, "Get data from sensor: " + SKSensorModuleUtilities.getSensorModuleInString(moduleType) + ".");
 

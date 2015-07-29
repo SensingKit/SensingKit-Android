@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.data;
 
-public interface SKDataInterface {
+public interface SKSensorData {
 
     String getDataInCSV();
 

@@ -5,7 +5,7 @@ An Android library that provides Continuous Sensing functionality to your applic
 
 ## Supported Sensors
 
-The following sensor modules are currently supported in SensingKit-Android, (listed in [SensorModuleType](SensingKitLib/src/main/java/org/sensingkit/sensingkitlib/modules/SensorModuleType.java) enum):
+The following sensor modules are currently supported in SensingKit-Android, (listed in [SKSensorModuleType](SensingKitLib/src/main/java/org/sensingkit/sensingkitlib/modules/SKSensorModuleType.java) enum):
 
 - Accelerometer
 - Gravity
@@ -82,8 +82,8 @@ mSensingKitLib.registerSensorModule(SKSensorModuleType.LIGHT);
 ```java
 mSensingKitLib.subscribeSensorDataListener(SKSensorModuleType.LIGHT, new SKSensorDataListener() {
     @Override
-    public void onDataReceived(final SKSensorModuleType moduleType, final SKDataInterface moduleData) {
-        System.out.println(moduleData.getDataInCSV());  // Print data in CSV format
+    public void onDataReceived(final SKSensorModuleType moduleType, final SKSensorData sensorData) {
+        System.out.println(sensorData.getDataInCSV());  // Print data in CSV format
     }
 });
 ```
@@ -92,7 +92,7 @@ mSensingKitLib.subscribeSensorDataListener(SKSensorModuleType.LIGHT, new SKSenso
 - You can cast the data object into the actual sensor data object in order to access all the sensor data properties:
  
 ```java
-SKLightData lightData = (SKLightData)moduleData;
+SKLightData lightData = (SKLightData)sensorData;
 ```
 
 

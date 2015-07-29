@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.data;
 
-public abstract class SKAbstractData implements SKDataInterface
+public abstract class SKAbstractData implements SKSensorData
 {
     @SuppressWarnings("unused")
     private static final String TAG = "SKAbstractData";
