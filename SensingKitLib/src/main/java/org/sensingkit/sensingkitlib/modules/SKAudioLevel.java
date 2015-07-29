@@ -41,7 +41,7 @@ public class SKAudioLevel extends SKAbstractSensorModule {
 
     private final int bufferSize = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT) * bufferSizeFactor;
 
-    private AudioRecord audioRecord;
+    private final AudioRecord audioRecord;
 
     public SKAudioLevel(final Context context) throws SKException {
         super(context, SKSensorModuleType.AUDIO_LEVEL);

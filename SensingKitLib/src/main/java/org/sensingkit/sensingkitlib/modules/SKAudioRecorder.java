@@ -39,7 +39,7 @@ public class SKAudioRecorder extends SKAbstractSensorModule {
 
     private static final String outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recording.aac";
 
-    private MediaRecorder recorder;
+    private final MediaRecorder recorder;
 
     public SKAudioRecorder(final Context context) throws SKException {
         super(context, SKSensorModuleType.AUDIO_RECORDER);
