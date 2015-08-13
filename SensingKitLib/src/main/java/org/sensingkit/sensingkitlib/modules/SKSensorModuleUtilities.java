@@ -88,6 +88,9 @@ public final class SKSensorModuleUtilities {
             case HUMIDITY:
                 return "Humidity";
 
+            case AIR_PRESSURE:
+                return "Air Pressure";
+
             default:
                 throw new SKException(TAG, "Unknown SensorModule", SKExceptionErrorCode.UNKNOWN_ERROR);
         }

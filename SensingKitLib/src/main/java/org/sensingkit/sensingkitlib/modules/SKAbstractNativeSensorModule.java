@@ -142,6 +142,9 @@ public abstract class SKAbstractNativeSensorModule extends SKAbstractSensorModul
             case HUMIDITY:
                 return Sensor.TYPE_RELATIVE_HUMIDITY;
 
+            case AIR_PRESSURE:
+                return Sensor.TYPE_PRESSURE;
+
             case LOCATION:
             case ACTIVITY:
             case BATTERY:
