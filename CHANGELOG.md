@@ -1,5 +1,9 @@
 # Changelog
 
+### Next
+  - Added support for Android Studio 1.3.1
+  - Update gradle to 1.3.0
+
 ### 0.2.0
   - Added support for Bluetooth sensor module.
   - DataInterface method getDataInString() has been renamed to getDataInCSV()
