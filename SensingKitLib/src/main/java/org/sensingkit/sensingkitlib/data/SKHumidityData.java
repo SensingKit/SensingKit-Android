@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014. Queen Mary University of London
+ * Copyright (c) 2015. Queen Mary University of London
  * Kleomenis Katevas, k.katevas@qmul.ac.uk
  *
  * This file is part of SensingKit-Android library.
@@ -19,25 +19,34 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib;
+package org.sensingkit.sensingkitlib.data;
 
-public enum SKSensorModuleType {
-    ACCELEROMETER,
-    GRAVITY,
-    LINEAR_ACCELERATION,
-    GYROSCOPE,
-    ROTATION,
-    MAGNETOMETER,
-    AMBIENT_TEMPERATURE,
-    STEP_DETECTOR,
-    STEP_COUNTER,
-    LIGHT,
-    LOCATION,
-    ACTIVITY,
-    BATTERY,
-    SCREEN_STATUS,
-    AUDIO_RECORDER,
-    AUDIO_LEVEL,
-    BLUETOOTH,
-    HUMIDITY
+import org.sensingkit.sensingkitlib.SKSensorModuleType;
+
+import java.util.Locale;
+
+public class SKHumidityData extends SKAbstractData {
+
+    @SuppressWarnings("unused")
+    private static final String TAG = "SKHumidityData";
+
+    protected final float humidity;
+
+    public SKHumidityData(long timestamp, float humidity) {
+
+        super(SKSensorModuleType.HUMIDITY, timestamp);
+
+        this.humidity = humidity;
+    }
+
+    @Override
+    public String getDataInCSV() {
+        return String.format(Locale.US, "%d,%f", this.timestamp, this.humidity);
+    }
+
+    @SuppressWarnings("unused")
+    public float getLight() {
+        return this.humidity;
+    }
+
 }

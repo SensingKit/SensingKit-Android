@@ -33,7 +33,7 @@ public class SKSensorModuleManager {
     @SuppressWarnings("unused")
     private static final String TAG = "SKSensorModuleManager";
 
-    private static final int TOTAL_SENSOR_MODULES = 17;
+    private static final int TOTAL_SENSOR_MODULES = 18;
 
     private static SKSensorModuleManager sSensorModuleManager;
     private final Context mApplicationContext;
@@ -192,6 +192,10 @@ public class SKSensorModuleManager {
 
             case BLUETOOTH:
                 sensorModule = new SKBluetooth(mApplicationContext);
+                break;
+
+            case HUMIDITY:
+                sensorModule = new SKHumidity(mApplicationContext);
                 break;
 
             // Don't forget the break; here

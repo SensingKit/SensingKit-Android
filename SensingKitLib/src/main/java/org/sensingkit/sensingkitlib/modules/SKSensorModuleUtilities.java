@@ -85,6 +85,9 @@ public final class SKSensorModuleUtilities {
             case BLUETOOTH:
                 return "Bluetooth";
 
+            case HUMIDITY:
+                return "Humidity";
+
             default:
                 throw new SKException(TAG, "Unknown SensorModule", SKExceptionErrorCode.UNKNOWN_ERROR);
         }

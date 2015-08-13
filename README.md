@@ -24,6 +24,7 @@ The following sensor modules are currently supported in SensingKit-Android, (lis
 - Audio Recorder
 - Audio Level
 - Bluetooth
+- Humidity
 
 ## Configuring the Library
 
