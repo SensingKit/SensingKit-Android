@@ -55,8 +55,8 @@ repositories {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'org.sensingkit:SensingKitLib-release@aar'
-    compile 'com.android.support:appcompat-v7:22.2.1’
-    compile 'com.google.android.gms:play-services-location:7.5.0'
+    compile 'com.android.support:appcompat-v7:23.0.0’
+    compile 'com.google.android.gms:play-services-location:7.8.0'
 }
 ```
 
