@@ -3,8 +3,8 @@
 ### Next
 - Added support for Air Pressure sensor module
 - Added support for Humidity sensor module
-- Updated Google Play Services to 7.8.0
-- Added support for Android Studio 1.3.1
+- Updated Google Play Services to 8.1.0
+- Added support for Android Studio 1.4.0
 - Added support for Android 6.0 SDK (Marshmallow)
 - Updated gradle to 1.3.0
 
