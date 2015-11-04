@@ -61,70 +61,70 @@ public class SKSensorModuleManager {
         mSensors = new SparseArray<>(TOTAL_SENSOR_MODULES);
     }
 
-    public void registerSensorModule(SKSensorModuleType moduleType) throws SKException {
+    public void registerSensorModule(SKSensorType sensorType) throws SKException {
 
-        Log.i(TAG, "Register sensor: " + SKSensorModuleUtilities.getSensorModuleInString(moduleType) + ".");
+        Log.i(TAG, "Register sensor: " + SKSensorModuleUtilities.getSensorModuleInString(sensorType) + ".");
 
-        if (isSensorModuleRegistered(moduleType)) {
+        if (isSensorModuleRegistered(sensorType)) {
             throw new SKException(TAG, "SensorModule is already registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
         // Register the SensorModule
-        int sensorIndex = moduleType.ordinal();
-        SKAbstractSensorModule sensorModule = createSensorModule(moduleType);
+        int sensorIndex = sensorType.ordinal();
+        SKAbstractSensorModule sensorModule = createSensorModule(sensorType);
         mSensors.put(sensorIndex, sensorModule);
     }
 
-    public void deregisterSensorModule(SKSensorModuleType moduleType) throws SKException {
+    public void deregisterSensorModule(SKSensorType sensorType) throws SKException {
 
-        Log.i(TAG, "Deregister sensor: " + SKSensorModuleUtilities.getSensorModuleInString(moduleType) + ".");
+        Log.i(TAG, "Deregister sensor: " + SKSensorModuleUtilities.getSensorModuleInString(sensorType) + ".");
 
-        if (!isSensorModuleRegistered(moduleType)) {
+        if (!isSensorModuleRegistered(sensorType)) {
             throw new SKException(TAG, "SensorModule is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        if (isSensorModuleSensing(moduleType)) {
+        if (isSensorModuleSensing(sensorType)) {
             throw new SKException(TAG, "SensorModule is currently sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
         // Clear all Callbacks from that sensor
-        getSensorModule(moduleType).unsubscribeAllSensorDataListeners();
+        getSensorModule(sensorType).unsubscribeAllSensorDataListeners();
 
         // Deregister the SensorModule
-        int sensorIndex = moduleType.ordinal();
+        int sensorIndex = sensorType.ordinal();
         mSensors.delete(sensorIndex);
     }
 
-    public boolean isSensorModuleRegistered(SKSensorModuleType moduleType) throws SKException {
+    public boolean isSensorModuleRegistered(SKSensorType sensorType) throws SKException {
 
-        int sensorIndex = moduleType.ordinal();
+        int sensorIndex = sensorType.ordinal();
         return (mSensors.get(sensorIndex) != null);
     }
 
-    public boolean isSensorModuleSensing(SKSensorModuleType moduleType) throws SKException {
+    public boolean isSensorModuleSensing(SKSensorType sensorType) throws SKException {
 
-        if (!isSensorModuleRegistered(moduleType)) {
+        if (!isSensorModuleRegistered(sensorType)) {
             throw new SKException(TAG, "SensorModule is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        return getSensorModule(moduleType).isSensing();
+        return getSensorModule(sensorType).isSensing();
     }
 
-    protected SKAbstractSensorModule getSensorModule(SKSensorModuleType moduleType) throws SKException {
+    protected SKAbstractSensorModule getSensorModule(SKSensorType sensorType) throws SKException {
 
-        if (!isSensorModuleRegistered(moduleType)) {
+        if (!isSensorModuleRegistered(sensorType)) {
             throw new SKException(TAG, "SensorModule is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        int sensorIndex = moduleType.ordinal();
+        int sensorIndex = sensorType.ordinal();
         return mSensors.get(sensorIndex);
     }
 
-    protected SKAbstractSensorModule createSensorModule(SKSensorModuleType moduleType) throws SKException {
+    protected SKAbstractSensorModule createSensorModule(SKSensorType sensorType) throws SKException {
 
         SKAbstractSensorModule sensorModule;
 
-        switch (moduleType) {
+        switch (sensorType) {
 
             case ACCELEROMETER:
                 sensorModule = new SKAccelerometer(mApplicationContext);
@@ -211,55 +211,55 @@ public class SKSensorModuleManager {
         return sensorModule;
     }
 
-    public SKSensorData getDataFromSensor(SKSensorModuleType moduleType) throws SKException {
+    public SKSensorData getDataFromSensor(SKSensorType sensorType) throws SKException {
 
-        Log.i(TAG, "Get data from sensor: " + SKSensorModuleUtilities.getSensorModuleInString(moduleType) + ".");
+        Log.i(TAG, "Get data from sensor: " + SKSensorModuleUtilities.getSensorModuleInString(sensorType) + ".");
 
         throw new SKException(TAG, "This feature is not supported just yet!", SKExceptionErrorCode.UNKNOWN_ERROR);
     }
 
-    public void subscribeSensorDataListener(SKSensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
+    public void subscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
 
-        Log.i(TAG, "Subscribe to sensor: " + SKSensorModuleUtilities.getSensorModuleInString(moduleType) + ".");
+        Log.i(TAG, "Subscribe to sensor: " + SKSensorModuleUtilities.getSensorModuleInString(sensorType) + ".");
 
-        getSensorModule(moduleType).subscribeSensorDataListener(dataListener);
+        getSensorModule(sensorType).subscribeSensorDataListener(dataListener);
     }
 
-    public void unsubscribeSensorDataListener(SKSensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
+    public void unsubscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
 
-        Log.i(TAG, "Unsubscribe from sensor: " + SKSensorModuleUtilities.getSensorModuleInString(moduleType) + ".");
+        Log.i(TAG, "Unsubscribe from sensor: " + SKSensorModuleUtilities.getSensorModuleInString(sensorType) + ".");
 
-        getSensorModule(moduleType).unsubscribeSensorDataListener(dataListener);
+        getSensorModule(sensorType).unsubscribeSensorDataListener(dataListener);
     }
 
-    public void unsubscribeAllSensorDataListeners(SKSensorModuleType moduleType) throws SKException {
+    public void unsubscribeAllSensorDataListeners(SKSensorType sensorType) throws SKException {
 
         Log.i(TAG, "Unsubscribe from all sensors.");
 
-        getSensorModule(moduleType).unsubscribeAllSensorDataListeners();
+        getSensorModule(sensorType).unsubscribeAllSensorDataListeners();
     }
 
-    public void startContinuousSensingWithSensor(SKSensorModuleType moduleType) throws SKException {
+    public void startContinuousSensingWithSensor(SKSensorType sensorType) throws SKException {
 
-        Log.i(TAG, "Start sensing with sensor: " + SKSensorModuleUtilities.getSensorModuleInString(moduleType) + ".");
+        Log.i(TAG, "Start sensing with sensor: " + SKSensorModuleUtilities.getSensorModuleInString(sensorType) + ".");
 
-        if (isSensorModuleSensing(moduleType)) {
+        if (isSensorModuleSensing(sensorType)) {
             throw new SKException(TAG, "SensorModule is already sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
         // Start Sensing
-        getSensorModule(moduleType).startSensing();
+        getSensorModule(sensorType).startSensing();
     }
 
-    public void stopContinuousSensingWithSensor(SKSensorModuleType moduleType) throws SKException {
+    public void stopContinuousSensingWithSensor(SKSensorType sensorType) throws SKException {
 
-        Log.i(TAG, "Stop sensing with sensor: " + SKSensorModuleUtilities.getSensorModuleInString(moduleType) + ".");
+        Log.i(TAG, "Stop sensing with sensor: " + SKSensorModuleUtilities.getSensorModuleInString(sensorType) + ".");
 
-        if (!isSensorModuleSensing(moduleType)) {
+        if (!isSensorModuleSensing(sensorType)) {
             throw new SKException(TAG, "SensorModule is already not sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        SKSensorModuleInterface sensorModule = getSensorModule(moduleType);
+        SKSensorModuleInterface sensorModule = getSensorModule(sensorType);
 
         // Stop Sensing
         sensorModule.stopSensing();

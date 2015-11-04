@@ -36,7 +36,7 @@ import com.google.android.gms.location.DetectedActivity;
 
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKActivityData;
 
@@ -54,7 +54,7 @@ public class SKActivity extends SKAbstractGoogleServicesSensorModule {
     private int mLastConfidenceSensed = Integer.MAX_VALUE;
 
     public SKActivity(final Context context) throws SKException {
-        super(context, SKSensorModuleType.ACTIVITY);
+        super(context, SKSensorType.ACTIVITY);
 
         mClient = new GoogleApiClient.Builder(context)
                 .addApi(ActivityRecognition.API)

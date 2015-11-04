@@ -59,53 +59,53 @@ public class SensingKitLib implements SensingKitLibInterface {
     }
 
     @Override
-    public void registerSensorModule(SKSensorModuleType moduleType) throws SKException {
-        mSensorModuleManager.registerSensorModule(moduleType);
+    public void registerSensorModule(SKSensorType sensorType) throws SKException {
+        mSensorModuleManager.registerSensorModule(sensorType);
     }
 
     @Override
-    public void deregisterSensorModule(SKSensorModuleType moduleType) throws SKException {
-        mSensorModuleManager.deregisterSensorModule(moduleType);
+    public void deregisterSensorModule(SKSensorType sensorType) throws SKException {
+        mSensorModuleManager.deregisterSensorModule(sensorType);
     }
 
     @Override
-    public boolean isSensorModuleRegistered(SKSensorModuleType moduleType) throws SKException {
-        return mSensorModuleManager.isSensorModuleRegistered(moduleType);
+    public boolean isSensorModuleRegistered(SKSensorType sensorType) throws SKException {
+        return mSensorModuleManager.isSensorModuleRegistered(sensorType);
     }
 
     @Override
-    public SKSensorData getDataFromSensor(SKSensorModuleType moduleType) throws SKException {
-        return mSensorModuleManager.getDataFromSensor(moduleType);
+    public SKSensorData getDataFromSensor(SKSensorType sensorType) throws SKException {
+        return mSensorModuleManager.getDataFromSensor(sensorType);
     }
 
     @Override
-    public void subscribeSensorDataListener(SKSensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
-        mSensorModuleManager.subscribeSensorDataListener(moduleType, dataListener);
+    public void subscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
+        mSensorModuleManager.subscribeSensorDataListener(sensorType, dataListener);
     }
 
     @Override
-    public void unsubscribeSensorDataListener(SKSensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException {
-        mSensorModuleManager.unsubscribeSensorDataListener(moduleType, dataListener);
+    public void unsubscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
+        mSensorModuleManager.unsubscribeSensorDataListener(sensorType, dataListener);
     }
 
     @Override
-    public void unsubscribeAllSensorDataListeners(SKSensorModuleType moduleType) throws SKException {
-        mSensorModuleManager.unsubscribeAllSensorDataListeners(moduleType);
+    public void unsubscribeAllSensorDataListeners(SKSensorType sensorType) throws SKException {
+        mSensorModuleManager.unsubscribeAllSensorDataListeners(sensorType);
     }
 
     @Override
-    public void startContinuousSensingWithSensor(SKSensorModuleType moduleType) throws SKException {
-        mSensorModuleManager.startContinuousSensingWithSensor(moduleType);
+    public void startContinuousSensingWithSensor(SKSensorType sensorType) throws SKException {
+        mSensorModuleManager.startContinuousSensingWithSensor(sensorType);
     }
 
     @Override
-    public void stopContinuousSensingWithSensor(SKSensorModuleType moduleType) throws SKException {
-        mSensorModuleManager.stopContinuousSensingWithSensor(moduleType);
+    public void stopContinuousSensingWithSensor(SKSensorType sensorType) throws SKException {
+        mSensorModuleManager.stopContinuousSensingWithSensor(sensorType);
     }
 
     @Override
-    public boolean isSensorModuleSensing(SKSensorModuleType moduleType) throws SKException {
-        return mSensorModuleManager.isSensorModuleSensing(moduleType);
+    public boolean isSensorModuleSensing(SKSensorType sensorType) throws SKException {
+        return mSensorModuleManager.isSensorModuleSensing(sensorType);
     }
 
     @Override

@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.data;
 
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
@@ -34,7 +34,7 @@ public class SKLightData extends SKAbstractData {
 
     public SKLightData(long timestamp, float light) {
 
-        super(SKSensorModuleType.LIGHT, timestamp);
+        super(SKSensorType.LIGHT, timestamp);
 
         this.light = light;
     }

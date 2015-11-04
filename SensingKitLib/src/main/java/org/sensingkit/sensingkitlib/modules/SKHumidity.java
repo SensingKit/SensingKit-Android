@@ -25,7 +25,7 @@ import android.content.Context;
 import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKHumidityData;
 
@@ -35,7 +35,7 @@ public class SKHumidity extends SKAbstractNativeSensorModule {
     private static final String TAG = "SKHumidity";
 
     public SKHumidity(final Context context) throws SKException {
-        super(context, SKSensorModuleType.HUMIDITY);
+        super(context, SKSensorType.HUMIDITY);
     }
 
     @Override

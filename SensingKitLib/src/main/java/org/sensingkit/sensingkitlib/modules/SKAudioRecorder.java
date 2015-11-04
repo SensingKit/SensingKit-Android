@@ -27,7 +27,7 @@ import android.os.Environment;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 
 import java.io.IOException;
@@ -42,7 +42,7 @@ public class SKAudioRecorder extends SKAbstractSensorModule {
     private final MediaRecorder recorder;
 
     public SKAudioRecorder(final Context context) throws SKException {
-        super(context, SKSensorModuleType.AUDIO_RECORDER);
+        super(context, SKSensorType.AUDIO_RECORDER);
 
         recorder = new MediaRecorder();
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);

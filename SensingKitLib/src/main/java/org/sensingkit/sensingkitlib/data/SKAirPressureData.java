@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.data;
 
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
@@ -34,7 +34,7 @@ public class SKAirPressureData extends SKAbstractData {
 
     public SKAirPressureData(long timestamp, float pressure) {
 
-        super(SKSensorModuleType.AIR_PRESSURE, timestamp);
+        super(SKSensorType.AIR_PRESSURE, timestamp);
 
         this.pressure = pressure;
     }

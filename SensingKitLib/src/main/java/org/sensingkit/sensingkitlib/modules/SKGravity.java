@@ -25,7 +25,7 @@ import android.content.Context;
 import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKGravityData;
 
@@ -35,7 +35,7 @@ public class SKGravity extends SKAbstractNativeSensorModule {
     private static final String TAG = "SKGravity";
 
     public SKGravity(final Context context) throws SKException {
-        super(context, SKSensorModuleType.GRAVITY);
+        super(context, SKSensorType.GRAVITY);
     }
 
     @Override

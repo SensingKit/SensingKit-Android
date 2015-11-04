@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.data;
 
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
@@ -38,7 +38,7 @@ public class SKScreenStatusData extends SKAbstractData {
 
     public SKScreenStatusData(long timestamp, int status) {
 
-        super(SKSensorModuleType.SCREEN_STATUS, timestamp);
+        super(SKSensorType.SCREEN_STATUS, timestamp);
 
         this.status = status;
     }

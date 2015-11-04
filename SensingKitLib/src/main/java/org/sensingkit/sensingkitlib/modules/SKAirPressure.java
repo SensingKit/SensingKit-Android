@@ -25,7 +25,7 @@ import android.content.Context;
 import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKAirPressureData;
 
@@ -35,7 +35,7 @@ public class SKAirPressure extends SKAbstractNativeSensorModule {
     private static final String TAG = "SKAirPressure";
 
     public SKAirPressure(final Context context) throws SKException {
-        super(context, SKSensorModuleType.AIR_PRESSURE);
+        super(context, SKSensorType.AIR_PRESSURE);
     }
 
     @Override
