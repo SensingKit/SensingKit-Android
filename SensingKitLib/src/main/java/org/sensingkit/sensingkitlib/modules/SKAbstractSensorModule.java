@@ -26,7 +26,7 @@ import android.content.Context;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 
 import java.util.ArrayList;
@@ -37,26 +37,26 @@ public abstract class SKAbstractSensorModule implements SKSensorModuleInterface 
     private static final String TAG = "SKAbstractSensorModule";
 
     protected final Context mApplicationContext;
-    protected final SKSensorModuleType mSensorModuleType;
+    protected final SKSensorType mSensorType;
     protected boolean isSensing = false;
     protected ArrayList<SKSensorDataListener> mSensorDataListeners;
 
-    protected SKAbstractSensorModule(final Context context, final SKSensorModuleType sensorModuleType) {
+    protected SKAbstractSensorModule(final Context context, final SKSensorType sensorType) {
 
         this.mApplicationContext = context;
-        this.mSensorModuleType = sensorModuleType;
+        this.mSensorType = sensorType;
     }
 
     public boolean isSensing() {
         return isSensing;
     }
 
-    public SKSensorModuleType getSensorType() {
-        return this.mSensorModuleType;
+    public SKSensorType getSensorType() {
+        return this.mSensorType;
     }
 
     public String getSensorName() throws SKException {
-        return SKSensorModuleUtilities.getSensorModuleInString(mSensorModuleType);
+        return SKSensorModuleUtilities.getSensorModuleInString(mSensorType);
     }
 
     public void subscribeSensorDataListener(SKSensorDataListener callback) throws SKException {
@@ -107,7 +107,7 @@ public abstract class SKAbstractSensorModule implements SKSensorModuleInterface 
 
                 // CallBack with data as parameter
                 for (SKSensorDataListener callback : mSensorDataListeners) {
-                    callback.onDataReceived(mSensorModuleType, data);
+                    callback.onDataReceived(mSensorType, data);
                 }
             }
         }

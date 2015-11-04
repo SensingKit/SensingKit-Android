@@ -21,18 +21,18 @@
 
 package org.sensingkit.sensingkitlib.data;
 
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 
 public abstract class SKAbstractData implements SKSensorData
 {
     @SuppressWarnings("unused")
     private static final String TAG = "SKAbstractData";
 
-    protected final SKSensorModuleType moduleType;
+    protected final SKSensorType sensorType;
     protected final long timestamp;
 
-    public SKAbstractData(SKSensorModuleType moduleType, long timestamp) {
-        this.moduleType = moduleType;
+    public SKAbstractData(SKSensorType sensorType, long timestamp) {
+        this.sensorType = sensorType;
         this.timestamp = timestamp;
     }
 
@@ -41,8 +41,8 @@ public abstract class SKAbstractData implements SKSensorData
     }
 
     @SuppressWarnings("unused")
-    public SKSensorModuleType getSensorModuleType() {
-        return moduleType;
+    public SKSensorType getSensorType() {
+        return sensorType;
     }
 
     @SuppressWarnings("unused")

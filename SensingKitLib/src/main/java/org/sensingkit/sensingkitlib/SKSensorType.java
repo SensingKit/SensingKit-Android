@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib;
 
-public enum SKSensorModuleType {
+public enum SKSensorType {
     ACCELEROMETER,
     GRAVITY,
     LINEAR_ACCELERATION,

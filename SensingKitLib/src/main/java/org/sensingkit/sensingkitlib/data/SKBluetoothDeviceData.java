@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.data;
 
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
@@ -36,7 +36,7 @@ public class SKBluetoothDeviceData extends SKAbstractData {
 
     public SKBluetoothDeviceData(long timestamp, String name, String address, int rssi) {
 
-        super(SKSensorModuleType.BLUETOOTH, timestamp);
+        super(SKSensorType.BLUETOOTH, timestamp);
 
         this.name = name;
         this.address = address;

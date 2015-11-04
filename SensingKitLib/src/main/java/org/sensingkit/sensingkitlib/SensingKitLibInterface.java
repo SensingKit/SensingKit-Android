@@ -28,11 +28,11 @@ public interface SensingKitLibInterface {
 
     /** Sensor Registration */
 
-    void registerSensorModule(SKSensorModuleType moduleType) throws SKException;
+    void registerSensorModule(SKSensorType sensorType) throws SKException;
 
-    void deregisterSensorModule(SKSensorModuleType moduleType) throws SKException;
+    void deregisterSensorModule(SKSensorType sensorType) throws SKException;
 
-    boolean isSensorModuleRegistered(SKSensorModuleType moduleType) throws SKException;
+    boolean isSensorModuleRegistered(SKSensorType sensorType) throws SKException;
 
     /** Configuration */
     // TODO: Add Configuration
@@ -40,22 +40,22 @@ public interface SensingKitLibInterface {
 
     /** One Shot Sensing */
 
-    SKSensorData getDataFromSensor(SKSensorModuleType moduleType) throws SKException;
+    SKSensorData getDataFromSensor(SKSensorType sensorType) throws SKException;
 
 
     /** Continuous Sensing */
 
-    void subscribeSensorDataListener(SKSensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException;
+    void subscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException;
 
-    void unsubscribeSensorDataListener(SKSensorModuleType moduleType, SKSensorDataListener dataListener) throws SKException;
+    void unsubscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException;
 
-    void unsubscribeAllSensorDataListeners(SKSensorModuleType moduleType) throws SKException;
+    void unsubscribeAllSensorDataListeners(SKSensorType sensorType) throws SKException;
 
-    void startContinuousSensingWithSensor(SKSensorModuleType moduleType) throws SKException;
+    void startContinuousSensingWithSensor(SKSensorType sensorType) throws SKException;
 
-    void stopContinuousSensingWithSensor(SKSensorModuleType moduleType) throws SKException;
+    void stopContinuousSensingWithSensor(SKSensorType sensorType) throws SKException;
 
-    boolean isSensorModuleSensing(SKSensorModuleType moduleType) throws SKException;
+    boolean isSensorModuleSensing(SKSensorType sensorType) throws SKException;
 
     /** Time */
 

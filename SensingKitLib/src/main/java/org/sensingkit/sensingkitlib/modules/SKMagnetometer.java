@@ -25,7 +25,7 @@ import android.content.Context;
 import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKMagnetometerData;
 
@@ -35,7 +35,7 @@ public class SKMagnetometer extends SKAbstractNativeSensorModule {
     private static final String TAG = "SKMagnetometer";
 
     public SKMagnetometer(final Context context) throws SKException {
-        super(context, SKSensorModuleType.MAGNETOMETER);
+        super(context, SKSensorType.MAGNETOMETER);
     }
 
     @Override

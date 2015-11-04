@@ -23,12 +23,12 @@ package org.sensingkit.sensingkitlib.modules;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 
 @SuppressWarnings("unused")
 public interface SKSensorModuleInterface {
 
-    SKSensorModuleType getSensorType();
+    SKSensorType getSensorType();
 
     void startSensing() throws SKException;
     void stopSensing();

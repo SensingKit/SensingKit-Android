@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.data;
 
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
@@ -34,7 +34,7 @@ public class SKHumidityData extends SKAbstractData {
 
     public SKHumidityData(long timestamp, float humidity) {
 
-        super(SKSensorModuleType.HUMIDITY, timestamp);
+        super(SKSensorType.HUMIDITY, timestamp);
 
         this.humidity = humidity;
     }

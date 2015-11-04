@@ -30,7 +30,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKLocationData;
 
@@ -40,7 +40,7 @@ public class SKLocation extends SKAbstractGoogleServicesSensorModule implements 
     private static final String TAG = "SKLocation";
 
     public SKLocation(final Context context) throws SKException {
-        super(context, SKSensorModuleType.LOCATION);
+        super(context, SKSensorType.LOCATION);
 
         mClient = new GoogleApiClient.Builder(context)
                 .addApi(LocationServices.API)

@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.data;
 
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
@@ -34,7 +34,7 @@ public class SKAudioLevelData extends SKAbstractData {
 
     public SKAudioLevelData(long timestamp, int level) {
 
-        super(SKSensorModuleType.AUDIO_LEVEL, timestamp);
+        super(SKSensorType.AUDIO_LEVEL, timestamp);
 
         this.level = level;
     }

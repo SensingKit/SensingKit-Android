@@ -23,16 +23,16 @@ package org.sensingkit.sensingkitlib.modules;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 
 public final class SKSensorModuleUtilities {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SKSensorModuleUtilities";
 
-    public static String getSensorModuleInString(SKSensorModuleType moduleType) throws SKException {
+    public static String getSensorModuleInString(SKSensorType sensorType) throws SKException {
 
-        switch (moduleType) {
+        switch (sensorType) {
 
             case ACCELEROMETER:
                 return "Accelerometer";

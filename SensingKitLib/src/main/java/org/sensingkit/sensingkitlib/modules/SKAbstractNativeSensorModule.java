@@ -31,7 +31,7 @@ import android.os.Build;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 
 public abstract class SKAbstractNativeSensorModule extends SKAbstractSensorModule {
@@ -43,11 +43,11 @@ public abstract class SKAbstractNativeSensorModule extends SKAbstractSensorModul
     private final Sensor mSensor;
     private final SensorEventListener mSensorEventListener;
 
-    protected SKAbstractNativeSensorModule(final Context context, final SKSensorModuleType sensorModuleType) throws SKException {
-        super(context, sensorModuleType);
+    protected SKAbstractNativeSensorModule(final Context context, final SKSensorType sensorType) throws SKException {
+        super(context, sensorType);
 
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        mSensor = mSensorManager.getDefaultSensor(getSensorType(sensorModuleType));
+        mSensor = mSensorManager.getDefaultSensor(getSensorType(sensorType));
 
         mSensorEventListener = new SensorEventListener() {
 
@@ -91,7 +91,7 @@ public abstract class SKAbstractNativeSensorModule extends SKAbstractSensorModul
     protected abstract SKAbstractData buildData(SensorEvent event);
 
     @SuppressLint("InlinedApi")  // There is a check in STEP_DETECTOR and STEP_COUNTER
-    private static int getSensorType(SKSensorModuleType sensorType) throws SKException{
+    private static int getSensorType(SKSensorType sensorType) throws SKException{
 
         switch (sensorType) {
 

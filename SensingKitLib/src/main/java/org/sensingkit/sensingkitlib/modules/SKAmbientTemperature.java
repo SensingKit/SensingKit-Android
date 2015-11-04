@@ -25,7 +25,7 @@ import android.content.Context;
 import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
+import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKAmbientTemperatureData;
 
@@ -35,7 +35,7 @@ public class SKAmbientTemperature extends SKAbstractNativeSensorModule {
     private static final String TAG = "SKAmbientTemperature";
 
     public SKAmbientTemperature(final Context context) throws SKException {
-        super(context, SKSensorModuleType.AMBIENT_TEMPERATURE);
+        super(context, SKSensorType.AMBIENT_TEMPERATURE);
     }
 
     @Override
