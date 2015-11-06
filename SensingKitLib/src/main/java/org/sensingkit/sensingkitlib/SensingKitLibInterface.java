@@ -28,11 +28,11 @@ public interface SensingKitLibInterface {
 
     /** Sensor Registration */
 
-    void registerSensorModule(SKSensorType sensorType) throws SKException;
+    void registerSensor(SKSensorType sensorType) throws SKException;
 
-    void deregisterSensorModule(SKSensorType sensorType) throws SKException;
+    void deregisterSensor(SKSensorType sensorType) throws SKException;
 
-    boolean isSensorModuleRegistered(SKSensorType sensorType) throws SKException;
+    boolean isSensorRegistered(SKSensorType sensorType) throws SKException;
 
     /** Configuration */
     // TODO: Add Configuration
@@ -55,7 +55,7 @@ public interface SensingKitLibInterface {
 
     void stopContinuousSensingWithSensor(SKSensorType sensorType) throws SKException;
 
-    boolean isSensorModuleSensing(SKSensorType sensorType) throws SKException;
+    boolean isSensorSensing(SKSensorType sensorType) throws SKException;
 
     /** Time */
 

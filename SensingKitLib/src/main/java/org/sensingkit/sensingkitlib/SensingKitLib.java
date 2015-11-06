@@ -59,17 +59,17 @@ public class SensingKitLib implements SensingKitLibInterface {
     }
 
     @Override
-    public void registerSensorModule(SKSensorType sensorType) throws SKException {
+    public void registerSensor(SKSensorType sensorType) throws SKException {
         mSensorModuleManager.registerSensorModule(sensorType);
     }
 
     @Override
-    public void deregisterSensorModule(SKSensorType sensorType) throws SKException {
+    public void deregisterSensor(SKSensorType sensorType) throws SKException {
         mSensorModuleManager.deregisterSensorModule(sensorType);
     }
 
     @Override
-    public boolean isSensorModuleRegistered(SKSensorType sensorType) throws SKException {
+    public boolean isSensorRegistered(SKSensorType sensorType) throws SKException {
         return mSensorModuleManager.isSensorModuleRegistered(sensorType);
     }
 
@@ -104,7 +104,7 @@ public class SensingKitLib implements SensingKitLibInterface {
     }
 
     @Override
-    public boolean isSensorModuleSensing(SKSensorType sensorType) throws SKException {
+    public boolean isSensorSensing(SKSensorType sensorType) throws SKException {
         return mSensorModuleManager.isSensorModuleSensing(sensorType);
     }
 
