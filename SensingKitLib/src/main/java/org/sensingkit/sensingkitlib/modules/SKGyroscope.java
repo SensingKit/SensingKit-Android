@@ -29,7 +29,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKGyroscopeData;
 
-public class SKGyroscope extends SKAbstractNativeSensorModule {
+public class SKGyroscope extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SKGyroscope";

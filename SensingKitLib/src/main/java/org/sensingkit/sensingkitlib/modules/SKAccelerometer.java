@@ -29,7 +29,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKAccelerometerData;
 
-public class SKAccelerometer extends SKAbstractNativeSensorModule {
+public class SKAccelerometer extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SKAccelerometer";

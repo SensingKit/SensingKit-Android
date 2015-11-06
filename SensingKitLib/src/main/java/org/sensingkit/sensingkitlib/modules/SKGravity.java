@@ -29,7 +29,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKGravityData;
 
-public class SKGravity extends SKAbstractNativeSensorModule {
+public class SKGravity extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SKGravity";

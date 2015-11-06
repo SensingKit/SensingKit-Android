@@ -29,7 +29,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKAirPressureData;
 
-public class SKAirPressure extends SKAbstractNativeSensorModule {
+public class SKAirPressure extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SKAirPressure";

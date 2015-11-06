@@ -29,7 +29,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKLinearAccelerationData;
 
-public class SKLinearAcceleration extends SKAbstractNativeSensorModule {
+public class SKLinearAcceleration extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SKLinearAcceleration";

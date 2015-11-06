@@ -34,7 +34,7 @@ import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 
-public abstract class SKAbstractNativeSensorModule extends SKAbstractSensor {
+public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SKAbstractNativeSensorModule";
@@ -43,7 +43,7 @@ public abstract class SKAbstractNativeSensorModule extends SKAbstractSensor {
     private final Sensor mSensor;
     private final SensorEventListener mSensorEventListener;
 
-    protected SKAbstractNativeSensorModule(final Context context, final SKSensorType sensorType) throws SKException {
+    protected SKAbstractNativeSensor(final Context context, final SKSensorType sensorType) throws SKException {
         super(context, sensorType);
 
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);

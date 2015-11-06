@@ -29,7 +29,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKAmbientTemperatureData;
 
-public class SKAmbientTemperature extends SKAbstractNativeSensorModule {
+public class SKAmbientTemperature extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SKAmbientTemperature";
