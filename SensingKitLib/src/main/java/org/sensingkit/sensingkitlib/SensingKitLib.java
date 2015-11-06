@@ -37,7 +37,7 @@ public class SensingKitLib implements SensingKitLibInterface {
     private final Context mApplicationContext;
     private PowerManager.WakeLock mWakeLock;
 
-    private SKSensorManager mSensorModuleManager;
+    private SKSensorManager mSensorManager;
 
     @SuppressWarnings("unused")
     public static SensingKitLibInterface getSensingKitLib(final Context context) throws SKException {
@@ -55,57 +55,57 @@ public class SensingKitLib implements SensingKitLibInterface {
 
     private SensingKitLib(final Context context) throws SKException {
         mApplicationContext = context;
-        mSensorModuleManager = SKSensorManager.getSensorManager(context);
+        mSensorManager = SKSensorManager.getSensorManager(context);
     }
 
     @Override
     public void registerSensor(SKSensorType sensorType) throws SKException {
-        mSensorModuleManager.registerSensor(sensorType);
+        mSensorManager.registerSensor(sensorType);
     }
 
     @Override
     public void deregisterSensor(SKSensorType sensorType) throws SKException {
-        mSensorModuleManager.deregisterSensor(sensorType);
+        mSensorManager.deregisterSensor(sensorType);
     }
 
     @Override
     public boolean isSensorRegistered(SKSensorType sensorType) throws SKException {
-        return mSensorModuleManager.isSensorRegistered(sensorType);
+        return mSensorManager.isSensorRegistered(sensorType);
     }
 
     @Override
     public SKSensorData getDataFromSensor(SKSensorType sensorType) throws SKException {
-        return mSensorModuleManager.getDataFromSensor(sensorType);
+        return mSensorManager.getDataFromSensor(sensorType);
     }
 
     @Override
     public void subscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
-        mSensorModuleManager.subscribeSensorDataListener(sensorType, dataListener);
+        mSensorManager.subscribeSensorDataListener(sensorType, dataListener);
     }
 
     @Override
     public void unsubscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
-        mSensorModuleManager.unsubscribeSensorDataListener(sensorType, dataListener);
+        mSensorManager.unsubscribeSensorDataListener(sensorType, dataListener);
     }
 
     @Override
     public void unsubscribeAllSensorDataListeners(SKSensorType sensorType) throws SKException {
-        mSensorModuleManager.unsubscribeAllSensorDataListeners(sensorType);
+        mSensorManager.unsubscribeAllSensorDataListeners(sensorType);
     }
 
     @Override
     public void startContinuousSensingWithSensor(SKSensorType sensorType) throws SKException {
-        mSensorModuleManager.startContinuousSensingWithSensor(sensorType);
+        mSensorManager.startContinuousSensingWithSensor(sensorType);
     }
 
     @Override
     public void stopContinuousSensingWithSensor(SKSensorType sensorType) throws SKException {
-        mSensorModuleManager.stopContinuousSensingWithSensor(sensorType);
+        mSensorManager.stopContinuousSensingWithSensor(sensorType);
     }
 
     @Override
     public boolean isSensorSensing(SKSensorType sensorType) throws SKException {
-        return mSensorModuleManager.isSensorSensing(sensorType);
+        return mSensorManager.isSensorSensing(sensorType);
     }
 
     @Override
