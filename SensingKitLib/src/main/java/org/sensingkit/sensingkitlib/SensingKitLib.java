@@ -37,7 +37,7 @@ public class SensingKitLib implements SensingKitLibInterface {
     private final Context mApplicationContext;
     private PowerManager.WakeLock mWakeLock;
 
-    private SKSensorModuleManager mSensorModuleManager;
+    private SKSensorManager mSensorModuleManager;
 
     @SuppressWarnings("unused")
     public static SensingKitLibInterface getSensingKitLib(final Context context) throws SKException {
@@ -55,22 +55,22 @@ public class SensingKitLib implements SensingKitLibInterface {
 
     private SensingKitLib(final Context context) throws SKException {
         mApplicationContext = context;
-        mSensorModuleManager = SKSensorModuleManager.getSensorManager(context);
+        mSensorModuleManager = SKSensorManager.getSensorManager(context);
     }
 
     @Override
     public void registerSensor(SKSensorType sensorType) throws SKException {
-        mSensorModuleManager.registerSensorModule(sensorType);
+        mSensorModuleManager.registerSensor(sensorType);
     }
 
     @Override
     public void deregisterSensor(SKSensorType sensorType) throws SKException {
-        mSensorModuleManager.deregisterSensorModule(sensorType);
+        mSensorModuleManager.deregisterSensor(sensorType);
     }
 
     @Override
     public boolean isSensorRegistered(SKSensorType sensorType) throws SKException {
-        return mSensorModuleManager.isSensorModuleRegistered(sensorType);
+        return mSensorModuleManager.isSensorRegistered(sensorType);
     }
 
     @Override
@@ -105,7 +105,7 @@ public class SensingKitLib implements SensingKitLibInterface {
 
     @Override
     public boolean isSensorSensing(SKSensorType sensorType) throws SKException {
-        return mSensorModuleManager.isSensorModuleSensing(sensorType);
+        return mSensorModuleManager.isSensorSensing(sensorType);
     }
 
     @Override
