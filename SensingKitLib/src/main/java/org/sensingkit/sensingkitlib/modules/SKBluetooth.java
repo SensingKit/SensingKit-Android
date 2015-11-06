@@ -38,7 +38,7 @@ import org.sensingkit.sensingkitlib.data.SKBluetoothDeviceData;
 import java.util.ArrayList;
 
 @SuppressWarnings("ResourceType")
-public class SKBluetooth extends SKAbstractSensorModule {
+public class SKBluetooth extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SKBluetooth";

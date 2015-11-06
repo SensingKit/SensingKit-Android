@@ -31,7 +31,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKAudioLevelData;
 
-public class SKAudioLevel extends SKAbstractSensorModule {
+public class SKAudioLevel extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SKAudioLevel";

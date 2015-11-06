@@ -31,17 +31,17 @@ import org.sensingkit.sensingkitlib.data.SKAbstractData;
 
 import java.util.ArrayList;
 
-public abstract class SKAbstractSensorModule implements SKSensorInterface {
+public abstract class SKAbstractSensor implements SKSensorInterface {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKAbstractSensorModule";
+    private static final String TAG = "SKAbstractSensor";
 
     protected final Context mApplicationContext;
     protected final SKSensorType mSensorType;
     protected boolean isSensing = false;
     protected ArrayList<SKSensorDataListener> mSensorDataListeners;
 
-    protected SKAbstractSensorModule(final Context context, final SKSensorType sensorType) {
+    protected SKAbstractSensor(final Context context, final SKSensorType sensorType) {
 
         this.mApplicationContext = context;
         this.mSensorType = sensorType;

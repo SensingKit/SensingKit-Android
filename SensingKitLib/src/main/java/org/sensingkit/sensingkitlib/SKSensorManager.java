@@ -38,7 +38,7 @@ public class SKSensorManager {
     private static SKSensorManager sSensorManager;
     private final Context mApplicationContext;
 
-    private final SparseArray<SKAbstractSensorModule> mSensors;
+    private final SparseArray<SKAbstractSensor> mSensors;
 
     public static SKSensorManager getSensorManager(final Context context) throws SKException {
 
@@ -71,7 +71,7 @@ public class SKSensorManager {
 
         // Register the SensorModule
         int sensorIndex = sensorType.ordinal();
-        SKAbstractSensorModule sensorModule = createSensorModule(sensorType);
+        SKAbstractSensor sensorModule = createSensorModule(sensorType);
         mSensors.put(sensorIndex, sensorModule);
     }
 
@@ -110,7 +110,7 @@ public class SKSensorManager {
         return getSensor(sensorType).isSensing();
     }
 
-    protected SKAbstractSensorModule getSensor(SKSensorType sensorType) throws SKException {
+    protected SKAbstractSensor getSensor(SKSensorType sensorType) throws SKException {
 
         if (!isSensorRegistered(sensorType)) {
             throw new SKException(TAG, "SensorModule is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
@@ -120,9 +120,9 @@ public class SKSensorManager {
         return mSensors.get(sensorIndex);
     }
 
-    protected SKAbstractSensorModule createSensorModule(SKSensorType sensorType) throws SKException {
+    protected SKAbstractSensor createSensorModule(SKSensorType sensorType) throws SKException {
 
-        SKAbstractSensorModule sensorModule;
+        SKAbstractSensor sensorModule;
 
         switch (sensorType) {
 

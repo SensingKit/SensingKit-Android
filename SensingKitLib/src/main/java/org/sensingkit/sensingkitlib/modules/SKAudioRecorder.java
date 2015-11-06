@@ -32,7 +32,7 @@ import org.sensingkit.sensingkitlib.data.SKAbstractData;
 
 import java.io.IOException;
 
-public class SKAudioRecorder extends SKAbstractSensorModule {
+public class SKAudioRecorder extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SKAudioRecorder";

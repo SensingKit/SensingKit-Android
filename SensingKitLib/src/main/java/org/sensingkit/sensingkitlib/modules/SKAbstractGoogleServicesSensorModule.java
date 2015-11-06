@@ -31,7 +31,7 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 
-public abstract class SKAbstractGoogleServicesSensorModule extends SKAbstractSensorModule implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public abstract class SKAbstractGoogleServicesSensorModule extends SKAbstractSensor implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SKAbstractGoogleServicesSensorModule";

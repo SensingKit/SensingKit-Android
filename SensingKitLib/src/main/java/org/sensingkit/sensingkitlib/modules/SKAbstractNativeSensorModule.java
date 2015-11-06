@@ -34,7 +34,7 @@ import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 
-public abstract class SKAbstractNativeSensorModule extends SKAbstractSensorModule {
+public abstract class SKAbstractNativeSensorModule extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SKAbstractNativeSensorModule";

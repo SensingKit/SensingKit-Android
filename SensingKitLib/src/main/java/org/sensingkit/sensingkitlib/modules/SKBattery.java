@@ -31,7 +31,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKBatteryData;
 
-public class SKBattery extends SKAbstractSensorModule {
+public class SKBattery extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SKBattery";

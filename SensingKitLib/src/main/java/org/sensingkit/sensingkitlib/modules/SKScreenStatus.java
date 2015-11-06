@@ -31,7 +31,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKScreenStatusData;
 
-public class SKScreenStatus extends SKAbstractSensorModule {
+public class SKScreenStatus extends SKAbstractSensor {
 
     private final BroadcastReceiver mBroadcastReceiver;
 
