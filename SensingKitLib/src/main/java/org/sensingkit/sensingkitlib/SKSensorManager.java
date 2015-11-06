@@ -69,10 +69,10 @@ public class SKSensorManager {
             throw new SKException(TAG, "SensorModule is already registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        // Register the SensorModule
+        // Register the Sensor
         int sensorIndex = sensorType.ordinal();
-        SKAbstractSensor sensorModule = createSensorModule(sensorType);
-        mSensors.put(sensorIndex, sensorModule);
+        SKAbstractSensor sensor = createSensor(sensorType);
+        mSensors.put(sensorIndex, sensor);
     }
 
     public void deregisterSensor(SKSensorType sensorType) throws SKException {
@@ -80,17 +80,17 @@ public class SKSensorManager {
         Log.i(TAG, "Deregister sensor: " + SKSensorModuleUtilities.getSensorModuleInString(sensorType) + ".");
 
         if (!isSensorRegistered(sensorType)) {
-            throw new SKException(TAG, "SensorModule is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
         if (isSensorSensing(sensorType)) {
-            throw new SKException(TAG, "SensorModule is currently sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor is currently sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
         // Clear all Callbacks from that sensor
         getSensor(sensorType).unsubscribeAllSensorDataListeners();
 
-        // Deregister the SensorModule
+        // Deregister the Sensor
         int sensorIndex = sensorType.ordinal();
         mSensors.delete(sensorIndex);
     }
@@ -104,7 +104,7 @@ public class SKSensorManager {
     public boolean isSensorSensing(SKSensorType sensorType) throws SKException {
 
         if (!isSensorRegistered(sensorType)) {
-            throw new SKException(TAG, "SensorModule is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
         return getSensor(sensorType).isSensing();
@@ -113,102 +113,102 @@ public class SKSensorManager {
     protected SKAbstractSensor getSensor(SKSensorType sensorType) throws SKException {
 
         if (!isSensorRegistered(sensorType)) {
-            throw new SKException(TAG, "SensorModule is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
         int sensorIndex = sensorType.ordinal();
         return mSensors.get(sensorIndex);
     }
 
-    protected SKAbstractSensor createSensorModule(SKSensorType sensorType) throws SKException {
+    protected SKAbstractSensor createSensor(SKSensorType sensorType) throws SKException {
 
-        SKAbstractSensor sensorModule;
+        SKAbstractSensor sensor;
 
         switch (sensorType) {
 
             case ACCELEROMETER:
-                sensorModule = new SKAccelerometer(mApplicationContext);
+                sensor = new SKAccelerometer(mApplicationContext);
                 break;
 
             case GRAVITY:
-                sensorModule = new SKGravity(mApplicationContext);
+                sensor = new SKGravity(mApplicationContext);
                 break;
 
             case LINEAR_ACCELERATION:
-                sensorModule = new SKLinearAcceleration(mApplicationContext);
+                sensor = new SKLinearAcceleration(mApplicationContext);
                 break;
 
             case GYROSCOPE:
-                sensorModule = new SKGyroscope(mApplicationContext);
+                sensor = new SKGyroscope(mApplicationContext);
                 break;
 
             case ROTATION:
-                sensorModule = new SKRotation(mApplicationContext);
+                sensor = new SKRotation(mApplicationContext);
                 break;
 
             case MAGNETOMETER:
-                sensorModule = new SKMagnetometer(mApplicationContext);
+                sensor = new SKMagnetometer(mApplicationContext);
                 break;
 
             case AMBIENT_TEMPERATURE:
-                sensorModule = new SKAmbientTemperature(mApplicationContext);
+                sensor = new SKAmbientTemperature(mApplicationContext);
                 break;
 
             case STEP_DETECTOR:
-                sensorModule = new SKStepDetector(mApplicationContext);
+                sensor = new SKStepDetector(mApplicationContext);
                 break;
 
             case STEP_COUNTER:
-                sensorModule = new SKStepCounter(mApplicationContext);
+                sensor = new SKStepCounter(mApplicationContext);
                 break;
 
             case LIGHT:
-                sensorModule = new SKLight(mApplicationContext);
+                sensor = new SKLight(mApplicationContext);
                 break;
 
             case LOCATION:
-                sensorModule = new SKLocation(mApplicationContext);
+                sensor = new SKLocation(mApplicationContext);
                 break;
 
             case ACTIVITY:
-                sensorModule = new SKActivity(mApplicationContext);
+                sensor = new SKActivity(mApplicationContext);
                 break;
 
             case BATTERY:
-                sensorModule = new SKBattery(mApplicationContext);
+                sensor = new SKBattery(mApplicationContext);
                 break;
 
             case SCREEN_STATUS:
-                sensorModule = new SKScreenStatus(mApplicationContext);
+                sensor = new SKScreenStatus(mApplicationContext);
                 break;
 
             case AUDIO_RECORDER:
-                sensorModule = new SKAudioRecorder(mApplicationContext);
+                sensor = new SKAudioRecorder(mApplicationContext);
                 break;
 
             case AUDIO_LEVEL:
-                sensorModule = new SKAudioLevel(mApplicationContext);
+                sensor = new SKAudioLevel(mApplicationContext);
                 break;
 
             case BLUETOOTH:
-                sensorModule = new SKBluetooth(mApplicationContext);
+                sensor = new SKBluetooth(mApplicationContext);
                 break;
 
             case HUMIDITY:
-                sensorModule = new SKHumidity(mApplicationContext);
+                sensor = new SKHumidity(mApplicationContext);
                 break;
 
             case AIR_PRESSURE:
-                sensorModule = new SKAirPressure(mApplicationContext);
+                sensor = new SKAirPressure(mApplicationContext);
                 break;
 
             // Don't forget the break; here
 
             default:
-                throw new SKException(TAG, "Unknown SensorModule", SKExceptionErrorCode.UNKNOWN_ERROR);
+                throw new SKException(TAG, "Unknown Sensor", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        return sensorModule;
+        return sensor;
     }
 
     public SKSensorData getDataFromSensor(SKSensorType sensorType) throws SKException {
@@ -244,7 +244,7 @@ public class SKSensorManager {
         Log.i(TAG, "Start sensing with sensor: " + SKSensorModuleUtilities.getSensorModuleInString(sensorType) + ".");
 
         if (isSensorSensing(sensorType)) {
-            throw new SKException(TAG, "SensorModule is already sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor is already sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
         // Start Sensing
@@ -256,13 +256,13 @@ public class SKSensorManager {
         Log.i(TAG, "Stop sensing with sensor: " + SKSensorModuleUtilities.getSensorModuleInString(sensorType) + ".");
 
         if (!isSensorSensing(sensorType)) {
-            throw new SKException(TAG, "SensorModule is already not sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor is already not sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        SKSensorInterface sensorModule = getSensor(sensorType);
+        SKSensorInterface sensor = getSensor(sensorType);
 
         // Stop Sensing
-        sensorModule.stopSensing();
+        sensor.stopSensing();
     }
 
 }
