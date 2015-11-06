@@ -25,12 +25,12 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
-public final class SKSensorModuleUtilities {
+public final class SKSensorUtilities {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKSensorModuleUtilities";
+    private static final String TAG = "SKSensorUtilities";
 
-    public static String getSensorModuleInString(SKSensorType sensorType) throws SKException {
+    public static String getSensorInString(SKSensorType sensorType) throws SKException {
 
         switch (sensorType) {
 

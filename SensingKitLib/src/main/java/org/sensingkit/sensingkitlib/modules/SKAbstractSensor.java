@@ -56,7 +56,7 @@ public abstract class SKAbstractSensor implements SKSensorInterface {
     }
 
     public String getSensorName() throws SKException {
-        return SKSensorModuleUtilities.getSensorModuleInString(mSensorType);
+        return SKSensorUtilities.getSensorInString(mSensorType);
     }
 
     public void subscribeSensorDataListener(SKSensorDataListener callback) throws SKException {

@@ -63,7 +63,7 @@ public class SKSensorManager {
 
     public void registerSensor(SKSensorType sensorType) throws SKException {
 
-        Log.i(TAG, "Register sensor: " + SKSensorModuleUtilities.getSensorModuleInString(sensorType) + ".");
+        Log.i(TAG, "Register sensor: " + SKSensorUtilities.getSensorInString(sensorType) + ".");
 
         if (isSensorRegistered(sensorType)) {
             throw new SKException(TAG, "SensorModule is already registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
@@ -77,7 +77,7 @@ public class SKSensorManager {
 
     public void deregisterSensor(SKSensorType sensorType) throws SKException {
 
-        Log.i(TAG, "Deregister sensor: " + SKSensorModuleUtilities.getSensorModuleInString(sensorType) + ".");
+        Log.i(TAG, "Deregister sensor: " + SKSensorUtilities.getSensorInString(sensorType) + ".");
 
         if (!isSensorRegistered(sensorType)) {
             throw new SKException(TAG, "Sensor is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
@@ -213,21 +213,21 @@ public class SKSensorManager {
 
     public SKSensorData getDataFromSensor(SKSensorType sensorType) throws SKException {
 
-        Log.i(TAG, "Get data from sensor: " + SKSensorModuleUtilities.getSensorModuleInString(sensorType) + ".");
+        Log.i(TAG, "Get data from sensor: " + SKSensorUtilities.getSensorInString(sensorType) + ".");
 
         throw new SKException(TAG, "This feature is not supported just yet!", SKExceptionErrorCode.UNKNOWN_ERROR);
     }
 
     public void subscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
 
-        Log.i(TAG, "Subscribe to sensor: " + SKSensorModuleUtilities.getSensorModuleInString(sensorType) + ".");
+        Log.i(TAG, "Subscribe to sensor: " + SKSensorUtilities.getSensorInString(sensorType) + ".");
 
         getSensor(sensorType).subscribeSensorDataListener(dataListener);
     }
 
     public void unsubscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
 
-        Log.i(TAG, "Unsubscribe from sensor: " + SKSensorModuleUtilities.getSensorModuleInString(sensorType) + ".");
+        Log.i(TAG, "Unsubscribe from sensor: " + SKSensorUtilities.getSensorInString(sensorType) + ".");
 
         getSensor(sensorType).unsubscribeSensorDataListener(dataListener);
     }
@@ -241,7 +241,7 @@ public class SKSensorManager {
 
     public void startContinuousSensingWithSensor(SKSensorType sensorType) throws SKException {
 
-        Log.i(TAG, "Start sensing with sensor: " + SKSensorModuleUtilities.getSensorModuleInString(sensorType) + ".");
+        Log.i(TAG, "Start sensing with sensor: " + SKSensorUtilities.getSensorInString(sensorType) + ".");
 
         if (isSensorSensing(sensorType)) {
             throw new SKException(TAG, "Sensor is already sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
@@ -253,7 +253,7 @@ public class SKSensorManager {
 
     public void stopContinuousSensingWithSensor(SKSensorType sensorType) throws SKException {
 
-        Log.i(TAG, "Stop sensing with sensor: " + SKSensorModuleUtilities.getSensorModuleInString(sensorType) + ".");
+        Log.i(TAG, "Stop sensing with sensor: " + SKSensorUtilities.getSensorInString(sensorType) + ".");
 
         if (!isSensorSensing(sensorType)) {
             throw new SKException(TAG, "Sensor is already not sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
