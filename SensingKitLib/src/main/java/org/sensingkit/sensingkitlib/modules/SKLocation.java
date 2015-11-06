@@ -34,7 +34,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKLocationData;
 
-public class SKLocation extends SKAbstractGoogleServicesSensorModule implements LocationListener {
+public class SKLocation extends SKAbstractGoogleServicesSensor implements LocationListener {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SKLocation";

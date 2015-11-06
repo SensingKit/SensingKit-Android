@@ -31,14 +31,14 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 
-public abstract class SKAbstractGoogleServicesSensorModule extends SKAbstractSensor implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public abstract class SKAbstractGoogleServicesSensor extends SKAbstractSensor implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKAbstractGoogleServicesSensorModule";
+    private static final String TAG = "SKAbstractGoogleServicesSensor";
 
     protected GoogleApiClient mClient;
 
-    protected SKAbstractGoogleServicesSensorModule(final Context context, final SKSensorType sensorType) throws SKException {
+    protected SKAbstractGoogleServicesSensor(final Context context, final SKSensorType sensorType) throws SKException {
         super(context, sensorType);
 
 

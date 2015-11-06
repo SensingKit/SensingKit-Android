@@ -40,7 +40,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKActivityData;
 
-public class SKActivity extends SKAbstractGoogleServicesSensorModule {
+public class SKActivity extends SKAbstractGoogleServicesSensor {
 
     @SuppressWarnings("unused")
     private static final String TAG = "SKActivity";
