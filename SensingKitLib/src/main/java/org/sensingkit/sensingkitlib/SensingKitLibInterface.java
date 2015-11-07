@@ -55,6 +55,10 @@ public interface SensingKitLibInterface {
 
     void stopContinuousSensingWithSensor(SKSensorType sensorType) throws SKException;
 
+    void startContinuousSensingWithAllRegisteredSensors() throws SKException;
+
+    void stopContinuousSensingWithAllRegisteredSensors() throws SKException;
+
     boolean isSensorSensing(SKSensorType sensorType) throws SKException;
 
     /** Time */

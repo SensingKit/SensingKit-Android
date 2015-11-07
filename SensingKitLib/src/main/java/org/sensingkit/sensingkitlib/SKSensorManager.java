@@ -244,7 +244,7 @@ public class SKSensorManager {
         Log.i(TAG, "Start sensing with sensor: " + SKSensorUtilities.getSensorInString(sensorType) + ".");
 
         if (isSensorSensing(sensorType)) {
-            throw new SKException(TAG, "Sensor is already sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor [" + SKSensorUtilities.getSensorInString(sensorType) + "] is already sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
         // Start Sensing
@@ -256,13 +256,44 @@ public class SKSensorManager {
         Log.i(TAG, "Stop sensing with sensor: " + SKSensorUtilities.getSensorInString(sensorType) + ".");
 
         if (!isSensorSensing(sensorType)) {
-            throw new SKException(TAG, "Sensor is already not sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor [" + SKSensorUtilities.getSensorInString(sensorType) + "] is already not sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
         SKSensorInterface sensor = getSensor(sensorType);
 
         // Stop Sensing
         sensor.stopSensing();
+    }
+
+    public void startContinuousSensingWithAllRegisteredSensors() throws SKException {
+
+        for (int i = 0; i < TOTAL_SENSOR_MODULES; i++){
+            if(mSensors.get(i) != null){
+                Log.i(TAG, "Start sensing with sensor: " + mSensors.get(i).getSensorName() + ".");
+
+                if (isSensorSensing(mSensors.get(i).getSensorType())) {
+                    throw new SKException(TAG, "Sensor [" + mSensors.get(i).getSensorName() + "] is already sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
+                }
+
+                // Start Sensing
+                mSensors.get(i).startSensing();
+            }
+        }
+    }
+
+    public void stopContinuousSensingWithAllRegisteredSensors() throws SKException {
+        for (int i = 0; i < TOTAL_SENSOR_MODULES; i++) {
+            if (mSensors.get(i) != null) {
+                Log.i(TAG, "Stop sensing with sensor: " + mSensors.get(i).getSensorName() + ".");
+
+                if (!isSensorSensing(mSensors.get(i).getSensorType())) {
+                    throw new SKException(TAG, "Sensor [" + mSensors.get(i).getSensorName() + "] is already not sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
+                }
+
+                // Stop Sensing
+                mSensors.get(i).stopSensing();
+            }
+        }
     }
 
 }

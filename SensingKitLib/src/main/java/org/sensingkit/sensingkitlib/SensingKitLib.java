@@ -104,6 +104,16 @@ public class SensingKitLib implements SensingKitLibInterface {
     }
 
     @Override
+    public void startContinuousSensingWithAllRegisteredSensors() throws SKException {
+        mSensorManager.startContinuousSensingWithAllRegisteredSensors();
+    }
+
+    @Override
+    public void stopContinuousSensingWithAllRegisteredSensors() throws SKException {
+        mSensorManager.stopContinuousSensingWithAllRegisteredSensors();
+    }
+
+    @Override
     public boolean isSensorSensing(SKSensorType sensorType) throws SKException {
         return mSensorManager.isSensorSensing(sensorType);
     }
