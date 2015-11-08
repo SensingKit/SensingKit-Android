@@ -19,7 +19,7 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.modules;
+package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Context;
 import android.hardware.SensorEvent;
@@ -27,21 +27,21 @@ import android.hardware.SensorEvent;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
-import org.sensingkit.sensingkitlib.data.SKAccelerometerData;
+import org.sensingkit.sensingkitlib.data.SKStepDetectorData;
 
-public class SKAccelerometer extends SKAbstractNativeSensor {
+public class SKStepDetector extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKAccelerometer";
+    private static final String TAG = "SKStepDetector";
 
-    public SKAccelerometer(final Context context) throws SKException {
-        super(context, SKSensorType.ACCELEROMETER);
+    public SKStepDetector(final Context context) throws SKException {
+        super(context, SKSensorType.STEP_DETECTOR);
     }
 
     @Override
     protected SKAbstractData buildData(SensorEvent event)
     {
-        return new SKAccelerometerData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
+        return new SKStepDetectorData(System.currentTimeMillis());
     }
 
     @Override

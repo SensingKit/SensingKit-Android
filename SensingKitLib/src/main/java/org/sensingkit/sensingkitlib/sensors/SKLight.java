@@ -19,7 +19,7 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.modules;
+package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Context;
 import android.hardware.SensorEvent;
@@ -27,27 +27,47 @@ import android.hardware.SensorEvent;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
-import org.sensingkit.sensingkitlib.data.SKAmbientTemperatureData;
+import org.sensingkit.sensingkitlib.data.SKLightData;
 
-public class SKAmbientTemperature extends SKAbstractNativeSensor {
+public class SKLight extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKAmbientTemperature";
+    private static final String TAG = "SKLight";
 
-    public SKAmbientTemperature(final Context context) throws SKException {
-        super(context, SKSensorType.AMBIENT_TEMPERATURE);
+    private float lastLightSensed = Float.MAX_VALUE;
+
+    public SKLight(final Context context) throws SKException {
+        super(context, SKSensorType.LIGHT);
     }
 
     @Override
     protected SKAbstractData buildData(SensorEvent event)
     {
-        return new SKAmbientTemperatureData(System.currentTimeMillis(), event.values[0]);
+        return new SKLightData(System.currentTimeMillis(), event.values[0]);
     }
 
     @Override
     protected boolean shouldPostSensorData(SKAbstractData data) {
 
-        // Always post sensor data
-        return true;
+        // Only post when light value changes
+
+        float light = ((SKLightData)data).getLight();
+
+        boolean shouldPost = (lastLightSensed != light);
+
+        if (shouldPost) {
+            this.lastLightSensed = light;
+        }
+
+        return shouldPost;
     }
+
+    public void stopSensing() {
+
+        super.stopSensing();
+
+        // Clear last sensed values
+        lastLightSensed = Float.MAX_VALUE;
+    }
+
 }

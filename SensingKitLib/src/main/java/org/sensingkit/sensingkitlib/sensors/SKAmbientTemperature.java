@@ -19,7 +19,7 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.modules;
+package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Context;
 import android.hardware.SensorEvent;
@@ -27,21 +27,21 @@ import android.hardware.SensorEvent;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
-import org.sensingkit.sensingkitlib.data.SKGyroscopeData;
+import org.sensingkit.sensingkitlib.data.SKAmbientTemperatureData;
 
-public class SKGyroscope extends SKAbstractNativeSensor {
+public class SKAmbientTemperature extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKGyroscope";
+    private static final String TAG = "SKAmbientTemperature";
 
-    public SKGyroscope(final Context context) throws SKException {
-        super(context, SKSensorType.GYROSCOPE);
+    public SKAmbientTemperature(final Context context) throws SKException {
+        super(context, SKSensorType.AMBIENT_TEMPERATURE);
     }
 
     @Override
     protected SKAbstractData buildData(SensorEvent event)
     {
-        return new SKGyroscopeData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
+        return new SKAmbientTemperatureData(System.currentTimeMillis(), event.values[0]);
     }
 
     @Override

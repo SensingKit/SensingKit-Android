@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014. Queen Mary University of London
+ * Copyright (c) 2015. Queen Mary University of London
  * Kleomenis Katevas, k.katevas@qmul.ac.uk
  *
  * This file is part of SensingKit-Android library.
@@ -19,22 +19,35 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.modules;
+package org.sensingkit.sensingkitlib.sensors;
+
+import android.content.Context;
+import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKSensorDataListener;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.data.SKAbstractData;
+import org.sensingkit.sensingkitlib.data.SKHumidityData;
 
-@SuppressWarnings("unused")
-public interface SKSensorInterface {
+public class SKHumidity extends SKAbstractNativeSensor {
 
-    SKSensorType getSensorType();
+    @SuppressWarnings("unused")
+    private static final String TAG = "SKHumidity";
 
-    void startSensing() throws SKException;
-    void stopSensing();
-    boolean isSensing();
+    public SKHumidity(final Context context) throws SKException {
+        super(context, SKSensorType.HUMIDITY);
+    }
 
-    void subscribeSensorDataListener(SKSensorDataListener callback) throws SKException;
-    void unsubscribeSensorDataListener(SKSensorDataListener callback) throws SKException;
-    void unsubscribeAllSensorDataListeners() throws SKException;
+    @Override
+    protected SKAbstractData buildData(SensorEvent event)
+    {
+        return new SKHumidityData(System.currentTimeMillis(), event.values[0]);
+    }
+
+    @Override
+    protected boolean shouldPostSensorData(SKAbstractData data) {
+
+        // Always post sensor data
+        return true;
+    }
 }

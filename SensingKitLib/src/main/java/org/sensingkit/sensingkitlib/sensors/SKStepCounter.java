@@ -19,7 +19,7 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.modules;
+package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Context;
 import android.hardware.SensorEvent;
@@ -27,26 +27,21 @@ import android.hardware.SensorEvent;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
-import org.sensingkit.sensingkitlib.data.SKRotationData;
+import org.sensingkit.sensingkitlib.data.SKStepCounterData;
 
-public class SKRotation extends SKAbstractNativeSensor {
+public class SKStepCounter extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKRotation";
+    private static final String TAG = "SKStepCounter";
 
-    public SKRotation(final Context context) throws SKException {
-        super(context, SKSensorType.ROTATION);
+    public SKStepCounter(final Context context) throws SKException {
+        super(context, SKSensorType.STEP_COUNTER);
     }
 
     @Override
     protected SKAbstractData buildData(SensorEvent event)
     {
-        if (event.values.length >= 6) {
-            return new SKRotationData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2], event.values[3], event.values[4]);
-        }
-        else {
-            return new SKRotationData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
-        }
+        return new SKStepCounterData(System.currentTimeMillis(), event.values[0]);
     }
 
     @Override
@@ -55,4 +50,5 @@ public class SKRotation extends SKAbstractNativeSensor {
         // Always post sensor data
         return true;
     }
+
 }

@@ -19,35 +19,47 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.modules;
+package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Context;
-import android.hardware.SensorEvent;
+import android.os.Bundle;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
-import org.sensingkit.sensingkitlib.data.SKAbstractData;
-import org.sensingkit.sensingkitlib.data.SKLinearAccelerationData;
 
-public class SKLinearAcceleration extends SKAbstractNativeSensor {
+
+public abstract class SKAbstractGoogleServicesSensor extends SKAbstractSensor implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKLinearAcceleration";
+    private static final String TAG = "SKAbstractGoogleServicesSensor";
 
-    public SKLinearAcceleration(final Context context) throws SKException {
-        super(context, SKSensorType.LINEAR_ACCELERATION);
+    protected GoogleApiClient mClient;
+
+    protected SKAbstractGoogleServicesSensor(final Context context, final SKSensorType sensorType) throws SKException {
+        super(context, sensorType);
+
+
+    }
+
+    protected abstract void serviceConnected();
+
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        serviceConnected();
     }
 
     @Override
-    protected SKAbstractData buildData(SensorEvent event)
-    {
-        return new SKLinearAccelerationData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
+    public void onConnectionSuspended(int cause) {
+        // Ignore, will try to reconnect automatically
     }
 
     @Override
-    protected boolean shouldPostSensorData(SKAbstractData data) {
-
-        // Always post sensor data
-        return true;
+    public void onConnectionFailed(ConnectionResult result) {
+        // At least one of the API client connect attempts failed
+        // No client is connected
     }
+
 }

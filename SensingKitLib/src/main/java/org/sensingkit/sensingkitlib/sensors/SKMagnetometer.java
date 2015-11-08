@@ -19,7 +19,7 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.modules;
+package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Context;
 import android.hardware.SensorEvent;
@@ -27,21 +27,21 @@ import android.hardware.SensorEvent;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
-import org.sensingkit.sensingkitlib.data.SKStepCounterData;
+import org.sensingkit.sensingkitlib.data.SKMagnetometerData;
 
-public class SKStepCounter extends SKAbstractNativeSensor {
+public class SKMagnetometer extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKStepCounter";
+    private static final String TAG = "SKMagnetometer";
 
-    public SKStepCounter(final Context context) throws SKException {
-        super(context, SKSensorType.STEP_COUNTER);
+    public SKMagnetometer(final Context context) throws SKException {
+        super(context, SKSensorType.MAGNETOMETER);
     }
 
     @Override
     protected SKAbstractData buildData(SensorEvent event)
     {
-        return new SKStepCounterData(System.currentTimeMillis(), event.values[0]);
+        return new SKMagnetometerData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
     }
 
     @Override
@@ -50,5 +50,4 @@ public class SKStepCounter extends SKAbstractNativeSensor {
         // Always post sensor data
         return true;
     }
-
 }

@@ -19,7 +19,7 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.modules;
+package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Context;
 import android.hardware.SensorEvent;
@@ -27,47 +27,27 @@ import android.hardware.SensorEvent;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
-import org.sensingkit.sensingkitlib.data.SKLightData;
+import org.sensingkit.sensingkitlib.data.SKGravityData;
 
-public class SKLight extends SKAbstractNativeSensor {
+public class SKGravity extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKLight";
+    private static final String TAG = "SKGravity";
 
-    private float lastLightSensed = Float.MAX_VALUE;
-
-    public SKLight(final Context context) throws SKException {
-        super(context, SKSensorType.LIGHT);
+    public SKGravity(final Context context) throws SKException {
+        super(context, SKSensorType.GRAVITY);
     }
 
     @Override
     protected SKAbstractData buildData(SensorEvent event)
     {
-        return new SKLightData(System.currentTimeMillis(), event.values[0]);
+        return new SKGravityData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
     }
 
     @Override
     protected boolean shouldPostSensorData(SKAbstractData data) {
 
-        // Only post when light value changes
-
-        float light = ((SKLightData)data).getLight();
-
-        boolean shouldPost = (lastLightSensed != light);
-
-        if (shouldPost) {
-            this.lastLightSensed = light;
-        }
-
-        return shouldPost;
+        // Always post sensor data
+        return true;
     }
-
-    public void stopSensing() {
-
-        super.stopSensing();
-
-        // Clear last sensed values
-        lastLightSensed = Float.MAX_VALUE;
-    }
-
 }

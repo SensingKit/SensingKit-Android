@@ -26,7 +26,7 @@ import android.util.Log;
 import android.util.SparseArray;
 
 import org.sensingkit.sensingkitlib.data.SKSensorData;
-import org.sensingkit.sensingkitlib.modules.*;
+import org.sensingkit.sensingkitlib.sensors.*;
 
 public class SKSensorManager {
 

@@ -19,47 +19,36 @@
  * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.sensingkit.sensingkitlib.modules;
+package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Context;
-import android.os.Bundle;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
+import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.data.SKAbstractData;
+import org.sensingkit.sensingkitlib.data.SKAccelerometerData;
 
-
-public abstract class SKAbstractGoogleServicesSensor extends SKAbstractSensor implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class SKAccelerometer extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKAbstractGoogleServicesSensor";
+    private static final String TAG = "SKAccelerometer";
 
-    protected GoogleApiClient mClient;
-
-    protected SKAbstractGoogleServicesSensor(final Context context, final SKSensorType sensorType) throws SKException {
-        super(context, sensorType);
-
-
-    }
-
-    protected abstract void serviceConnected();
-
-    @Override
-    public void onConnected(Bundle connectionHint) {
-        serviceConnected();
+    public SKAccelerometer(final Context context) throws SKException {
+        super(context, SKSensorType.ACCELEROMETER);
     }
 
     @Override
-    public void onConnectionSuspended(int cause) {
-        // Ignore, will try to reconnect automatically
+    protected SKAbstractData buildData(SensorEvent event)
+    {
+        return new SKAccelerometerData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
     }
 
     @Override
-    public void onConnectionFailed(ConnectionResult result) {
-        // At least one of the API client connect attempts failed
-        // No client is connected
+    protected boolean shouldPostSensorData(SKAbstractData data) {
+
+        // Always post sensor data
+        return true;
     }
 
 }
