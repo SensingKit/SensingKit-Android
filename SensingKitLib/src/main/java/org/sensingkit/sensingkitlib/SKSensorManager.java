@@ -33,7 +33,7 @@ public class SKSensorManager {
     @SuppressWarnings("unused")
     private static final String TAG = "SKSensorManager";
 
-    private static final int TOTAL_SENSOR_MODULES = 19;
+    private static final int TOTAL_SENSORS = 19;
 
     private static SKSensorManager sSensorManager;
     private final Context mApplicationContext;
@@ -58,7 +58,7 @@ public class SKSensorManager {
         mApplicationContext = context;
 
         // Init Sensor Array
-        mSensors = new SparseArray<>(TOTAL_SENSOR_MODULES);
+        mSensors = new SparseArray<>(TOTAL_SENSORS);
     }
 
     public void registerSensor(SKSensorType sensorType) throws SKException {
@@ -267,7 +267,7 @@ public class SKSensorManager {
 
     public void startContinuousSensingWithAllRegisteredSensors() throws SKException {
 
-        for (int i = 0; i < TOTAL_SENSOR_MODULES; i++){
+        for (int i = 0; i < TOTAL_SENSORS; i++){
             if(mSensors.get(i) != null){
                 Log.i(TAG, "Start sensing with sensor: " + mSensors.get(i).getSensorName() + ".");
 
@@ -282,7 +282,7 @@ public class SKSensorManager {
     }
 
     public void stopContinuousSensingWithAllRegisteredSensors() throws SKException {
-        for (int i = 0; i < TOTAL_SENSOR_MODULES; i++) {
+        for (int i = 0; i < TOTAL_SENSORS; i++) {
             if (mSensors.get(i) != null) {
                 Log.i(TAG, "Stop sensing with sensor: " + mSensors.get(i).getSensorName() + ".");
 
