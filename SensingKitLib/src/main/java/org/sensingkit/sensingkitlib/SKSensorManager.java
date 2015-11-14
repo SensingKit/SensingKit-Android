@@ -202,6 +202,10 @@ public class SKSensorManager {
                 sensor = new SKAirPressure(mApplicationContext);
                 break;
 
+            case EDDYSTONE_PROXIMITY:
+                sensor = new SKEddystoneProximity(mApplicationContext);
+                break;
+
             // Don't forget the break; here
 
             default:

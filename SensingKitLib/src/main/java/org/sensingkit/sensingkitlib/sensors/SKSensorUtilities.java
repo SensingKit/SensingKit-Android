@@ -91,6 +91,9 @@ public final class SKSensorUtilities {
             case AIR_PRESSURE:
                 return "Air Pressure";
 
+            case EDDYSTONE_PROXIMITY:
+                return "Eddystone Proximity";
+
             default:
                 throw new SKException(TAG, "Unknown SensorModule", SKExceptionErrorCode.UNKNOWN_ERROR);
         }

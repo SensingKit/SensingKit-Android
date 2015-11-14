@@ -40,5 +40,6 @@ public enum SKSensorType {
     AUDIO_LEVEL,
     BLUETOOTH,
     HUMIDITY,
-    AIR_PRESSURE
+    AIR_PRESSURE,
+    EDDYSTONE_PROXIMITY
 }
