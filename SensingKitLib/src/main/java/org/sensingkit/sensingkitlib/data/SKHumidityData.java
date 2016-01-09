@@ -25,6 +25,9 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
+/**
+ *  An instance of SKHumidityData encapsulates measurements related to the Humidity sensor.
+ */
 public class SKHumidityData extends SKAbstractData {
 
     @SuppressWarnings("unused")
@@ -32,6 +35,13 @@ public class SKHumidityData extends SKAbstractData {
 
     protected final float humidity;
 
+    /**
+     * Initialize the instance
+     *
+     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     *
+     * @param humidity Humidity measurement
+     */
     public SKHumidityData(long timestamp, float humidity) {
 
         super(SKSensorType.HUMIDITY, timestamp);
@@ -39,13 +49,18 @@ public class SKHumidityData extends SKAbstractData {
         this.humidity = humidity;
     }
 
+    /**
+     * Get humidity sensor data in CSV format
+     *
+     * @return String in CSV format: timestamp, humidity
+     */
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f", this.timestamp, this.humidity);
     }
 
     @SuppressWarnings("unused")
-    public float getLight() {
+    public float getHumidity() {
         return this.humidity;
     }
 
