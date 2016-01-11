@@ -26,7 +26,7 @@ package org.sensingkit.sensingkitlib;
  */
 public enum SKSensorType {
     /**
-     *  Measures the device acceleration changes in three‑dimensional space. You can use this data to detect both the current orientation of the device (relative to the ground) and any instantaneous changes to that orientation.
+     *  Measures the device acceleration changes in three-dimensional space. You can use this data to detect both the current orientation of the device (relative to the ground) and any instantaneous changes to that orientation.
      */
     ACCELEROMETER,
     /**
@@ -38,7 +38,7 @@ public enum SKSensorType {
      */
     LINEAR_ACCELERATION,
     /**
-     *  Measures the device’s rate of rotation around each of the three spatial axes.
+     *  Measures the device's rate of rotation around each of the three spatial axes.
      */
     GYROSCOPE,
     /**
@@ -46,7 +46,7 @@ public enum SKSensorType {
      */
     ROTATION,
     /**
-     *  Measures the ambient geomagnetic field for all three physical axes (x, y, z) in μT.
+     *  Measures the ambient geomagnetic field for all three physical axes (x, y, z) in microtesla.
      */
     MAGNETOMETER,
     /**
@@ -66,11 +66,11 @@ public enum SKSensorType {
      */
     LIGHT,
     /**
-     *  Location sensor determines the current location of the device using a combination of Cellular, Wi‑Fi, Bluetooth and GPS sensors. It provides 2D geographical coordinate information (latitude, longitude), as well as the altitude of the device.
+     *  Location sensor determines the current location of the device using a combination of Cellular, Wi-Fi, Bluetooth and GPS sensors. It provides 2D geographical coordinate information (latitude, longitude), as well as the altitude of the device.
      */
     LOCATION,
     /**
-     *  Motion Activity sensor uses an embedded motion co‑processor that senses the user’s activity classified as Stationary, Walking, Running, Automotive or Cycling.
+     *  Motion Activity sensor uses an embedded motion co-processor that senses the user's activity classified as Stationary, Walking, Running, Automotive or Cycling.
      *  Assume that Activity is the same as Motion Activity
      */
     ACTIVITY,
