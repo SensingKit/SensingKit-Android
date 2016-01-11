@@ -187,7 +187,6 @@ public class SensingKitLib implements SensingKitLibInterface {
 
     /**
      *  Get the current time in nanoseconds (the current value of the running Java Virtual Machine's high-resolution time source)
-
      *
      *  @return current time in nanoseconds
      */
