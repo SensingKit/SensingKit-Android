@@ -29,6 +29,17 @@ public final class SKUtilities {
     @SuppressWarnings("unused")
     private static final String TAG = "SKUtilities";
 
+    /**
+     * Check whether a given permission has been granted
+     *
+     * @param context Android Context
+     *
+     * @param permission Android permission
+     *
+     * @return 1 if permission is granted; 0 if it is not
+     *
+     * @throws SKException
+     */
     public static boolean checkPermission(Context context, String permission) throws SKException {
 
         if (context == null) {
@@ -39,10 +50,21 @@ public final class SKUtilities {
         return (res == PackageManager.PERMISSION_GRANTED);
     }
 
+    /**
+     *  Get the current time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     *
+     *  @return the current time in milliseconds
+     */
     public static long getCurrentTimeMillis() {
         return System.currentTimeMillis();
     }
 
+    /**
+     *  Get the current time in nanoseconds (the current value of the running Java Virtual Machine's high-resolution time source)
+     *
+     *  @return the current time in nanoseconds
+
+     */
     public static long getNanoTime() {
         return System.nanoTime();
     }

@@ -25,6 +25,10 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
+/**
+ *  An instance of SKLinearAccelerationData encapsulates measurements related to the Linear Acceleration sensor.
+ * Measures the acceleration force in mass/seconds**2, excluding the force of gravity
+ */
 public class SKLinearAccelerationData extends SKAbstractData {
 
     @SuppressWarnings("unused")
@@ -34,6 +38,17 @@ public class SKLinearAccelerationData extends SKAbstractData {
     protected final float y;
     protected final float z;
 
+    /**
+     * Initialize the instance
+     *
+     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     *
+     * @param x Force in X direction
+     *
+     * @param y Force in Y direction
+     *
+     * @param z Force in Z direction
+     */
     public SKLinearAccelerationData(long timestamp, float x, float y, float z) {
 
         super(SKSensorType.LINEAR_ACCELERATION, timestamp);
@@ -43,21 +58,41 @@ public class SKLinearAccelerationData extends SKAbstractData {
         this.z = z;
     }
 
+    /**
+     * Get Linear Acceleration sensor data in CSV format
+     *
+     * @return String in CSV format: timestamp, x force, y force, z force
+     */
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
     }
 
+    /**
+     * Get Linear Acceleration force in X direction
+     *
+     * @return force in X direction
+     */
     @SuppressWarnings("unused")
     public float getX() {
         return this.x;
     }
 
+    /**
+     * Get Linear Acceleration force in Y direction
+     *
+     * @return force in Y direction
+     */
     @SuppressWarnings("unused")
     public float getY() {
         return this.y;
     }
 
+    /**
+     * Get Linear Acceleration force in Z direction
+     *
+     * @return force in Z direction
+     */
     @SuppressWarnings("unused")
     public float getZ() {
         return this.z;

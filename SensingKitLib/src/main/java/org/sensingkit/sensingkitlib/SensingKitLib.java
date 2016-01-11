@@ -58,16 +58,33 @@ public class SensingKitLib implements SensingKitLibInterface {
         mSensorManager = SKSensorManager.getSensorManager(context);
     }
 
+    /**
+     *  Initializes and registers a sensor into the library with a default sensor configuration.
+     *
+     *  @param sensorType The type of the sensor that will be initialized and registered in the library.
+     */
     @Override
     public void registerSensor(SKSensorType sensorType) throws SKException {
         mSensorManager.registerSensor(sensorType);
     }
 
+    /**
+     *  Deregisters a sensor from the library. Sensor should not be actively sensing when this method is called. All previously subscribed blocks will also be unsubscribed.
+     *
+     *  @param sensorType The type of the sensor that will be deregistered.
+     */
     @Override
     public void deregisterSensor(SKSensorType sensorType) throws SKException {
         mSensorManager.deregisterSensor(sensorType);
     }
 
+    /**
+     *  A Boolean value that indicates whether the sensor is registered.
+     *
+     *  @param sensorType The type of the sensor that will be checked.
+     *
+     *  @return TRUE if the sensor is registered or FALSE if it is not.
+     */
     @Override
     public boolean isSensorRegistered(SKSensorType sensorType) throws SKException {
         return mSensorManager.isSensorRegistered(sensorType);
@@ -78,51 +95,102 @@ public class SensingKitLib implements SensingKitLibInterface {
         return mSensorManager.getDataFromSensor(sensorType);
     }
 
+    /**
+     *  Subscribes for sensor updates using a specified event listener.
+     *
+     *  @param sensorType  The type of the sensor that the data handler will be subscribed to.
+     *  @param dataListener    An event listener that is invoked with each update to handle new sensor data. The block must conform to the SKSensorDataListener type.
+     */
     @Override
     public void subscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
         mSensorManager.subscribeSensorDataListener(sensorType, dataListener);
     }
 
-    @Override
+    /**
+     *  Unsubscribes an event listener.
+     *
+     *  @param sensorType The type of the sensor for which the event listener will be unsubscribed.
+     *  @param dataListener The event listener to be unsubscribed.
+     */
+     @Override
     public void unsubscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
         mSensorManager.unsubscribeSensorDataListener(sensorType, dataListener);
     }
 
-    @Override
+     /**
+      *  Unsubscribes all event listenerss.
+      *
+      *  @param sensorType The type of the sensor for which the event listener will be unsubscribed.
+      */
+     @Override
     public void unsubscribeAllSensorDataListeners(SKSensorType sensorType) throws SKException {
         mSensorManager.unsubscribeAllSensorDataListeners(sensorType);
     }
 
+    /**
+     *  Starts continuous sensing with the specified sensor.
+     *
+     *  @param sensorType The type of the sensor that will be started.
+     */
     @Override
     public void startContinuousSensingWithSensor(SKSensorType sensorType) throws SKException {
         mSensorManager.startContinuousSensingWithSensor(sensorType);
     }
 
+    /**
+     *  Stops continuous sensing with the specified sensor.
+     *
+     *  @param sensorType The type of the sensor that will be stopped.
+     */
     @Override
     public void stopContinuousSensingWithSensor(SKSensorType sensorType) throws SKException {
         mSensorManager.stopContinuousSensingWithSensor(sensorType);
     }
 
+    /**
+     *  Starts continuous sensing with all registered sensors.
+     */
     @Override
     public void startContinuousSensingWithAllRegisteredSensors() throws SKException {
         mSensorManager.startContinuousSensingWithAllRegisteredSensors();
     }
 
+    /**
+     *  Starts continuous sensing with all registered sensors.
+     */
     @Override
     public void stopContinuousSensingWithAllRegisteredSensors() throws SKException {
         mSensorManager.stopContinuousSensingWithAllRegisteredSensors();
     }
 
+    /**
+     *  A Boolean value that indicates whether the sensor is currently sensing.
+     *
+     *  @param sensorType The type of the sensor that will be checked.
+     *
+     *  @return TRUE if the sensor is currently sensing or FALSE if it is not.
+     */
     @Override
     public boolean isSensorSensing(SKSensorType sensorType) throws SKException {
         return mSensorManager.isSensorSensing(sensorType);
     }
 
+    /**
+     *  Get the current time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC).
+     *
+     *  @return current time in milliseconds
+     */
     @Override
     public long getCurrentTimeMillis() {
         return SKUtilities.getCurrentTimeMillis();
     }
 
+    /**
+     *  Get the current time in nanoseconds (the current value of the running Java Virtual Machine's high-resolution time source)
+
+     *
+     *  @return current time in nanoseconds
+     */
     @Override
     public long getNanoTime() {
         return SKUtilities.getNanoTime();

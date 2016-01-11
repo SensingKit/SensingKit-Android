@@ -25,6 +25,9 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
+/**
+ *  An instance of SKGyroscopeData encapsulates measurements related to the Gyroscope sensor.
+ */
 public class SKGyroscopeData extends SKAbstractData {
 
     @SuppressWarnings("unused")
@@ -34,6 +37,17 @@ public class SKGyroscopeData extends SKAbstractData {
     protected final float y;
     protected final float z;
 
+    /**
+     * Initialize the instance
+     *
+     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     *
+     * @param x X-axis of the Gyroscope data
+     *
+     * @param y Y-axis of the Gyroscope data
+     *
+     * @param z Z-axis of the Gyroscope data
+     */
     public SKGyroscopeData(long timestamp, float x, float y, float z) {
 
         super(SKSensorType.GYROSCOPE, timestamp);
@@ -43,21 +57,41 @@ public class SKGyroscopeData extends SKAbstractData {
         this.z = z;
     }
 
+    /**
+     * Get the Gyroscope data in csv format
+     *
+     * @return String in csv format: timestamp, X-axis, Y-axis, Z-axis
+     */
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
     }
 
+    /**
+     * Get the X-axis of the Gyroscope sensor data
+     *
+     * @return X-axis value
+     */
     @SuppressWarnings("unused")
     public float getX() {
         return this.x;
     }
 
+    /**
+     * Get the Y-axis of the Gyroscope sensor data
+     *
+     * @return Y-axis value
+     */
     @SuppressWarnings("unused")
     public float getY() {
         return this.y;
     }
 
+    /**
+     * Get the Z-axis of the Gyroscope sensor data
+     *
+     * @return Z-axis value
+     */
     @SuppressWarnings("unused")
     public float getZ() {
         return this.z;

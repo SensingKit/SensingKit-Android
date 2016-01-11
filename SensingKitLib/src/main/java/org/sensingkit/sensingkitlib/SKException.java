@@ -26,17 +26,33 @@ public class SKException extends Exception {
     private final SKExceptionErrorCode errorCode;
     private final String TAG;
 
+    /**
+     *
+     * @param TAG - TAG
+     * @param message - error message
+     * @param errorCode - error code
+     */
     public SKException(String TAG, String message, SKExceptionErrorCode errorCode) {
         super(message);
         this.TAG = TAG;
         this.errorCode = errorCode;
     }
 
+    /**
+     * Get the error code
+     *
+     * @return error code
+     */
     @SuppressWarnings("unused")
     public SKExceptionErrorCode getErrorCode() {
         return this.errorCode;
     }
 
+    /**
+     * Get the tag
+     *
+     * @return tag
+     */
     @SuppressWarnings("unused")
     public String getTAG() {
         return this.TAG;
