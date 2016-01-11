@@ -102,7 +102,7 @@ public class SKActivityData extends SKAbstractData {
     /**
      * Get the name of an activity type
      *
-     * @param activityType
+     * @param activityType The type of the activity
      *
      * @return name
      */
