@@ -52,7 +52,7 @@ public class SKAudioLevelData extends SKAbstractData {
     /**
      * Get the audio level measurement in csv format
      *
-     * @returns String containing the timestamp and audio level measurements in csv format:  timestamp,level
+     * @return String containing the timestamp and audio level measurements in csv format:  timestamp,level
      */
     @Override
     public String getDataInCSV() {

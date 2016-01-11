@@ -62,7 +62,7 @@ public class SKAccelerometerData extends SKAbstractData {
     /**
      * Get the accelerator measurements in csv format
      *
-     * @returns String containing the timestamp and accelerometer measurements in csv format:  timestamp,x,y,z
+     * @return String containing the timestamp and accelerometer measurements in csv format:  timestamp,x,y,z
      */
     @Override
     public String getDataInCSV() {
