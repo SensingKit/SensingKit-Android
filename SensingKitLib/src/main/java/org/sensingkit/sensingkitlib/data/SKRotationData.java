@@ -25,6 +25,9 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
+/**
+ *  An instance of SKRotationData encapsulates measurements related to the Rotation sensor.
+ */
 public class SKRotationData extends SKAbstractData {
 
     @SuppressWarnings("unused")
@@ -36,6 +39,23 @@ public class SKRotationData extends SKAbstractData {
     protected final float cos;
     protected final float headingAccuracy;
 
+    /**
+     * Initialize the instance
+     *
+     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     *
+     * @param x Rotation axis x-component*sin(theta/2)
+     *
+     * @param y Rotation axis y-component*sin(theta/2)
+     *
+     * @param z Rotation axis z-component*sin(theta/2)
+     *
+     * @param cos Cos(theta)
+     *
+     * where theta is the angle of rotation
+     *
+     * @param headingAccuracy Estimated accuracy in radians
+     */
     public SKRotationData(long timestamp, float x, float y, float z, float cos, float headingAccuracy) {
 
         super(SKSensorType.ROTATION, timestamp);
@@ -47,35 +67,78 @@ public class SKRotationData extends SKAbstractData {
         this.headingAccuracy = headingAccuracy;
     }
 
+    /**
+     * Initialize the instance
+     *
+     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     *
+     * @param x Rotation axis x-component*sin(theta/2)
+     *
+     * @param y Rotation axis y-component*sin(theta/2)
+     *
+     * @param z Rotation axis z-component*sin(theta/2)
+     *
+     * where theta is the angle of rotation
+     */
     public SKRotationData(long timestamp, float x, float y, float z) {
         this(timestamp, x, y, z, 0, 0);
     }
 
+    /**
+     * Get Rotation sensor data in CSV format
+     *
+     * @return String in CSV format: timestamp, x, y, z, cos, headingAccuracy
+     */
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%f,%f,%f,%f", this.timestamp, this.x, this.y, this.z, this.cos, this.headingAccuracy);
     }
 
+    /**
+     * Get X component of rotation
+     *
+     * @return X component
+     */
     @SuppressWarnings("unused")
     public float getX() {
         return this.x;
     }
 
+    /**
+     * Get Y component of rotation
+     *
+     * @return Y component
+     */
     @SuppressWarnings("unused")
      public float getY() {
         return this.y;
     }
 
+    /**
+     * Get Z component of rotation
+     *
+     * @return Z component
+     */
     @SuppressWarnings("unused")
     public float getZ() {
         return this.z;
     }
 
+    /**
+     * Get cos of the angle of rotation
+     *
+     * @return Cos(theta)
+     */
     @SuppressWarnings("unused")
     public float getCos() {
         return this.cos;
     }
 
+    /**
+     * Get heading accuracy of rotation data
+     *
+     * @return Heading accuracy
+     */
     @SuppressWarnings("unused")
     public float getHeadingAccuracy() {
         return this.headingAccuracy;

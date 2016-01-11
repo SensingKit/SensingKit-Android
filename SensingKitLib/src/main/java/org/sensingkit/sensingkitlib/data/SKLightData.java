@@ -25,6 +25,9 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
+/**
+ *  An instance of SKLightData encapsulates measurements related to the Light sensor.
+ */
 public class SKLightData extends SKAbstractData {
 
     @SuppressWarnings("unused")
@@ -32,6 +35,13 @@ public class SKLightData extends SKAbstractData {
 
     protected final float light;
 
+    /**
+     * Initialize the instance
+     *
+     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     *
+     * @param light Ambient light in lux
+     */
     public SKLightData(long timestamp, float light) {
 
         super(SKSensorType.LIGHT, timestamp);
@@ -39,11 +49,21 @@ public class SKLightData extends SKAbstractData {
         this.light = light;
     }
 
+    /**
+     * Get light sensor data in CSV format
+     *
+     * @return String in CSV format: timestamp, ambient light in lux
+     */
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f", this.timestamp, this.light);
     }
 
+    /**
+     * Get light sensor data
+     *
+     * @return Ambient light in lux
+     */
     @SuppressWarnings("unused")
     public float getLight() {
         return this.light;

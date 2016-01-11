@@ -25,6 +25,9 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
+/**
+ *  An instance of SKStepCounterData encapsulates measurements related to the Step Counter sensor.
+ */
 public class SKStepCounterData extends SKAbstractData {
 
     @SuppressWarnings("unused")
@@ -32,6 +35,13 @@ public class SKStepCounterData extends SKAbstractData {
 
     protected final float steps;
 
+    /**
+     * Initialize the instance
+     *
+     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     *
+     * @param steps Number of steps
+     */
     public SKStepCounterData(long timestamp, float steps) {
 
         super(SKSensorType.STEP_COUNTER, timestamp);
@@ -39,11 +49,21 @@ public class SKStepCounterData extends SKAbstractData {
         this.steps = steps;
     }
 
+    /**
+     * Get Step Counter sensor data in CSV format
+     *
+     * @return String in CSV format: timestamp, number of steps
+     */
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f", this.timestamp, this.steps);
     }
 
+    /**
+     * Get number of steps
+     *
+     * @return number of steps
+     */
     @SuppressWarnings("unused")
     public float getSteps() {
         return this.steps;

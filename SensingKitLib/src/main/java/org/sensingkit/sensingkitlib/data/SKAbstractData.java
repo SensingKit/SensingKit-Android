@@ -23,6 +23,9 @@ package org.sensingkit.sensingkitlib.data;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+/*
+Abstract class for sensor data
+ */
 public abstract class SKAbstractData implements SKSensorData
 {
     @SuppressWarnings("unused")
@@ -31,20 +34,42 @@ public abstract class SKAbstractData implements SKSensorData
     protected final SKSensorType sensorType;
     protected final long timestamp;
 
+    /**
+     * Initialize the instance
+     *
+     * @param sensorType of type SKSensorType
+     *
+     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     */
     public SKAbstractData(SKSensorType sensorType, long timestamp) {
         this.sensorType = sensorType;
         this.timestamp = timestamp;
     }
 
+    /**
+     * Get the sensor data in csv format
+     *
+     * @return String in csv format
+     */
     public String toString() {
         return this.getDataInCSV();
     }
 
+    /**
+     * Get the sensor type
+     *
+     * @return sensor type
+     */
     @SuppressWarnings("unused")
     public SKSensorType getSensorType() {
         return sensorType;
     }
 
+    /**
+     * Get the timestamp
+     *
+     * @return timestamp
+     */
     @SuppressWarnings("unused")
     public long getTimestamp() {
         return timestamp;

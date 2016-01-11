@@ -28,6 +28,9 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import java.util.Locale;
 
 
+/**
+ *  An instance of SKLocationData encapsulates measurements related to the Light sensor.
+ */
 public class SKLocationData extends SKAbstractData {
 
     @SuppressWarnings("unused")
@@ -35,6 +38,13 @@ public class SKLocationData extends SKAbstractData {
 
     protected final Location location;
 
+    /**
+     * Initialize the instance
+     *
+     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     *
+     * @param location Location object
+     */
     public SKLocationData(long timestamp, Location location) {
 
         super(SKSensorType.LOCATION, timestamp);
@@ -42,11 +52,21 @@ public class SKLocationData extends SKAbstractData {
         this.location = location;
     }
 
+    /**
+     * Get location sensor data in CSV format
+     *
+     * @return String in CSV format: timestamp, location
+     */
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%s", this.timestamp, this.location);
     }
 
+    /**
+     * Get Location object
+     *
+     * @return Location object
+     */
     @SuppressWarnings("unused")
     public Location getLocation() {
         return location;

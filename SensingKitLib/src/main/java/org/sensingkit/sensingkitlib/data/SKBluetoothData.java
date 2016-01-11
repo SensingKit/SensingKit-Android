@@ -26,6 +26,9 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import java.util.ArrayList;
 import java.util.Locale;
 
+/**
+ *  An instance of SKBluetoothData encapsulates measurements related to all the Bluetooth devices.
+ */
 public class SKBluetoothData extends SKAbstractData {
 
     @SuppressWarnings("unused")
@@ -33,6 +36,13 @@ public class SKBluetoothData extends SKAbstractData {
 
     private final ArrayList<SKBluetoothDeviceData> mBluetoothDevices;
 
+    /**
+     * Initialize the instance
+     *
+     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     *
+     * @param bluetoothDevices One BluetoothDeviceData object for each Bluetooth device
+     */
     public SKBluetoothData(long timestamp, ArrayList<SKBluetoothDeviceData> bluetoothDevices) {
 
         super(SKSensorType.BLUETOOTH, timestamp);
@@ -40,6 +50,11 @@ public class SKBluetoothData extends SKAbstractData {
         this.mBluetoothDevices = bluetoothDevices;
     }
 
+    /**
+     * Get the data for all Bluetooth devices in CSV format
+     *
+     * @return String formatted as follows:  timestamp,device1 data, device2 data,,,
+     */
     @Override
     public String getDataInCSV() {
 
@@ -60,6 +75,11 @@ public class SKBluetoothData extends SKAbstractData {
         return stringBuilder.toString();
     }
 
+    /**
+     * Get Bluetooth Device data
+     *
+     * @return an ArrayList containing an SKBluetoothDeviceData object for each Bluetooth Device
+     */
     @SuppressWarnings("unused")
     public ArrayList<SKBluetoothDeviceData> getBluetoothDevices() {
         return this.mBluetoothDevices;

@@ -25,6 +25,9 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
+/**
+ *  An instance of SKGravityData encapsulates measurements related to the Gravity sensor.
+ */
 public class SKGravityData extends SKAbstractData {
 
     @SuppressWarnings("unused")
@@ -34,6 +37,17 @@ public class SKGravityData extends SKAbstractData {
     protected final float y;
     protected final float z;
 
+    /**
+     * Initialize the instance
+     *
+     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     *
+     * @param x X-axis value
+     *
+     * @param y Y-axis value
+     *
+     * @param z Z-axis value
+     */
     public SKGravityData(long timestamp, float x, float y, float z) {
 
         super(SKSensorType.GRAVITY, timestamp);
@@ -43,21 +57,41 @@ public class SKGravityData extends SKAbstractData {
         this.z = z;
     }
 
+    /**
+     * Get the Gravity sensor data in csv format
+     *
+     * @return String in csv format:  timestamp, x-axis, y-axis, z-axis
+     */
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
     }
 
+    /**
+     * Get the Gravity sensor X-axis value
+     *
+     * @return X-axis value
+     */
     @SuppressWarnings("unused")
     public float getX() {
         return this.x;
     }
 
+    /**
+     * Get the Gravity sensor Y-axis value
+     *
+     * @return Y-axis value
+     */
     @SuppressWarnings("unused")
     public float getY() {
         return this.y;
     }
 
+    /**
+     * Get the Gravity sensor Z-axis value
+     *
+     * @return Z-axis value
+     */
     @SuppressWarnings("unused")
     public float getZ() {
         return this.z;

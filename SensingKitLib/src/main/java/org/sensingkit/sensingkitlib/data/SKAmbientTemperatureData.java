@@ -25,6 +25,9 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
+/**
+ *  An instance of SKAirPressureData encapsulates measurements related to the Air Pressure sensor.
+ */
 public class SKAmbientTemperatureData extends SKAbstractData {
 
     @SuppressWarnings("unused")
@@ -32,6 +35,13 @@ public class SKAmbientTemperatureData extends SKAbstractData {
 
     protected final float temperature;
 
+    /**
+     * Initialize Ambient Temperature data instance
+     *
+     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     *
+     * @param temperature In degrees Celsius
+     */
     public SKAmbientTemperatureData(long timestamp, float temperature) {
 
         super(SKSensorType.AMBIENT_TEMPERATURE, timestamp);
@@ -39,11 +49,22 @@ public class SKAmbientTemperatureData extends SKAbstractData {
         this.temperature = temperature;
     }
 
+    /**
+     * Get the Ambient Temperature sensor data in csv format
+     *
+     * @return Ambient Temperature data in csv format: timestamp,ambient temperature
+     *
+     */
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f", this.timestamp, this.temperature);
     }
 
+    /**
+     * Get only the Ambient Temperature
+     *
+     * @return Ambient Temperature
+     */
     @SuppressWarnings("unused")
     public float getTemperature() {
         return this.temperature;
