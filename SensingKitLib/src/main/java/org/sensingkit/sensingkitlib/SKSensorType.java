@@ -99,11 +99,8 @@ public enum SKSensorType {
      *  Relative ambient air humidity in percent
      */
     HUMIDITY,
-<<<<<<< HEAD
     EDDYSTONE_PROXIMITY,
     IBEACON,
-=======
->>>>>>> origin/develop
     /**
      *  Atmospheric pressure in hPa (millibar)
      */

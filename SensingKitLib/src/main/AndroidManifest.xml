@@ -4,11 +4,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-<<<<<<< HEAD
 
-=======
- 
->>>>>>> origin/develop
     <application android:allowBackup="true"
         tools:ignore="GoogleAppIndexingWarning">
 

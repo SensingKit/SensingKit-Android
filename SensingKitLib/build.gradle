@@ -20,9 +20,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-<<<<<<< HEAD
     compile 'com.estimote:sdk:0.9.4@aar'
-=======
->>>>>>> origin/develop
     compile 'com.google.android.gms:play-services-location:8.4.0'
 }
