@@ -56,7 +56,7 @@ public enum SKSensorType {
     MAGNETOMETER,
 
     /**
-     * Room temperature in degrees Celcius
+     * Room temperature in degrees Celcius.
      */
     AMBIENT_TEMPERATURE,
 
@@ -66,7 +66,7 @@ public enum SKSensorType {
     STEP_DETECTOR,
 
     /**
-     *  Number of steps taken by the user since the last reboot while activated
+     *  Number of steps taken by the user since the last reboot while activated.
      */
     STEP_COUNTER,
 
@@ -82,7 +82,6 @@ public enum SKSensorType {
 
     /**
      *  Motion Activity sensor uses an embedded motion co-processor that senses the user's activity classified as Stationary, Walking, Running, Automotive or Cycling.
-     *  Assume that Activity is the same as Motion Activity
      */
     ACTIVITY,
 
@@ -92,18 +91,17 @@ public enum SKSensorType {
     BATTERY,
 
     /**
-     *  Not defined in IOS docs
+     *  Senses the status of the screen (On / Off).
      */
     SCREEN_STATUS,
 
     /**
-     *  Microphone sensor can be used to record audio from the environment (up to 4 hours) by converting sound into electrical signal.
-     *  Assume that Microphone is the same as AUDIO RECORDER
+     *  Microphone sensor can be used to record audio from the environment by converting sound into electrical signal.
      */
     AUDIO_RECORDER,
 
     /**
-     *  Maximum level of the audio signal in a buffer
+     *  Maximum level of the audio signal in a buffer.
      */
     AUDIO_LEVEL,
 
@@ -123,12 +121,12 @@ public enum SKSensorType {
     IBEACON,
 
     /**
-     *  Relative ambient air humidity in percent
+     *  Relative ambient air humidity in percent.
      */
     HUMIDITY,
 
     /**
-     *  Atmospheric pressure in hPa (millibar)
+     *  Atmospheric pressure in hPa (millibar).
      */
     AIR_PRESSURE
 }
