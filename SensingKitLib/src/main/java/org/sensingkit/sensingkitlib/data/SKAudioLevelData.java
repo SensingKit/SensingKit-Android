@@ -25,6 +25,9 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
+/**
+ *  An instance of SKAudioLevelData encapsulates measurements related to the Audio Level sensor.
+ */
 public class SKAudioLevelData extends SKAbstractData {
 
     @SuppressWarnings("unused")
@@ -32,6 +35,13 @@ public class SKAudioLevelData extends SKAbstractData {
 
     protected final int level;
 
+    /**
+     * Initialize the instance
+     *
+     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     *
+     * @param level - Audio Level
+     */
     public SKAudioLevelData(long timestamp, int level) {
 
         super(SKSensorType.AUDIO_LEVEL, timestamp);
@@ -39,11 +49,21 @@ public class SKAudioLevelData extends SKAbstractData {
         this.level = level;
     }
 
+    /**
+     * Get the audio level measurement in csv format
+     *
+     * @return String containing the timestamp and audio level measurements in csv format:  timestamp,level
+     */
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%d", this.timestamp, this.level);
     }
 
+    /**
+     * Get the audio level only
+     *
+     * @return Audio level
+     */
     @SuppressWarnings("unused")
     public int getLevel() {
         return this.level;

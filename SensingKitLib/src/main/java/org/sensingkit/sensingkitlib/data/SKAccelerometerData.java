@@ -25,6 +25,10 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
+
+/**
+ *  An instance of SKAccelerometerData encapsulates measurements related to the Accelerometer sensor.
+ */
 public class SKAccelerometerData extends SKAbstractData {
 
     @SuppressWarnings("unused")
@@ -33,6 +37,18 @@ public class SKAccelerometerData extends SKAbstractData {
     protected final float x;
     protected final float y;
     protected final float z;
+
+    /**
+     * Initialize the instance
+     *
+     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     *
+     * @param x X-axis value of the Accelerometer sensor
+     *
+     * @param y Y-axis value of the Accelerometer sensor
+     *
+     * @param z Z-axis value of the Accelerometer sensor
+     */
 
     public SKAccelerometerData(long timestamp, float x, float y, float z) {
 
@@ -43,20 +59,41 @@ public class SKAccelerometerData extends SKAbstractData {
         this.z = z;
     }
 
+    /**
+     * Get the accelerator measurements in csv format
+     *
+     * @return String containing the timestamp and accelerometer measurements in csv format:  timestamp,x,y,z
+     */
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
     }
 
+    /**
+     * Get the X-axis acceleromator measurement
+     *
+     * @return Float containing the X-axis value of the Accelerometer sensor
+     */
     @SuppressWarnings("unused")
     public float getX() {
         return this.x;
     }
 
+    /**
+     * Get the Y-axis accelerator measurement
+     *
+     * @return Float containing the y-axis value of the Accelerometer sensor
+     */
     @SuppressWarnings("unused")
     public float getY() {
         return this.y;
     }
+
+    /**
+     * Get the Z-axis accelerator measurement
+     *
+     * @return Float containing the z-axis value of the Accelerometer sensor
+     */
 
     @SuppressWarnings("unused")
     public float getZ() {

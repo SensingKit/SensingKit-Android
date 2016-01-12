@@ -25,6 +25,12 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
+
+/**
+ *  An instance of SKMagnetometerData encapsulates measurements related to the Magnetometer sensor.
+ *  Measures the magnetic force in micro-Tesla
+ */
+
 public class SKMagnetometerData extends SKAbstractData {
 
     @SuppressWarnings("unused")
@@ -34,6 +40,17 @@ public class SKMagnetometerData extends SKAbstractData {
     protected final float y;
     protected final float z;
 
+    /**
+     * Initialize the instance
+     *
+     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     *
+     * @param x Force in X-direction
+     *
+     * @param y Force in Y-direction
+     *
+     * @param z Force in Z-direction
+     */
     public SKMagnetometerData(long timestamp, float x, float y, float z) {
 
         super(SKSensorType.MAGNETOMETER, timestamp);
@@ -43,21 +60,41 @@ public class SKMagnetometerData extends SKAbstractData {
         this.z = z;
     }
 
+    /**
+     * Get Magnetometer sensor data in CSV format
+     *
+     * @return String in CSV format: timestamp, x force, y force, z force
+     */
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
     }
 
+    /**
+     * Get Magnetometer force in X direction
+     *
+     * @return force in X direction
+     */
     @SuppressWarnings("unused")
     public float getX() {
         return this.x;
     }
 
+    /**
+     * Get Magnetometer force in Y direction
+     *
+     * @return force in Y direction
+     */
     @SuppressWarnings("unused")
     public float getY() {
         return this.y;
     }
 
+    /**
+     * Get Magnetometer force in Z direction
+     *
+     * @return force in Z direction
+     */
     @SuppressWarnings("unused")
     public float getZ() {
         return this.z;

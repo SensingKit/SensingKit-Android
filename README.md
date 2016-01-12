@@ -63,28 +63,40 @@ dependencies {
 
 ## How to Use this Library
 
-- Import and init SensingKit into your Activity class as shown bellow:
+- The imports you will need are:
 
 ```java
+import org.sensingkit.sensingkitlib.SKException;
+import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.SensingKitLib;
+import org.sensingkit.sensingkitlib.SensingKitLibInterface;  //Document:  needed to add this to init SensingKit
+import org.sensingkit.sensingkitlib.data.SKSensorData;
+import org.sensingkit.sensingkitlib.SKSensorDataListener;
+```
 
+- Init SensingKit in your Activity class as shown below:
+
+```java
+//You will need a try..catch block around this code
 SensingKitLibInterface mSensingKitLib = SensingKitLib.getSensingKitLib(this);
 ```
 
 
-- Register a sensor module (e.g. a Light sensor) as shown bellow:
+- Register a sensor module (e.g. a Light sensor) as shown below:
 
 ```java
-mSensingKitLib.registerSensorModule(SKSensorModuleType.LIGHT);
+//You will need a try..catch block around this code
+mSensingKitLib.registerSensor(SKSensorType.LIGHT);
 ```
 
 
 - Subscribe a sensor data listener:
 
 ```java
-mSensingKitLib.subscribeSensorDataListener(SKSensorModuleType.LIGHT, new SKSensorDataListener() {
+//You will need a try..catch block around this code
+mSensingKitLib.subscribeSensorDataListener(SKSensorType.LIGHT, new SKSensorDataListener() {
     @Override
-    public void onDataReceived(final SKSensorModuleType moduleType, final SKSensorData sensorData) {
+    public void onDataReceived(final SKSensorType moduleType, final SKSensorData sensorData) {
         System.out.println(sensorData.getDataInCSV());  // Print data in CSV format
     }
 });
@@ -102,8 +114,9 @@ SKLightData lightData = (SKLightData)sensorData;
 - You can Start and Stop the Continuous Sensing using the following commands:
 
 ```java
-mSensingKitLib.startContinuousSensingWithSensor(SKSensorModuleType.LIGHT);
-mSensingKitLib.stopContinuousSensingWithSensor(SKSensorModuleType.LIGHT);
+//You will need try..catch blocks around these statements
+mSensingKitLib.startContinuousSensingWithSensor(SKSensorType.LIGHT);
+mSensingKitLib.stopContinuousSensingWithSensor(SKSensorType.LIGHT);
 ```
 
 

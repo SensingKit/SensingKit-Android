@@ -25,6 +25,9 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
+/**
+ *  An instance of SKScreenStatusData encapsulates measurements related to the Screen Status sensor.
+ */
 public class SKScreenStatusData extends SKAbstractData {
 
     @SuppressWarnings("unused")
@@ -36,6 +39,12 @@ public class SKScreenStatusData extends SKAbstractData {
 
     protected final int status;
 
+    /**
+     * Initialize the instance
+     *
+     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     * @param status Screen status
+     */
     public SKScreenStatusData(long timestamp, int status) {
 
         super(SKSensorType.SCREEN_STATUS, timestamp);
@@ -43,16 +52,31 @@ public class SKScreenStatusData extends SKAbstractData {
         this.status = status;
     }
 
+    /**
+     * Get Screen Status sensor data in CSV format
+     *
+     * @return String in CSV format: timestamp, screen status string
+     */
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%s", this.timestamp, this.getStatusString());
     }
 
+    /**
+     * Get screen status
+     *
+     * @return Screen status as an int
+     */
     @SuppressWarnings("unused")
     public int getStatus() {
         return this.status;
     }
 
+    /**
+     * Get screen status as a string
+     *
+     * @return Screen status as a string:  "screen off", "screen on", or "unknown"
+     */
     @SuppressWarnings("unused")
     public String getStatusString() {
 

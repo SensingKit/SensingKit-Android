@@ -61,6 +61,12 @@ public class SKSensorManager {
         mSensors = new SparseArray<>(TOTAL_SENSORS);
     }
 
+
+    /**
+     *  Initializes and registers a sensor into the library with a default sensor configuration.
+     *
+     *  @param sensorType The type of the sensor that will be initialized and registered in the library.
+     */
     public void registerSensor(SKSensorType sensorType) throws SKException {
 
         Log.i(TAG, "Register sensor: " + SKSensorUtilities.getSensorInString(sensorType) + ".");
@@ -75,6 +81,11 @@ public class SKSensorManager {
         mSensors.put(sensorIndex, sensor);
     }
 
+    /**
+     *  Deregisters a sensor from the library. Sensor should not be actively sensing when this method is called. All previously subscribed blocks will also be unsubscribed.
+     *
+     *  @param sensorType The type of the sensor that will be deregistered.
+     */
     public void deregisterSensor(SKSensorType sensorType) throws SKException {
 
         Log.i(TAG, "Deregister sensor: " + SKSensorUtilities.getSensorInString(sensorType) + ".");
@@ -95,12 +106,26 @@ public class SKSensorManager {
         mSensors.delete(sensorIndex);
     }
 
+    /**
+     *  A Boolean value that indicates whether the sensor is registered.
+     *
+     *  @param sensorType The type of the sensor that will be checked.
+     *
+     *  @return TRUE if the sensor is registered or FALSE if it is not.
+     */
     public boolean isSensorRegistered(SKSensorType sensorType) throws SKException {
 
         int sensorIndex = sensorType.ordinal();
         return (mSensors.get(sensorIndex) != null);
     }
 
+    /**
+     *  A Boolean value that indicates whether the sensor is currently sensing.
+     *
+     *  @param sensorType The type of the sensor that will be checked.
+     *
+     *  @return TRUE if the sensor is currently sensing or FALSE if it is not.
+     */
     public boolean isSensorSensing(SKSensorType sensorType) throws SKException {
 
         if (!isSensorRegistered(sensorType)) {
@@ -215,6 +240,15 @@ public class SKSensorManager {
         return sensor;
     }
 
+    /**
+     * Get data from the sensor
+     *
+     * @param sensorType of type SKSensorType
+     *
+     * @return an SKSensorData object
+     *
+     * @throws SKException
+     */
     public SKSensorData getDataFromSensor(SKSensorType sensorType) throws SKException {
 
         Log.i(TAG, "Get data from sensor: " + SKSensorUtilities.getSensorInString(sensorType) + ".");
@@ -222,6 +256,13 @@ public class SKSensorManager {
         throw new SKException(TAG, "This feature is not supported just yet!", SKExceptionErrorCode.UNKNOWN_ERROR);
     }
 
+    /**
+     *  Subscribes for sensor updates using a specified event listener.
+     *
+     *  @param sensorType  The type of the sensor that the data handler will be subscribed to.
+     *
+     *  @param dataListener    An event listener that is invoked with each update to handle new sensor data. The block must conform to the SKSensorDataListener type.
+     */
     public void subscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
 
         Log.i(TAG, "Subscribe to sensor: " + SKSensorUtilities.getSensorInString(sensorType) + ".");
@@ -229,12 +270,24 @@ public class SKSensorManager {
         getSensor(sensorType).subscribeSensorDataListener(dataListener);
     }
 
+    /**
+     *  Unsubscribes an event listener.
+     *
+     *  @param sensorType The type of the sensor for which the event listener will be unsubscribed.
+     *  @param dataListener The event listener to be unsubscribed.
+     */
     public void unsubscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
 
         Log.i(TAG, "Unsubscribe from sensor: " + SKSensorUtilities.getSensorInString(sensorType) + ".");
 
         getSensor(sensorType).unsubscribeSensorDataListener(dataListener);
     }
+
+    /**
+     *  Unsubscribes all event listenerss.
+     *
+     *  @param sensorType The type of the sensor for which the event listener will be unsubscribed.
+     */
 
     public void unsubscribeAllSensorDataListeners(SKSensorType sensorType) throws SKException {
 
@@ -243,6 +296,11 @@ public class SKSensorManager {
         getSensor(sensorType).unsubscribeAllSensorDataListeners();
     }
 
+    /**
+     *  Starts continuous sensing with the specified sensor.
+     *
+     *  @param sensorType The type of the sensor that will be started.
+     */
     public void startContinuousSensingWithSensor(SKSensorType sensorType) throws SKException {
 
         Log.i(TAG, "Start sensing with sensor: " + SKSensorUtilities.getSensorInString(sensorType) + ".");
@@ -255,6 +313,11 @@ public class SKSensorManager {
         getSensor(sensorType).startSensing();
     }
 
+    /**
+     *  Stops continuous sensing with the specified sensor.
+     *
+     *  @param sensorType The type of the sensor that will be stopped.
+     */
     public void stopContinuousSensingWithSensor(SKSensorType sensorType) throws SKException {
 
         Log.i(TAG, "Stop sensing with sensor: " + SKSensorUtilities.getSensorInString(sensorType) + ".");
@@ -269,6 +332,9 @@ public class SKSensorManager {
         sensor.stopSensing();
     }
 
+    /**
+     *  Starts continuous sensing with all registered sensors.
+     */
     public void startContinuousSensingWithAllRegisteredSensors() throws SKException {
 
         for (int i = 0; i < TOTAL_SENSORS; i++){
@@ -285,6 +351,9 @@ public class SKSensorManager {
         }
     }
 
+    /**
+     *  Stops continuous sensing with all registered sensors.
+     */
     public void stopContinuousSensingWithAllRegisteredSensors() throws SKException {
         for (int i = 0; i < TOTAL_SENSORS; i++) {
             if (mSensors.get(i) != null) {

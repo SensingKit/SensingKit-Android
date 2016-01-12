@@ -25,6 +25,9 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
+/**
+ *  An instance of SKAirPressureData encapsulates measurements related to the Air Pressure sensor.
+ */
 public class SKAirPressureData extends SKAbstractData {
 
     @SuppressWarnings("unused")
@@ -32,6 +35,13 @@ public class SKAirPressureData extends SKAbstractData {
 
     protected final float pressure;
 
+    /**
+     * Initialize the Air Pressure data instance
+     *
+     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     *
+     * @param pressure Air pressure
+     */
     public SKAirPressureData(long timestamp, float pressure) {
 
         super(SKSensorType.AIR_PRESSURE, timestamp);
@@ -39,11 +49,22 @@ public class SKAirPressureData extends SKAbstractData {
         this.pressure = pressure;
     }
 
+    /**
+     * Get the Air Pressure sensor data in csv format
+     *
+     * @return Air Pressure data in csv format: timestamp,air pressure
+     *
+     */
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f", this.timestamp, this.pressure);
     }
 
+    /**
+     * Get the Air Pressure measurement along
+     *
+     * @return Air Pressure measurement
+     */
     @SuppressWarnings("unused")
     public float getLight() {
         return this.pressure;
