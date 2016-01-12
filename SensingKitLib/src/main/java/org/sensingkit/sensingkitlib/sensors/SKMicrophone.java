@@ -32,17 +32,17 @@ import org.sensingkit.sensingkitlib.data.SKAbstractData;
 
 import java.io.IOException;
 
-public class SKAudioRecorder extends SKAbstractSensor {
+public class SKMicrophone extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKAudioRecorder";
+    private static final String TAG = "SKMicrophone";
 
     private static final String outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recording.aac";
 
     private final MediaRecorder recorder;
 
-    public SKAudioRecorder(final Context context) throws SKException {
-        super(context, SKSensorType.AUDIO_RECORDER);
+    public SKMicrophone(final Context context) throws SKException {
+        super(context, SKSensorType.MICROPHONE);
 
         recorder = new MediaRecorder();
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -67,7 +67,7 @@ public class SKAudioRecorder extends SKAbstractSensor {
             recorder.prepare();
         } catch (IOException e) {
             e.printStackTrace();
-            throw new SKException(TAG, "AudioRecorder sensor could not be prepared.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Microphone sensor could not be prepared.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
         recorder.start();

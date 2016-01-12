@@ -98,7 +98,7 @@ public enum SKSensorType {
     /**
      *  Microphone sensor can be used to record audio from the environment by converting sound into electrical signal.
      */
-    AUDIO_RECORDER,
+    MICROPHONE,
 
     /**
      *  Maximum level of the audio signal in a buffer.

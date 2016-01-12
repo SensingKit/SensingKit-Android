@@ -76,8 +76,8 @@ public final class SKSensorUtilities {
             case SCREEN_STATUS:
                 return "Screen Status";
 
-            case AUDIO_RECORDER:
-                return "Audio Recorder";
+            case MICROPHONE:
+                return "Microphone";
 
             case AUDIO_LEVEL:
                 return "Audio Level";

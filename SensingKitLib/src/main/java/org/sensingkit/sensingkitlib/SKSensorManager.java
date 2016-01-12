@@ -207,8 +207,8 @@ public class SKSensorManager {
                 sensor = new SKScreenStatus(mApplicationContext);
                 break;
 
-            case AUDIO_RECORDER:
-                sensor = new SKAudioRecorder(mApplicationContext);
+            case MICROPHONE:
+                sensor = new SKMicrophone(mApplicationContext);
                 break;
 
             case AUDIO_LEVEL:
