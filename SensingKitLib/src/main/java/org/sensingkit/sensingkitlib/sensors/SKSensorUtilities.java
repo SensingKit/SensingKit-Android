@@ -67,8 +67,8 @@ public final class SKSensorUtilities {
             case LOCATION:
                 return "Location";
 
-            case ACTIVITY:
-                return "Activity";
+            case MOTION_ACTIVITY:
+                return "Motion Activity";
 
             case BATTERY:
                 return "Battery";
@@ -76,8 +76,8 @@ public final class SKSensorUtilities {
             case SCREEN_STATUS:
                 return "Screen Status";
 
-            case AUDIO_RECORDER:
-                return "Audio Recorder";
+            case MICROPHONE:
+                return "Microphone";
 
             case AUDIO_LEVEL:
                 return "Audio Level";
@@ -90,6 +90,12 @@ public final class SKSensorUtilities {
 
             case AIR_PRESSURE:
                 return "Air Pressure";
+
+            case EDDYSTONE_PROXIMITY:
+                return "Eddystone Proximity";
+
+            case IBEACON:
+                return "iBeacon";
 
             default:
                 throw new SKException(TAG, "Unknown SensorModule", SKExceptionErrorCode.UNKNOWN_ERROR);

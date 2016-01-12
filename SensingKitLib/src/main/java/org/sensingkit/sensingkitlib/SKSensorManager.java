@@ -195,8 +195,8 @@ public class SKSensorManager {
                 sensor = new SKLocation(mApplicationContext);
                 break;
 
-            case ACTIVITY:
-                sensor = new SKActivity(mApplicationContext);
+            case MOTION_ACTIVITY:
+                sensor = new SKMotionActivity(mApplicationContext);
                 break;
 
             case BATTERY:
@@ -207,8 +207,8 @@ public class SKSensorManager {
                 sensor = new SKScreenStatus(mApplicationContext);
                 break;
 
-            case AUDIO_RECORDER:
-                sensor = new SKAudioRecorder(mApplicationContext);
+            case MICROPHONE:
+                sensor = new SKMicrophone(mApplicationContext);
                 break;
 
             case AUDIO_LEVEL:
@@ -225,6 +225,10 @@ public class SKSensorManager {
 
             case AIR_PRESSURE:
                 sensor = new SKAirPressure(mApplicationContext);
+                break;
+
+            case EDDYSTONE_PROXIMITY:
+                sensor = new SKEddystoneProximity(mApplicationContext);
                 break;
 
             // Don't forget the break; here

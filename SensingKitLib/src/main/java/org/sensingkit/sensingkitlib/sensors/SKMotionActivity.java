@@ -38,12 +38,12 @@ import com.google.android.gms.location.DetectedActivity;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
-import org.sensingkit.sensingkitlib.data.SKActivityData;
+import org.sensingkit.sensingkitlib.data.SKMotionActivityData;
 
-public class SKActivity extends SKAbstractGoogleServicesSensor {
+public class SKMotionActivity extends SKAbstractGoogleServicesSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKActivity";
+    private static final String TAG = "SKMotionActivity";
 
     private ActivityRecognitionApi mActivityRecognition;
     private PendingIntent mRecognitionPendingIntent;
@@ -53,8 +53,8 @@ public class SKActivity extends SKAbstractGoogleServicesSensor {
     private int mLastActivityTypeSensed = Integer.MAX_VALUE;
     private int mLastConfidenceSensed = Integer.MAX_VALUE;
 
-    public SKActivity(final Context context) throws SKException {
-        super(context, SKSensorType.ACTIVITY);
+    public SKMotionActivity(final Context context) throws SKException {
+        super(context, SKSensorType.MOTION_ACTIVITY);
 
         mClient = new GoogleApiClient.Builder(context)
                 .addApi(ActivityRecognition.API)
@@ -80,7 +80,7 @@ public class SKActivity extends SKAbstractGoogleServicesSensor {
                 int confidence = activity.getConfidence();
 
                 // Build the data object
-                SKAbstractData data = new SKActivityData(result.getTime(), activityType, confidence);
+                SKAbstractData data = new SKMotionActivityData(result.getTime(), activityType, confidence);
 
                 // Submit sensor data object
                 submitSensorData(data);
@@ -179,8 +179,8 @@ public class SKActivity extends SKAbstractGoogleServicesSensor {
 
         // Only post when specific values changed
 
-        int activityType = ((SKActivityData)data).getActivityType();
-        int confidence = ((SKActivityData)data).getConfidence();
+        int activityType = ((SKMotionActivityData)data).getActivityType();
+        int confidence = ((SKMotionActivityData)data).getConfidence();
 
         // Ignore Temperature and Voltage
         boolean shouldPost = (mLastActivityTypeSensed != activityType ||
