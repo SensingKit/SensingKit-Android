@@ -67,8 +67,8 @@ public final class SKSensorUtilities {
             case LOCATION:
                 return "Location";
 
-            case ACTIVITY:
-                return "Activity";
+            case MOTION_ACTIVITY:
+                return "Motion Activity";
 
             case BATTERY:
                 return "Battery";

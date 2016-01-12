@@ -83,7 +83,7 @@ public enum SKSensorType {
     /**
      *  Motion Activity sensor uses an embedded motion co-processor that senses the user's activity classified as Stationary, Walking, Running, Automotive or Cycling.
      */
-    ACTIVITY,
+    MOTION_ACTIVITY,
 
     /**
      *  Battery sensor listens to changes in the battery charge state (Charging, Full, Unplugged) as well as in the battery charge level (with 1% precision).

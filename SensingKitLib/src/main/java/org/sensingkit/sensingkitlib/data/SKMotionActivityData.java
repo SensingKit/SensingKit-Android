@@ -28,13 +28,13 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import java.util.Locale;
 
 /**
- *  An instance of SKActivityData encapsulates measurements related to the Activity sensor.
+ *  An instance of SKMotionActivityData encapsulates measurements related to the Activity sensor.
  *  Activity is classified as Stationary, Walking, Running, Automotive, Cycling, Tilt, or Unknown.
  */
-public class SKActivityData extends SKAbstractData {
+public class SKMotionActivityData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKActivityData";
+    private static final String TAG = "SKMotionActivityData";
 
     protected final int activityType;
     protected final int confidence;
@@ -48,9 +48,9 @@ public class SKActivityData extends SKAbstractData {
      *
      * @param confidence Confidence percentage for the most probable activity
      */
-    public SKActivityData(long timestamp, int activityType, int confidence) {
+    public SKMotionActivityData(long timestamp, int activityType, int confidence) {
 
-        super(SKSensorType.ACTIVITY, timestamp);
+        super(SKSensorType.MOTION_ACTIVITY, timestamp);
 
         this.activityType = activityType;
         this.confidence = confidence;

@@ -18,7 +18,7 @@ The following sensor modules are currently supported in SensingKit-Android, (lis
 - Step Counter
 - Light
 - Location
-- Activity
+- Motion Activity
 - Battery
 - Screen Status
 - Microphone

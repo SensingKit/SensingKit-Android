@@ -195,8 +195,8 @@ public class SKSensorManager {
                 sensor = new SKLocation(mApplicationContext);
                 break;
 
-            case ACTIVITY:
-                sensor = new SKActivity(mApplicationContext);
+            case MOTION_ACTIVITY:
+                sensor = new SKMotionActivity(mApplicationContext);
                 break;
 
             case BATTERY:
