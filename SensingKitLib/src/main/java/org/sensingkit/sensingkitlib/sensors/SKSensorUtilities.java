@@ -94,6 +94,9 @@ public final class SKSensorUtilities {
             case EDDYSTONE_PROXIMITY:
                 return "Eddystone Proximity";
 
+            case IBEACON:
+                return "iBeacon";
+
             default:
                 throw new SKException(TAG, "Unknown SensorModule", SKExceptionErrorCode.UNKNOWN_ERROR);
         }

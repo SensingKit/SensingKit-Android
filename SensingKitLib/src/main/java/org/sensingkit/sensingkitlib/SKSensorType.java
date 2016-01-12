@@ -41,5 +41,6 @@ public enum SKSensorType {
     BLUETOOTH,
     HUMIDITY,
     AIR_PRESSURE,
-    EDDYSTONE_PROXIMITY
+    EDDYSTONE_PROXIMITY,
+    IBEACON
 }
