@@ -27,7 +27,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Build;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -90,7 +89,7 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
 
     protected abstract SKAbstractData buildData(SensorEvent event);
 
-    @SuppressLint("InlinedApi")  // There is a check in STEP_DETECTOR and STEP_COUNTER
+    @SuppressLint("InlinedApi")  // There is a check in SKSensorManager
     private static int getSensorType(SKSensorType sensorType) throws SKException{
 
         switch (sensorType) {
@@ -117,24 +116,10 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
                 return Sensor.TYPE_AMBIENT_TEMPERATURE;
 
             case STEP_DETECTOR:
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    return Sensor.TYPE_STEP_DETECTOR;
-                }
-                else
-                {
-                    throw new SKException(TAG, "STEP_DETECTOR requires Android KitKat or greater.", SKExceptionErrorCode.UNKNOWN_ERROR);
-                }
+                return Sensor.TYPE_STEP_DETECTOR;
 
             case STEP_COUNTER:
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    return Sensor.TYPE_STEP_COUNTER;
-                }
-                else
-                {
-                    throw new SKException(TAG, "STEP_COUNTER requires Android KitKat or greater.", SKExceptionErrorCode.UNKNOWN_ERROR);
-                }
+                return Sensor.TYPE_STEP_COUNTER;
 
             case LIGHT:
                 return Sensor.TYPE_LIGHT;

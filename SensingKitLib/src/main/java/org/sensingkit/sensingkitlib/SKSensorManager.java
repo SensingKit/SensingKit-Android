@@ -22,6 +22,7 @@
 package org.sensingkit.sensingkitlib;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -180,10 +181,20 @@ public class SKSensorManager {
                 break;
 
             case STEP_DETECTOR:
+
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+                    throw new SKException(TAG, "STEP_DETECTOR requires Android KitKat or greater.", SKExceptionErrorCode.UNKNOWN_ERROR);
+                }
+
                 sensor = new SKStepDetector(mApplicationContext);
                 break;
 
             case STEP_COUNTER:
+
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+                    throw new SKException(TAG, "STEP_COUNTER requires Android KitKat or greater.", SKExceptionErrorCode.UNKNOWN_ERROR);
+                }
+
                 sensor = new SKStepCounter(mApplicationContext);
                 break;
 
@@ -228,6 +239,11 @@ public class SKSensorManager {
                 break;
 
             case EDDYSTONE_PROXIMITY:
+
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    throw new SKException(TAG, "EDDYSTONE_PROXIMITY requires Android Lollipop or greater.", SKExceptionErrorCode.UNKNOWN_ERROR);
+                }
+
                 sensor = new SKEddystoneProximity(mApplicationContext);
                 break;
 
