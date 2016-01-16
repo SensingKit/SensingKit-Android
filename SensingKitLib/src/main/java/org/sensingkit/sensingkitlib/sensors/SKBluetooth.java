@@ -53,7 +53,7 @@ public class SKBluetooth extends SKAbstractSensor {
         mBluetoothDevices = new ArrayList<>();
 
         if (mBluetoothAdapter == null) {
-            throw new SKException(TAG, "Bluetooth sensor module is not supported from the device.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Bluetooth sensor is not supported from the device.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
     }
 
