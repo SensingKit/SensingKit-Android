@@ -145,13 +145,8 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
             case AIR_PRESSURE:
                 return Sensor.TYPE_PRESSURE;
 
-            case LOCATION:
-            case MOTION_ACTIVITY:
-            case BATTERY:
-                throw new SKException(TAG, "Not a native SensorModule.", SKExceptionErrorCode.UNKNOWN_ERROR);
-
             default:
-                throw new SKException(TAG, "Unknown SensorModule", SKExceptionErrorCode.UNKNOWN_ERROR);
+                throw new SKException(TAG, "Not a native SensorModule.", SKExceptionErrorCode.UNKNOWN_ERROR);
 
         }
     }
