@@ -1,6 +1,6 @@
 # SensingKit-Android Library
 
-An Android library that provides Continuous Sensing functionality to your applications. For more information, please refer to the [project website](http://www.sensingkit.org).
+An Android library that provides Continuous Sensing functionality to your applications. For more information, please refer to the [project website](https://www.sensingkit.org).
 
 
 ## Supported Sensors
@@ -122,7 +122,7 @@ mSensingKitLib.stopContinuousSensingWithSensor(SKSensorType.LIGHT);
 ```
 
 
-For a complete description of our API, please refer to the [project website](http://www.sensingkit.org).
+For a complete description of our API, please refer to the [project website](https://www.sensingkit.org).
 
 ## License
 
@@ -131,7 +131,7 @@ Copyright (c) 2014. Queen Mary University of London
 Kleomenis Katevas, k.katevas@qmul.ac.uk.
 
 This file is part of SensingKit-Android library.
-For more information, please visit http://www.sensingkit.org.
+For more information, please visit https://www.sensingkit.org.
 
 SensingKit-Android is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by
