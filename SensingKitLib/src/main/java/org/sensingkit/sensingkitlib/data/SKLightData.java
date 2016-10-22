@@ -31,7 +31,7 @@ import java.util.Locale;
 public class SKLightData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKLightData";
+    private static final String TAG = SKLightData.class.getName();
 
     protected final float light;
 

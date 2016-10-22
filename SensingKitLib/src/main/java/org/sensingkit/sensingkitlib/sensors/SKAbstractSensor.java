@@ -34,7 +34,7 @@ import java.util.ArrayList;
 public abstract class SKAbstractSensor implements SKSensorInterface {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKAbstractSensor";
+    private static final String TAG = SKAbstractSensor.class.getName();
 
     protected final Context mApplicationContext;
     protected final SKSensorType mSensorType;

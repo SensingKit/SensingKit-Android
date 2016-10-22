@@ -31,7 +31,7 @@ import java.util.Locale;
 public class SKHumidityData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKHumidityData";
+    private static final String TAG = SKHumidityData.class.getName();
 
     protected final float humidity;
 

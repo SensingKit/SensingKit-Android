@@ -41,7 +41,7 @@ import java.util.ArrayList;
 public class SKBluetooth extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKBluetooth";
+    private static final String TAG = SKBluetooth.class.getName();
 
     private final BluetoothAdapter mBluetoothAdapter;
     private ArrayList<SKBluetoothDeviceData> mBluetoothDevices;

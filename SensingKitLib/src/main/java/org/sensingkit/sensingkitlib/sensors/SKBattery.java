@@ -34,7 +34,7 @@ import org.sensingkit.sensingkitlib.data.SKBatteryData;
 public class SKBattery extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKBattery";
+    private static final String TAG = SKBattery.class.getName();
 
     // Last data sensed
     private int mLastLevelSensed = Integer.MAX_VALUE;

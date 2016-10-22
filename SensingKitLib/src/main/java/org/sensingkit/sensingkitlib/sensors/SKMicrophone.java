@@ -35,7 +35,7 @@ import java.io.IOException;
 public class SKMicrophone extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKMicrophone";
+    private static final String TAG = SKMicrophone.class.getName();
 
     private static final String outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recording.aac";
 

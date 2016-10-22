@@ -32,7 +32,7 @@ import org.sensingkit.sensingkitlib.sensors.*;
 public class SKSensorManager {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKSensorManager";
+    private static final String TAG = SKSensorManager.class.getName();
 
     private static final int TOTAL_SENSORS = 19;
 

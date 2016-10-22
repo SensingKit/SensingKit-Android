@@ -36,7 +36,7 @@ import org.sensingkit.sensingkitlib.data.SKAbstractData;
 public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKAbstractNativeSensor";
+    private static final String TAG = SKAbstractNativeSensor.class.getName();
 
     private final SensorManager mSensorManager;
     private final Sensor mSensor;

@@ -32,7 +32,7 @@ import org.sensingkit.sensingkitlib.data.SKAirPressureData;
 public class SKAirPressure extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKAirPressure";
+    private static final String TAG = SKAirPressure.class.getName();
 
     public SKAirPressure(final Context context) throws SKException {
         super(context, SKSensorType.AIR_PRESSURE);

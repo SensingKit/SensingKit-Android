@@ -31,7 +31,7 @@ import java.util.Locale;
 public class SKAirPressureData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKAirPressureData";
+    private static final String TAG = SKAirPressureData.class.getName();
 
     protected final float pressure;
 

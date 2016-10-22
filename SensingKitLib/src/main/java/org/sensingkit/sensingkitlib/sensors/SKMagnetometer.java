@@ -32,7 +32,7 @@ import org.sensingkit.sensingkitlib.data.SKMagnetometerData;
 public class SKMagnetometer extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKMagnetometer";
+    private static final String TAG = SKMagnetometer.class.getName();
 
     public SKMagnetometer(final Context context) throws SKException {
         super(context, SKSensorType.MAGNETOMETER);

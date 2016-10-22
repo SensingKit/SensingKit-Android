@@ -29,7 +29,7 @@ import java.util.Locale;
 public class SKiBeaconData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKiBeaconData";
+    private static final String TAG = SKiBeaconData.class.getName();
 
     protected final String namespaceId;
     protected final String instanceId;

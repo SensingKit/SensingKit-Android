@@ -30,7 +30,7 @@ import org.sensingkit.sensingkitlib.data.SKSensorData;
 public class SensingKitLib implements SensingKitLibInterface {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SensingKitLib";
+    private static final String TAG = SensingKitLib.class.getName();
 
     private static SensingKitLib sSensingKitLib;
 

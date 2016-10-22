@@ -31,7 +31,7 @@ import java.util.Locale;
 public class SKScreenStatusData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKScreenStatusData";
+    private static final String TAG = SKScreenStatusData.class.getName();
 
     public static final int SCREEN_OFF = 0;
     public static final int SCREEN_ON = 1;

@@ -32,7 +32,7 @@ import org.sensingkit.sensingkitlib.data.SKRotationData;
 public class SKRotation extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKRotation";
+    private static final String TAG = SKRotation.class.getName();
 
     public SKRotation(final Context context) throws SKException {
         super(context, SKSensorType.ROTATION);

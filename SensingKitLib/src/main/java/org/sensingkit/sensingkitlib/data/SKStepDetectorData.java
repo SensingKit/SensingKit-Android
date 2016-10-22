@@ -31,7 +31,7 @@ import java.util.Locale;
 public class SKStepDetectorData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKStepDetectorData";
+    private static final String TAG = SKStepDetectorData.class.getName();
 
     /**
      * Initialize the instance

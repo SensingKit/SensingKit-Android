@@ -32,7 +32,7 @@ import org.sensingkit.sensingkitlib.data.SKHumidityData;
 public class SKHumidity extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKHumidity";
+    private static final String TAG = SKHumidity.class.getName();
 
     public SKHumidity(final Context context) throws SKException {
         super(context, SKSensorType.HUMIDITY);

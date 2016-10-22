@@ -30,7 +30,7 @@ import com.google.android.gms.location.ActivityRecognitionResult;
 public class SKActivityRecognitionIntentService extends IntentService {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKActivityRecognitionIntentService";
+    private static final String TAG = SKActivityRecognitionIntentService.class.getName();
 
     public static final String RECOGNITION_RESULT = "result";
     public static final String BROADCAST_UPDATE = "new_update";

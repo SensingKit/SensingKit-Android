@@ -32,7 +32,7 @@ import org.sensingkit.sensingkitlib.data.SKGyroscopeData;
 public class SKGyroscope extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKGyroscope";
+    private static final String TAG = SKGyroscope.class.getName();
 
     public SKGyroscope(final Context context) throws SKException {
         super(context, SKSensorType.GYROSCOPE);

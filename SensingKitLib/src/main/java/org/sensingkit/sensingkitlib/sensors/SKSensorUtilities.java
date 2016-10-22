@@ -28,7 +28,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 public final class SKSensorUtilities {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKSensorUtilities";
+    private static final String TAG = SKSensorUtilities.class.getName();
 
     public static String getSensorInString(SKSensorType sensorType) throws SKException {
 

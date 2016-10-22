@@ -37,7 +37,7 @@ import org.sensingkit.sensingkitlib.data.SKLocationData;
 public class SKLocation extends SKAbstractGoogleServicesSensor implements LocationListener {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKLocation";
+    private static final String TAG = SKLocation.class.getName();
 
     public SKLocation(final Context context) throws SKException {
         super(context, SKSensorType.LOCATION);

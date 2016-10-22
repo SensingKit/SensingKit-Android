@@ -31,7 +31,7 @@ import java.util.Locale;
 public class SKGravityData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "SKGravityData";
+    private static final String TAG = SKGravityData.class.getName();
 
     protected final float x;
     protected final float y;
