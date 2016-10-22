@@ -12,6 +12,36 @@ buildscript {
     }
 }
 
+plugins {
+    id "com.jfrog.bintray" version "1.7"
+}
+
+bintray {
+    user = System.getenv('bintray.user')
+    key = System.getenv('bintray.api.key')
+    pkg {
+        repo = 'SensingKit-Android'
+        name = 'SensingKit-Android'
+        userOrg = 'SensingKit'
+        licenses = ['LGPL-3.0']
+        vcsUrl = 'https://github.com/SensingKit/SensingKit-Android.git'
+        version {
+            name = project.version
+            released  = new Date()
+            gpg {
+                sign = true
+                passphrase = System.getenv('bintray.gpg.password')
+            }
+            mavenCentralSync {
+                sync = true
+                user = System.getenv('maven.user')
+                password = System.getenv('maven.password')
+                close = '1'
+            }
+        }
+    }
+}
+
 allprojects {
     repositories {
         jcenter()
