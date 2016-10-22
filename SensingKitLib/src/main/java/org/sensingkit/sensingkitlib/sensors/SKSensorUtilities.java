@@ -21,8 +21,6 @@
 
 package org.sensingkit.sensingkitlib.sensors;
 
-import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 public final class SKSensorUtilities {
@@ -30,144 +28,63 @@ public final class SKSensorUtilities {
     @SuppressWarnings("unused")
     private static final String TAG = SKSensorUtilities.class.getName();
 
+    private static final String SENSOR_STRINGS[] = {
+            "Accelerometer",
+            "Gravity",
+            "Linear Acceleration",
+            "Gyroscope",
+            "Rotation",
+            "Magnetometer",
+            "Ambient Temperature",
+            "Step Detector",
+            "Step Counter",
+            "Light",
+            "Location",
+            "Motion Activity",
+            "Battery",
+            "Screen Status",
+            "Microphone",
+            "Audio Level",
+            "Bluetooth",
+            "Beacon Proximity",
+            "Humidity",
+            "Air Pressure",
+    };
+
+    private static final String NONSPACED_SENSOR_STRINGS[] = {
+            "Accelerometer",
+            "Gravity",
+            "LinearAcceleration",
+            "Gyroscope",
+            "Rotation",
+            "Magnetometer",
+            "AmbientTemperature",
+            "StepDetector",
+            "StepCounter",
+            "Light",
+            "Location",
+            "MotionActivity",
+            "Battery",
+            "ScreenStatus",
+            "Microphone",
+            "AudioLevel",
+            "Bluetooth",
+            "BeaconProximity",
+            "Humidity",
+            "AirPressure",
+    };
+
+
     @SuppressWarnings("unused")
-    public static String getSensorInString(SKSensorType sensorType) throws SKException {
+    public static String getSensorInString(SKSensorType sensorType) {
 
-        switch (sensorType) {
-
-            case ACCELEROMETER:
-                return "Accelerometer";
-
-            case GRAVITY:
-                return "Gravity";
-
-            case LINEAR_ACCELERATION:
-                return "Linear Acceleration";
-
-            case GYROSCOPE:
-                return "Gyroscope";
-
-            case ROTATION:
-                return "Rotation";
-
-            case MAGNETOMETER:
-                return "Magnetometer";
-
-            case AMBIENT_TEMPERATURE:
-                return "Ambient Temperature";
-
-            case STEP_DETECTOR:
-                return "Step Detector";
-
-            case STEP_COUNTER:
-                return "Step Counter";
-
-            case LIGHT:
-                return "Light";
-
-            case LOCATION:
-                return "Location";
-
-            case MOTION_ACTIVITY:
-                return "Motion Activity";
-
-            case BATTERY:
-                return "Battery";
-
-            case SCREEN_STATUS:
-                return "Screen Status";
-
-            case MICROPHONE:
-                return "Microphone";
-
-            case AUDIO_LEVEL:
-                return "Audio Level";
-
-            case BLUETOOTH:
-                return "Bluetooth";
-
-            case BEACON_PROXIMITY:
-                return "Beacon Proximity";
-
-            case HUMIDITY:
-                return "Humidity";
-
-            case AIR_PRESSURE:
-                return "Air Pressure";
-
-            default:
-                throw new SKException(TAG, "Unknown SensorModule", SKExceptionErrorCode.UNKNOWN_ERROR);
-        }
+        return SENSOR_STRINGS[sensorType.ordinal()];
     }
 
     @SuppressWarnings("unused")
-    public static String getSensorInNonspacedString(SKSensorType sensorType) throws SKException {
+    public static String getSensorInNonspacedString(SKSensorType sensorType) {
 
-        switch (sensorType) {
-
-            case ACCELEROMETER:
-                return "Accelerometer";
-
-            case GRAVITY:
-                return "Gravity";
-
-            case LINEAR_ACCELERATION:
-                return "LinearAcceleration";
-
-            case GYROSCOPE:
-                return "Gyroscope";
-
-            case ROTATION:
-                return "Rotation";
-
-            case MAGNETOMETER:
-                return "Magnetometer";
-
-            case AMBIENT_TEMPERATURE:
-                return "AmbientTemperature";
-
-            case STEP_DETECTOR:
-                return "StepDetector";
-
-            case STEP_COUNTER:
-                return "StepCounter";
-
-            case LIGHT:
-                return "Light";
-
-            case LOCATION:
-                return "Location";
-
-            case MOTION_ACTIVITY:
-                return "MotionActivity";
-
-            case BATTERY:
-                return "Battery";
-
-            case SCREEN_STATUS:
-                return "ScreenStatus";
-
-            case MICROPHONE:
-                return "Microphone";
-
-            case AUDIO_LEVEL:
-                return "AudioLevel";
-
-            case BLUETOOTH:
-                return "Bluetooth";
-
-            case BEACON_PROXIMITY:
-                return "BeaconProximity";
-
-            case HUMIDITY:
-                return "Humidity";
-
-            case AIR_PRESSURE:
-                return "AirPressure";
-
-            default:
-                throw new SKException(TAG, "Unknown SensorModule", SKExceptionErrorCode.UNKNOWN_ERROR);
-        }
+        return NONSPACED_SENSOR_STRINGS[sensorType.ordinal()];
     }
 
 }
