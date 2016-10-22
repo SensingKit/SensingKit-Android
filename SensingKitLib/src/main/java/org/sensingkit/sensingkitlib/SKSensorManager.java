@@ -238,15 +238,6 @@ public class SKSensorManager {
                 sensor = new SKAirPressure(mApplicationContext);
                 break;
 
-            case EDDYSTONE_PROXIMITY:
-
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    throw new SKException(TAG, "EDDYSTONE_PROXIMITY requires Android Lollipop or greater.", SKExceptionErrorCode.UNKNOWN_ERROR);
-                }
-
-                sensor = new SKEddystoneProximity(mApplicationContext);
-                break;
-
             // Don't forget the break; here
 
             default:
