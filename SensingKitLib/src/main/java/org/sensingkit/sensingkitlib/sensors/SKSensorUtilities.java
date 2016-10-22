@@ -30,6 +30,7 @@ public final class SKSensorUtilities {
     @SuppressWarnings("unused")
     private static final String TAG = SKSensorUtilities.class.getName();
 
+    @SuppressWarnings("unused")
     public static String getSensorInString(SKSensorType sensorType) throws SKException {
 
         switch (sensorType) {
@@ -85,22 +86,88 @@ public final class SKSensorUtilities {
             case BLUETOOTH:
                 return "Bluetooth";
 
+            case BEACON_PROXIMITY:
+                return "Beacon Proximity";
+
             case HUMIDITY:
                 return "Humidity";
 
             case AIR_PRESSURE:
                 return "Air Pressure";
 
-            case EDDYSTONE_PROXIMITY:
-                return "Eddystone Proximity";
+            default:
+                throw new SKException(TAG, "Unknown SensorModule", SKExceptionErrorCode.UNKNOWN_ERROR);
+        }
+    }
 
-            case IBEACON:
-                return "iBeacon";
+    @SuppressWarnings("unused")
+    public static String getSensorInNonspacedString(SKSensorType sensorType) throws SKException {
+
+        switch (sensorType) {
+
+            case ACCELEROMETER:
+                return "Accelerometer";
+
+            case GRAVITY:
+                return "Gravity";
+
+            case LINEAR_ACCELERATION:
+                return "LinearAcceleration";
+
+            case GYROSCOPE:
+                return "Gyroscope";
+
+            case ROTATION:
+                return "Rotation";
+
+            case MAGNETOMETER:
+                return "Magnetometer";
+
+            case AMBIENT_TEMPERATURE:
+                return "AmbientTemperature";
+
+            case STEP_DETECTOR:
+                return "StepDetector";
+
+            case STEP_COUNTER:
+                return "StepCounter";
+
+            case LIGHT:
+                return "Light";
+
+            case LOCATION:
+                return "Location";
+
+            case MOTION_ACTIVITY:
+                return "MotionActivity";
+
+            case BATTERY:
+                return "Battery";
+
+            case SCREEN_STATUS:
+                return "ScreenStatus";
+
+            case MICROPHONE:
+                return "Microphone";
+
+            case AUDIO_LEVEL:
+                return "AudioLevel";
+
+            case BLUETOOTH:
+                return "Bluetooth";
+
+            case BEACON_PROXIMITY:
+                return "BeaconProximity";
+
+            case HUMIDITY:
+                return "Humidity";
+
+            case AIR_PRESSURE:
+                return "AirPressure";
 
             default:
                 throw new SKException(TAG, "Unknown SensorModule", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
-
     }
 
 }
