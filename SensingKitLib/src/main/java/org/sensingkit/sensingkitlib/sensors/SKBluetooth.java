@@ -33,7 +33,7 @@ import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKBluetoothCollectionData;
-import org.sensingkit.sensingkitlib.data.SKBluetoothDeviceData;
+import org.sensingkit.sensingkitlib.data.SKBluetoothData;
 
 import java.util.ArrayList;
 
@@ -44,7 +44,7 @@ public class SKBluetooth extends SKAbstractSensor {
     private static final String TAG = SKBluetooth.class.getName();
 
     private final BluetoothAdapter mBluetoothAdapter;
-    private ArrayList<SKBluetoothDeviceData> mBluetoothDevices;
+    private ArrayList<SKBluetoothData> mBluetoothDevices;
 
     public SKBluetooth(Context context) throws SKException {
         super(context, SKSensorType.BLUETOOTH);
@@ -76,7 +76,7 @@ public class SKBluetooth extends SKAbstractSensor {
                 int rssi = (int) intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
 
                 // Create SKBluetoothDevice and add to mBluetoothDevices array
-                SKBluetoothDeviceData deviceData = new SKBluetoothDeviceData(System.currentTimeMillis(), name, address, rssi);
+                SKBluetoothData deviceData = new SKBluetoothData(System.currentTimeMillis(), name, address, rssi);
                 mBluetoothDevices.add(deviceData);
 
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {  // Discovery Finished

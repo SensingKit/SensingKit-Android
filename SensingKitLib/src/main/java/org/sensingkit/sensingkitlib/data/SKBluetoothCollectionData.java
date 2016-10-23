@@ -34,16 +34,16 @@ public class SKBluetoothCollectionData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKBluetoothCollectionData.class.getName();
 
-    private final ArrayList<SKBluetoothDeviceData> mDevices;
+    private final ArrayList<SKBluetoothData> mDevices;
 
     /**
      * Initialize the instance
      *
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      *
-     * @param devices One BluetoothDeviceData object for each Bluetooth device
+     * @param devices One BluetoothData object for each Bluetooth device
      */
-    public SKBluetoothCollectionData(long timestamp, ArrayList<SKBluetoothDeviceData> devices) {
+    public SKBluetoothCollectionData(long timestamp, ArrayList<SKBluetoothData> devices) {
 
         super(SKSensorType.BLUETOOTH, timestamp);
 
@@ -63,7 +63,7 @@ public class SKBluetoothCollectionData extends SKAbstractData {
         StringBuilder stringBuilder = new StringBuilder(capacity);
 
         // Add deviceData
-        for (SKBluetoothDeviceData deviceData : mDevices) {
+        for (SKBluetoothData deviceData : mDevices) {
 
             stringBuilder.append(String.format(Locale.US, "%d,%s\n", this.timestamp, deviceData.getDataInCSV()));
         }
@@ -78,10 +78,10 @@ public class SKBluetoothCollectionData extends SKAbstractData {
     /**
      * Get Bluetooth device data
      *
-     * @return an ArrayList containing an SKBluetoothDeviceData object for each Bluetooth Device
+     * @return an ArrayList containing an SKBluetoothDeviceData object for each Bluetooth device
      */
     @SuppressWarnings("unused")
-    public ArrayList<SKBluetoothDeviceData> getDevices() {
+    public ArrayList<SKBluetoothData> getDevices() {
         return this.mDevices;
     }
 }

@@ -28,10 +28,10 @@ import java.util.Locale;
 /**
  *  An instance of SKBluetoothData encapsulates measurements related to one Bluetooth device.
  */
-public class SKBluetoothDeviceData extends SKAbstractData {
+public class SKBluetoothData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKBluetoothDeviceData.class.getName();
+    private static final String TAG = SKBluetoothData.class.getName();
 
     protected final String name;
     protected final String address;
@@ -46,7 +46,7 @@ public class SKBluetoothDeviceData extends SKAbstractData {
      * @param address Device Address
      * @param rssi Device RSSI
      */
-    public SKBluetoothDeviceData(long timestamp, String name, String address, int rssi) {
+    public SKBluetoothData(long timestamp, String name, String address, int rssi) {
 
         super(SKSensorType.BLUETOOTH, timestamp);
 
