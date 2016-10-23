@@ -80,9 +80,19 @@ public class SKBatteryData extends SKAbstractData {
     }
 
     /**
+     * Get the csv header of the Battery sensor data
+     *
+     * @return String with a CSV formatted header that describes the data of the Battery sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return "timeIntervalSince1970,charge,temperature,voltage,plugged,status,health";
+    }
+
+    /**
      * Get the battery properties in csv format
      *
-     * @return String containing the battery properties in csv format:  timestamp,charge,temperature,
+     * @return String containing the battery properties in csv format: timeIntervalSince1970,charge,temperature,
      * voltage,
      * plugged string ("usb", "ac", "wireless" or "unknown"),
      * status string ("charging", "discharging", "full", "not charging", "unknown" or "unsupported"),

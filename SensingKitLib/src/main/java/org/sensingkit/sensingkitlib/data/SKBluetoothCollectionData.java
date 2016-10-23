@@ -51,6 +51,16 @@ public class SKBluetoothCollectionData extends SKAbstractData {
     }
 
     /**
+     * Get the csv header of the Bluetooth sensor data
+     *
+     * @return String with a CSV formatted header that describes the data of the Bluetooth sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return SKBluetoothData.csvHeader();
+    }
+
+    /**
      * Get the data for all Bluetooth devices in CSV format
      *
      * @return String formatted as follows:  timestamp,device1 data, device2 data,,,
@@ -65,7 +75,7 @@ public class SKBluetoothCollectionData extends SKAbstractData {
         // Add deviceData
         for (SKBluetoothData deviceData : mDevices) {
 
-            stringBuilder.append(String.format(Locale.US, "%d,%s\n", this.timestamp, deviceData.getDataInCSV()));
+            stringBuilder.append(String.format(Locale.US, "%s\n", deviceData.getDataInCSV()));
         }
 
         // Delete last \n

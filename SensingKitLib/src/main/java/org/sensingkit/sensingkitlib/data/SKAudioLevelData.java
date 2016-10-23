@@ -50,9 +50,19 @@ public class SKAudioLevelData extends SKAbstractData {
     }
 
     /**
+     * Get the csv header of the Audio Level sensor data
+     *
+     * @return String with a CSV formatted header that describes the data of the Audio Level sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return "timeIntervalSince1970,level";
+    }
+
+    /**
      * Get the audio level measurement in csv format
      *
-     * @return String containing the timestamp and audio level measurements in csv format:  timestamp,level
+     * @return String containing the timestamp and audio level measurements in csv format: timeIntervalSince1970,level
      */
     @Override
     public String getDataInCSV() {

@@ -50,9 +50,19 @@ public class SKAirPressureData extends SKAbstractData {
     }
 
     /**
+     * Get the csv header of the Air Pressure sensor data
+     *
+     * @return String with a CSV formatted header that describes the data of the Air Pressure sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return "timeIntervalSince1970,pressure";
+    }
+
+    /**
      * Get the Air Pressure sensor data in csv format
      *
-     * @return Air Pressure data in csv format: timestamp,air pressure
+     * @return Air Pressure data in csv format: timeIntervalSince1970,pressure
      *
      */
     @Override

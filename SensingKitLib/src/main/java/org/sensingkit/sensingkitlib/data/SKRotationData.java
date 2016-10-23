@@ -85,9 +85,19 @@ public class SKRotationData extends SKAbstractData {
     }
 
     /**
+     * Get the csv header of the Rotation sensor data
+     *
+     * @return String with a CSV formatted header that describes the data of the Rotation sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return "timeIntervalSince1970,x,y,z,cos,headingAccuracy";
+    }
+
+    /**
      * Get Rotation sensor data in CSV format
      *
-     * @return String in CSV format: timestamp, x, y, z, cos, headingAccuracy
+     * @return String in CSV format: timeIntervalSince1970, x, y, z, cos, headingAccuracy
      */
     @Override
     public String getDataInCSV() {

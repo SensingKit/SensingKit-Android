@@ -40,6 +40,16 @@ public class SKBeaconProximityData extends SKAbstractData {
         this.mBeacon = beacon;
     }
 
+    /**
+     * Get the csv header of the Beacon Proximity sensor data
+     *
+     * @return String with a CSV formatted header that describes the data of the Beacon Proximity sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return "timeIntervalSince1970,beaconType,manufacturer,id1,id2,id3,rssi,txPower,distance";
+    }
+
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%d,%d,%s,%d,%d,%d,%d,%f",

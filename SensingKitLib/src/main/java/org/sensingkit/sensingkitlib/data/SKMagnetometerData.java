@@ -61,9 +61,19 @@ public class SKMagnetometerData extends SKAbstractData {
     }
 
     /**
+     * Get the csv header of the Magnetometer sensor data
+     *
+     * @return String with a CSV formatted header that describes the data of the Magnetometer sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return "timeIntervalSince1970,x,y,z";
+    }
+
+    /**
      * Get Magnetometer sensor data in CSV format
      *
-     * @return String in CSV format: timestamp, x force, y force, z force
+     * @return String in CSV format: timeIntervalSince1970, x force, y force, z force
      */
     @Override
     public String getDataInCSV() {

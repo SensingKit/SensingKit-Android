@@ -50,9 +50,19 @@ public class SKAmbientTemperatureData extends SKAbstractData {
     }
 
     /**
+     * Get the csv header of the Ambient Temperature sensor data
+     *
+     * @return String with a CSV formatted header that describes the data of the Ambient Temperature sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return "timeIntervalSince1970,temperature";
+    }
+
+    /**
      * Get the Ambient Temperature sensor data in csv format
      *
-     * @return Ambient Temperature data in csv format: timestamp,ambient temperature
+     * @return Ambient Temperature data in csv format: timeIntervalSince1970,temperature
      *
      */
     @Override

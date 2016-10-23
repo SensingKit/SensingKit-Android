@@ -53,13 +53,23 @@ public class SKScreenStatusData extends SKAbstractData {
     }
 
     /**
+     * Get the csv header of the Screen Status sensor data
+     *
+     * @return String with a CSV formatted header that describes the data of the Screen Status sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return "timeIntervalSince1970,status,statusString";
+    }
+
+    /**
      * Get Screen Status sensor data in CSV format
      *
-     * @return String in CSV format: timestamp, screen status string
+     * @return String in CSV format: timestamp, status, statusString
      */
     @Override
     public String getDataInCSV() {
-        return String.format(Locale.US, "%d,%s", this.timestamp, this.getStatusString());
+        return String.format(Locale.US, "%d,%d,%s", this.timestamp, this.getStatus(), this.getStatusString());
     }
 
     /**

@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2015. Queen Mary University of London
+ * Copyright (c) 2016. Queen Mary University of London
  * Kleomenis Katevas, k.katevas@qmul.ac.uk
  *
  * This file is part of SensingKit-Android library.
- * For more information, please visit http://www.sensingkit.org
+ * For more information, please visit https://www.sensingkit.org
  *
  * SensingKit-Android is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -26,52 +26,57 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import java.util.Locale;
 
 /**
- *  An instance of SKHumidityData encapsulates measurements related to the Humidity sensor.
+ *  An instance of SKMicrophoneData encapsulates measurements related to the Microphone sensor.
  */
-public class SKHumidityData extends SKAbstractData {
+public class SKMicrophoneData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKHumidityData.class.getName();
+    private static final String TAG = SKMicrophoneData.class.getName();
 
-    protected final float humidity;
+    protected String state;
 
     /**
      * Initialize the instance
      *
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      *
-     * @param humidity Humidity measurement
+     * @param state Microphone sensor status (Start, Stop)
+     *
      */
-    public SKHumidityData(long timestamp, float humidity) {
+    public SKMicrophoneData(long timestamp, String state) {
 
-        super(SKSensorType.HUMIDITY, timestamp);
+        super(SKSensorType.STEP_DETECTOR, timestamp);
 
-        this.humidity = humidity;
+        this.state = state;
     }
 
     /**
-     * Get the csv header of the Humidity sensor data
+     * Get the csv header of the Step Counter sensor data
      *
-     * @return String with a CSV formatted header that describes the data of the Humidity sensor.
+     * @return String with a CSV formatted header that describes the data of the Step Counter sensor.
      */
     @SuppressWarnings("unused")
     public static String csvHeader() {
-        return "timeIntervalSince1970,humidity";
+        return "timeIntervalSince1970,state";
     }
 
     /**
-     * Get humidity sensor data in CSV format
+     * Get Step Detector sensor data in CSV format
      *
-     * @return String in CSV format: timeIntervalSince1970, humidity
+     * @return String in CSV format: timeIntervalSince1970
      */
     @Override
     public String getDataInCSV() {
-        return String.format(Locale.US, "%d,%f", this.timestamp, this.humidity);
+        return String.format(Locale.US, "%d,%s", this.timestamp, this.state);
     }
 
+    /**
+     * Get Microphone Status
+     *
+     * @return String with the status of the Microphone sensor
+     */
     @SuppressWarnings("unused")
-    public float getHumidity() {
-        return this.humidity;
+    public String getState() {
+        return this.state;
     }
-
 }

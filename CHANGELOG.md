@@ -5,6 +5,7 @@
 - Added support for Air Pressure sensor
 - Added support for Humidity sensor
 - Added support for Beacon Proximity (iBeacon™, Eddystone™ and AltBeacon) with the help of the Android Beacon Library (thanks Radius Networks).
+- Added csvHeaderForSensor method to get the headers of the csv format.
 - Added support for Android Studio 2.2
 - Added support for Android 6.0 and 7.0 SDK (Marshmallow and Nugat)
 - Added support for maven distribution (jCenter and Maven Central)

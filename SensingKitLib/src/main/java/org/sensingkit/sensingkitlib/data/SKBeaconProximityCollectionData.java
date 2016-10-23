@@ -51,9 +51,19 @@ public class SKBeaconProximityCollectionData extends SKAbstractData {
     }
 
     /**
+     * Get the csv header of the Beacon Proximity sensor data
+     *
+     * @return String with a CSV formatted header that describes the data of the Beacon Proximity sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return SKBeaconProximityData.csvHeader();
+    }
+
+    /**
      * Get the data for all Beacon devices in CSV format
      *
-     * @return String formatted as follows:  timestamp,device1 data, device2 data,,,
+     * @return String formatted as follows: timeIntervalSince1970,device1 data, device2 data,,,
      */
     @Override
     public String getDataInCSV() {
@@ -65,7 +75,7 @@ public class SKBeaconProximityCollectionData extends SKAbstractData {
         // Add deviceData
         for (SKBeaconProximityData deviceData : mDevices) {
 
-            stringBuilder.append(String.format(Locale.US, "%d,%s\n", this.timestamp, deviceData.getDataInCSV()));
+            stringBuilder.append(String.format(Locale.US, "%s\n", deviceData.getDataInCSV()));
         }
 
         // Delete last \n

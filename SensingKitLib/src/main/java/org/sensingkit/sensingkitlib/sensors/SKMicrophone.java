@@ -29,6 +29,7 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
+import org.sensingkit.sensingkitlib.data.SKMicrophoneData;
 
 import java.io.IOException;
 
@@ -54,8 +55,8 @@ public class SKMicrophone extends SKAbstractSensor {
     @Override
     protected boolean shouldPostSensorData(SKAbstractData data) {
 
-        // This sensor does not post data
-        return false;
+        // Always post sensor data
+        return true;
     }
 
     @Override
@@ -71,6 +72,12 @@ public class SKMicrophone extends SKAbstractSensor {
         }
 
         recorder.start();
+
+        // Build the data object
+        SKAbstractData data = new SKMicrophoneData(System.currentTimeMillis(), "Started");
+
+        // Submit sensor data object
+        submitSensorData(data);
     }
 
     @Override
@@ -81,5 +88,11 @@ public class SKMicrophone extends SKAbstractSensor {
         recorder.stop();
         recorder.reset();
         recorder.release();
+
+        // Build the data object
+        SKAbstractData data = new SKMicrophoneData(System.currentTimeMillis(), "Stopped");
+
+        // Submit sensor data object
+        submitSensorData(data);
     }
 }

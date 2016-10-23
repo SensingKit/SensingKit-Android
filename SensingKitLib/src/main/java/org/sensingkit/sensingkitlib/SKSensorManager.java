@@ -26,7 +26,27 @@ import android.os.Build;
 import android.util.Log;
 import android.util.SparseArray;
 
+import org.sensingkit.sensingkitlib.data.SKAccelerometerData;
+import org.sensingkit.sensingkitlib.data.SKAirPressureData;
+import org.sensingkit.sensingkitlib.data.SKAmbientTemperatureData;
+import org.sensingkit.sensingkitlib.data.SKAudioLevelData;
+import org.sensingkit.sensingkitlib.data.SKBatteryData;
+import org.sensingkit.sensingkitlib.data.SKBeaconProximityData;
+import org.sensingkit.sensingkitlib.data.SKBluetoothData;
+import org.sensingkit.sensingkitlib.data.SKGravityData;
+import org.sensingkit.sensingkitlib.data.SKGyroscopeData;
+import org.sensingkit.sensingkitlib.data.SKHumidityData;
+import org.sensingkit.sensingkitlib.data.SKLightData;
+import org.sensingkit.sensingkitlib.data.SKLinearAccelerationData;
+import org.sensingkit.sensingkitlib.data.SKLocationData;
+import org.sensingkit.sensingkitlib.data.SKMagnetometerData;
+import org.sensingkit.sensingkitlib.data.SKMicrophoneData;
+import org.sensingkit.sensingkitlib.data.SKMotionActivityData;
+import org.sensingkit.sensingkitlib.data.SKRotationData;
+import org.sensingkit.sensingkitlib.data.SKScreenStatusData;
 import org.sensingkit.sensingkitlib.data.SKSensorData;
+import org.sensingkit.sensingkitlib.data.SKStepCounterData;
+import org.sensingkit.sensingkitlib.data.SKStepDetectorData;
 import org.sensingkit.sensingkitlib.sensors.*;
 
 public class SKSensorManager {
@@ -377,6 +397,79 @@ public class SKSensorManager {
                 // Stop Sensing
                 mSensors.get(i).stopSensing();
             }
+        }
+    }
+
+    /**
+     *  Return a string with a CSV formatted header that describes the data of the particular sensor.
+     */
+    public static String csvHeaderForSensor(SKSensorType sensorType) {
+
+        switch (sensorType) {
+
+            case ACCELEROMETER:
+                return SKAccelerometerData.csvHeader();
+
+            case GRAVITY:
+                return SKGravityData.csvHeader();
+
+            case LINEAR_ACCELERATION:
+                return SKLinearAccelerationData.csvHeader();
+
+            case GYROSCOPE:
+                return SKGyroscopeData.csvHeader();
+
+            case ROTATION:
+                return SKRotationData.csvHeader();
+
+            case MAGNETOMETER:
+                return SKMagnetometerData.csvHeader();
+
+            case AMBIENT_TEMPERATURE:
+                return SKAmbientTemperatureData.csvHeader();
+
+            case STEP_DETECTOR:
+                return SKStepDetectorData.csvHeader();
+
+            case STEP_COUNTER:
+                return SKStepCounterData.csvHeader();
+
+            case LIGHT:
+                return SKLightData.csvHeader();
+
+            case LOCATION:
+                return SKLocationData.csvHeader();
+
+            case MOTION_ACTIVITY:
+                return SKMotionActivityData.csvHeader();
+
+            case BATTERY:
+                return SKBatteryData.csvHeader();
+
+            case SCREEN_STATUS:
+                return SKScreenStatusData.csvHeader();
+
+            case MICROPHONE:
+                return SKMicrophoneData.csvHeader();
+
+            case AUDIO_LEVEL:
+                return SKAudioLevelData.csvHeader();
+
+            case BLUETOOTH:
+                return SKBluetoothData.csvHeader();
+
+            case BEACON_PROXIMITY:
+                return SKBeaconProximityData.csvHeader();
+
+            case HUMIDITY:
+                return SKHumidityData.csvHeader();
+
+            case AIR_PRESSURE:
+                return SKAirPressureData.csvHeader();
+
+            default:
+                // TODO: Handle errors
+                return "";
         }
     }
 

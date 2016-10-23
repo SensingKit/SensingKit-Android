@@ -28,7 +28,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import java.util.Locale;
 
 /**
- *  An instance of SKMotionActivityData encapsulates measurements related to the Activity sensor.
+ *  An instance of SKMotionActivityData encapsulates measurements related to the Motion Activity sensor.
  *  Activity is classified as Stationary, Walking, Running, Automotive, Cycling, Tilt, or Unknown.
  */
 public class SKMotionActivityData extends SKAbstractData {
@@ -57,9 +57,19 @@ public class SKMotionActivityData extends SKAbstractData {
     }
 
     /**
-     * Get the Activity sensor data in csv format
+     * Get the csv header of the Motion Activity sensor data
      *
-     * @return Activity data in csv format: timestamp,activity type,activity string, confidence
+     * @return String with a CSV formatted header that describes the data of the Motion Activity sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return "timeIntervalSince1970,activity,activityString,confidence";
+    }
+
+    /**
+     * Get the Motion Activity sensor data in csv format
+     *
+     * @return Activity data in csv format: timeIntervalSince1970, activity, activityString, confidence
      *
      */
     @Override

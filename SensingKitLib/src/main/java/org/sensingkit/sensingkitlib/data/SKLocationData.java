@@ -29,7 +29,7 @@ import java.util.Locale;
 
 
 /**
- *  An instance of SKLocationData encapsulates measurements related to the Light sensor.
+ *  An instance of SKLocationData encapsulates measurements related to the Location sensor.
  */
 public class SKLocationData extends SKAbstractData {
 
@@ -53,13 +53,25 @@ public class SKLocationData extends SKAbstractData {
     }
 
     /**
+     * Get the csv header of the Location sensor data
+     *
+     * @return String with a CSV formatted header that describes the data of the Location sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return "timeIntervalSince1970,latitude,longitude,altitude,accuracy";
+    }
+
+    /**
      * Get location sensor data in CSV format
      *
-     * @return String in CSV format: timestamp, location
+     * @return String in CSV format: timeIntervalSince1970, latitude, longitude, altitude, accuracy
      */
     @Override
     public String getDataInCSV() {
-        return String.format(Locale.US, "%d,%s", this.timestamp, this.location);
+        return String.format(Locale.US, "%d,%f,%f,%f,%f", this.timestamp,
+                this.location.getLatitude(), this.location.getLongitude(), this.location.getAltitude(),
+                this.location.getAccuracy());
     }
 
     /**
@@ -70,6 +82,46 @@ public class SKLocationData extends SKAbstractData {
     @SuppressWarnings("unused")
     public Location getLocation() {
         return location;
+    }
+
+    /**
+     * Get Latitude
+     *
+     * @return Latitude
+     */
+    @SuppressWarnings("unused")
+    public double getLatitude() {
+        return location.getLatitude();
+    }
+
+    /**
+     * Get Longitude
+     *
+     * @return Longitude
+     */
+    @SuppressWarnings("unused")
+    public double getLongitude() {
+        return location.getLongitude();
+    }
+
+    /**
+     * Get Altitude
+     *
+     * @return Altitude
+     */
+    @SuppressWarnings("unused")
+    public double getAltitude() {
+        return location.getAltitude();
+    }
+
+    /**
+     * Get Accuracy
+     *
+     * @return Accuracy
+     */
+    @SuppressWarnings("unused")
+    public float getAccuracy() {
+        return location.getAccuracy();
     }
 
 }

@@ -41,7 +41,7 @@ public class SKStepCounter extends SKAbstractNativeSensor {
     @Override
     protected SKAbstractData buildData(SensorEvent event)
     {
-        return new SKStepCounterData(System.currentTimeMillis(), event.values[0]);
+        return new SKStepCounterData(System.currentTimeMillis(), (int)event.values[0]);
     }
 
     @Override

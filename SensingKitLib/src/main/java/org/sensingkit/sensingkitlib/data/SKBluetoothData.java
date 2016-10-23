@@ -56,9 +56,19 @@ public class SKBluetoothData extends SKAbstractData {
     }
 
     /**
+     * Get the csv header of the Bluetooth sensor data
+     *
+     * @return String with a CSV formatted header that describes the data of the Bluetooth sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return "timeIntervalSince1970,name,address,rssi";
+    }
+
+    /**
      * Get Bluetooth data in CSV format
      *
-     * @return String formatted as a CSV, containing: timestamp,name,address,rssi
+     * @return String formatted as a CSV, containing: timeIntervalSince1970,name,address,rssi
      */
     @Override
     public String getDataInCSV() {

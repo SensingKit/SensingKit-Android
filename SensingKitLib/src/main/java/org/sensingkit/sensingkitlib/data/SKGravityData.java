@@ -58,9 +58,19 @@ public class SKGravityData extends SKAbstractData {
     }
 
     /**
+     * Get the csv header of the Gravity sensor data
+     *
+     * @return String with a CSV formatted header that describes the data of the Gravity sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return "timeIntervalSince1970,x,y,z";
+    }
+
+    /**
      * Get the Gravity sensor data in csv format
      *
-     * @return String in csv format:  timestamp, x-axis, y-axis, z-axis
+     * @return String in csv format: timeIntervalSince1970, x-axis, y-axis, z-axis
      */
     @Override
     public String getDataInCSV() {

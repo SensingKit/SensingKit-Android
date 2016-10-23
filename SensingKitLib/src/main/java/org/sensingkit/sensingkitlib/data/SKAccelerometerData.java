@@ -60,9 +60,19 @@ public class SKAccelerometerData extends SKAbstractData {
     }
 
     /**
+     * Get the csv header of the Accelerometer sensor data
+     *
+     * @return String with a CSV formatted header that describes the data of the Accelerometer sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return "timeIntervalSince1970,x,y,z";
+    }
+
+    /**
      * Get the accelerator measurements in csv format
      *
-     * @return String containing the timestamp and accelerometer measurements in csv format:  timestamp,x,y,z
+     * @return String containing the timestamp and accelerometer measurements in csv format:  timeIntervalSince1970,x,y,z
      */
     @Override
     public String getDataInCSV() {

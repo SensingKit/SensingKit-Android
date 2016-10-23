@@ -128,6 +128,18 @@ public class SensingKitLib implements SensingKitLibInterface {
     }
 
     /**
+     *  A string with a CSV formatted header that describes the data of the particular sensor. This method is useful in combination with the toString() or csvString() instance method of an SKSensorData object.
+     *
+     *  @param sensorType The type of the sensor for which the CSV Header will be returned.
+     *
+     *  @return A String with the CSV header.
+     */
+    @Override
+    public String csvHeaderForSensor(SKSensorType sensorType) {
+        return SKSensorManager.csvHeaderForSensor(sensorType);
+    }
+
+    /**
      *  Starts continuous sensing with the specified sensor.
      *
      *  @param sensorType The type of the sensor that will be started.

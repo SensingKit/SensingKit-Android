@@ -59,9 +59,19 @@ public class SKLinearAccelerationData extends SKAbstractData {
     }
 
     /**
+     * Get the csv header of the Linear Acceleration sensor data
+     *
+     * @return String with a CSV formatted header that describes the data of the Linear Acceleration sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return "timeIntervalSince1970,x,y,z";
+    }
+
+    /**
      * Get Linear Acceleration sensor data in CSV format
      *
-     * @return String in CSV format: timestamp, x force, y force, z force
+     * @return String in CSV format: timeIntervalSince1970, x force, y force, z force
      */
     @Override
     public String getDataInCSV() {

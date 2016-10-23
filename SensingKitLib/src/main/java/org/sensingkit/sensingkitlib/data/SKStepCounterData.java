@@ -33,7 +33,7 @@ public class SKStepCounterData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKStepCounterData.class.getName();
 
-    protected final float steps;
+    protected final int steps;
 
     /**
      * Initialize the instance
@@ -42,7 +42,7 @@ public class SKStepCounterData extends SKAbstractData {
      *
      * @param steps Number of steps
      */
-    public SKStepCounterData(long timestamp, float steps) {
+    public SKStepCounterData(long timestamp, int steps) {
 
         super(SKSensorType.STEP_COUNTER, timestamp);
 
@@ -50,13 +50,23 @@ public class SKStepCounterData extends SKAbstractData {
     }
 
     /**
+     * Get the csv header of the Step Counter sensor data
+     *
+     * @return String with a CSV formatted header that describes the data of the Step Counter sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return "timeIntervalSince1970,numberOfSteps";
+    }
+
+    /**
      * Get Step Counter sensor data in CSV format
      *
-     * @return String in CSV format: timestamp, number of steps
+     * @return String in CSV format: timeIntervalSince1970, numberOfSteps
      */
     @Override
     public String getDataInCSV() {
-        return String.format(Locale.US, "%d,%f", this.timestamp, this.steps);
+        return String.format(Locale.US, "%d,%d", this.timestamp, this.steps);
     }
 
     /**
@@ -65,7 +75,7 @@ public class SKStepCounterData extends SKAbstractData {
      * @return number of steps
      */
     @SuppressWarnings("unused")
-    public float getSteps() {
+    public int getSteps() {
         return this.steps;
     }
 

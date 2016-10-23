@@ -44,9 +44,19 @@ public class SKStepDetectorData extends SKAbstractData {
     }
 
     /**
+     * Get the csv header of the Step Counter sensor data
+     *
+     * @return String with a CSV formatted header that describes the data of the Step Counter sensor.
+     */
+    @SuppressWarnings("unused")
+    public static String csvHeader() {
+        return "timeIntervalSince1970";
+    }
+
+    /**
      * Get Step Detector sensor data in CSV format
      *
-     * @return String in CSV format: timestamp, step detector data
+     * @return String in CSV format: timeIntervalSince1970
      */
     @Override
     public String getDataInCSV() {
