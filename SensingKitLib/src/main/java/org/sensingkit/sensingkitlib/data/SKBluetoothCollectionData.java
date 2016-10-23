@@ -27,12 +27,12 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 /**
- *  An instance of SKBluetoothData encapsulates measurements related to all the Bluetooth devices.
+ *  An instance of SKBluetoothCollectionData encapsulates measurements related to all the Bluetooth devices.
  */
-public class SKBluetoothData extends SKAbstractData {
+public class SKBluetoothCollectionData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKBluetoothData.class.getName();
+    private static final String TAG = SKBluetoothCollectionData.class.getName();
 
     private final ArrayList<SKBluetoothDeviceData> mBluetoothDevices;
 
@@ -43,7 +43,7 @@ public class SKBluetoothData extends SKAbstractData {
      *
      * @param bluetoothDevices One BluetoothDeviceData object for each Bluetooth device
      */
-    public SKBluetoothData(long timestamp, ArrayList<SKBluetoothDeviceData> bluetoothDevices) {
+    public SKBluetoothCollectionData(long timestamp, ArrayList<SKBluetoothDeviceData> bluetoothDevices) {
 
         super(SKSensorType.BLUETOOTH, timestamp);
 
