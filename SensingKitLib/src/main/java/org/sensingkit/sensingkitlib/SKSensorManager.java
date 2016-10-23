@@ -34,7 +34,7 @@ public class SKSensorManager {
     @SuppressWarnings("unused")
     private static final String TAG = SKSensorManager.class.getName();
 
-    private static final int TOTAL_SENSORS = 19;
+    private static final int TOTAL_SENSORS = 20;
 
     private static SKSensorManager sSensorManager;
     private final Context mApplicationContext;
@@ -228,6 +228,10 @@ public class SKSensorManager {
 
             case BLUETOOTH:
                 sensor = new SKBluetooth(mApplicationContext);
+                break;
+
+            case BEACON_PROXIMITY:
+                sensor = new SKBeaconProximity(mApplicationContext);
                 break;
 
             case HUMIDITY:

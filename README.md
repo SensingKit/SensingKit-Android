@@ -24,8 +24,7 @@ The following sensor modules are currently supported in SensingKit-Android, (lis
 - Microphone
 - Audio Level
 - Bluetooth
-- Eddystone
-- iBeacon
+- Beacon Proximity
 - Humidity
 - Air Pressure
 

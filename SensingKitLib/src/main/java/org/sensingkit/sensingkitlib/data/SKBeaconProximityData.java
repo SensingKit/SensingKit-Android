@@ -26,18 +26,18 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
-public class SKiBeaconData extends SKAbstractData {
+public class SKBeaconProximityData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKiBeaconData.class.getName();
+    private static final String TAG = SKBeaconProximityData.class.getName();
 
     protected final String namespaceId;
     protected final String instanceId;
     protected final int rssi;
     protected final int txPower;
 
-    public SKiBeaconData(long timestamp, String namespaceId, String instanceId, int rssi, int txPower) {
-        super(SKSensorType.IBEACON, timestamp);
+    public SKBeaconProximityData(long timestamp, String namespaceId, String instanceId, int rssi, int txPower) {
+        super(SKSensorType.BEACON_PROXIMITY, timestamp);
         this.namespaceId = namespaceId; //**
         this.instanceId = instanceId; //**
         this.rssi = rssi;
