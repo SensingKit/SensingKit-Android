@@ -113,7 +113,7 @@ public enum SKSensorType {
     BLUETOOTH,
 
     /**
-     *  Eddystone Proximity sensor estimates the proximity of the current device with other iBeacon™, AltBeacon or Eddystone™ beacons in range.
+     *  Beacon Proximity sensor estimates the proximity of the current device with other iBeacon™, AltBeacon or Eddystone™ beacons in range.
      */
     BEACON_PROXIMITY,
 
