@@ -35,7 +35,8 @@ public class SKScreenStatusData extends SKAbstractData {
 
     public static final int SCREEN_OFF = 0;
     public static final int SCREEN_ON = 1;
-    public static final int SCREEN_UNKNOWN = 2;
+    public static final int SCREEN_UNLOCKED = 2;
+    public static final int SCREEN_UNKNOWN = 3;
 
     protected final int status;
 
@@ -85,17 +86,20 @@ public class SKScreenStatusData extends SKAbstractData {
     /**
      * Get screen status as a string
      *
-     * @return Screen status as a string:  "screen off", "screen on", or "unknown"
+     * @return Screen status as a string:  "off", "on", "unlocked" or "unknown"
      */
     @SuppressWarnings("unused")
     public String getStatusString() {
 
         switch (this.status) {
             case SCREEN_OFF:
-                return "screen off";
+                return "off";
 
             case SCREEN_ON:
-                return "screen on";
+                return "on";
+
+            case SCREEN_UNLOCKED:
+                return "unlocked";
 
             default:
                 return "unknown";
