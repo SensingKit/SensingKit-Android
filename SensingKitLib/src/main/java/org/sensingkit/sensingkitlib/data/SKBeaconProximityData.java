@@ -22,6 +22,8 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.altbeacon.beacon.Beacon;
+import org.altbeacon.beacon.Identifier;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
@@ -31,42 +33,68 @@ public class SKBeaconProximityData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKBeaconProximityData.class.getName();
 
-    protected final String namespaceId;
-    protected final String instanceId;
-    protected final int rssi;
-    protected final int txPower;
+    protected final Beacon mBeacon;
 
-    public SKBeaconProximityData(long timestamp, String namespaceId, String instanceId, int rssi, int txPower) {
+    public SKBeaconProximityData(long timestamp, Beacon beacon) {
         super(SKSensorType.BEACON_PROXIMITY, timestamp);
-        this.namespaceId = namespaceId; //**
-        this.instanceId = instanceId; //**
-        this.rssi = rssi;
-        this.txPower = txPower;
+        this.mBeacon = beacon;
     }
 
     @Override
     public String getDataInCSV() {
-        //TODO Check format
-        return String.format(Locale.US, "%d,%s,%s,%d,%d", this.timestamp, this.namespaceId, this.instanceId, this.rssi, this.txPower );
+        return String.format(Locale.US, "%d,%d,%d,%s,%d,%d,%d,%d,%f",
+                this.timestamp, this.getBeaconTypeCode(), this.getManufacturer(),
+                this.getId1().toUuid().toString(), this.getId2().toInt(), this.getId3().toInt(),
+                this.getRssi(), this.getTxPower(), this.getDistance() );
     }
 
     @SuppressWarnings("unused")
-    public String getNamespaceId(){
-        return this.namespaceId;
+    public int getBeaconTypeCode() {
+        return mBeacon.getBeaconTypeCode();
     }
 
     @SuppressWarnings("unused")
-    public String getInstanceId(){
-        return this.instanceId;
+    public int getManufacturer() {
+        return mBeacon.getManufacturer();
+    }
+
+    @SuppressWarnings("unused")
+    public Identifier getId1(){
+        return mBeacon.getId1();
+    }
+
+    @SuppressWarnings("unused")
+    public Identifier getId2(){
+        return mBeacon.getId2();
+    }
+
+    @SuppressWarnings("unused")
+    public Identifier getId3(){
+        return mBeacon.getId3();
     }
 
     @SuppressWarnings("unused")
     public int getRssi(){
-        return this.rssi;
+        return mBeacon.getRssi();
     }
 
     @SuppressWarnings("unused")
     public int getTxPower(){
-        return this.txPower;
+        return mBeacon.getTxPower();
+    }
+
+    @SuppressWarnings("unused")
+    public String getBluetoothAddress() {
+        return mBeacon.getBluetoothAddress();
+    }
+
+    @SuppressWarnings("unused")
+    public String getBluetoothName() {
+        return mBeacon.getBluetoothName();
+    }
+
+    @SuppressWarnings("unused")
+    public double getDistance() {
+        return mBeacon.getDistance();
     }
 }

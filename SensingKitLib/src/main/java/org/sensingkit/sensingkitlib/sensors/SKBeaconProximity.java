@@ -36,7 +36,10 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
+import org.sensingkit.sensingkitlib.data.SKBeaconProximityCollectionData;
+import org.sensingkit.sensingkitlib.data.SKBeaconProximityData;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @SuppressWarnings("ResourceType")
@@ -72,8 +75,23 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
             @Override
             public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
-                if (beacons.size() > 0) {
-                    Log.i(TAG, "The first beacon I see is about " + beacons.iterator().next().getDistance() + " meters away.");
+                if (!beacons.isEmpty()) {
+
+                    // Get the timestamp
+                    long timestamp = System.currentTimeMillis();
+
+                    // Create the SKBeaconProximityData objects and add them to a new list
+                    ArrayList<SKBeaconProximityData> deviceData = new ArrayList<>(beacons.size());
+
+                    for (Beacon beacon : beacons) {
+                        deviceData.add(new SKBeaconProximityData(timestamp, beacon));
+                    }
+
+                    // Build the data object
+                    SKAbstractData data = new SKBeaconProximityCollectionData(timestamp, deviceData);
+
+                    // Submit sensor data object
+                    submitSensorData(data);
                 }
             }
         });
