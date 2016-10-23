@@ -27,27 +27,27 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 /**
- *  An instance of SKBluetoothCollectionData encapsulates measurements related to all the Bluetooth devices.
+ *  An instance of SKBluetoothCollectionData encapsulates measurements related to all Bluetooth devices.
  */
 public class SKBluetoothCollectionData extends SKAbstractData {
 
     @SuppressWarnings("unused")
     private static final String TAG = SKBluetoothCollectionData.class.getName();
 
-    private final ArrayList<SKBluetoothDeviceData> mBluetoothDevices;
+    private final ArrayList<SKBluetoothDeviceData> mDevices;
 
     /**
      * Initialize the instance
      *
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      *
-     * @param bluetoothDevices One BluetoothDeviceData object for each Bluetooth device
+     * @param devices One BluetoothDeviceData object for each Bluetooth device
      */
-    public SKBluetoothCollectionData(long timestamp, ArrayList<SKBluetoothDeviceData> bluetoothDevices) {
+    public SKBluetoothCollectionData(long timestamp, ArrayList<SKBluetoothDeviceData> devices) {
 
         super(SKSensorType.BLUETOOTH, timestamp);
 
-        this.mBluetoothDevices = bluetoothDevices;
+        this.mDevices = devices;
     }
 
     /**
@@ -59,11 +59,11 @@ public class SKBluetoothCollectionData extends SKAbstractData {
     public String getDataInCSV() {
 
         // Calculate capacity and init StringBuilder
-        int capacity = 10 * mBluetoothDevices.size();
+        int capacity = 10 * mDevices.size();
         StringBuilder stringBuilder = new StringBuilder(capacity);
 
         // Add deviceData
-        for (SKBluetoothDeviceData deviceData : mBluetoothDevices) {
+        for (SKBluetoothDeviceData deviceData : mDevices) {
 
             stringBuilder.append(String.format(Locale.US, "%d,%s\n", this.timestamp, deviceData.getDataInCSV()));
         }
@@ -76,12 +76,12 @@ public class SKBluetoothCollectionData extends SKAbstractData {
     }
 
     /**
-     * Get Bluetooth Device data
+     * Get Bluetooth device data
      *
      * @return an ArrayList containing an SKBluetoothDeviceData object for each Bluetooth Device
      */
     @SuppressWarnings("unused")
-    public ArrayList<SKBluetoothDeviceData> getBluetoothDevices() {
-        return this.mBluetoothDevices;
+    public ArrayList<SKBluetoothDeviceData> getDevices() {
+        return this.mDevices;
     }
 }
