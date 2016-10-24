@@ -127,7 +127,7 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
             case HUMIDITY:
                 return Sensor.TYPE_RELATIVE_HUMIDITY;
 
-            case AIR_PRESSURE:
+            case BAROMETER:
                 return Sensor.TYPE_PRESSURE;
 
             default:

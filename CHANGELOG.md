@@ -8,10 +8,11 @@
 - Added csvHeaderForSensor method to get the headers of the csv format
 - Added missing SKMicrophoneData object
 - Added support for Android Studio 2.2
-- Added support for Android 6.0 and 7.0 SDK (Marshmallow and Nugat)
+- Added support for Android 7.1 SDK (Nugat)
 - Added support for maven distribution (jCenter and Maven Central)
 - Renamed Activity sensor to Motion Activity
-- Renamed Audio Level sensor to Microphone
+- Renamed Audio sensor to Microphone
+- Renamed Air Pressure sensor to Barometer
 - Renamed all sensor modules into sensors
 - Updated SensingKit-Android API (thanks to Ming-Jiun Huang @U3D3)
 - Updated Google Play Services to 9.6.1

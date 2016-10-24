@@ -27,21 +27,21 @@ import android.hardware.SensorEvent;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
-import org.sensingkit.sensingkitlib.data.SKAirPressureData;
+import org.sensingkit.sensingkitlib.data.SKBarometerData;
 
-public class SKAirPressure extends SKAbstractNativeSensor {
+public class SKBarometer extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKAirPressure.class.getName();
+    private static final String TAG = SKBarometer.class.getName();
 
-    public SKAirPressure(final Context context) throws SKException {
-        super(context, SKSensorType.AIR_PRESSURE);
+    public SKBarometer(final Context context) throws SKException {
+        super(context, SKSensorType.BAROMETER);
     }
 
     @Override
     protected SKAbstractData buildData(SensorEvent event)
     {
-        return new SKAirPressureData(System.currentTimeMillis(), event.values[0]);
+        return new SKBarometerData(System.currentTimeMillis(), event.values[0]);
     }
 
     @Override

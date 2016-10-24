@@ -28,102 +28,132 @@ public enum SKSensorType {
     /**
      *  Measures the device acceleration changes in three-dimensional space. You can use this data to detect both the current orientation of the device (relative to the ground) and any instantaneous changes to that orientation.
      */
-    ACCELEROMETER,
+    ACCELEROMETER ("Accelerometer", "Accelerometer"),
 
     /**
      *  Measures the force of gravity in m/s2 that is applied to a device on all three physical axes (x, y, z).
      */
-    GRAVITY,
+    GRAVITY ("Gravity", "Gravity"),
 
     /**
      *  Measures the acceleration force in m/s2 that is applied to a device on all three physical axes (x, y, and z), excluding the force of gravity.
      */
-    LINEAR_ACCELERATION,
+    LINEAR_ACCELERATION ("Linear Acceleration", "LinearAcceleration"),
 
     /**
      *  Measures the device's rate of rotation around each of the three spatial axes.
      */
-    GYROSCOPE,
+    GYROSCOPE ("Gyroscope", "Gyroscope"),
 
     /**
      *  Measures the orientation of a device by providing the three elements of the device's rotation vector.
      */
-    ROTATION,
+    ROTATION ("Rotation", "Rotation"),
 
     /**
      *  Measures the ambient geomagnetic field for all three physical axes (x, y, z) in microtesla.
      */
-    MAGNETOMETER,
+    MAGNETOMETER ("Magnetometer", "Magnetometer"),
 
     /**
      * Room temperature in degrees Celcius.
      */
-    AMBIENT_TEMPERATURE,
+    AMBIENT_TEMPERATURE ("Ambient Temperature", "AmbientTemperature"),
 
     /**
      *  Returns 1.0 each time a step is taken
      */
-    STEP_DETECTOR,
+    STEP_DETECTOR ("Step Detector", "StepDetector"),
 
     /**
      *  Number of steps taken by the user since the last reboot while activated.
      */
-    STEP_COUNTER,
+    STEP_COUNTER ("Step Counter", "StepCounter"),
 
     /**
      *  Measures the ambient light level (illumination) in lux.
      */
-    LIGHT,
+    LIGHT ("Light", "Light"),
 
     /**
      *  Location sensor determines the current location of the device using a combination of Cellular, Wi-Fi, Bluetooth and GPS sensors. It provides 2D geographical coordinate information (latitude, longitude), as well as the altitude of the device.
      */
-    LOCATION,
+    LOCATION ("Location", "Location"),
 
     /**
      *  Motion Activity sensor uses an embedded motion co-processor that senses the user's activity classified as Stationary, Walking, Running, Automotive or Cycling.
      *  Assume that Activity is the same as Motion Activity
      */
-    MOTION_ACTIVITY,
+    MOTION_ACTIVITY ("Motion Activity", "MotionActivity"),
 
     /**
      *  Battery sensor listens to changes in the battery charge state (Charging, Full, Unplugged) as well as in the battery charge level (with 1% precision).
      */
-    BATTERY,
+    BATTERY ("Battery", "Battery"),
 
     /**
      *  Senses the status of the screen (On / Off).
      */
-    SCREEN_STATUS,
+    SCREEN_STATUS ("Screen Status", "ScreenStatus"),
 
     /**
      *  Microphone sensor can be used to record audio from the environment by converting sound into electrical signal.
      *  Assume that Microphone is the same as AUDIO RECORDER
      */
-    MICROPHONE,
+    MICROPHONE ("Microphone", "Microphone"),
 
     /**
      *  Maximum level of the audio signal in a buffer.
      */
-    AUDIO_LEVEL,
+    AUDIO_LEVEL ("Audio Level", "AudioLevel"),
 
     /**
      *  Scans for other Bluetooth Classic devices around.
      */
-    BLUETOOTH,
+    BLUETOOTH ("Bluetooth", "Bluetooth"),
 
     /**
      *  Beacon Proximity sensor estimates the proximity of the current device with other iBeacon™, AltBeacon or Eddystone™ beacons in range.
      */
-    BEACON_PROXIMITY,
+    BEACON_PROXIMITY ("Beacon Proximity", "BeaconProximity"),
 
     /**
      *  Relative ambient air humidity in percent.
      */
-    HUMIDITY,
+    HUMIDITY ("Humidity", "Humidity"),
 
     /**
      *  Atmospheric pressure in hPa (millibar).
      */
-    AIR_PRESSURE
+    BAROMETER ("Barometer", "Barometer");
+
+    private final static int length = SKSensorType.values().length;
+
+    private final String name;
+    private final String nonspacedName;
+
+    SKSensorType(String name, String nonspacedName) {
+        this.name = name;
+        this.nonspacedName = nonspacedName;
+    }
+
+    @SuppressWarnings("unused")
+    public static int getLength() {
+        return SKSensorType.length;
+    }
+
+    @SuppressWarnings("unused")
+    public String getName() {
+        return this.name;
+    }
+
+    @SuppressWarnings("unused")
+    public String getNonspacedName() {
+        return this.nonspacedName;
+    }
+
+    @Override
+    public String toString() {
+        return this.getName();
+    }
 }

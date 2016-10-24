@@ -26,7 +26,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import java.util.Locale;
 
 /**
- *  An instance of SKAirPressureData encapsulates measurements related to the Air Pressure sensor.
+ *  An instance of SKAmbientTemperatureData encapsulates measurements related to the Ambient Temperature sensor.
  */
 public class SKAmbientTemperatureData extends SKAbstractData {
 

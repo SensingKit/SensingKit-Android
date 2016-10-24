@@ -21,12 +21,35 @@
 
 package org.sensingkit.sensingkitlib;
 
-import org.sensingkit.sensingkitlib.data.SKSensorData;
-
 @SuppressWarnings("unused")
 public interface SensingKitLibInterface {
 
-    /** Sensor Registration */
+    /**
+     *  A Boolean value that indicates whether the sensor is available on the device.
+     *
+     *  @param sensorType The type of the sensor that will be checked.
+     *
+     *  @return TRUE if the sensor is available on the device, or FALSE if it is not.
+     */
+    boolean isSensorAvailable(SKSensorType sensorType) throws SKException;
+
+    /**
+     *  A Boolean value that indicates whether the sensor is registered.
+     *
+     *  @param sensorType The type of the sensor that will be checked.
+     *
+     *  @return TRUE if the sensor is registered or FALSE if it is not.
+     */
+    boolean isSensorRegistered(SKSensorType sensorType) throws SKException;
+
+    /**
+     *  A Boolean value that indicates whether the sensor is currently sensing.
+     *
+     *  @param sensorType The type of the sensor that will be checked.
+     *
+     *  @return TRUE if the sensor is currently sensing or FALSE if it is not.
+     */
+    boolean isSensorSensing(SKSensorType sensorType) throws SKException;
 
     /**
      *  Initializes and registers a sensor into the library with a default sensor configuration.
@@ -41,26 +64,6 @@ public interface SensingKitLibInterface {
      *  @param sensorType The type of the sensor that will be deregistered.
      */
     void deregisterSensor(SKSensorType sensorType) throws SKException;
-
-    /**
-     *  A Boolean value that indicates whether the sensor is registered.
-     *
-     *  @param sensorType The type of the sensor that will be checked.
-     *
-     *  @return TRUE if the sensor is registered or FALSE if it is not.
-     */
-    boolean isSensorRegistered(SKSensorType sensorType) throws SKException;
-
-    /** Configuration */
-    // TODO: Add Configuration
-
-
-    /** One Shot Sensing */
-
-    SKSensorData getDataFromSensor(SKSensorType sensorType) throws SKException;
-
-
-    /** Continuous Sensing */
 
     /**
      *  Subscribes for sensor updates using a specified event listener.
@@ -117,17 +120,6 @@ public interface SensingKitLibInterface {
      *  Starts continuous sensing with all registered sensors.
      */
     void stopContinuousSensingWithAllRegisteredSensors() throws SKException;
-
-    /**
-     *  A Boolean value that indicates whether the sensor is currently sensing.
-     *
-     *  @param sensorType The type of the sensor that will be checked.
-     *
-     *  @return TRUE if the sensor is currently sensing or FALSE if it is not.
-     */
-    boolean isSensorSensing(SKSensorType sensorType) throws SKException;
-
-    /** Time */
 
     /**
      *  Get the current time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC).

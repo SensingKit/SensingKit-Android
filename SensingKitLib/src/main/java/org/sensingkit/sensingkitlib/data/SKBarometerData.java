@@ -26,33 +26,33 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import java.util.Locale;
 
 /**
- *  An instance of SKAirPressureData encapsulates measurements related to the Air Pressure sensor.
+ *  An instance of SKBarometerData encapsulates measurements related to the Air Pressure sensor.
  */
-public class SKAirPressureData extends SKAbstractData {
+public class SKBarometerData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKAirPressureData.class.getName();
+    private static final String TAG = SKBarometerData.class.getName();
 
     protected final float pressure;
 
     /**
-     * Initialize the Air Pressure data instance
+     * Initialize the Barometer data instance
      *
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      *
      * @param pressure Air pressure
      */
-    public SKAirPressureData(long timestamp, float pressure) {
+    public SKBarometerData(long timestamp, float pressure) {
 
-        super(SKSensorType.AIR_PRESSURE, timestamp);
+        super(SKSensorType.BAROMETER, timestamp);
 
         this.pressure = pressure;
     }
 
     /**
-     * Get the csv header of the Air Pressure sensor data
+     * Get the csv header of the Barometer sensor data
      *
-     * @return String with a CSV formatted header that describes the data of the Air Pressure sensor.
+     * @return String with a CSV formatted header that describes the data of the Barometer sensor.
      */
     @SuppressWarnings("unused")
     public static String csvHeader() {
@@ -60,9 +60,9 @@ public class SKAirPressureData extends SKAbstractData {
     }
 
     /**
-     * Get the Air Pressure sensor data in csv format
+     * Get the Barometer sensor data in csv format
      *
-     * @return Air Pressure data in csv format: timeIntervalSince1970,pressure
+     * @return Barometer data in csv format: timeIntervalSince1970,pressure
      *
      */
     @Override
@@ -76,7 +76,7 @@ public class SKAirPressureData extends SKAbstractData {
      * @return Air Pressure measurement
      */
     @SuppressWarnings("unused")
-    public float getLight() {
+    public float getPressure() {
         return this.pressure;
     }
 

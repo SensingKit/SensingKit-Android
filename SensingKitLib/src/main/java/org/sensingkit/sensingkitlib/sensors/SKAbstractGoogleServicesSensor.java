@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.sensingkit.sensingkitlib.SKException;
@@ -63,4 +64,9 @@ public abstract class SKAbstractGoogleServicesSensor extends SKAbstractSensor im
         // No client is connected
     }
 
+    public static boolean isGooglePlayServicesAvailable(final Context context) {
+        GoogleApiAvailability api = GoogleApiAvailability.getInstance();
+        int code = api.isGooglePlayServicesAvailable(context);
+        return code == ConnectionResult.SUCCESS;
+    }
 }

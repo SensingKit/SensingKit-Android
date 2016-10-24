@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+
 import com.google.android.gms.location.ActivityRecognitionApi;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognition;
@@ -194,5 +195,4 @@ public class SKMotionActivity extends SKAbstractGoogleServicesSensor {
 
         return shouldPost;
     }
-
 }

@@ -24,9 +24,6 @@ package org.sensingkit.sensingkitlib;
 import android.content.Context;
 import android.os.PowerManager;
 
-import org.sensingkit.sensingkitlib.data.SKSensorData;
-
-
 public class SensingKitLib implements SensingKitLibInterface {
 
     @SuppressWarnings("unused")
@@ -59,6 +56,42 @@ public class SensingKitLib implements SensingKitLibInterface {
     }
 
     /**
+     *  A Boolean value that indicates whether the sensor is available on the device.
+     *
+     *  @param sensorType The type of the sensor that will be checked.
+     *
+     *  @return TRUE if the sensor is available on the device, or FALSE if it is not.
+     */
+    @Override
+    public boolean isSensorAvailable(SKSensorType sensorType) throws SKException {
+        return mSensorManager.isSensorAvailable(sensorType);
+    }
+
+    /**
+     *  A Boolean value that indicates whether the sensor is registered.
+     *
+     *  @param sensorType The type of the sensor that will be checked.
+     *
+     *  @return TRUE if the sensor is registered or FALSE if it is not.
+     */
+    @Override
+    public boolean isSensorRegistered(SKSensorType sensorType) throws SKException {
+        return mSensorManager.isSensorRegistered(sensorType);
+    }
+
+    /**
+     *  A Boolean value that indicates whether the sensor is currently sensing.
+     *
+     *  @param sensorType The type of the sensor that will be checked.
+     *
+     *  @return TRUE if the sensor is currently sensing or FALSE if it is not.
+     */
+    @Override
+    public boolean isSensorSensing(SKSensorType sensorType) throws SKException {
+        return mSensorManager.isSensorSensing(sensorType);
+    }
+
+    /**
      *  Initializes and registers a sensor into the library with a default sensor configuration.
      *
      *  @param sensorType The type of the sensor that will be initialized and registered in the library.
@@ -76,23 +109,6 @@ public class SensingKitLib implements SensingKitLibInterface {
     @Override
     public void deregisterSensor(SKSensorType sensorType) throws SKException {
         mSensorManager.deregisterSensor(sensorType);
-    }
-
-    /**
-     *  A Boolean value that indicates whether the sensor is registered.
-     *
-     *  @param sensorType The type of the sensor that will be checked.
-     *
-     *  @return TRUE if the sensor is registered or FALSE if it is not.
-     */
-    @Override
-    public boolean isSensorRegistered(SKSensorType sensorType) throws SKException {
-        return mSensorManager.isSensorRegistered(sensorType);
-    }
-
-    @Override
-    public SKSensorData getDataFromSensor(SKSensorType sensorType) throws SKException {
-        return mSensorManager.getDataFromSensor(sensorType);
     }
 
     /**
@@ -173,18 +189,6 @@ public class SensingKitLib implements SensingKitLibInterface {
     @Override
     public void stopContinuousSensingWithAllRegisteredSensors() throws SKException {
         mSensorManager.stopContinuousSensingWithAllRegisteredSensors();
-    }
-
-    /**
-     *  A Boolean value that indicates whether the sensor is currently sensing.
-     *
-     *  @param sensorType The type of the sensor that will be checked.
-     *
-     *  @return TRUE if the sensor is currently sensing or FALSE if it is not.
-     */
-    @Override
-    public boolean isSensorSensing(SKSensorType sensorType) throws SKException {
-        return mSensorManager.isSensorSensing(sensorType);
     }
 
     /**
