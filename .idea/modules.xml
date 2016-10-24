@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SensingKit-Android.iml" filepath="$PROJECT_DIR$/SensingKit-Android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SensingKitLib/SensingKitLib.iml" filepath="$PROJECT_DIR$/SensingKitLib/SensingKitLib.iml" />
+    </modules>
+  </component>
+</project>
