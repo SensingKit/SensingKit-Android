@@ -15,7 +15,7 @@
 - Renamed Air Pressure sensor to Barometer
 - Renamed all sensor modules into sensors
 - Updated SensingKit-Android API (thanks to Ming-Jiun Huang @U3D3)
-- Updated Google Play Services to 9.6.1
+- Updated Google Play Services to 9.8.0
 - Updated gradle to 2.2.2
 
 ### 0.2.0 (July 30, 2015)
