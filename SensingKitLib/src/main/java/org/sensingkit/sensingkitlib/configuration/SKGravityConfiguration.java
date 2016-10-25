@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
-public class SKGravityConfiguration extends SKNativeSensorConfiguration {
+public class SKGravityConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKGravityConfiguration() {
         super();

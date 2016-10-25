@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
-public class SKAmbientTemperatureConfiguration extends SKNativeSensorConfiguration {
+public class SKAmbientTemperatureConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKAmbientTemperatureConfiguration() {
         super();

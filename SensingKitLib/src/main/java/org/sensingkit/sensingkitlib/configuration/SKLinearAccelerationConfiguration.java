@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
-public class SKLinearAccelerationConfiguration extends SKNativeSensorConfiguration {
+public class SKLinearAccelerationConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKLinearAccelerationConfiguration() {
         super();

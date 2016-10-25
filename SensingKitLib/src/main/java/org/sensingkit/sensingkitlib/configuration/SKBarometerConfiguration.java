@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
-public class SKBarometerConfiguration extends SKNativeSensorConfiguration {
+public class SKBarometerConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKBarometerConfiguration() {
         super();

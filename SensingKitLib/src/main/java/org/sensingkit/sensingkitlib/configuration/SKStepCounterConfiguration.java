@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
-public class SKStepCounterConfiguration extends SKNativeSensorConfiguration {
+public class SKStepCounterConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKStepCounterConfiguration() {
         super();

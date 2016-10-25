@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
-public class SKRotationConfiguration extends SKNativeSensorConfiguration {
+public class SKRotationConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKRotationConfiguration() {
         super();

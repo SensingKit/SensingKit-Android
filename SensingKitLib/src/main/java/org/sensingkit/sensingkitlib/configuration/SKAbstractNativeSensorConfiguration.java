@@ -23,11 +23,11 @@ package org.sensingkit.sensingkitlib.configuration;
 
 import android.hardware.SensorManager;
 
-public class SKNativeSensorConfiguration extends SKAbstractConfiguration {
+public abstract class SKAbstractNativeSensorConfiguration extends SKAbstractConfiguration {
 
     protected int samplingRate;
 
-    public SKNativeSensorConfiguration() {
+    public SKAbstractNativeSensorConfiguration() {
         super();
 
         // Set default values

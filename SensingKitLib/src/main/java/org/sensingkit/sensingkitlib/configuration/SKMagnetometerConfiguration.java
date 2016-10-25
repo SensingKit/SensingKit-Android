@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
-public class SKMagnetometerConfiguration extends SKNativeSensorConfiguration {
+public class SKMagnetometerConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKMagnetometerConfiguration() {
         super();

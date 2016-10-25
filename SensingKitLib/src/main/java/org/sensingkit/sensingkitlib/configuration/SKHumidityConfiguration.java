@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
-public class SKHumidityConfiguration extends SKNativeSensorConfiguration {
+public class SKHumidityConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKHumidityConfiguration() {
         super();

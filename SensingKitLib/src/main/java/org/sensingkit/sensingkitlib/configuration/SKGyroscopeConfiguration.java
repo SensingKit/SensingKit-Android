@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
-public class SKGyroscopeConfiguration extends SKNativeSensorConfiguration {
+public class SKGyroscopeConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKGyroscopeConfiguration() {
         super();

@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
-public class SKLightConfiguration extends SKNativeSensorConfiguration {
+public class SKLightConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKLightConfiguration() {
         super();

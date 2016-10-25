@@ -21,5 +21,5 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
-public class SKAbstractConfiguration implements SKConfiguration {
+public abstract class SKAbstractConfiguration implements SKConfiguration {
 }
