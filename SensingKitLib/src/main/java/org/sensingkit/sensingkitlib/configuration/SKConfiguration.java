@@ -22,4 +22,5 @@
 package org.sensingkit.sensingkitlib.configuration;
 
 public interface SKConfiguration {
+
 }

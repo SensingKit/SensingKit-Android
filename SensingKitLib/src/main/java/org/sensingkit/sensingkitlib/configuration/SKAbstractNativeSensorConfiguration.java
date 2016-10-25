@@ -31,6 +31,22 @@ public abstract class SKAbstractNativeSensorConfiguration extends SKAbstractConf
         super();
 
         // Set default values
-        samplingRate = SensorManager.SENSOR_DELAY_NORMAL;
+        this.samplingRate = SensorManager.SENSOR_DELAY_NORMAL;
+    }
+
+    public SKAbstractNativeSensorConfiguration(final int samplingRate) {
+        super();
+
+        this.samplingRate = samplingRate;
+    }
+
+    @SuppressWarnings("unused")
+    public int getSamplingRate() {
+        return this.samplingRate;
+    }
+
+    @SuppressWarnings("unused")
+    public void setSamplingRate(final int samplingRate) {
+        this.samplingRate = samplingRate;
     }
 }
