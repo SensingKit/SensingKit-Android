@@ -26,6 +26,7 @@ import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKAccelerometerConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKAccelerometerData;
 
@@ -34,8 +35,8 @@ public class SKAccelerometer extends SKAbstractNativeSensor {
     @SuppressWarnings("unused")
     private static final String TAG = SKAccelerometer.class.getName();
 
-    public SKAccelerometer(final Context context) throws SKException {
-        super(context, SKSensorType.ACCELEROMETER);
+    public SKAccelerometer(final Context context, final SKAccelerometerConfiguration configuration) throws SKException {
+        super(context, SKSensorType.ACCELEROMETER, configuration);
     }
 
     @Override

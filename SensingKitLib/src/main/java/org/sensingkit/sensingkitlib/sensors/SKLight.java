@@ -26,6 +26,7 @@ import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKLightConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKLightData;
 
@@ -36,8 +37,8 @@ public class SKLight extends SKAbstractNativeSensor {
 
     private float lastLightSensed = Float.MAX_VALUE;
 
-    public SKLight(final Context context) throws SKException {
-        super(context, SKSensorType.LIGHT);
+    public SKLight(final Context context, final SKLightConfiguration configuration) throws SKException {
+        super(context, SKSensorType.LIGHT, configuration);
     }
 
     @Override

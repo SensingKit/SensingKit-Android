@@ -28,6 +28,7 @@ import android.content.IntentFilter;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKBatteryConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKBatteryData;
 
@@ -47,8 +48,8 @@ public class SKBattery extends SKAbstractSensor {
 
     private final BroadcastReceiver mBroadcastReceiver;
 
-    public SKBattery(final Context context) throws SKException {
-        super(context, SKSensorType.BATTERY);
+    public SKBattery(final Context context, SKBatteryConfiguration configuration) throws SKException {
+        super(context, SKSensorType.BATTERY, configuration);
 
         mBroadcastReceiver = new BroadcastReceiver() {
             @Override

@@ -31,6 +31,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 
 
 public abstract class SKAbstractGoogleServicesSensor extends SKAbstractSensor implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -40,9 +41,8 @@ public abstract class SKAbstractGoogleServicesSensor extends SKAbstractSensor im
 
     protected GoogleApiClient mClient;
 
-    protected SKAbstractGoogleServicesSensor(final Context context, final SKSensorType sensorType) throws SKException {
-        super(context, sensorType);
-
+    protected SKAbstractGoogleServicesSensor(final Context context, final SKSensorType sensorType, final SKConfiguration configuration) throws SKException {
+        super(context, sensorType, configuration);
 
     }
 

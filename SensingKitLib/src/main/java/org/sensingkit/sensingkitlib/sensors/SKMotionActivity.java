@@ -38,6 +38,7 @@ import com.google.android.gms.location.DetectedActivity;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKMotionActivityConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKMotionActivityData;
 
@@ -54,8 +55,8 @@ public class SKMotionActivity extends SKAbstractGoogleServicesSensor {
     private int mLastActivityTypeSensed = Integer.MAX_VALUE;
     private int mLastConfidenceSensed = Integer.MAX_VALUE;
 
-    public SKMotionActivity(final Context context) throws SKException {
-        super(context, SKSensorType.MOTION_ACTIVITY);
+    public SKMotionActivity(final Context context, final SKMotionActivityConfiguration configuration) throws SKException {
+        super(context, SKSensorType.MOTION_ACTIVITY, configuration);
 
         mClient = new GoogleApiClient.Builder(context)
                 .addApi(ActivityRecognition.API)

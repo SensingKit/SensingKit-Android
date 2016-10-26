@@ -27,6 +27,7 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 
 import java.util.ArrayList;
@@ -40,11 +41,13 @@ public abstract class SKAbstractSensor implements SKSensorInterface {
     protected final SKSensorType mSensorType;
     protected boolean isSensing = false;
     protected ArrayList<SKSensorDataListener> mSensorDataListeners;
+    protected SKConfiguration mConfiguration;
 
-    protected SKAbstractSensor(final Context context, final SKSensorType sensorType) {
+    protected SKAbstractSensor(final Context context, final SKSensorType sensorType, final SKConfiguration configuration) {
 
         this.mApplicationContext = context;
         this.mSensorType = sensorType;
+        this.mConfiguration = configuration;
     }
 
     public boolean isSensing() {

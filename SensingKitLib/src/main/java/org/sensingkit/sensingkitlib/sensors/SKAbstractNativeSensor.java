@@ -31,6 +31,7 @@ import android.hardware.SensorManager;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 
 public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
@@ -42,8 +43,8 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
     private final Sensor mSensor;
     private final SensorEventListener mSensorEventListener;
 
-    protected SKAbstractNativeSensor(final Context context, final SKSensorType sensorType) throws SKException {
-        super(context, sensorType);
+    protected SKAbstractNativeSensor(final Context context, final SKSensorType sensorType, final SKConfiguration configuration) throws SKException {
+        super(context, sensorType, configuration);
 
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(getSensorType(sensorType));

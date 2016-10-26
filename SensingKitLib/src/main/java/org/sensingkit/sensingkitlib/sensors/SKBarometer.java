@@ -26,6 +26,7 @@ import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKBarometerConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKBarometerData;
 
@@ -34,8 +35,8 @@ public class SKBarometer extends SKAbstractNativeSensor {
     @SuppressWarnings("unused")
     private static final String TAG = SKBarometer.class.getName();
 
-    public SKBarometer(final Context context) throws SKException {
-        super(context, SKSensorType.BAROMETER);
+    public SKBarometer(final Context context, final SKBarometerConfiguration configuration) throws SKException {
+        super(context, SKSensorType.BAROMETER, configuration);
     }
 
     @Override

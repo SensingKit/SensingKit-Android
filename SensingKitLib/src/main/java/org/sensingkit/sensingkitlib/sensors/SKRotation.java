@@ -26,6 +26,7 @@ import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKRotationConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKRotationData;
 
@@ -34,8 +35,8 @@ public class SKRotation extends SKAbstractNativeSensor {
     @SuppressWarnings("unused")
     private static final String TAG = SKRotation.class.getName();
 
-    public SKRotation(final Context context) throws SKException {
-        super(context, SKSensorType.ROTATION);
+    public SKRotation(final Context context, final SKRotationConfiguration configuration) throws SKException {
+        super(context, SKSensorType.ROTATION, configuration);
     }
 
     @Override

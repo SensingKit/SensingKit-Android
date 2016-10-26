@@ -26,6 +26,7 @@ import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKStepDetectorConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKStepDetectorData;
 
@@ -34,8 +35,8 @@ public class SKStepDetector extends SKAbstractNativeSensor {
     @SuppressWarnings("unused")
     private static final String TAG = SKStepDetector.class.getName();
 
-    public SKStepDetector(final Context context) throws SKException {
-        super(context, SKSensorType.STEP_DETECTOR);
+    public SKStepDetector(final Context context, final SKStepDetectorConfiguration configuration) throws SKException {
+        super(context, SKSensorType.STEP_DETECTOR, configuration);
     }
 
     @Override

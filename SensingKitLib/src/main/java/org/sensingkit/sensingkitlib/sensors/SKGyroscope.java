@@ -26,6 +26,7 @@ import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKGyroscopeConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKGyroscopeData;
 
@@ -34,8 +35,8 @@ public class SKGyroscope extends SKAbstractNativeSensor {
     @SuppressWarnings("unused")
     private static final String TAG = SKGyroscope.class.getName();
 
-    public SKGyroscope(final Context context) throws SKException {
-        super(context, SKSensorType.GYROSCOPE);
+    public SKGyroscope(final Context context, final SKGyroscopeConfiguration configuration) throws SKException {
+        super(context, SKSensorType.GYROSCOPE, configuration);
     }
 
     @Override

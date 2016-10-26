@@ -73,6 +73,10 @@ class SKSensorManager {
 
         Log.i(TAG, "Register sensor: " + sensorType.getName() + ".");
 
+        if (!isSensorAvailable(sensorType)) {
+            throw new SKException(TAG, "Sensor is not available in the device.", SKExceptionErrorCode.UNKNOWN_ERROR);
+        }
+
         if (isSensorRegistered(sensorType)) {
             throw new SKException(TAG, "SensorModule is already registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }

@@ -28,6 +28,7 @@ import android.content.IntentFilter;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKScreenStatusConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKScreenStatusData;
 
@@ -38,8 +39,8 @@ public class SKScreenStatus extends SKAbstractSensor {
     @SuppressWarnings("unused")
     private static final String TAG = SKScreenStatus.class.getName();
 
-    public SKScreenStatus(final Context context) throws SKException {
-        super(context, SKSensorType.SCREEN_STATUS);
+    public SKScreenStatus(final Context context, final SKScreenStatusConfiguration configuration) throws SKException {
+        super(context, SKSensorType.SCREEN_STATUS, configuration);
 
         mBroadcastReceiver = new BroadcastReceiver() {
 

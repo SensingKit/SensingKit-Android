@@ -120,13 +120,12 @@ public class SensingKitLib implements SensingKitLibInterface {
 
     @Override
     public void setConfiguration(SKConfiguration configuration, SKSensorType sensorType) throws SKException {
-        // TODO
+        mSensorManager.setConfiguration(configuration, sensorType);
     }
 
     @Override
     public SKConfiguration getConfiguration(SKSensorType sensorType) throws SKException {
-        // TODO
-        return null;
+        return mSensorManager.getConfiguration(sensorType);
     }
 
     /**

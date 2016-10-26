@@ -35,6 +35,7 @@ import org.altbeacon.beacon.Region;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKBeaconProximityConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKBeaconProximityCollectionData;
 import org.sensingkit.sensingkitlib.data.SKBeaconProximityData;
@@ -51,8 +52,8 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
     @SuppressWarnings("unused")
     private static final String TAG = SKBluetooth.class.getName();
 
-    public SKBeaconProximity(Context context) throws SKException {
-        super(context, SKSensorType.BEACON_PROXIMITY);
+    public SKBeaconProximity(final Context context, final SKBeaconProximityConfiguration configuration) throws SKException {
+        super(context, SKSensorType.BEACON_PROXIMITY, configuration);
 
         mBeaconManager = BeaconManager.getInstanceForApplication(context);
 

@@ -26,6 +26,7 @@ import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKHumidityConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKHumidityData;
 
@@ -34,8 +35,8 @@ public class SKHumidity extends SKAbstractNativeSensor {
     @SuppressWarnings("unused")
     private static final String TAG = SKHumidity.class.getName();
 
-    public SKHumidity(final Context context) throws SKException {
-        super(context, SKSensorType.HUMIDITY);
+    public SKHumidity(final Context context, final SKHumidityConfiguration configuration) throws SKException {
+        super(context, SKSensorType.HUMIDITY, configuration);
     }
 
     @Override
