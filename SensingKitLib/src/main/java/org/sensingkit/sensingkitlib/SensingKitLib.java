@@ -24,6 +24,8 @@ package org.sensingkit.sensingkitlib;
 import android.content.Context;
 import android.os.PowerManager;
 
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
+
 public class SensingKitLib implements SensingKitLibInterface {
 
     @SuppressWarnings("unused")
@@ -98,7 +100,12 @@ public class SensingKitLib implements SensingKitLibInterface {
      */
     @Override
     public void registerSensor(SKSensorType sensorType) throws SKException {
-        mSensorManager.registerSensor(sensorType);
+        registerSensor(sensorType, null);
+    }
+
+    @Override
+    public void registerSensor(SKSensorType sensorType, SKConfiguration configuration) throws SKException {
+        mSensorManager.registerSensor(sensorType, configuration);
     }
 
     /**
@@ -109,6 +116,17 @@ public class SensingKitLib implements SensingKitLibInterface {
     @Override
     public void deregisterSensor(SKSensorType sensorType) throws SKException {
         mSensorManager.deregisterSensor(sensorType);
+    }
+
+    @Override
+    public void setConfiguration(SKConfiguration configuration, SKSensorType sensorType) throws SKException {
+        // TODO
+    }
+
+    @Override
+    public SKConfiguration getConfiguration(SKSensorType sensorType) throws SKException {
+        // TODO
+        return null;
     }
 
     /**
@@ -134,7 +152,7 @@ public class SensingKitLib implements SensingKitLibInterface {
     }
 
      /**
-      *  Unsubscribes all event listenerss.
+      *  Unsubscribes all event listeners.
       *
       *  @param sensorType The type of the sensor for which the event listener will be unsubscribed.
       */

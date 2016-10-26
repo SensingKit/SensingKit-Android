@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib;
 
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
+
 @SuppressWarnings("unused")
 public interface SensingKitLibInterface {
 
@@ -59,11 +61,34 @@ public interface SensingKitLibInterface {
     void registerSensor(SKSensorType sensorType) throws SKException;
 
     /**
+     *  Initializes and registers a sensor into the library with a default sensor configuration.
+     *
+     *  @param sensorType The type of the sensor that will be initialized and registered in the library.
+     *  @param configuration ...
+     */
+    void registerSensor(SKSensorType sensorType, SKConfiguration configuration) throws SKException;
+
+    /**
      *  Deregisters a sensor from the library. Sensor should not be actively sensing when this method is called. All previously subscribed blocks will also be unsubscribed.
      *
      *  @param sensorType The type of the sensor that will be deregistered.
      */
     void deregisterSensor(SKSensorType sensorType) throws SKException;
+
+    /**
+     *  TODO
+     *
+     *  @param configuration TODO
+     *  @param sensorType TODO
+     */
+    void setConfiguration(SKConfiguration configuration, SKSensorType sensorType) throws SKException;
+
+    /**
+     *  TODO
+     *
+     *  @param sensorType TODO
+     */
+    SKConfiguration getConfiguration(SKSensorType sensorType) throws SKException;
 
     /**
      *  Subscribes for sensor updates using a specified event listener.
@@ -82,7 +107,7 @@ public interface SensingKitLibInterface {
     void unsubscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException;
 
     /**
-     *  Unsubscribes all event listenerss.
+     *  Unsubscribes all event listeners.
      *
      *  @param sensorType The type of the sensor for which the event listener will be unsubscribed.
      */

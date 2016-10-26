@@ -27,6 +27,7 @@ import android.os.Build;
 import android.util.Log;
 import android.util.SparseArray;
 
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.data.*;
 import org.sensingkit.sensingkitlib.sensors.*;
 
@@ -66,8 +67,9 @@ class SKSensorManager {
      *  Initializes and registers a sensor into the library with a default sensor configuration.
      *
      *  @param sensorType The type of the sensor that will be initialized and registered in the library.
+     *  @param configuration TODO
      */
-    void registerSensor(SKSensorType sensorType) throws SKException {
+    void registerSensor(SKSensorType sensorType, SKConfiguration configuration) throws SKException {
 
         Log.i(TAG, "Register sensor: " + sensorType.getName() + ".");
 
