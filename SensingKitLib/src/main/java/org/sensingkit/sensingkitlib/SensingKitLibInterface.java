@@ -120,7 +120,7 @@ public interface SensingKitLibInterface {
      *
      *  @return A String with the CSV header.
      */
-    String csvHeaderForSensor(SKSensorType sensorType);
+    String csvHeaderForSensor(SKSensorType sensorType) throws SKException;
 
     /**
      *  Starts continuous sensing with the specified sensor.

@@ -585,7 +585,7 @@ class SKSensorManager {
     /**
      *  Return a string with a CSV formatted header that describes the data of the particular sensor.
      */
-    static String csvHeaderForSensor(SKSensorType sensorType) {
+    static String csvHeaderForSensor(SKSensorType sensorType) throws SKException {
 
         switch (sensorType) {
 
@@ -650,8 +650,7 @@ class SKSensorManager {
                 return SKBarometerData.csvHeader();
 
             default:
-                // TODO: Handle errors
-                return "";
+                throw new SKException(TAG, "Unknown Sensor", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
     }
 

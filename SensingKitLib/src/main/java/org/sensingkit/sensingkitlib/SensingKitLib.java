@@ -168,7 +168,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      *  @return A String with the CSV header.
      */
     @Override
-    public String csvHeaderForSensor(SKSensorType sensorType) {
+    public String csvHeaderForSensor(SKSensorType sensorType) throws SKException {
         return SKSensorManager.csvHeaderForSensor(sensorType);
     }
 
