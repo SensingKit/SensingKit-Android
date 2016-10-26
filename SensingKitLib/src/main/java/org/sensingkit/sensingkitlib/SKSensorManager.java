@@ -27,9 +27,9 @@ import android.os.Build;
 import android.util.Log;
 import android.util.SparseArray;
 
-import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
-import org.sensingkit.sensingkitlib.data.*;
 import org.sensingkit.sensingkitlib.sensors.*;
+import org.sensingkit.sensingkitlib.data.*;
+import org.sensingkit.sensingkitlib.configuration.*;
 
 class SKSensorManager {
 
@@ -81,9 +81,14 @@ class SKSensorManager {
             throw new SKException(TAG, "SensorModule is already registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // If configuration was not provided, get the Default
+        if (configuration == null) {
+            configuration = SKSensorManager.defaultConfigurationForSensor(sensorType);
+        }
+
         // Register the Sensor
         int sensorIndex = sensorType.ordinal();
-        SKAbstractSensor sensor = createSensor(sensorType);
+        SKAbstractSensor sensor = createSensor(sensorType, configuration);
         mSensors.put(sensorIndex, sensor);
     }
 
@@ -110,6 +115,30 @@ class SKSensorManager {
         // Deregister the Sensor
         int sensorIndex = sensorType.ordinal();
         mSensors.delete(sensorIndex);
+    }
+
+    void setConfiguration(SKConfiguration configuration, SKSensorType sensorType) throws SKException {
+
+        if (!isSensorAvailable(sensorType)) {
+            throw new SKException(TAG, "Sensor is not available in the device.", SKExceptionErrorCode.UNKNOWN_ERROR);
+        }
+
+        // If configuration was not provided, get the Default
+        if (configuration == null) {
+            configuration = SKSensorManager.defaultConfigurationForSensor(sensorType);
+        }
+
+        // TODO
+    }
+
+    SKConfiguration getConfiguration(SKSensorType sensorType) throws SKException {
+
+        if (!isSensorAvailable(sensorType)) {
+            throw new SKException(TAG, "Sensor is not available.", SKExceptionErrorCode.UNKNOWN_ERROR);
+        }
+
+        // TODO
+        return null;
     }
 
     /**
@@ -192,8 +221,7 @@ class SKSensorManager {
                 return packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_BAROMETER);
 
             default:
-                // TODO: Handle errors
-                return false;
+                throw new SKException(TAG, "Unknown Sensor", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
     }
 
@@ -236,38 +264,38 @@ class SKSensorManager {
         return mSensors.get(sensorIndex);
     }
 
-    private SKAbstractSensor createSensor(SKSensorType sensorType) throws SKException {
+    private SKAbstractSensor createSensor(SKSensorType sensorType, SKConfiguration configuration) throws SKException {
 
         SKAbstractSensor sensor;
 
         switch (sensorType) {
 
             case ACCELEROMETER:
-                sensor = new SKAccelerometer(mApplicationContext);
+                sensor = new SKAccelerometer(mApplicationContext, (SKAccelerometerConfiguration)configuration);
                 break;
 
             case GRAVITY:
-                sensor = new SKGravity(mApplicationContext);
+                sensor = new SKGravity(mApplicationContext, (SKGravityConfiguration)configuration);
                 break;
 
             case LINEAR_ACCELERATION:
-                sensor = new SKLinearAcceleration(mApplicationContext);
+                sensor = new SKLinearAcceleration(mApplicationContext, (SKLinearAccelerationConfiguration)configuration);
                 break;
 
             case GYROSCOPE:
-                sensor = new SKGyroscope(mApplicationContext);
+                sensor = new SKGyroscope(mApplicationContext, (SKGyroscopeConfiguration)configuration);
                 break;
 
             case ROTATION:
-                sensor = new SKRotation(mApplicationContext);
+                sensor = new SKRotation(mApplicationContext, (SKRotationConfiguration)configuration);
                 break;
 
             case MAGNETOMETER:
-                sensor = new SKMagnetometer(mApplicationContext);
+                sensor = new SKMagnetometer(mApplicationContext, (SKMagnetometerConfiguration)configuration);
                 break;
 
             case AMBIENT_TEMPERATURE:
-                sensor = new SKAmbientTemperature(mApplicationContext);
+                sensor = new SKAmbientTemperature(mApplicationContext, (SKAmbientTemperatureConfiguration)configuration);
                 break;
 
             case STEP_DETECTOR:
@@ -276,7 +304,7 @@ class SKSensorManager {
                     throw new SKException(TAG, "STEP_DETECTOR requires Android KitKat (19) or greater.", SKExceptionErrorCode.UNKNOWN_ERROR);
                 }
 
-                sensor = new SKStepDetector(mApplicationContext);
+                sensor = new SKStepDetector(mApplicationContext, (SKStepDetectorConfiguration)configuration);
                 break;
 
             case STEP_COUNTER:
@@ -285,39 +313,39 @@ class SKSensorManager {
                     throw new SKException(TAG, "STEP_COUNTER requires Android KitKat (19) or greater.", SKExceptionErrorCode.UNKNOWN_ERROR);
                 }
 
-                sensor = new SKStepCounter(mApplicationContext);
+                sensor = new SKStepCounter(mApplicationContext, (SKStepCounterConfiguration)configuration);
                 break;
 
             case LIGHT:
-                sensor = new SKLight(mApplicationContext);
+                sensor = new SKLight(mApplicationContext, (SKLightConfiguration)configuration);
                 break;
 
             case LOCATION:
-                sensor = new SKLocation(mApplicationContext);
+                sensor = new SKLocation(mApplicationContext, (SKLocationConfiguration)configuration);
                 break;
 
             case MOTION_ACTIVITY:
-                sensor = new SKMotionActivity(mApplicationContext);
+                sensor = new SKMotionActivity(mApplicationContext, (SKMotionActivityConfiguration)configuration);
                 break;
 
             case BATTERY:
-                sensor = new SKBattery(mApplicationContext);
+                sensor = new SKBattery(mApplicationContext, (SKBatteryConfiguration)configuration);
                 break;
 
             case SCREEN_STATUS:
-                sensor = new SKScreenStatus(mApplicationContext);
+                sensor = new SKScreenStatus(mApplicationContext, (SKScreenStatusConfiguration)configuration);
                 break;
 
             case MICROPHONE:
-                sensor = new SKMicrophone(mApplicationContext);
+                sensor = new SKMicrophone(mApplicationContext, (SKMicrophoneConfiguration)configuration);
                 break;
 
             case AUDIO_LEVEL:
-                sensor = new SKAudioLevel(mApplicationContext);
+                sensor = new SKAudioLevel(mApplicationContext, (SKAudioLevelConfiguration)configuration);
                 break;
 
             case BLUETOOTH:
-                sensor = new SKBluetooth(mApplicationContext);
+                sensor = new SKBluetooth(mApplicationContext, (SKBluetoothConfiguration)configuration);
                 break;
 
             case BEACON_PROXIMITY:
@@ -326,15 +354,15 @@ class SKSensorManager {
                     throw new SKException(TAG, "STEP_COUNTER requires Android Jelly Bean (18) or greater.", SKExceptionErrorCode.UNKNOWN_ERROR);
                 }
 
-                sensor = new SKBeaconProximity(mApplicationContext);
+                sensor = new SKBeaconProximity(mApplicationContext, (SKBeaconProximityConfiguration)configuration);
                 break;
 
             case HUMIDITY:
-                sensor = new SKHumidity(mApplicationContext);
+                sensor = new SKHumidity(mApplicationContext, (SKHumidityConfiguration)configuration);
                 break;
 
             case BAROMETER:
-                sensor = new SKBarometer(mApplicationContext);
+                sensor = new SKBarometer(mApplicationContext, (SKBarometerConfiguration)configuration);
                 break;
 
             // Don't forget the break; here
@@ -344,6 +372,101 @@ class SKSensorManager {
         }
 
         return sensor;
+    }
+
+    private static SKConfiguration defaultConfigurationForSensor(SKSensorType sensorType) throws SKException {
+
+        SKConfiguration configuration;
+
+        switch (sensorType) {
+
+            case ACCELEROMETER:
+                configuration = new SKAccelerometerConfiguration();
+                break;
+
+            case GRAVITY:
+                configuration = new SKGravityConfiguration();
+                break;
+
+            case LINEAR_ACCELERATION:
+                configuration = new SKLinearAccelerationConfiguration();
+                break;
+
+            case GYROSCOPE:
+                configuration = new SKGyroscopeConfiguration();
+                break;
+
+            case ROTATION:
+                configuration = new SKRotationConfiguration();
+                break;
+
+            case MAGNETOMETER:
+                configuration = new SKMagnetometerConfiguration();
+                break;
+
+            case AMBIENT_TEMPERATURE:
+                configuration = new SKAmbientTemperatureConfiguration();
+                break;
+
+            case STEP_DETECTOR:
+                configuration = new SKStepDetectorConfiguration();
+                break;
+
+            case STEP_COUNTER:
+                configuration = new SKStepCounterConfiguration();
+                break;
+
+            case LIGHT:
+                configuration = new SKLightConfiguration();
+                break;
+
+            case LOCATION:
+                configuration = new SKLocationConfiguration();
+                break;
+
+            case MOTION_ACTIVITY:
+                configuration = new SKMotionActivityConfiguration();
+                break;
+
+            case BATTERY:
+                configuration = new SKBatteryConfiguration();
+                break;
+
+            case SCREEN_STATUS:
+                configuration = new SKScreenStatusConfiguration();
+                break;
+
+            case MICROPHONE:
+                configuration = new SKMicrophoneConfiguration();
+                break;
+
+            case AUDIO_LEVEL:
+                configuration = new SKAudioLevelConfiguration();
+                break;
+
+            case BLUETOOTH:
+                configuration = new SKBluetoothConfiguration();
+                break;
+
+            case BEACON_PROXIMITY:
+                configuration = new SKBeaconProximityConfiguration();
+                break;
+
+            case HUMIDITY:
+                configuration = new SKHumidityConfiguration();
+                break;
+
+            case BAROMETER:
+                configuration = new SKBarometerConfiguration();
+                break;
+
+            // Don't forget the break; here
+
+            default:
+                throw new SKException(TAG, "Unknown Sensor", SKExceptionErrorCode.UNKNOWN_ERROR);
+        }
+
+        return configuration;
     }
 
     /**
