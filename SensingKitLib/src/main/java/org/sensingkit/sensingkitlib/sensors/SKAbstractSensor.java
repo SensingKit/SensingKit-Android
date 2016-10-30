@@ -27,13 +27,12 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
 import org.sensingkit.sensingkitlib.SKSensorType;
-import org.sensingkit.sensingkitlib.configuration.SKAbstractConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 
 import java.util.ArrayList;
 
-public abstract class SKAbstractSensor implements SKSensorInterface {
+public abstract class SKAbstractSensor implements SKSensor {
 
     @SuppressWarnings("unused")
     private static final String TAG = SKAbstractSensor.class.getName();

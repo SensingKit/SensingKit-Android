@@ -27,7 +27,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 
 @SuppressWarnings("unused")
-public interface SKSensorInterface {
+public interface SKSensor {
 
     SKSensorType getSensorType();
 

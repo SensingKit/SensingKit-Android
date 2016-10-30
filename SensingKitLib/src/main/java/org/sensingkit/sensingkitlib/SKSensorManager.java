@@ -539,7 +539,7 @@ class SKSensorManager {
             throw new SKException(TAG, "Sensor [" + sensorType.getName() + "] is already not sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        SKSensorInterface sensor = getSensor(sensorType);
+        SKSensor sensor = getSensor(sensorType);
 
         // Stop Sensing
         sensor.stopSensing();
