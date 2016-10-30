@@ -28,4 +28,8 @@ public class SKBatteryConfiguration extends SKAbstractConfiguration {
 
         // Set default values
     }
+
+    public SKBatteryConfiguration(SKBatteryConfiguration configuration) {
+        super();
+    }
 }

@@ -28,4 +28,8 @@ public class SKAmbientTemperatureConfiguration extends SKAbstractNativeSensorCon
 
         // Set default values
     }
+
+    public SKAmbientTemperatureConfiguration(SKAmbientTemperatureConfiguration configuration) {
+        super(configuration.samplingRate);
+    }
 }

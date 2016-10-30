@@ -28,4 +28,8 @@ public class SKGyroscopeConfiguration extends SKAbstractNativeSensorConfiguratio
 
         // Set default values
     }
+
+    public SKGyroscopeConfiguration(SKGyroscopeConfiguration configuration) {
+        super(configuration.samplingRate);
+    }
 }

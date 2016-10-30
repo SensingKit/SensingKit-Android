@@ -28,4 +28,8 @@ public class SKMotionActivityConfiguration extends SKAbstractConfiguration {
 
         // Set default values
     }
+
+    public SKMotionActivityConfiguration(SKMotionActivityConfiguration configuration) {
+        super();
+    }
 }

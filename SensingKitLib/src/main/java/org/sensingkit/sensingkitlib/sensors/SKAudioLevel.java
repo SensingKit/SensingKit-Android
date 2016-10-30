@@ -29,6 +29,7 @@ import android.media.MediaRecorder;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKAudioLevelConfiguration;
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKAudioLevelData;
 
@@ -49,6 +50,16 @@ public class SKAudioLevel extends SKAbstractSensor {
 
         // Configure the AudioRecord
         audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize);
+    }
+
+    @Override
+    public void setConfiguration(SKConfiguration configuration) throws SKException {
+
+    }
+
+    @Override
+    public SKConfiguration getConfiguration() {
+        return new SKAudioLevelConfiguration((SKAudioLevelConfiguration)mConfiguration);
     }
 
     @Override

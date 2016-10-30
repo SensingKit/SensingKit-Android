@@ -29,6 +29,7 @@ import android.content.IntentFilter;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKBatteryConfiguration;
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKBatteryData;
 
@@ -105,6 +106,16 @@ public class SKBattery extends SKAbstractSensor {
 
     private void unregisterLocalBroadcastManager() {
         mApplicationContext.unregisterReceiver(mBroadcastReceiver);
+    }
+
+    @Override
+    public void setConfiguration(SKConfiguration configuration) throws SKException {
+
+    }
+
+    @Override
+    public SKConfiguration getConfiguration() {
+        return new SKBatteryConfiguration((SKBatteryConfiguration)mConfiguration);
     }
 
     @Override

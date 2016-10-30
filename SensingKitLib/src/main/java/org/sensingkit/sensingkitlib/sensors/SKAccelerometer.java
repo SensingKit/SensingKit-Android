@@ -27,6 +27,7 @@ import android.hardware.SensorEvent;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKAccelerometerConfiguration;
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKAccelerometerData;
 
@@ -43,6 +44,16 @@ public class SKAccelerometer extends SKAbstractNativeSensor {
     protected SKAbstractData buildData(SensorEvent event)
     {
         return new SKAccelerometerData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
+    }
+
+    @Override
+    public void setConfiguration(SKConfiguration configuration) throws SKException {
+
+    }
+
+    @Override
+    public SKConfiguration getConfiguration() {
+        return new SKAccelerometerConfiguration((SKAccelerometerConfiguration)mConfiguration);
     }
 
     @Override

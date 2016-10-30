@@ -28,4 +28,8 @@ public class SKLightConfiguration extends SKAbstractNativeSensorConfiguration {
 
         // Set default values
     }
+
+    public SKLightConfiguration(SKLightConfiguration configuration) {
+        super(configuration.samplingRate);
+    }
 }

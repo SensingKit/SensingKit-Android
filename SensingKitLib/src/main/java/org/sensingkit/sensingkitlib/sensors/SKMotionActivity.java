@@ -38,6 +38,7 @@ import com.google.android.gms.location.DetectedActivity;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKMotionActivityConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKMotionActivityData;
@@ -174,6 +175,16 @@ public class SKMotionActivity extends SKAbstractGoogleServicesSensor {
     private void unregisterLocalBroadcastManager() {
         LocalBroadcastManager manager = LocalBroadcastManager.getInstance(mApplicationContext);
         manager.unregisterReceiver(mBroadcastReceiver);
+    }
+
+    @Override
+    public void setConfiguration(SKConfiguration configuration) throws SKException {
+
+    }
+
+    @Override
+    public SKConfiguration getConfiguration() {
+        return new SKMotionActivityConfiguration((SKMotionActivityConfiguration)mConfiguration);
     }
 
     @Override

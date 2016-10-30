@@ -24,6 +24,7 @@ package org.sensingkit.sensingkitlib.sensors;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 
 @SuppressWarnings("unused")
 public interface SKSensorInterface {
@@ -37,4 +38,7 @@ public interface SKSensorInterface {
     void subscribeSensorDataListener(SKSensorDataListener callback) throws SKException;
     void unsubscribeSensorDataListener(SKSensorDataListener callback) throws SKException;
     void unsubscribeAllSensorDataListeners() throws SKException;
+
+    void setConfiguration(SKConfiguration configuration) throws SKException;
+    SKConfiguration getConfiguration();
 }

@@ -28,6 +28,7 @@ import android.os.Environment;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKMicrophoneConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKMicrophoneData;
@@ -51,6 +52,16 @@ public class SKMicrophone extends SKAbstractSensor {
         recorder.setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS);
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
         recorder.setOutputFile(outputFile);
+    }
+
+    @Override
+    public void setConfiguration(SKConfiguration configuration) throws SKException {
+
+    }
+
+    @Override
+    public SKConfiguration getConfiguration() {
+        return new SKMicrophoneConfiguration((SKMicrophoneConfiguration)mConfiguration);
     }
 
     @Override

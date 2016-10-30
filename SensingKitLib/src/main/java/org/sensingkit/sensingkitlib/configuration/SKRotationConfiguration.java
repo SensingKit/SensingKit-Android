@@ -28,4 +28,8 @@ public class SKRotationConfiguration extends SKAbstractNativeSensorConfiguration
 
         // Set default values
     }
+
+    public SKRotationConfiguration(SKRotationConfiguration configuration) {
+        super(configuration.samplingRate);
+    }
 }

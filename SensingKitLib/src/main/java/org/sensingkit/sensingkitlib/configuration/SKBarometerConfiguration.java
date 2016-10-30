@@ -28,4 +28,8 @@ public class SKBarometerConfiguration extends SKAbstractNativeSensorConfiguratio
 
         // Set default values
     }
+
+    public SKBarometerConfiguration(SKBarometerConfiguration configuration) {
+        super(configuration.samplingRate);
+    }
 }

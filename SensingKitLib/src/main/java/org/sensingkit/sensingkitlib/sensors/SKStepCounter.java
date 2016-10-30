@@ -26,6 +26,7 @@ import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKStepCounterConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKStepCounterData;
@@ -43,6 +44,16 @@ public class SKStepCounter extends SKAbstractNativeSensor {
     protected SKAbstractData buildData(SensorEvent event)
     {
         return new SKStepCounterData(System.currentTimeMillis(), (int)event.values[0]);
+    }
+
+    @Override
+    public void setConfiguration(SKConfiguration configuration) throws SKException {
+
+    }
+
+    @Override
+    public SKConfiguration getConfiguration() {
+        return new SKStepCounterConfiguration((SKStepCounterConfiguration)mConfiguration);
     }
 
     @Override

@@ -28,4 +28,8 @@ public class SKMagnetometerConfiguration extends SKAbstractNativeSensorConfigura
 
         // Set default values
     }
+
+    public SKMagnetometerConfiguration(SKMagnetometerConfiguration configuration) {
+        super(configuration.samplingRate);
+    }
 }

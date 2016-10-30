@@ -28,4 +28,8 @@ public class SKLocationConfiguration extends SKAbstractConfiguration {
 
         // Set default values
     }
+
+    public SKLocationConfiguration(SKLocationConfiguration configuration) {
+        super();
+    }
 }

@@ -27,6 +27,7 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKAbstractConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 
@@ -115,5 +116,4 @@ public abstract class SKAbstractSensor implements SKSensorInterface {
             }
         }
     }
-
 }

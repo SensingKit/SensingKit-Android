@@ -28,4 +28,8 @@ public class SKStepCounterConfiguration extends SKAbstractNativeSensorConfigurat
 
         // Set default values
     }
+
+    public SKStepCounterConfiguration(SKStepCounterConfiguration configuration) {
+        super(configuration.samplingRate);
+    }
 }

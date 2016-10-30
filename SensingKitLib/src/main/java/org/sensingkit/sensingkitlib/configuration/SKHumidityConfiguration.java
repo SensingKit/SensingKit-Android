@@ -28,4 +28,8 @@ public class SKHumidityConfiguration extends SKAbstractNativeSensorConfiguration
 
         // Set default values
     }
+
+    public SKHumidityConfiguration(SKHumidityConfiguration configuration) {
+        super(configuration.samplingRate);
+    }
 }

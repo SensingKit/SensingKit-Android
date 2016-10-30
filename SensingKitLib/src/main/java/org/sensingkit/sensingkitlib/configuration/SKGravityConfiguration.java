@@ -28,4 +28,8 @@ public class SKGravityConfiguration extends SKAbstractNativeSensorConfiguration 
 
         // Set default values
     }
+
+    public SKGravityConfiguration(SKGravityConfiguration configuration) {
+        super(configuration.samplingRate);
+    }
 }

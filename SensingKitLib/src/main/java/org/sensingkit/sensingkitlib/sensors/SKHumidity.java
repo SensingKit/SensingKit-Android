@@ -26,6 +26,7 @@ import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKHumidityConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKHumidityData;
@@ -43,6 +44,16 @@ public class SKHumidity extends SKAbstractNativeSensor {
     protected SKAbstractData buildData(SensorEvent event)
     {
         return new SKHumidityData(System.currentTimeMillis(), event.values[0]);
+    }
+
+    @Override
+    public void setConfiguration(SKConfiguration configuration) throws SKException {
+
+    }
+
+    @Override
+    public SKConfiguration getConfiguration() {
+        return new SKHumidityConfiguration((SKHumidityConfiguration)mConfiguration);
     }
 
     @Override

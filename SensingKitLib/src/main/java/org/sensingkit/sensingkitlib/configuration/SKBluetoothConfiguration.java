@@ -28,4 +28,8 @@ public class SKBluetoothConfiguration extends SKAbstractConfiguration {
 
         // Set default values
     }
+
+    public SKBluetoothConfiguration(SKBluetoothConfiguration configuration) {
+        super();
+    }
 }

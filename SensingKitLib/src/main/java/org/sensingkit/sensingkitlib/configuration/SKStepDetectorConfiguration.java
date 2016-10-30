@@ -28,4 +28,8 @@ public class SKStepDetectorConfiguration extends SKAbstractNativeSensorConfigura
 
         // Set default values
     }
+
+    public SKStepDetectorConfiguration(SKStepDetectorConfiguration configuration) {
+        super(configuration.samplingRate);
+    }
 }

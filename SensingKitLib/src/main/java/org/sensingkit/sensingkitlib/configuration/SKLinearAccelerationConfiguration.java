@@ -28,4 +28,10 @@ public class SKLinearAccelerationConfiguration extends SKAbstractNativeSensorCon
 
         // Set default values
     }
+
+    public SKLinearAccelerationConfiguration(SKLinearAccelerationConfiguration configuration) {
+        super(configuration.samplingRate);
+    }
+
+
 }

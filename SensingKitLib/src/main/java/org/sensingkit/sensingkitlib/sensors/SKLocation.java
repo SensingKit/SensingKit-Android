@@ -31,6 +31,7 @@ import com.google.android.gms.location.LocationServices;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKLocationConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKLocationData;
@@ -98,6 +99,16 @@ public class SKLocation extends SKAbstractGoogleServicesSensor implements Locati
 
         LocationServices.FusedLocationApi.removeLocationUpdates(mClient, this);
 
+    }
+
+    @Override
+    public void setConfiguration(SKConfiguration configuration) throws SKException {
+
+    }
+
+    @Override
+    public SKConfiguration getConfiguration() {
+        return new SKLocationConfiguration((SKLocationConfiguration)mConfiguration);
     }
 
     @Override

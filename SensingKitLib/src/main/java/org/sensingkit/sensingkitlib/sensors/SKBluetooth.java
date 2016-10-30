@@ -32,6 +32,7 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKBluetoothConfiguration;
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKBluetoothCollectionData;
 import org.sensingkit.sensingkitlib.data.SKBluetoothData;
@@ -96,6 +97,16 @@ public class SKBluetooth extends SKAbstractSensor {
             }
         }
     };
+
+    @Override
+    public void setConfiguration(SKConfiguration configuration) throws SKException {
+
+    }
+
+    @Override
+    public SKConfiguration getConfiguration() {
+        return new SKBluetoothConfiguration((SKBluetoothConfiguration)mConfiguration);
+    }
 
     @Override
     protected boolean shouldPostSensorData(SKAbstractData data) {

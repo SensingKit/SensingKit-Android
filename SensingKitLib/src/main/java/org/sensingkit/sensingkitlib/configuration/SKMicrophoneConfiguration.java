@@ -28,4 +28,8 @@ public class SKMicrophoneConfiguration extends SKAbstractConfiguration {
 
         // Set default values
     }
+
+    public SKMicrophoneConfiguration(SKMicrophoneConfiguration configuration) {
+        super();
+    }
 }

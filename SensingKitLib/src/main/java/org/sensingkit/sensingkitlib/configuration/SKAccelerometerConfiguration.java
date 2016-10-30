@@ -28,4 +28,8 @@ public class SKAccelerometerConfiguration extends SKAbstractNativeSensorConfigur
 
         // Set default values
     }
+
+    public SKAccelerometerConfiguration(SKAccelerometerConfiguration configuration) {
+        super(configuration.samplingRate);
+    }
 }

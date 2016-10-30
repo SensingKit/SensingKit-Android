@@ -28,4 +28,8 @@ public class SKAudioLevelConfiguration extends SKAbstractConfiguration {
 
         // Set default values
     }
+
+    public SKAudioLevelConfiguration(SKAudioLevelConfiguration configuration) {
+        super();
+    }
 }

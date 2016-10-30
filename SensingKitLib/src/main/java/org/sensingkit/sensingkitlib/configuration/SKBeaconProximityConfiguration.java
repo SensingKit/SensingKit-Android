@@ -28,4 +28,8 @@ public class SKBeaconProximityConfiguration extends SKAbstractConfiguration {
 
         // Set default values
     }
+
+    public SKBeaconProximityConfiguration(SKBeaconProximityConfiguration configuration) {
+        super();
+    }
 }

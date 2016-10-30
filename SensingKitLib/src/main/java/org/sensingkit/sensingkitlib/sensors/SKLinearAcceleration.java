@@ -26,6 +26,7 @@ import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKLinearAccelerationConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKLinearAccelerationData;
@@ -43,6 +44,16 @@ public class SKLinearAcceleration extends SKAbstractNativeSensor {
     protected SKAbstractData buildData(SensorEvent event)
     {
         return new SKLinearAccelerationData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
+    }
+
+    @Override
+    public void setConfiguration(SKConfiguration configuration) throws SKException {
+
+    }
+
+    @Override
+    public SKConfiguration getConfiguration() {
+        return new SKLinearAccelerationConfiguration((SKLinearAccelerationConfiguration)mConfiguration);
     }
 
     @Override

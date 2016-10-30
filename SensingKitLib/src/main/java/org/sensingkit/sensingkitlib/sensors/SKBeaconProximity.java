@@ -36,6 +36,7 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKBeaconProximityConfiguration;
+import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKBeaconProximityCollectionData;
 import org.sensingkit.sensingkitlib.data.SKBeaconProximityData;
@@ -110,6 +111,16 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
     public boolean bindService(Intent intent, ServiceConnection serviceConnection, int i) {
         return mApplicationContext.bindService(intent, serviceConnection, i);
+    }
+
+    @Override
+    public void setConfiguration(SKConfiguration configuration) throws SKException {
+
+    }
+
+    @Override
+    public SKConfiguration getConfiguration() {
+        return new SKBeaconProximityConfiguration((SKBeaconProximityConfiguration)mConfiguration);
     }
 
     @Override

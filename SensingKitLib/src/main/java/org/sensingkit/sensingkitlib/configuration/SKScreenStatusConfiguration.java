@@ -28,4 +28,8 @@ public class SKScreenStatusConfiguration extends SKAbstractConfiguration {
 
         // Set default values
     }
+
+    public SKScreenStatusConfiguration(SKScreenStatusConfiguration configuration) {
+        super();
+    }
 }
