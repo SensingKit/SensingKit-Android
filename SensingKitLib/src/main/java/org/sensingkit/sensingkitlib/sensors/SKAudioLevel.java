@@ -27,6 +27,7 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 
 import org.sensingkit.sensingkitlib.SKException;
+import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKAudioLevelConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
@@ -55,6 +56,18 @@ public class SKAudioLevel extends SKAbstractSensor {
     @Override
     public void setConfiguration(SKConfiguration configuration) throws SKException {
 
+        // Check if the correct configuration type provided
+        if (!(configuration instanceof SKAudioLevelConfiguration)) {
+            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMicrophone.",
+                    SKExceptionErrorCode.UNKNOWN_ERROR);
+        }
+
+        super.setConfiguration(configuration);
+
+        // Cast the configuration instance
+        SKAudioLevelConfiguration audioLevelConfiguration = (SKAudioLevelConfiguration)configuration;
+
+        // Make the required updates on the sensor
     }
 
     @Override

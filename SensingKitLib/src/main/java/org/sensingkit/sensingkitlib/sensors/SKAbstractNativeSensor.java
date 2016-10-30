@@ -95,7 +95,7 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
     protected abstract SKAbstractData buildData(SensorEvent event);
 
     @SuppressLint("InlinedApi")  // There is a check in SKSensorManager
-    private static int getSensorType(SKSensorType sensorType) throws SKException{
+    private static int getSensorType(SKSensorType sensorType) throws SKException {
 
         switch (sensorType) {
 

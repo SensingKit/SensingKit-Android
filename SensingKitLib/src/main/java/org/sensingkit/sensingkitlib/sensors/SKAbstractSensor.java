@@ -62,6 +62,11 @@ public abstract class SKAbstractSensor implements SKSensor {
         return mSensorType.getName();
     }
 
+    @Override
+    public void setConfiguration(SKConfiguration configuration) throws SKException {
+        this.mConfiguration = configuration;
+    }
+
     public void subscribeSensorDataListener(SKSensorDataListener callback) throws SKException {
 
         // Init the list

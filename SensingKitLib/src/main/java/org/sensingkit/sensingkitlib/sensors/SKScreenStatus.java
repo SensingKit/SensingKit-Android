@@ -27,8 +27,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 
 import org.sensingkit.sensingkitlib.SKException;
+import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
+import org.sensingkit.sensingkitlib.configuration.SKMicrophoneConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKScreenStatusConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKScreenStatusData;
@@ -78,6 +80,18 @@ public class SKScreenStatus extends SKAbstractSensor {
     @Override
     public void setConfiguration(SKConfiguration configuration) throws SKException {
 
+        // Check if the correct configuration type provided
+        if (!(configuration instanceof SKScreenStatusConfiguration)) {
+            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMicrophone.",
+                    SKExceptionErrorCode.UNKNOWN_ERROR);
+        }
+
+        super.setConfiguration(configuration);
+
+        // Cast the configuration instance
+        SKScreenStatusConfiguration screenStatusConfiguration = (SKScreenStatusConfiguration)configuration;
+
+        // Make the required updates on the sensor
     }
 
     @Override

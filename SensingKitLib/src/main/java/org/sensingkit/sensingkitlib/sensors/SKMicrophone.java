@@ -57,6 +57,18 @@ public class SKMicrophone extends SKAbstractSensor {
     @Override
     public void setConfiguration(SKConfiguration configuration) throws SKException {
 
+        // Check if the correct configuration type provided
+        if (!(configuration instanceof SKMicrophoneConfiguration)) {
+            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMicrophone.",
+                    SKExceptionErrorCode.UNKNOWN_ERROR);
+        }
+
+        super.setConfiguration(configuration);
+
+        // Cast the configuration instance
+        SKMicrophoneConfiguration microphoneConfiguration = (SKMicrophoneConfiguration)configuration;
+
+        // Make the required updates on the sensor
     }
 
     @Override

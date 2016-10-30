@@ -25,6 +25,7 @@ import android.content.Context;
 import android.hardware.SensorEvent;
 
 import org.sensingkit.sensingkitlib.SKException;
+import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKRotationConfiguration;
@@ -54,6 +55,18 @@ public class SKRotation extends SKAbstractNativeSensor {
     @Override
     public void setConfiguration(SKConfiguration configuration) throws SKException {
 
+        // Check if the correct configuration type provided
+        if (!(configuration instanceof SKRotationConfiguration)) {
+            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMicrophone.",
+                    SKExceptionErrorCode.UNKNOWN_ERROR);
+        }
+
+        super.setConfiguration(configuration);
+
+        // Cast the configuration instance
+        SKRotationConfiguration rotationConfiguration = (SKRotationConfiguration)configuration;
+
+        // Make the required updates on the sensor
     }
 
     @Override
