@@ -31,6 +31,7 @@ import android.hardware.SensorManager;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.configuration.SKAbstractNativeSensorConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 
@@ -73,7 +74,10 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
 
         this.isSensing = true;
 
-        boolean status = mSensorManager.registerListener(mSensorEventListener, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        // Get the configuration
+        SKAbstractNativeSensorConfiguration configuration = (SKAbstractNativeSensorConfiguration)mConfiguration;
+
+        boolean status = mSensorManager.registerListener(mSensorEventListener, mSensor, configuration.getSamplingRate());
 
         if (!status) {
             throw new SKException(TAG, "SensorModule '" + getSensorName() + "' could not be started.", SKExceptionErrorCode.UNKNOWN_ERROR);
