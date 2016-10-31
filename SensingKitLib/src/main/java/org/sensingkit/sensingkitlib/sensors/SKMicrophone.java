@@ -118,14 +118,22 @@ public class SKMicrophone extends SKAbstractSensor {
 
         this.isSensing = false;
 
+        // Stop recording
         recorder.stop();
-        recorder.reset();
-        recorder.release();
 
         // Build the data object
         SKAbstractData data = new SKMicrophoneData(System.currentTimeMillis(), "Stopped");
 
         // Submit sensor data object
         submitSensorData(data);
+    }
+
+    @Override
+    public void sensorDeregestered() {
+        super.sensorDeregestered();
+
+        // Release sensor
+        recorder.reset();
+        recorder.release();
     }
 }

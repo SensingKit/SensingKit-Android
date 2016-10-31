@@ -122,4 +122,10 @@ public abstract class SKAbstractSensor implements SKSensor {
             }
         }
     }
+
+    @Override
+    public void sensorDeregestered() {
+        // Override this method in the sensor subclass if needed.
+    }
+
 }

@@ -41,4 +41,6 @@ public interface SKSensor {
 
     void setConfiguration(SKConfiguration configuration) throws SKException;
     SKConfiguration getConfiguration();
+
+    void sensorDeregestered();
 }

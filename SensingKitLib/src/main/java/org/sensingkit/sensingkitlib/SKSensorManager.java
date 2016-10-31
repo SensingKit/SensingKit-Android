@@ -113,6 +113,7 @@ class SKSensorManager {
         getSensor(sensorType).unsubscribeAllSensorDataListeners();
 
         // Deregister the Sensor
+        getSensor(sensorType).sensorDeregestered();
         int sensorIndex = sensorType.ordinal();
         mSensors.delete(sensorIndex);
     }

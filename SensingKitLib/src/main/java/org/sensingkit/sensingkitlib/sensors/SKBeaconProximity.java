@@ -66,8 +66,6 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
         mRegion = new Region("myRangingUniqueId", null, null, null);  // Add UUID
 
         mBeaconManager.bind(this);
-
-        // TODO: mBeaconManager.unbind(this);
     }
 
     @Override
@@ -161,5 +159,13 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
         }
 
         this.isSensing = false;
+    }
+
+    @Override
+    public void sensorDeregestered() {
+        super.sensorDeregestered();
+
+        // Release sensor
+        mBeaconManager.unbind(this);
     }
 }
