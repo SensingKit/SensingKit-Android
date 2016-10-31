@@ -43,11 +43,13 @@ public abstract class SKAbstractSensor implements SKSensor {
     protected ArrayList<SKSensorDataListener> mSensorDataListeners;
     protected SKConfiguration mConfiguration;
 
-    protected SKAbstractSensor(final Context context, final SKSensorType sensorType, final SKConfiguration configuration) {
+    protected SKAbstractSensor(final Context context, final SKSensorType sensorType, final SKConfiguration configuration) throws SKException {
 
         this.mApplicationContext = context;
         this.mSensorType = sensorType;
-        this.mConfiguration = configuration;
+
+        // Set the configuration
+        setConfiguration(configuration);
     }
 
     public boolean isSensing() {
