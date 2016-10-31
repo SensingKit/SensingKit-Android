@@ -89,17 +89,22 @@ public class SKLocation extends SKAbstractGoogleServicesSensor implements Locati
 
     private void registerForLocationUpdates() {
 
-        LocationRequest locationRequest = LocationRequest.create();
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setInterval(1000); // Update location every second
+        // Cast the configuration instance
+        SKLocationConfiguration locationConfiguration = (SKLocationConfiguration)mConfiguration;
 
+        // Configure the LocationRequest
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setPriority(locationConfiguration.getPriority());
+        locationRequest.setInterval(locationConfiguration.getInterval());
+        locationRequest.setFastestInterval(locationConfiguration.getFastestInterval());
+
+        // Start the request
         LocationServices.FusedLocationApi.requestLocationUpdates(mClient, locationRequest, this);
     }
 
     private void unregisterForLocationUpdates() {
 
         LocationServices.FusedLocationApi.removeLocationUpdates(mClient, this);
-
     }
 
     @Override
@@ -111,12 +116,8 @@ public class SKLocation extends SKAbstractGoogleServicesSensor implements Locati
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // Set the configuration
         super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKLocationConfiguration locationConfiguration = (SKLocationConfiguration)configuration;
-
-        // Make the required updates on the sensor
     }
 
     @Override

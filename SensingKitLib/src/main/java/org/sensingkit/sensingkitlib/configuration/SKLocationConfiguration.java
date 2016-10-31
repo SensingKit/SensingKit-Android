@@ -21,15 +21,65 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import com.google.android.gms.location.LocationRequest;
+
 public class SKLocationConfiguration extends SKAbstractConfiguration {
+
+    public static final int PRIORITY_HIGH_ACCURACY = LocationRequest.PRIORITY_HIGH_ACCURACY;
+    public static final int PRIORITY_BALANCED_POWER_ACCURACY = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY;
+    public static final int PRIORITY_LOW_POWER = LocationRequest.PRIORITY_LOW_POWER;
+    public static final int PRIORITY_NO_POWER = LocationRequest.PRIORITY_NO_POWER;
+
+    protected int priority;
+    protected int interval;
+    protected int fastestInterval;
 
     public SKLocationConfiguration() {
         super();
 
         // Set default values
+        this.priority = PRIORITY_HIGH_ACCURACY;
+        this.interval = 1000;
+        this.fastestInterval = 500;
     }
 
     public SKLocationConfiguration(SKLocationConfiguration configuration) {
         super();
+
+        // Save local configuration
+        this.priority = configuration.priority;
+        this.interval = configuration.interval;
+        this.fastestInterval = configuration.fastestInterval;
     }
+
+    @SuppressWarnings("unused")
+    public int getPriority() {
+        return priority;
+    }
+
+    @SuppressWarnings("unused")
+    public void setPriority(final int priority) {
+        this.priority = priority;
+    }
+
+    @SuppressWarnings("unused")
+    public int getInterval() {
+        return interval;
+    }
+
+    @SuppressWarnings("unused")
+    public void setInterval(final int interval) {
+        this.interval = interval;
+    }
+
+    @SuppressWarnings("unused")
+    public int getFastestInterval() {
+        return fastestInterval;
+    }
+
+    @SuppressWarnings("unused")
+    public void setFastestInterval(final int fastestInterval) {
+        this.fastestInterval = fastestInterval;
+    }
+
 }
