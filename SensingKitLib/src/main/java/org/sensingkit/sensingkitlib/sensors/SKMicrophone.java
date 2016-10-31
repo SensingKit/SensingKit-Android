@@ -40,18 +40,12 @@ public class SKMicrophone extends SKAbstractSensor {
     @SuppressWarnings("unused")
     private static final String TAG = SKMicrophone.class.getName();
 
-    private static final String outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recording.aac";
-
-    private final MediaRecorder recorder;
+    private MediaRecorder recorder;
 
     public SKMicrophone(final Context context, final SKMicrophoneConfiguration configuration) throws SKException {
         super(context, SKSensorType.MICROPHONE, configuration);
 
         recorder = new MediaRecorder();
-        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        recorder.setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS);
-        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
-        recorder.setOutputFile(outputFile);
     }
 
     @Override
@@ -65,6 +59,19 @@ public class SKMicrophone extends SKAbstractSensor {
 
         // Set the configuration
         super.setConfiguration(configuration);
+
+        // Cast the configuration instance
+        SKMicrophoneConfiguration microphoneConfiguration = (SKMicrophoneConfiguration)configuration;
+
+        // Set configuration
+        recorder = new MediaRecorder();
+        recorder.setAudioSource(microphoneConfiguration.getAudioSource());
+        recorder.setOutputFormat(microphoneConfiguration.getOutputFormat());
+        recorder.setAudioEncoder(microphoneConfiguration.getAudioEncoder());
+        recorder.setOutputFile(microphoneConfiguration.getRecordingPath());
+        recorder.setAudioEncodingBitRate(microphoneConfiguration.getBitrate());
+        recorder.setAudioSamplingRate(microphoneConfiguration.getSamplingRate());
+        recorder.setAudioChannels(microphoneConfiguration.getAudioChannels());
     }
 
     @Override
