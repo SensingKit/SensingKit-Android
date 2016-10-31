@@ -120,9 +120,10 @@ public class SKScreenStatus extends SKAbstractSensor {
 
     private void registerLocalBroadcastManager() {
 
-        // Register for SCREEN_STATUS ON and OFF notifications
+        // Register for SCREEN_STATUS ON, OFF and UNLOCKED (USER_PRESENT) notifications
         mApplicationContext.registerReceiver(mBroadcastReceiver, new IntentFilter(Intent.ACTION_SCREEN_ON));
         mApplicationContext.registerReceiver(mBroadcastReceiver, new IntentFilter(Intent.ACTION_SCREEN_OFF));
+        mApplicationContext.registerReceiver(mBroadcastReceiver, new IntentFilter(Intent.ACTION_USER_PRESENT));
     }
 
     private void unregisterLocalBroadcastManager() {
