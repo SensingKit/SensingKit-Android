@@ -61,8 +61,16 @@ public class SKMicrophone extends SKAbstractSensor {
         // Cast the configuration instance
         SKMicrophoneConfiguration microphoneConfiguration = (SKMicrophoneConfiguration)configuration;
 
+        // Init MediaRecorder
+        if (recorder == null) {
+            recorder = new MediaRecorder();
+        }
+        else {
+            // Reset if the sensor is already prepared for recording
+            recorder.reset();
+        }
+
         // Set configuration
-        recorder = new MediaRecorder();
         recorder.setAudioSource(microphoneConfiguration.getAudioSource());
         recorder.setOutputFormat(microphoneConfiguration.getOutputFormat());
         recorder.setAudioEncoder(microphoneConfiguration.getAudioEncoder());
