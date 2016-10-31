@@ -37,9 +37,9 @@ public class SKLocationConfiguration extends SKAbstractConfiguration {
         }
     }
 
-    protected int priority;
-    protected int interval;
-    protected int fastestInterval;
+    private int priority;
+    private int interval;
+    private int fastestInterval;
 
     public SKLocationConfiguration() {
         super();
