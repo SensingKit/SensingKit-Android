@@ -56,12 +56,8 @@ public class SKLinearAcceleration extends SKAbstractNativeSensor {
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // Set the configuration
         super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKLinearAccelerationConfiguration linearAccelerationConfiguration = (SKLinearAccelerationConfiguration)configuration;
-
-        // Make the required updates on the sensor
     }
 
     @Override

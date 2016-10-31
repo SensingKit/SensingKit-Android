@@ -118,12 +118,8 @@ public class SKBattery extends SKAbstractSensor {
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // Set the configuration
         super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKBatteryConfiguration batteryConfiguration = (SKBatteryConfiguration)configuration;
-
-        // Make the required updates on the sensor
     }
 
     @Override

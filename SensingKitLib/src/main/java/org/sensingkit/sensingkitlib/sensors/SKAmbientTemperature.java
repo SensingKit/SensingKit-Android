@@ -56,12 +56,8 @@ public class SKAmbientTemperature extends SKAbstractNativeSensor {
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // Set the configuration
         super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKAmbientTemperatureConfiguration ambientTemperatureConfiguration = (SKAmbientTemperatureConfiguration)configuration;
-
-        // Make the required updates on the sensor
     }
 
     @Override

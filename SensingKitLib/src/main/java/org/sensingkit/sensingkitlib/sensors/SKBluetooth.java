@@ -107,12 +107,8 @@ public class SKBluetooth extends SKAbstractSensor {
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // Set the configuration
         super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKBluetoothConfiguration bluetoothConfiguration = (SKBluetoothConfiguration)configuration;
-
-        // Make the required updates on the sensor
     }
 
     @Override

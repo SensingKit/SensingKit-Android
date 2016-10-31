@@ -86,12 +86,8 @@ public class SKScreenStatus extends SKAbstractSensor {
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // Set the configuration
         super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKScreenStatusConfiguration screenStatusConfiguration = (SKScreenStatusConfiguration)configuration;
-
-        // Make the required updates on the sensor
     }
 
     @Override

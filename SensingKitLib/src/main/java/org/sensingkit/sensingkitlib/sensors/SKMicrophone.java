@@ -63,12 +63,8 @@ public class SKMicrophone extends SKAbstractSensor {
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // Set the configuration
         super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKMicrophoneConfiguration microphoneConfiguration = (SKMicrophoneConfiguration)configuration;
-
-        // Make the required updates on the sensor
     }
 
     @Override

@@ -122,12 +122,8 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // Set the configuration
         super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKBeaconProximityConfiguration beaconProximityConfiguration = (SKBeaconProximityConfiguration)configuration;
-
-        // Make the required updates on the sensor
     }
 
     @Override

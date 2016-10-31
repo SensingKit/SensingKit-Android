@@ -56,12 +56,8 @@ public class SKStepDetector extends SKAbstractNativeSensor {
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // Set the configuration
         super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKStepDetectorConfiguration stepDetectorConfiguration = (SKStepDetectorConfiguration)configuration;
-
-        // Make the required updates on the sensor
     }
 
     @Override

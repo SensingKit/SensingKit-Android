@@ -56,12 +56,8 @@ public class SKAccelerometer extends SKAbstractNativeSensor {
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // Set the configuration
         super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKAccelerometerConfiguration accelerometerConfiguration = (SKAccelerometerConfiguration)configuration;
-
-        // Make the required updates on the sensor
     }
 
     @Override

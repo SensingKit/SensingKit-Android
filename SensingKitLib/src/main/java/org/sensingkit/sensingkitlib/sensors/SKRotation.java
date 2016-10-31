@@ -61,12 +61,8 @@ public class SKRotation extends SKAbstractNativeSensor {
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // Set the configuration
         super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKRotationConfiguration rotationConfiguration = (SKRotationConfiguration)configuration;
-
-        // Make the required updates on the sensor
     }
 
     @Override

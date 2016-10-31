@@ -56,12 +56,8 @@ public class SKGravity extends SKAbstractNativeSensor {
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // Set the configuration
         super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKGravityConfiguration gravityConfiguration = (SKGravityConfiguration)configuration;
-
-        // Make the required updates on the sensor
     }
 
     @Override

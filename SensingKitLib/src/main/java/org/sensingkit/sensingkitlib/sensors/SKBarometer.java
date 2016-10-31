@@ -56,12 +56,8 @@ public class SKBarometer extends SKAbstractNativeSensor {
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // Set the configuration
         super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKBarometerConfiguration barometerConfiguration = (SKBarometerConfiguration)configuration;
-
-        // Make the required updates on the sensor
     }
 
     @Override

@@ -58,12 +58,8 @@ public class SKLight extends SKAbstractNativeSensor {
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // Set the configuration
         super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKLightConfiguration lightConfiguration = (SKLightConfiguration)configuration;
-
-        // Make the required updates on the sensor
     }
 
     @Override

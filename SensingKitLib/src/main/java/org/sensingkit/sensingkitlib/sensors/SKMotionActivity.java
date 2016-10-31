@@ -187,12 +187,8 @@ public class SKMotionActivity extends SKAbstractGoogleServicesSensor {
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // Set the configuration
         super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKMotionActivityConfiguration motionActivityConfiguration = (SKMotionActivityConfiguration)configuration;
-
-        // Make the required updates on the sensor
     }
 
     @Override

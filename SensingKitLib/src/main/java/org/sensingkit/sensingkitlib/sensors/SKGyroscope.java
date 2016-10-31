@@ -56,12 +56,8 @@ public class SKGyroscope extends SKAbstractNativeSensor {
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // Set the configuration
         super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKGyroscopeConfiguration gyroscopeConfiguration = (SKGyroscopeConfiguration)configuration;
-
-        // Make the required updates on the sensor
     }
 
     @Override

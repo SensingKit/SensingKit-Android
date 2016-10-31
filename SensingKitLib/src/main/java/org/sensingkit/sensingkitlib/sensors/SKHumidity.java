@@ -56,12 +56,8 @@ public class SKHumidity extends SKAbstractNativeSensor {
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
+        // Set the configuration
         super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKHumidityConfiguration humidityConfiguration = (SKHumidityConfiguration)configuration;
-
-        // Make the required updates on the sensor
     }
 
     @Override
