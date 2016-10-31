@@ -44,8 +44,6 @@ public class SKMicrophone extends SKAbstractSensor {
 
     public SKMicrophone(final Context context, final SKMicrophoneConfiguration configuration) throws SKException {
         super(context, SKSensorType.MICROPHONE, configuration);
-
-        recorder = new MediaRecorder();
     }
 
     @Override
@@ -72,6 +70,13 @@ public class SKMicrophone extends SKAbstractSensor {
         recorder.setAudioEncodingBitRate(microphoneConfiguration.getBitrate());
         recorder.setAudioSamplingRate(microphoneConfiguration.getSamplingRate());
         recorder.setAudioChannels(microphoneConfiguration.getAudioChannels());
+
+        // Prepare for recording
+        try {
+            recorder.prepare();
+        } catch (IOException e) {
+            throw new SKException(TAG, "Microphone sensor could not be prepared.", SKExceptionErrorCode.UNKNOWN_ERROR);
+        }
     }
 
     @Override
@@ -90,13 +95,6 @@ public class SKMicrophone extends SKAbstractSensor {
     public void startSensing() throws SKException {
 
         this.isSensing = true;
-
-        try {
-            recorder.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new SKException(TAG, "Microphone sensor could not be prepared.", SKExceptionErrorCode.UNKNOWN_ERROR);
-        }
 
         recorder.start();
 
