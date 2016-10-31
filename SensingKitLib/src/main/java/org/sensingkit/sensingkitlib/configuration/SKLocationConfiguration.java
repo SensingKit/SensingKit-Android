@@ -25,10 +25,17 @@ import com.google.android.gms.location.LocationRequest;
 
 public class SKLocationConfiguration extends SKAbstractConfiguration {
 
-    public static final int PRIORITY_HIGH_ACCURACY = LocationRequest.PRIORITY_HIGH_ACCURACY;
-    public static final int PRIORITY_BALANCED_POWER_ACCURACY = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY;
-    public static final int PRIORITY_LOW_POWER = LocationRequest.PRIORITY_LOW_POWER;
-    public static final int PRIORITY_NO_POWER = LocationRequest.PRIORITY_NO_POWER;
+    public final class Priority {
+
+        public static final int HIGH_ACCURACY           = LocationRequest.PRIORITY_HIGH_ACCURACY;
+        public static final int BALANCED_POWER_ACCURACY = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY;
+        public static final int LOW_POWER               = LocationRequest.PRIORITY_LOW_POWER;
+        public static final int NO_POWER                = LocationRequest.PRIORITY_NO_POWER;
+
+        Priority() {
+            throw new RuntimeException();
+        }
+    }
 
     protected int priority;
     protected int interval;
@@ -38,7 +45,7 @@ public class SKLocationConfiguration extends SKAbstractConfiguration {
         super();
 
         // Set default values
-        this.priority = PRIORITY_HIGH_ACCURACY;
+        this.priority = Priority.HIGH_ACCURACY;
         this.interval = 1000;
         this.fastestInterval = 500;
     }
