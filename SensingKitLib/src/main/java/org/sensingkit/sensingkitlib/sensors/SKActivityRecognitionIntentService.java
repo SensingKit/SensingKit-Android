@@ -32,8 +32,8 @@ public class SKActivityRecognitionIntentService extends IntentService {
     @SuppressWarnings("unused")
     private static final String TAG = SKActivityRecognitionIntentService.class.getName();
 
-    public static final String RECOGNITION_RESULT = "result";
-    public static final String BROADCAST_UPDATE = "new_update";
+    static final String RECOGNITION_RESULT = "result";
+    static final String BROADCAST_UPDATE = "new_update";
 
     public SKActivityRecognitionIntentService() {
 
