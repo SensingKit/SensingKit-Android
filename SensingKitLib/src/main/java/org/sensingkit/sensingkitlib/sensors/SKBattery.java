@@ -114,7 +114,7 @@ public class SKBattery extends SKAbstractSensor {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKBatteryConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMicrophone.",
+            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKBattery.",
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 

@@ -52,7 +52,7 @@ public class SKGravity extends SKAbstractNativeSensor {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKGravityConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMicrophone.",
+            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKGravity.",
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 

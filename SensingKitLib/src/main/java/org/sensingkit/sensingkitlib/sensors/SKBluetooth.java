@@ -103,7 +103,7 @@ public class SKBluetooth extends SKAbstractSensor {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKBluetoothConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMicrophone.",
+            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKBluetooth.",
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 

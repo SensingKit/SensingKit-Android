@@ -52,7 +52,7 @@ public class SKStepCounter extends SKAbstractNativeSensor {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKStepCounterConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMicrophone.",
+            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKStepCounter.",
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 

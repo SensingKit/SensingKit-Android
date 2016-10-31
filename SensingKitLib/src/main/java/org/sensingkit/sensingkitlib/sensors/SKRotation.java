@@ -57,7 +57,7 @@ public class SKRotation extends SKAbstractNativeSensor {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKRotationConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMicrophone.",
+            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKRotation.",
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 

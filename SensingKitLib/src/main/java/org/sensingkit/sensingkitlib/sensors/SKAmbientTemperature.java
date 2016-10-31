@@ -52,7 +52,7 @@ public class SKAmbientTemperature extends SKAbstractNativeSensor {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKAmbientTemperatureConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMicrophone.",
+            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKAmbientTemperature.",
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 

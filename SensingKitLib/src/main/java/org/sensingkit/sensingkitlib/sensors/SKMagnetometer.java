@@ -52,7 +52,7 @@ public class SKMagnetometer extends SKAbstractNativeSensor {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKMagnetometerConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMicrophone.",
+            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMagnetometer.",
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 

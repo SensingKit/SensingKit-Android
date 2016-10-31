@@ -52,7 +52,7 @@ public class SKAccelerometer extends SKAbstractNativeSensor {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKAccelerometerConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMicrophone.",
+            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKAccelerometer.",
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 

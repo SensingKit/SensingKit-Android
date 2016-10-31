@@ -58,7 +58,7 @@ public class SKAudioLevel extends SKAbstractSensor {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKAudioLevelConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMicrophone.",
+            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKAudioLevel.",
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
