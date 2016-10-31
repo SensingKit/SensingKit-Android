@@ -136,13 +136,17 @@ public class SKBattery extends SKAbstractSensor {
 
         // Only post when specific values changed
 
-        int level = ((SKBatteryData)data).getLevel();
-        int scale = ((SKBatteryData)data).getScale();
-        int temperature = ((SKBatteryData)data).getTemperature();
-        int voltage = ((SKBatteryData)data).getVoltage();
-        int plugged = ((SKBatteryData)data).getPlugged();
-        int status = ((SKBatteryData)data).getBatteryStatus();
-        int health = ((SKBatteryData)data).getBatteryHealth();
+        // Cast into SKBatteryData
+        SKBatteryData batteryData = (SKBatteryData)data;
+
+        // Read values
+        int level = batteryData.getLevel();
+        int scale = batteryData.getScale();
+        int temperature = batteryData.getTemperature();
+        int voltage = batteryData.getVoltage();
+        int plugged = batteryData.getPlugged();
+        int status = batteryData.getBatteryStatus();
+        int health = batteryData.getBatteryHealth();
 
         // Ignore Temperature and Voltage
         boolean shouldPost = (mLastLevelSensed != level ||
@@ -152,6 +156,8 @@ public class SKBattery extends SKAbstractSensor {
                               mLastHealthSensed != health );
 
         if (shouldPost) {
+
+            // Save last sensed values
             this.mLastLevelSensed = level;
             this.mLastScaleSensed = scale;
             this.mLastTemperatureSensed = temperature;
