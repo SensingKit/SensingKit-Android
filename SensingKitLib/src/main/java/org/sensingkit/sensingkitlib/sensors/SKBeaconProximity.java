@@ -30,6 +30,7 @@ import android.util.Log;
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
 import org.altbeacon.beacon.BeaconManager;
+import org.altbeacon.beacon.BeaconParser;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 import org.sensingkit.sensingkitlib.SKException;
@@ -47,6 +48,8 @@ import java.util.Collection;
 @SuppressWarnings("ResourceType")
 public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsumer {
 
+    public static final String BEACON_IDENTIFIER = "org.sensingkit.beaconIdentifier";
+
     private BeaconManager mBeaconManager;
     private Region mRegion;
 
@@ -55,18 +58,56 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
     public SKBeaconProximity(final Context context, final SKBeaconProximityConfiguration configuration) throws SKException {
         super(context, SKSensorType.BEACON_PROXIMITY, configuration);
+    }
 
-        mBeaconManager = BeaconManager.getInstanceForApplication(context);
+    @Override
+    public void setConfiguration(SKConfiguration configuration) throws SKException {
 
-        if (mBeaconManager == null) {
-            throw new SKException(TAG, "Beacon Proximity sensor is not supported from the device.", SKExceptionErrorCode.UNKNOWN_ERROR);
+        // Check if the correct configuration type provided
+        if (!(configuration instanceof SKBeaconProximityConfiguration)) {
+            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKBeaconProximity.",
+                    SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
-        //mBeaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=beac,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"));
-        mRegion = new Region("myRangingUniqueId", null, null, null);  // Add UUID
+        // Set the configuration
+        super.setConfiguration(configuration);
 
+        // Init MediaRecorder
+        if (mBeaconManager == null) {
+            mBeaconManager = BeaconManager.getInstanceForApplication(mApplicationContext);
+
+            if (mBeaconManager == null) {
+                throw new SKException(TAG, "Beacon Proximity sensor is not supported from the device.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            }
+        }
+        else {
+            // Reset Beacon Parsers
+            mBeaconManager.getBeaconParsers().clear();
+        }
+
+        // Cast the configuration instance
+        SKBeaconProximityConfiguration beaconProximityConfiguration = (SKBeaconProximityConfiguration)configuration;
+
+        // Configure BeaconParsers
+        String layout = SKBeaconProximity.getBeaconLayout(beaconProximityConfiguration.getBeaconType());
+        mBeaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout(layout));
+
+        // Configure Region
+        mRegion = new Region(
+                BEACON_IDENTIFIER,
+                beaconProximityConfiguration.getFilterId1(),
+                beaconProximityConfiguration.getFilterId2(),
+                beaconProximityConfiguration.getFilterId3());
+
+        // Bind
         mBeaconManager.bind(this);
     }
+
+    @Override
+    public SKConfiguration getConfiguration() {
+        return new SKBeaconProximityConfiguration((SKBeaconProximityConfiguration)mConfiguration);
+    }
+
 
     @Override
     public void onBeaconServiceConnect() {
@@ -112,24 +153,6 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
     }
 
     @Override
-    public void setConfiguration(SKConfiguration configuration) throws SKException {
-
-        // Check if the correct configuration type provided
-        if (!(configuration instanceof SKBeaconProximityConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKBeaconProximity.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
-        }
-
-        // Set the configuration
-        super.setConfiguration(configuration);
-    }
-
-    @Override
-    public SKConfiguration getConfiguration() {
-        return new SKBeaconProximityConfiguration((SKBeaconProximityConfiguration)mConfiguration);
-    }
-
-    @Override
     protected boolean shouldPostSensorData(SKAbstractData data) {
 
         // Always post sensor data
@@ -144,21 +167,21 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
         try {
             mBeaconManager.startRangingBeaconsInRegion(mRegion);
         } catch (RemoteException ex) {
-
+            throw new SKException(TAG, "Beacon Proximity sensor could not be started on this device.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
     }
 
     @Override
-    public void stopSensing() {
+    public void stopSensing() throws SKException {
 
         try {
             mBeaconManager.stopRangingBeaconsInRegion(mRegion);
+            this.isSensing = false;
+
         } catch (RemoteException ex) {
-
+            throw new SKException(TAG, "Beacon Proximity sensor could not be stopped.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
-
-        this.isSensing = false;
     }
 
     @Override
@@ -167,5 +190,29 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
         // Release sensor
         mBeaconManager.unbind(this);
+    }
+
+    private static String getBeaconLayout(final int beaconType) {
+
+        switch (beaconType) {
+
+            case SKBeaconProximityConfiguration.BeaconType.ALTBEACON:
+                return "m:2-3=beac,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25";
+
+            case SKBeaconProximityConfiguration.BeaconType.IBEACON:
+                return "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24";
+
+            case SKBeaconProximityConfiguration.BeaconType.EDDYSTONE_UID:
+                return "s:0-1=feaa,m:2-2=00,p:3-3:-41,i:4-13,i:14-19";
+
+            //case SKBeaconProximityConfiguration.BeaconType.EDDYSTONE_TLM:
+            //    return "x,s:0-1=feaa,m:2-2=20,d:3-3,d:4-5,d:6-7,d:8-11,d:12-15";
+
+            //case SKBeaconProximityConfiguration.BeaconType.EDDYSTONE_URL:
+            //    return "s:0-1=feaa,m:2-2=10,p:3-3:-41,i:4-21v";
+
+            default:
+                throw new RuntimeException();
+        }
     }
 }

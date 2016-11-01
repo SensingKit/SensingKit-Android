@@ -21,15 +21,98 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import org.altbeacon.beacon.Identifier;
+
 public class SKBeaconProximityConfiguration extends SKAbstractConfiguration {
 
+    public final class BeaconType {
+
+        public static final int ALTBEACON = 0;
+        public static final int IBEACON = 1;
+        public static final int EDDYSTONE_UID = 2;
+
+        BeaconType() {
+            throw new RuntimeException();
+        }
+    }
+
+    private int beaconType;
+
+    // Filters
+    private Identifier filterId1;
+    private Identifier filterId2;
+    private Identifier filterId3;
+
     public SKBeaconProximityConfiguration() {
+        this(null, null, null);
+    }
+
+    public SKBeaconProximityConfiguration(Identifier filterId1) {
+        this(filterId1, null, null);
+    }
+
+    public SKBeaconProximityConfiguration(Identifier filterId1, Identifier filterId2) {
+        this(filterId1, filterId2, null);
+    }
+
+    public SKBeaconProximityConfiguration(Identifier filterId1, Identifier filterId2, Identifier filterId3) {
         super();
 
         // Set default values
+        beaconType = BeaconType.ALTBEACON;
+        this.filterId1 = filterId1;
+        this.filterId2 = filterId2;
+        this.filterId3 = filterId3;
     }
 
     public SKBeaconProximityConfiguration(SKBeaconProximityConfiguration configuration) {
         super();
+
+        // Save local configuration
+        beaconType = configuration.beaconType;
+        filterId1 = configuration.filterId1;
+        filterId2 = configuration.filterId2;
+        filterId3 = configuration.filterId3;
     }
+
+    @SuppressWarnings("unused")
+    public int getBeaconType() {
+        return beaconType;
+    }
+
+    @SuppressWarnings("unused")
+    public void setBeaconType(final int beaconType) {
+        this.beaconType = beaconType;
+    }
+
+    @SuppressWarnings("unused")
+    public final Identifier getFilterId1() {
+        return filterId1;
+    }
+
+    @SuppressWarnings("unused")
+    public void setFilterId1(final Identifier filterId1) {
+        this.filterId1 = filterId1;
+    }
+
+    @SuppressWarnings("unused")
+    public final Identifier getFilterId2() {
+        return filterId2;
+    }
+
+    @SuppressWarnings("unused")
+    public void setFilterId2(final Identifier filterId2) {
+        this.filterId2 = filterId2;
+    }
+
+    @SuppressWarnings("unused")
+    public final Identifier getFilterId3() {
+        return filterId3;
+    }
+
+    @SuppressWarnings("unused")
+    public void setFilterId3(final Identifier filterId3) {
+        this.filterId3 = filterId3;
+    }
+
 }

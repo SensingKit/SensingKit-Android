@@ -32,7 +32,7 @@ public interface SKSensor {
     SKSensorType getSensorType();
 
     void startSensing() throws SKException;
-    void stopSensing();
+    void stopSensing() throws SKException;
     boolean isSensing();
 
     void subscribeSensorDataListener(SKSensorDataListener callback) throws SKException;
