@@ -48,7 +48,7 @@ import java.util.Collection;
 @SuppressWarnings("ResourceType")
 public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsumer {
 
-    public static final String BEACON_IDENTIFIER = "org.sensingkit.beaconIdentifier";
+    private static final String BEACON_IDENTIFIER = "org.sensingkit.beaconIdentifier";
 
     private BeaconManager mBeaconManager;
     private Region mRegion;
@@ -58,6 +58,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
     public SKBeaconProximity(final Context context, final SKBeaconProximityConfiguration configuration) throws SKException {
         super(context, SKSensorType.BEACON_PROXIMITY, configuration);
+
     }
 
     @Override
@@ -90,6 +91,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
         // Configure BeaconParsers
         String layout = SKBeaconProximity.getBeaconLayout(beaconProximityConfiguration.getBeaconType());
+
         mBeaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout(layout));
 
         // Configure Region
@@ -108,7 +110,6 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
         return new SKBeaconProximityConfiguration((SKBeaconProximityConfiguration)mConfiguration);
     }
 
-
     @Override
     public void onBeaconServiceConnect() {
 
@@ -116,6 +117,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
             @Override
             public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
+
                 if (!beacons.isEmpty()) {
 
                     // Get the timestamp
@@ -166,6 +168,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
         try {
             mBeaconManager.startRangingBeaconsInRegion(mRegion);
+
         } catch (RemoteException ex) {
             throw new SKException(TAG, "Beacon Proximity sensor could not be started on this device.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
