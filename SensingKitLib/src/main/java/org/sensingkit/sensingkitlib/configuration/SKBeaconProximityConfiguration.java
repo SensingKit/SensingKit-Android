@@ -43,18 +43,22 @@ public class SKBeaconProximityConfiguration extends SKAbstractConfiguration {
     private Identifier filterId2;
     private Identifier filterId3;
 
+    @SuppressWarnings("unused")
     public SKBeaconProximityConfiguration() {
         this(null, null, null);
     }
 
+    @SuppressWarnings("unused")
     public SKBeaconProximityConfiguration(Identifier filterId1) {
         this(filterId1, null, null);
     }
 
+    @SuppressWarnings("unused")
     public SKBeaconProximityConfiguration(Identifier filterId1, Identifier filterId2) {
         this(filterId1, filterId2, null);
     }
 
+    @SuppressWarnings("unused")
     public SKBeaconProximityConfiguration(Identifier filterId1, Identifier filterId2, Identifier filterId3) {
         super();
 
