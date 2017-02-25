@@ -54,7 +54,7 @@ public class SKBeaconProximityData extends SKAbstractData {
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%d,%d,%s,%d,%d,%d,%d,%f",
                 this.timestamp, this.getBeaconTypeCode(), this.getManufacturer(),
-                this.getId1().toUuid().toString(), this.getId2().toInt(), this.getId3().toInt(),
+                this.getId1().toString(), this.getId2().toInt(), this.getId3().toInt(),
                 this.getRssi(), this.getTxPower(), this.getDistance() );
     }
 
