@@ -1,0 +1,70 @@
+/*
+ * Copyright (c) 2017. Queen Mary University of London
+ * Kleomenis Katevas, k.katevas@qmul.ac.uk
+ *
+ * This file is part of SensingKit-Android library.
+ * For more information, please visit https://www.sensingkit.org
+ *
+ * SensingKit-Android is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * SensingKit-Android is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with SensingKit-Android.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package org.sensingkit.sensingkitlib.sensors;
+
+import android.content.Intent;
+import android.os.Build;
+import android.os.IBinder;
+import android.service.notification.NotificationListenerService;
+import android.service.notification.StatusBarNotification;
+import android.support.annotation.RequiresApi;
+import android.util.Log;
+
+@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+public class SKNotificationListenerService extends NotificationListenerService {
+
+    public static final String NOTIFICATION_ACTION = "org.sensingkit.SensingKit-Android.SKNotificationListenerService";
+
+    @SuppressWarnings("unused")
+    private String TAG = this.getClass().getSimpleName();
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return super.onBind(intent);
+    }
+
+    @Override
+    public void onListenerConnected() {
+        Log.i(TAG, "Connected!");
+    }
+
+    @Override
+    public void onNotificationPosted(StatusBarNotification sbn) {
+        sendNotification("posted", sbn);
+    }
+
+    @Override
+    public void onNotificationRemoved(StatusBarNotification sbn) {
+        sendNotification("removed", sbn);
+    }
+
+    private void sendNotification(String actionType, StatusBarNotification sbn) {
+
+        Intent i2 = new Intent(NOTIFICATION_ACTION);
+        i2.putExtra("actionType", actionType);
+        i2.putExtra("postTime", sbn.getPostTime());
+        i2.putExtra("packageName", sbn.getPackageName());
+
+        // send the broadcast to the SKNotification.NotificationServiceReceiver
+        sendBroadcast(i2);
+    }
+}

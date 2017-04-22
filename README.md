@@ -27,6 +27,7 @@ The following sensor modules are currently supported in SensingKit-Android, (lis
 - Beacon Proximity
 - Humidity
 - Barometer
+- Notification
 
 ## Configuring the Library
 

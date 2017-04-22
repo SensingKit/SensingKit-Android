@@ -221,6 +221,9 @@ class SKSensorManager {
             case BAROMETER:
                 return packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_BAROMETER);
 
+            case NOTIFICATION:
+                return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2;
+
             default:
                 throw new SKException(TAG, "Unknown Sensor", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
@@ -366,6 +369,10 @@ class SKSensorManager {
                 sensor = new SKBarometer(mApplicationContext, (SKBarometerConfiguration)configuration);
                 break;
 
+            case NOTIFICATION:
+                sensor = new SKNotification(mApplicationContext, (SKNotificationConfiguration)configuration);
+                break;
+
             // Don't forget the break; here
 
             default:
@@ -459,6 +466,10 @@ class SKSensorManager {
 
             case BAROMETER:
                 configuration = new SKBarometerConfiguration();
+                break;
+
+            case NOTIFICATION:
+                configuration = new SKNotificationConfiguration();
                 break;
 
             // Don't forget the break; here
@@ -649,6 +660,9 @@ class SKSensorManager {
 
             case BAROMETER:
                 return SKBarometerData.csvHeader();
+
+            case NOTIFICATION:
+                return SKNotificationData.csvHeader();
 
             default:
                 throw new SKException(TAG, "Unknown Sensor", SKExceptionErrorCode.UNKNOWN_ERROR);

@@ -125,7 +125,12 @@ public enum SKSensorType {
     /**
      *  Atmospheric pressure in hPa (millibar).
      */
-    BAROMETER ("Barometer", "Barometer");
+    BAROMETER ("Barometer", "Barometer"),
+
+    /**
+     *  Notifications received in the device.
+     */
+    NOTIFICATION ("Notification", "Notification");
 
     private final static int length = SKSensorType.values().length;
 

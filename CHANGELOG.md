@@ -1,13 +1,14 @@
 # Changelog
 
-### 0.5.0 (??, 2016)
+### 0.5.0 (??, 2017)
 - Added Documentation using javadoc generator (thanks to Susan Crayne @crayne)
 - Added support for Air Pressure sensor
 - Added support for Humidity sensor
-- Added support for Beacon Proximity (iBeacon™, Eddystone™ and AltBeacon) with the help of the Android Beacon Library (thanks Radius Networks)
+- Added support for Beacon Proximity (iBeacon™, Eddystone™ and AltBeacon) with the help of the Android Beacon Library (thanks Radius Networks. Great work!)
+- Added support for Notification sensor
 - Added csvHeaderForSensor method to get the headers of the csv format
 - Added missing SKMicrophoneData object
-- Added support for Android Studio 2.2
+- Added support for Android Studio 2.3
 - Added support for Android 7.1 SDK (Nugat)
 - Added support for maven distribution (jCenter and Maven Central)
 - Renamed Activity sensor to Motion Activity
@@ -15,8 +16,8 @@
 - Renamed Air Pressure sensor to Barometer
 - Renamed all sensor modules into sensors
 - Updated SensingKit-Android API (thanks to Ming-Jiun Huang @U3D3)
-- Updated Google Play Services to 9.8.0
-- Updated gradle to 2.2.2
+- Updated Google Play Services to 10.2.1
+- Updated gradle to 2.3.1
 
 ### 0.2.0 (July 30, 2015)
 - Added support for Bluetooth sensor
