@@ -12,6 +12,13 @@
 
         <service android:name=".sensors.SKActivityRecognitionIntentService" />
 
+        <service android:name=".sensors.SKNotificationListenerService"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>
