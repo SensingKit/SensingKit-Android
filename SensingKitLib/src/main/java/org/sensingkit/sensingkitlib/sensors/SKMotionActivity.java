@@ -151,6 +151,7 @@ public class SKMotionActivity extends SKAbstractGoogleServicesSensor {
         registerIntent();
     }
 
+    @SuppressWarnings({"MissingPermission"})
     private void registerIntent() {
 
         if (mRecognitionPendingIntent == null) {
@@ -161,6 +162,7 @@ public class SKMotionActivity extends SKAbstractGoogleServicesSensor {
         mActivityRecognition.requestActivityUpdates(mClient, 0, mRecognitionPendingIntent);
     }
 
+    @SuppressWarnings({"MissingPermission"})
     private void unregisterIntent() {
 
         mActivityRecognition.removeActivityUpdates(mClient, mRecognitionPendingIntent);

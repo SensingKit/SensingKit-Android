@@ -26,6 +26,7 @@ import android.os.PowerManager;
 
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 
+@SuppressWarnings({"StaticFieldLeak"})
 public class SensingKitLib implements SensingKitLibInterface {
 
     @SuppressWarnings("unused")

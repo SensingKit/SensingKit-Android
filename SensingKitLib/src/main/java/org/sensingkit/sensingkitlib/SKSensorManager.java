@@ -31,6 +31,7 @@ import org.sensingkit.sensingkitlib.sensors.*;
 import org.sensingkit.sensingkitlib.data.*;
 import org.sensingkit.sensingkitlib.configuration.*;
 
+@SuppressWarnings({"StaticFieldLeak"})
 class SKSensorManager {
 
     @SuppressWarnings("unused")

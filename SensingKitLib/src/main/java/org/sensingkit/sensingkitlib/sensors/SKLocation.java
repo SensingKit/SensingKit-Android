@@ -87,6 +87,7 @@ public class SKLocation extends SKAbstractGoogleServicesSensor implements Locati
         submitSensorData(data);
     }
 
+    @SuppressWarnings({"MissingPermission"})
     private void registerForLocationUpdates() {
 
         // Cast the configuration instance
