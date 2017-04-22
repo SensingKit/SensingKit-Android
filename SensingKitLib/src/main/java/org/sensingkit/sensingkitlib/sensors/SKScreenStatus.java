@@ -54,17 +54,19 @@ public class SKScreenStatus extends SKAbstractSensor {
 
                 String action = intent.getAction();
 
-                if (action.equals(Intent.ACTION_SCREEN_OFF)) {
-                    status = SKScreenStatusData.SCREEN_OFF;
-                }
-                else if (action.equals(Intent.ACTION_SCREEN_ON)) {
-                    status = SKScreenStatusData.SCREEN_ON;
-                }
-                else if (action.equals(Intent.ACTION_USER_PRESENT)) {
-                    status = SKScreenStatusData.SCREEN_UNLOCKED;
-                }
-                else {
-                    status = SKScreenStatusData.SCREEN_UNKNOWN;
+                switch (action) {
+                    case Intent.ACTION_SCREEN_OFF:
+                        status = SKScreenStatusData.SCREEN_OFF;
+                        break;
+                    case Intent.ACTION_SCREEN_ON:
+                        status = SKScreenStatusData.SCREEN_ON;
+                        break;
+                    case Intent.ACTION_USER_PRESENT:
+                        status = SKScreenStatusData.SCREEN_UNLOCKED;
+                        break;
+                    default:
+                        status = SKScreenStatusData.SCREEN_UNKNOWN;
+                        break;
                 }
 
                 // Build the data object
