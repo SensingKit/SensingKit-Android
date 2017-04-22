@@ -23,7 +23,6 @@ package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Context;
 import android.media.MediaRecorder;
-import android.os.Environment;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;

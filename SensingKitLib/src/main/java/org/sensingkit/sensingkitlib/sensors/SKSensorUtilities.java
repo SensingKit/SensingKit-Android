@@ -21,8 +21,6 @@
 
 package org.sensingkit.sensingkitlib.sensors;
 
-import org.sensingkit.sensingkitlib.SKSensorType;
-
 public final class SKSensorUtilities {
 
     @SuppressWarnings("unused")

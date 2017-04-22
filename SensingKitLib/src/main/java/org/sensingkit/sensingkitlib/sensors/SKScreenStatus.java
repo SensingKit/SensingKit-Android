@@ -30,7 +30,6 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
-import org.sensingkit.sensingkitlib.configuration.SKMicrophoneConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKScreenStatusConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKScreenStatusData;
