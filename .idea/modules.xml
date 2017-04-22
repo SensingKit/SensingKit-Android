@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SensingKit-Android.iml" filepath="$PROJECT_DIR$/SensingKit-Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/SensingKitLib/SensingKitLib.iml" filepath="$PROJECT_DIR$/SensingKitLib/SensingKitLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sensingkitapp/sensingkitapp.iml" filepath="$PROJECT_DIR$/sensingkitapp/sensingkitapp.iml" />
     </modules>
   </component>
 </project>

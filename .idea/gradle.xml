@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/SensingKitLib" />
+            <option value="$PROJECT_DIR$/sensingkitapp" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
