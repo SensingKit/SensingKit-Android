@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.RemoteException;
+import android.util.Log;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
@@ -47,13 +48,39 @@ import java.util.Collection;
 @SuppressWarnings("ResourceType")
 public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsumer {
 
+    @SuppressWarnings("unused")
+    private static final String TAG = SKBeaconProximity.class.getName();
+
     private static final String BEACON_IDENTIFIER = "org.sensingkit.beaconIdentifier";
 
     private BeaconManager mBeaconManager;
     private Region mRegion;
 
-    @SuppressWarnings("unused")
-    private static final String TAG = SKBluetooth.class.getName();
+    private RangeNotifier mRangeNotifier = new RangeNotifier() {
+
+        @Override
+        public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
+
+            if (!beacons.isEmpty()) {
+
+                // Get the timestamp
+                long timestamp = System.currentTimeMillis();
+
+                // Create the SKBeaconProximityData objects and add them to a new list
+                ArrayList<SKBeaconProximityData> deviceData = new ArrayList<>(beacons.size());
+
+                for (Beacon beacon : beacons) {
+                    deviceData.add(new SKBeaconProximityData(timestamp, beacon));
+                }
+
+                // Build the data object
+                SKAbstractData data = new SKBeaconProximityCollectionData(timestamp, deviceData);
+
+                // Submit sensor data object
+                submitSensorData(data);
+            }
+        }
+    };
 
     public SKBeaconProximity(final Context context, final SKBeaconProximityConfiguration configuration) throws SKException {
         super(context, SKSensorType.BEACON_PROXIMITY, configuration);
@@ -112,31 +139,8 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
     @Override
     public void onBeaconServiceConnect() {
 
-        mBeaconManager.addRangeNotifier(new RangeNotifier() {
-
-            @Override
-            public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
-
-                if (!beacons.isEmpty()) {
-
-                    // Get the timestamp
-                    long timestamp = System.currentTimeMillis();
-
-                    // Create the SKBeaconProximityData objects and add them to a new list
-                    ArrayList<SKBeaconProximityData> deviceData = new ArrayList<>(beacons.size());
-
-                    for (Beacon beacon : beacons) {
-                        deviceData.add(new SKBeaconProximityData(timestamp, beacon));
-                    }
-
-                    // Build the data object
-                    SKAbstractData data = new SKBeaconProximityCollectionData(timestamp, deviceData);
-
-                    // Submit sensor data object
-                    submitSensorData(data);
-                }
-            }
-        });
+        // Register the callback
+        mBeaconManager.addRangeNotifier(mRangeNotifier);
     }
 
     @Override
@@ -169,6 +173,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
             mBeaconManager.startRangingBeaconsInRegion(mRegion);
 
         } catch (RemoteException ex) {
+            Log.e(TAG, ex.toString());
             throw new SKException(TAG, "Beacon Proximity sensor could not be started on this device.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
@@ -189,6 +194,9 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
     @Override
     public void sensorDeregestered() {
         super.sensorDeregestered();
+
+        // Remove callback
+        mBeaconManager.removeRangeNotifier(mRangeNotifier);
 
         // Release sensor
         mBeaconManager.unbind(this);

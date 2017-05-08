@@ -356,7 +356,7 @@ class SKSensorManager {
             case BEACON_PROXIMITY:
 
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                    throw new SKException(TAG, "STEP_COUNTER requires Android Jelly Bean (18) or greater.", SKExceptionErrorCode.UNKNOWN_ERROR);
+                    throw new SKException(TAG, "BEACON_PROXIMITY requires Android Jelly Bean (18) or greater.", SKExceptionErrorCode.UNKNOWN_ERROR);
                 }
 
                 sensor = new SKBeaconProximity(mApplicationContext, (SKBeaconProximityConfiguration)configuration);
