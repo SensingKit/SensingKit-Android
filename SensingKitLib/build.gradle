@@ -23,6 +23,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'org.altbeacon:android-beacon-library:2.10'
+    compile 'org.altbeacon:android-beacon-library:2.11'
     compile 'com.google.android.gms:play-services-location:11.0.1'
 }
