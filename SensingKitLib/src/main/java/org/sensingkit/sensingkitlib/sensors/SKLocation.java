@@ -25,6 +25,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -37,19 +38,17 @@ import org.sensingkit.sensingkitlib.configuration.SKLocationConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKLocationData;
 
-public class SKLocation extends SKAbstractGoogleServicesSensor implements LocationListener {
+public class SKLocation extends SKAbstractSensor implements LocationListener {
 
     @SuppressWarnings("unused")
     private static final String TAG = SKLocation.class.getName();
+    private FusedLocationProviderClient mClient;
+
 
     public SKLocation(final Context context, final SKLocationConfiguration configuration) throws SKException {
         super(context, SKSensorType.LOCATION, configuration);
 
-        mClient = new GoogleApiClient.Builder(context)
-                .addApi(LocationServices.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .build();
+        mClient = LocationServices.getFusedLocationProviderClient(context);
     }
 
     @Override
