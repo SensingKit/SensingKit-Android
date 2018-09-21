@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2017. Queen Mary University of London
- * Kleomenis Katevas, k.katevas@qmul.ac.uk
+ * Copyright (c) 2017. Kleomenis Katevas
+ * Kleomenis Katevas, k.katevas@imperial.ac.uk
  *
  * This file is part of SensingKit-Android library.
  * For more information, please visit https://www.sensingkit.org
@@ -94,12 +94,15 @@ public class SKNotification extends SKAbstractSensor {
     }
 
     @Override
-    public void startSensing() throws SKException {
+    public void startSensing() {
 
         this.isSensing = true;
 
         // Register Receiver
-        IntentFilter filter = new IntentFilter(SKNotificationListenerService.NOTIFICATION_ACTION);
+        IntentFilter filter = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            filter = new IntentFilter(SKNotificationListenerService.NOTIFICATION_ACTION);
+        }
         this.mApplicationContext.registerReceiver(mNotificationReceiver, filter);
     }
 

@@ -127,8 +127,8 @@ For a complete description of our API, please refer to the [project website](htt
 ## License
 
 ```
-Copyright (c) 2014. Queen Mary University of London
-Kleomenis Katevas, k.katevas@qmul.ac.uk.
+Copyright (c) 2014. Kleomenis Katevas
+Kleomenis Katevas, k.katevas@imperial.ac.uk.
 
 This file is part of SensingKit-Android library.
 For more information, please visit https://www.sensingkit.org.

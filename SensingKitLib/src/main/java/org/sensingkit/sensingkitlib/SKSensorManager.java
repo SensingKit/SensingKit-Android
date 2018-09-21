@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2014. Queen Mary University of London
- * Kleomenis Katevas, k.katevas@qmul.ac.uk
+ * Copyright (c) 2014. Kleomenis Katevas
+ * Kleomenis Katevas, k.katevas@imperial.ac.uk
  *
  * This file is part of SensingKit-Android library.
  * For more information, please visit http://www.sensingkit.org
@@ -55,7 +55,7 @@ class SKSensorManager {
         return sSensorManager;
     }
 
-    private SKSensorManager(final Context context) throws SKException {
+    private SKSensorManager(final Context context) {
 
         mApplicationContext = context;
 
@@ -237,7 +237,7 @@ class SKSensorManager {
      *
      *  @return TRUE if the sensor is registered or FALSE if it is not.
      */
-    boolean isSensorRegistered(SKSensorType sensorType) throws SKException {
+    boolean isSensorRegistered(SKSensorType sensorType) {
 
         int sensorIndex = sensorType.ordinal();
         return (mSensors.get(sensorIndex) != null);

@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2015. Queen Mary University of London
- * Kleomenis Katevas, k.katevas@qmul.ac.uk
+ * Copyright (c) 2015. Kleomenis Katevas
+ * Kleomenis Katevas, k.katevas@imperial.ac.uk
  * Ming-Jiun Huang, ud2601@gmail.com
  *
  * This file is part of SensingKit-Android library.
