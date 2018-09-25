@@ -78,7 +78,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      *  @return TRUE if the sensor is registered or FALSE if it is not.
      */
     @Override
-    public boolean isSensorRegistered(SKSensorType sensorType) throws SKException {
+    public boolean isSensorRegistered(SKSensorType sensorType) {
         return mSensorManager.isSensorRegistered(sensorType);
     }
 
@@ -234,7 +234,7 @@ public class SensingKitLib implements SensingKitLibInterface {
     private void acquireWakeLock() {
         if ((mWakeLock == null) || (!mWakeLock.isHeld())) {
             PowerManager pm = (PowerManager) mApplicationContext.getSystemService(Context.POWER_SERVICE);
-            mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "WakeLock");
+            mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "SensingKit:WakeLock");
             mWakeLock.acquire();
         }
     }
