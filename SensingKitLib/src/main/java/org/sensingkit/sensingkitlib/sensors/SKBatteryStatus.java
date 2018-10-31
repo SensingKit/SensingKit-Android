@@ -29,15 +29,15 @@ import android.content.IntentFilter;
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
-import org.sensingkit.sensingkitlib.configuration.SKBatteryConfiguration;
+import org.sensingkit.sensingkitlib.configuration.SKBatteryStatusConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
-import org.sensingkit.sensingkitlib.data.SKBatteryData;
+import org.sensingkit.sensingkitlib.data.SKBatteryStatusData;
 
-public class SKBattery extends SKAbstractSensor {
+public class SKBatteryStatus extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKBattery.class.getName();
+    private static final String TAG = SKBatteryStatus.class.getName();
 
     // Last data sensed
     private int mLastLevelSensed = Integer.MAX_VALUE;
@@ -50,8 +50,8 @@ public class SKBattery extends SKAbstractSensor {
 
     private final BroadcastReceiver mBroadcastReceiver;
 
-    public SKBattery(final Context context, SKBatteryConfiguration configuration) throws SKException {
-        super(context, SKSensorType.BATTERY, configuration);
+    public SKBatteryStatus(final Context context, SKBatteryStatusConfiguration configuration) throws SKException {
+        super(context, SKSensorType.BATTERY_STATUS, configuration);
 
         mBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -67,7 +67,7 @@ public class SKBattery extends SKAbstractSensor {
                 int health = intent.getIntExtra("health", 0);
 
                 // Build the data object
-                SKAbstractData data = new SKBatteryData(System.currentTimeMillis(), level, scale, temperature, voltage, plugged, status, health);
+                SKAbstractData data = new SKBatteryStatusData(System.currentTimeMillis(), level, scale, temperature, voltage, plugged, status, health);
 
                 // Submit sensor data object
                 submitSensorData(data);
@@ -113,8 +113,8 @@ public class SKBattery extends SKAbstractSensor {
     public void setConfiguration(SKConfiguration configuration) throws SKException {
 
         // Check if the correct configuration type provided
-        if (!(configuration instanceof SKBatteryConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKBattery.",
+        if (!(configuration instanceof SKBatteryStatusConfiguration)) {
+            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKBatteryStatus.",
                     SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
@@ -124,7 +124,7 @@ public class SKBattery extends SKAbstractSensor {
 
     @Override
     public SKConfiguration getConfiguration() {
-        return new SKBatteryConfiguration((SKBatteryConfiguration)mConfiguration);
+        return new SKBatteryStatusConfiguration((SKBatteryStatusConfiguration)mConfiguration);
     }
 
     @Override
@@ -132,8 +132,8 @@ public class SKBattery extends SKAbstractSensor {
 
         // Only post when specific values changed
 
-        // Cast into SKBatteryData
-        SKBatteryData batteryData = (SKBatteryData)data;
+        // Cast into SKBatteryStatusData
+        SKBatteryStatusData batteryData = (SKBatteryStatusData)data;
 
         // Read values
         int level = batteryData.getLevel();

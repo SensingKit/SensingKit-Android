@@ -196,7 +196,7 @@ class SKSensorManager {
             case MOTION_ACTIVITY:
                 return SKMotionActivity.isGooglePlayServicesAvailable(mApplicationContext);
 
-            case BATTERY:
+            case BATTERY_STATUS:
                 return true;
 
             case SCREEN_STATUS:
@@ -333,8 +333,8 @@ class SKSensorManager {
                 sensor = new SKMotionActivity(mApplicationContext, (SKMotionActivityConfiguration)configuration);
                 break;
 
-            case BATTERY:
-                sensor = new SKBattery(mApplicationContext, (SKBatteryConfiguration)configuration);
+            case BATTERY_STATUS:
+                sensor = new SKBatteryStatus(mApplicationContext, (SKBatteryStatusConfiguration)configuration);
                 break;
 
             case SCREEN_STATUS:
@@ -437,8 +437,8 @@ class SKSensorManager {
                 configuration = new SKMotionActivityConfiguration();
                 break;
 
-            case BATTERY:
-                configuration = new SKBatteryConfiguration();
+            case BATTERY_STATUS:
+                configuration = new SKBatteryStatusConfiguration();
                 break;
 
             case SCREEN_STATUS:
@@ -638,8 +638,8 @@ class SKSensorManager {
             case MOTION_ACTIVITY:
                 return SKMotionActivityData.csvHeader();
 
-            case BATTERY:
-                return SKBatteryData.csvHeader();
+            case BATTERY_STATUS:
+                return SKBatteryStatusData.csvHeader();
 
             case SCREEN_STATUS:
                 return SKScreenStatusData.csvHeader();

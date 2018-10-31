@@ -87,9 +87,9 @@ public enum SKSensorType {
     MOTION_ACTIVITY ("Motion Activity", "MotionActivity"),
 
     /**
-     *  Battery sensor listens to changes in the battery charge state (Charging, Full, Unplugged) as well as in the battery charge level (with 1% precision).
+     *  Battery Status sensor listens to changes in the battery charge state (Charging, Full, Unplugged) as well as in the battery charge level (with 1% precision).
      */
-    BATTERY ("Battery", "Battery"),
+    BATTERY_STATUS("Battery Status", "BatteryStatus"),
 
     /**
      *  Senses the status of the screen (On / Off).

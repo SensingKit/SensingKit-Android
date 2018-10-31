@@ -30,12 +30,12 @@ import java.util.Locale;
 import static android.os.BatteryManager.*;
 
 /**
- *  An instance of SKBatteryData encapsulates Battery properties
+ *  An instance of SKBatteryStatusData encapsulates Battery properties
  */
-public class SKBatteryData extends SKAbstractData {
+public class SKBatteryStatusData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKBatteryData.class.getName();
+    private static final String TAG = SKBatteryStatusData.class.getName();
 
     protected final int level;
     protected final int scale;
@@ -66,9 +66,9 @@ public class SKBatteryData extends SKAbstractData {
      * @param health Values are: BATTERY_HEALTH_COLD, BATTERY_HEALTH_DEAD, BATTERY_HEALTH_GOOD, BATTERY_HEALTH_OVERHEAT,
      *               BATTERY_HEALTH_OVER_VOLTAGE, BATTERY_HEALTH_UNKNOWN
      */
-    public SKBatteryData(long timestamp, int level, int scale, int temperature, int voltage, int plugged, int status, int health) {
+    public SKBatteryStatusData(long timestamp, int level, int scale, int temperature, int voltage, int plugged, int status, int health) {
 
-        super(SKSensorType.BATTERY, timestamp);
+        super(SKSensorType.BATTERY_STATUS, timestamp);
 
         this.level = level;
         this.scale = scale;

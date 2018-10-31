@@ -21,15 +21,15 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
-public class SKBatteryConfiguration extends SKAbstractConfiguration {
+public class SKBatteryStatusConfiguration extends SKAbstractConfiguration {
 
-    public SKBatteryConfiguration() {
+    public SKBatteryStatusConfiguration() {
         super();
 
         // Set default values
     }
 
-    public SKBatteryConfiguration(SKBatteryConfiguration configuration) {
+    public SKBatteryStatusConfiguration(SKBatteryStatusConfiguration configuration) {
         super();
     }
 }
