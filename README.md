@@ -39,7 +39,7 @@ The following sensor modules are currently supported in SensingKit-Android, (lis
 
 - Create an app/libs directory inside your project and copy the generated SensingKitLib/build/outputs/aar/SensingKitLib-release.aar (or the equivalent debug) file there.
 
-- Edit your app/build.gradle file and add a flatDir entry as shown bellow:
+- Edit your app/build.gradle file and add a flatDir entry as shown below:
 
 ```
 repositories {
