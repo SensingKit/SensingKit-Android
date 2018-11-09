@@ -55,10 +55,9 @@ repositories {
 
 ```
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'org.sensingkit:SensingKitLib-release@aar'
-    compile 'com.android.support:appcompat-v7:23.0.0’
-    compile 'com.google.android.gms:play-services-location:8.4.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'org.sensingkit:SensingKitLib-release@aar'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
 }
 ```
 
@@ -71,7 +70,7 @@ dependencies {
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.SensingKitLib;
-import org.sensingkit.sensingkitlib.SensingKitLibInterface;  //Document:  needed to add this to init SensingKit
+import org.sensingkit.sensingkitlib.SensingKitLibInterface;
 import org.sensingkit.sensingkitlib.data.SKSensorData;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
 ```
@@ -106,7 +105,7 @@ mSensingKitLib.subscribeSensorDataListener(SKSensorType.LIGHT, new SKSensorDataL
 
 
 - You can cast the data object into the actual sensor data object in order to access all the sensor data properties:
- 
+
 ```java
 SKLightData lightData = (SKLightData)sensorData;
 ```
