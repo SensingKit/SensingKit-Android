@@ -150,20 +150,20 @@ public void requestPermissions() {
             ActivityCompat.requestPermissions(this, new String[] {
                     Manifest.permission.RECORD_AUDIO
             }, 0);
-        }
     }
+}
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 0) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission was granted, all good.
-            }
-            else {
-                // Report error.
-            }
+@Override
+public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    if (requestCode == 0) {
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            // Permission was granted, all good.
+        }
+        else {
+            // Report error.
         }
     }
+}
 ```
 
 You will also need to add a `<uses-permission>` element in your app manifest, as a child of the top-level `<manifest>` element:
