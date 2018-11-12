@@ -64,7 +64,7 @@ dependencies {
 
 ## How to Use this Library
 
-- The imports you will need are:
+Import and init SensingKit as shown below:
 
 ```java
 import org.sensingkit.sensingkitlib.SKException;
@@ -73,28 +73,47 @@ import org.sensingkit.sensingkitlib.SensingKitLib;
 import org.sensingkit.sensingkitlib.SensingKitLibInterface;
 import org.sensingkit.sensingkitlib.data.SKSensorData;
 import org.sensingkit.sensingkitlib.SKSensorDataListener;
+
+public class MainActivity extends AppCompatActivity {
+
+    SensingKitLibInterface mSensingKitLib;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        try {
+            mSensingKitLib = SensingKitLib.getSensingKitLib(this);
+        }
+        catch (SKException ex) {
+            // Handle Exception
+        }
+
+    }
+}
 ```
 
-- Init SensingKit in your Activity class as shown below:
+
+Check if a sensor is available in the device:
 
 ```java
-//You will need a try..catch block around this code
-SensingKitLibInterface mSensingKitLib = SensingKitLib.getSensingKitLib(this);
+if (mSensingKitLib.isSensorAvailable(SKSensorType.LIGHT)) {
+    // You can access the sensor
+}
 ```
 
 
-- Register a sensor module (e.g. a Light sensor) as shown below:
+Register a sensor (e.g. a Light sensor) as shown below:
 
 ```java
-//You will need a try..catch block around this code
 mSensingKitLib.registerSensor(SKSensorType.LIGHT);
 ```
 
 
-- Subscribe a sensor data listener:
+Subscribe a sensor data listener:
 
 ```java
-//You will need a try..catch block around this code
 mSensingKitLib.subscribeSensorDataListener(SKSensorType.LIGHT, new SKSensorDataListener() {
     @Override
     public void onDataReceived(final SKSensorType moduleType, final SKSensorData sensorData) {
@@ -104,19 +123,20 @@ mSensingKitLib.subscribeSensorDataListener(SKSensorType.LIGHT, new SKSensorDataL
 ```
 
 
-- You can cast the data object into the actual sensor data object in order to access all the sensor data properties:
+You can cast the data object into the actual sensor data object in order to access all the sensor data properties:
 
 ```java
 SKLightData lightData = (SKLightData)sensorData;
 ```
 
 
-
-- You can Start and Stop the Continuous Sensing using the following commands:
+You can Start and Stop the Continuous Sensing using the following commands:
 
 ```java
-//You will need try..catch blocks around these statements
+// Start
 mSensingKitLib.startContinuousSensingWithSensor(SKSensorType.LIGHT);
+
+// Stop
 mSensingKitLib.stopContinuousSensingWithSensor(SKSensorType.LIGHT);
 ```
 
