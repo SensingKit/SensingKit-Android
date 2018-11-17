@@ -79,7 +79,7 @@ class SKSensorManager {
         }
 
         if (isSensorRegistered(sensorType)) {
-            throw new SKException(TAG, "SensorModule is already registered.", SKExceptionErrorCode.SENSOR_ALREADY_REGISTERED);
+            throw new SKException(TAG, "Sensor is already registered.", SKExceptionErrorCode.SENSOR_ALREADY_REGISTERED);
         }
 
         // If configuration was not provided, get the Default
