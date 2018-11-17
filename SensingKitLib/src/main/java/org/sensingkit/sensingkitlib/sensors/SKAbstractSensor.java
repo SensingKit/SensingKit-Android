@@ -78,7 +78,7 @@ public abstract class SKAbstractSensor implements SKSensor {
 
         // Register the callback
         if (this.mSensorDataListeners.contains(callback)) {
-            throw new SKException(TAG, "SKSensorDataListener already registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "SKSensorDataListener already registered.", SKExceptionErrorCode.DATA_HANDLER_ALREADY_REGISTERED);
         }
 
         this.mSensorDataListeners.add(callback);
@@ -88,7 +88,7 @@ public abstract class SKAbstractSensor implements SKSensor {
 
         // Unregister the callback
         if (this.mSensorDataListeners == null || !this.mSensorDataListeners.remove(callback)) {
-            throw new SKException(TAG, "SKSensorDataListener is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "SKSensorDataListener is not registered.", SKExceptionErrorCode.DATA_HANDLER_NOT_REGISTERED);
         }
 
         // Delete the callBackList if it is empty

@@ -80,7 +80,7 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
         boolean status = mSensorManager.registerListener(mSensorEventListener, mSensor, configuration.getSamplingRate());
 
         if (!status) {
-            throw new SKException(TAG, "SensorModule '" + getSensorName() + "' could not be started.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor '" + getSensorName() + "' could not be started.", SKExceptionErrorCode.SENSOR_ERROR);
         }
     }
 
@@ -136,7 +136,7 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
                 return Sensor.TYPE_PRESSURE;
 
             default:
-                throw new SKException(TAG, "Not a native SensorModule.", SKExceptionErrorCode.UNKNOWN_ERROR);
+                throw new SKException(TAG, "Not a native Sensor.", SKExceptionErrorCode.SENSOR_ERROR);
 
         }
     }

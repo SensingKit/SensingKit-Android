@@ -43,7 +43,7 @@ public final class SKUtilities {
     public static boolean checkPermission(Context context, String permission) throws SKException {
 
         if (context == null) {
-            throw new SKException(TAG, "Context cannot be null.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Context cannot be null.", SKExceptionErrorCode.CONTEXT_NULL);
         }
 
         int res = context.checkCallingOrSelfPermission(permission);

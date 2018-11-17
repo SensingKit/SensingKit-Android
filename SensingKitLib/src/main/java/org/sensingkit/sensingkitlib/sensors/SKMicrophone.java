@@ -82,7 +82,7 @@ public class SKMicrophone extends SKAbstractSensor {
         try {
             recorder.prepare();
         } catch (IOException e) {
-            throw new SKException(TAG, "Microphone sensor could not be prepared.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Microphone sensor could not be prepared.", SKExceptionErrorCode.SENSOR_ERROR);
         }
     }
 

@@ -22,10 +22,6 @@
 package org.sensingkit.sensingkitlib;
 
 public enum SKExceptionErrorCode {
-    /**
-     * An unknown error occurred.
-     */
-    UNKNOWN_ERROR,
 
     // Context
 
@@ -55,6 +51,11 @@ public enum SKExceptionErrorCode {
      */
     SENSOR_NOT_REGISTERED,
 
+    /**
+     * Sensor could not be initialized.
+     */
+    SENSOR_ERROR,
+
 
     // Sensor Sensing
 
@@ -66,7 +67,7 @@ public enum SKExceptionErrorCode {
     /**
      * Sensor is currently not sensing.
      */
-    SENSOR_CURRENTLY_NOT_SENSING1,
+    SENSOR_CURRENTLY_NOT_SENSING,
 
 
     // Sensor Data Handlers
@@ -74,12 +75,12 @@ public enum SKExceptionErrorCode {
     /**
      * Sensor Data Handler is already registered.
      */
-    DATA_LISTENER_ALREADY_REGISTERED,
+    DATA_HANDLER_ALREADY_REGISTERED,
 
     /**
      * Sensor Data Handler is not registered
      */
-    DATA_LISTENER_NOT_REGISTERED,
+    DATA_HANDLER_NOT_REGISTERED,
 
 
     // Sensor Configuration

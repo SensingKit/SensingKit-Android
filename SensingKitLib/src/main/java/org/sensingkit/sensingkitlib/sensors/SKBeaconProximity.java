@@ -102,10 +102,6 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
         // Init MediaRecorder
         if (mBeaconManager == null) {
             mBeaconManager = BeaconManager.getInstanceForApplication(mApplicationContext);
-
-            if (mBeaconManager == null) {
-                throw new SKException(TAG, "Beacon Proximity sensor is not supported from the device.", SKExceptionErrorCode.UNKNOWN_ERROR);
-            }
         }
         else {
             // Reset Beacon Parsers
@@ -174,7 +170,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
         } catch (RemoteException ex) {
             Log.e(TAG, ex.toString());
-            throw new SKException(TAG, "Beacon Proximity sensor could not be started on this device.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Beacon Proximity sensor could not be started on this device.", SKExceptionErrorCode.SENSOR_ERROR);
         }
 
     }
@@ -187,7 +183,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
             this.isSensing = false;
 
         } catch (RemoteException ex) {
-            throw new SKException(TAG, "Beacon Proximity sensor could not be stopped.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Beacon Proximity sensor could not be stopped.", SKExceptionErrorCode.SENSOR_ERROR);
         }
     }
 
