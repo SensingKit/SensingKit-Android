@@ -37,8 +37,6 @@ public final class SKUtilities {
      * @param permission Android permission
      *
      * @return 1 if permission is granted; 0 if it is not
-     *
-     * @throws SKException
      */
     public static boolean checkPermission(Context context, String permission) throws SKException {
 

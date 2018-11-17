@@ -22,6 +22,7 @@
 package org.sensingkit.sensingkitlib.data;
 
 import android.os.BatteryManager;
+import android.os.Build;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
@@ -223,19 +224,17 @@ public class SKBatteryStatusData extends SKAbstractData {
 
     private static String getPluggedString(int pluggedType) {
 
-        switch (pluggedType) {
-
-            case BATTERY_PLUGGED_USB:
-                return "usb";
-
-            case BATTERY_PLUGGED_AC:
-                return "ac";
-
-            case BATTERY_PLUGGED_WIRELESS:
-                return "wireless";
-
-            default:
-                return "unknown";
+        if (pluggedType == BATTERY_PLUGGED_USB) {
+            return "usb";
+        }
+        else if (pluggedType == BATTERY_PLUGGED_AC) {
+            return "ac";
+        }
+        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && pluggedType == BATTERY_PLUGGED_WIRELESS) {
+            return "wireless";
+        }
+        else {
+            return "unknown";
         }
     }
 

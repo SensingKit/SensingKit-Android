@@ -56,7 +56,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
     private BeaconManager mBeaconManager;
     private Region mRegion;
 
-    private RangeNotifier mRangeNotifier = new RangeNotifier() {
+    private final RangeNotifier mRangeNotifier = new RangeNotifier() {
 
         @Override
         public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {

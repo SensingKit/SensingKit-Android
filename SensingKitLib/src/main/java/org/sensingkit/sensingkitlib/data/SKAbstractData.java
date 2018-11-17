@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import android.support.annotation.NonNull;
+
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 /*
@@ -51,6 +53,7 @@ public abstract class SKAbstractData implements SKSensorData
      *
      * @return String in csv format
      */
+    @NonNull
     public String toString() {
         return this.getDataInCSV();
     }

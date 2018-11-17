@@ -35,12 +35,7 @@ public class SKNotificationListenerService extends NotificationListenerService {
     public static final String NOTIFICATION_ACTION = "org.sensingkit.SensingKit-Android.SKNotificationListenerService";
 
     @SuppressWarnings("unused")
-    private String TAG = this.getClass().getSimpleName();
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        return super.onBind(intent);
-    }
+    private static final String TAG = SKNotificationListenerService.class.getName();
 
     @Override
     public void onListenerConnected() {

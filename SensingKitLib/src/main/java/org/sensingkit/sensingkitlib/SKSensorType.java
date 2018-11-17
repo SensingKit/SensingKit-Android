@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib;
 
+import android.support.annotation.NonNull;
+
 /**
  *  These constants indicate the type of the sensor.
  */
@@ -157,6 +159,7 @@ public enum SKSensorType {
         return this.nonspacedName;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return this.getName();

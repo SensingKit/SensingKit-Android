@@ -115,12 +115,4 @@ public class SKNotification extends SKAbstractSensor {
         this.mApplicationContext.unregisterReceiver(mNotificationReceiver);
     }
 
-    @Override
-    public void sensorDeregistered() {
-        super.sensorDeregistered();
-
-        // Release sensor
-        // Not required by this sensor.
-    }
-
 }

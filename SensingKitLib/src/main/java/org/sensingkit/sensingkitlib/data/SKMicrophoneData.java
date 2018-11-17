@@ -33,7 +33,7 @@ public class SKMicrophoneData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKMicrophoneData.class.getName();
 
-    protected String state;
+    protected final String state;
 
     /**
      * Initialize the instance

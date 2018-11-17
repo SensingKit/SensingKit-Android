@@ -23,6 +23,11 @@ package org.sensingkit.sensingkitlib;
 
 public enum SKExceptionErrorCode {
 
+    /**
+     * Unknown error..
+     */
+    UNKNOWN_ERROR,
+
     // Context
 
     /**
