@@ -74,7 +74,7 @@ public class SKNotification extends SKAbstractSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKNotificationConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKConfiguration.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration

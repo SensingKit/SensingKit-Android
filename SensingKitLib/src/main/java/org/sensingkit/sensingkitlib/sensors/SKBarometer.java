@@ -53,7 +53,7 @@ public class SKBarometer extends SKAbstractNativeSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKBarometerConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKBarometer.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration

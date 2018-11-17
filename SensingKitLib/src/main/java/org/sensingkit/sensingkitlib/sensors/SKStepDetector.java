@@ -53,7 +53,7 @@ public class SKStepDetector extends SKAbstractNativeSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKStepDetectorConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKStepDetector.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration

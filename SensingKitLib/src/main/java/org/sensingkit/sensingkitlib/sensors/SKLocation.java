@@ -114,7 +114,7 @@ public class SKLocation extends SKAbstractGoogleServicesSensor implements Locati
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKLocationConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKLocation.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration

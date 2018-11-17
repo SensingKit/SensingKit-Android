@@ -53,7 +53,7 @@ public class SKHumidity extends SKAbstractNativeSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKHumidityConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKHumidity.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration

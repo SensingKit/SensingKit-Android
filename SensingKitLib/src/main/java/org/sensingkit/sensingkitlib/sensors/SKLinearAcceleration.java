@@ -53,7 +53,7 @@ public class SKLinearAcceleration extends SKAbstractNativeSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKLinearAccelerationConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKLinearAcceleration.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration

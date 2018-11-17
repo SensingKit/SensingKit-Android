@@ -93,7 +93,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKBeaconProximityConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKBeaconProximity.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration
