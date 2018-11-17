@@ -15,6 +15,7 @@
 - Renamed Audio sensor to Microphone
 - Renamed Air Pressure sensor to Barometer
 - Renamed Battery sensor to BatteryStatus
+- Renamed SKSensorDataListener to SKSensorDataHandler
 - Renamed all sensor modules into sensors
 - Updated SensingKit-Android API (thanks to Ming-Jiun Huang @U3D3)
 - Updated Google Play Services to 16.0.0
