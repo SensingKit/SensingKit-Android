@@ -66,7 +66,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      *  @return TRUE if the sensor is available on the device, or FALSE if it is not.
      */
     @Override
-    public boolean isSensorAvailable(SKSensorType sensorType) throws SKException {
+    public boolean isSensorAvailable(SKSensorType sensorType) {
         return mSensorManager.isSensorAvailable(sensorType);
     }
 
@@ -169,7 +169,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      *  @return A String with the CSV header.
      */
     @Override
-    public String csvHeaderForSensor(SKSensorType sensorType) throws SKException {
+    public String csvHeaderForSensor(SKSensorType sensorType) {
         return SKSensorManager.csvHeaderForSensor(sensorType);
     }
 
