@@ -22,7 +22,7 @@
 package org.sensingkit.sensingkitlib.sensors;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKSensorDataListener;
+import org.sensingkit.sensingkitlib.SKSensorDataHandler;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 
@@ -35,12 +35,12 @@ public interface SKSensor {
     void stopSensing() throws SKException;
     boolean isSensing();
 
-    void subscribeSensorDataListener(SKSensorDataListener callback) throws SKException;
-    void unsubscribeSensorDataListener(SKSensorDataListener callback) throws SKException;
-    void unsubscribeAllSensorDataListeners() throws SKException;
+    void subscribeSensorDataHandler(SKSensorDataHandler handler) throws SKException;
+    void unsubscribeSensorDataHandler(SKSensorDataHandler handler) throws SKException;
+    void unsubscribeAllSensorDataHandlers() throws SKException;
 
     void setConfiguration(SKConfiguration configuration) throws SKException;
     SKConfiguration getConfiguration();
 
-    void sensorDeregestered();
+    void sensorDeregistered();
 }

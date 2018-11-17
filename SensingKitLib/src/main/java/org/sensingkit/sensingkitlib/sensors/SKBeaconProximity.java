@@ -188,8 +188,8 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
     }
 
     @Override
-    public void sensorDeregestered() {
-        super.sensorDeregestered();
+    public void sensorDeregistered() {
+        super.sensorDeregistered();
 
         // Remove callback
         mBeaconManager.removeRangeNotifier(mRangeNotifier);

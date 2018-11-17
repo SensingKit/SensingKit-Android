@@ -130,35 +130,35 @@ public class SensingKitLib implements SensingKitLibInterface {
     }
 
     /**
-     *  Subscribes for sensor updates using a specified event listener.
+     *  Subscribes for sensor updates using a specified data handler.
      *
      *  @param sensorType  The type of the sensor that the data handler will be subscribed to.
-     *  @param dataListener    An event listener that is invoked with each update to handle new sensor data. The block must conform to the SKSensorDataListener type.
+     *  @param dataHandler A data handler that is invoked with each update to handle new sensor data. The block must conform to the SKSensorDataHandler type.
      */
     @Override
-    public void subscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
-        mSensorManager.subscribeSensorDataListener(sensorType, dataListener);
+    public void subscribeSensorDataHandler(SKSensorType sensorType, SKSensorDataHandler dataHandler) throws SKException {
+        mSensorManager.subscribeSensorDataHandler(sensorType, dataHandler);
     }
 
     /**
-     *  Unsubscribes an event listener.
+     *  Unsubscribes a data handler.
      *
      *  @param sensorType The type of the sensor for which the event listener will be unsubscribed.
-     *  @param dataListener The event listener to be unsubscribed.
+     *  @param dataHandler The data handler to be unsubscribed.
      */
-     @Override
-    public void unsubscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
-        mSensorManager.unsubscribeSensorDataListener(sensorType, dataListener);
+    @Override
+    public void unsubscribeSensorDataHandler(SKSensorType sensorType, SKSensorDataHandler dataHandler) throws SKException {
+        mSensorManager.unsubscribeSensorDataHandler(sensorType, dataHandler);
     }
 
-     /**
-      *  Unsubscribes all event listeners.
-      *
-      *  @param sensorType The type of the sensor for which the event listener will be unsubscribed.
-      */
-     @Override
-    public void unsubscribeAllSensorDataListeners(SKSensorType sensorType) throws SKException {
-        mSensorManager.unsubscribeAllSensorDataListeners(sensorType);
+    /**
+     *  Unsubscribes all data handlers.
+     *
+     *  @param sensorType The type of the sensor for which the data handlers will be unsubscribed.
+     */
+    @Override
+    public void unsubscribeAllSensorDataHandlers(SKSensorType sensorType) throws SKException {
+        mSensorManager.unsubscribeAllSensorDataHandlers(sensorType);
     }
 
     /**

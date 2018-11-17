@@ -111,10 +111,10 @@ class SKSensorManager {
         }
 
         // Clear all Callbacks from that sensor
-        getSensor(sensorType).unsubscribeAllSensorDataListeners();
+        getSensor(sensorType).unsubscribeAllSensorDataHandlers();
 
         // Deregister the Sensor
-        getSensor(sensorType).sensorDeregestered();
+        getSensor(sensorType).sensorDeregistered();
         int sensorIndex = sensorType.ordinal();
         mSensors.delete(sensorIndex);
     }
@@ -487,44 +487,25 @@ class SKSensorManager {
         return configuration;
     }
 
-    /**
-     *  Subscribes for sensor updates using a specified event listener.
-     *
-     *  @param sensorType  The type of the sensor that the data handler will be subscribed to.
-     *
-     *  @param dataListener    An event listener that is invoked with each update to handle new sensor data. The block must conform to the SKSensorDataListener type.
-     */
-    void subscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
+    void subscribeSensorDataHandler(SKSensorType sensorType, SKSensorDataHandler dataHandler) throws SKException {
 
         Log.i(TAG, "Subscribe to sensor: " + sensorType.getName() + ".");
 
-        getSensor(sensorType).subscribeSensorDataListener(dataListener);
+        getSensor(sensorType).subscribeSensorDataHandler(dataHandler);
     }
 
-    /**
-     *  Unsubscribes an event listener.
-     *
-     *  @param sensorType The type of the sensor for which the event listener will be unsubscribed.
-     *  @param dataListener The event listener to be unsubscribed.
-     */
-    void unsubscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
+    void unsubscribeSensorDataHandler(SKSensorType sensorType, SKSensorDataHandler dataHandler) throws SKException {
 
         Log.i(TAG, "Unsubscribe from sensor: " + sensorType.getName() + ".");
 
-        getSensor(sensorType).unsubscribeSensorDataListener(dataListener);
+        getSensor(sensorType).unsubscribeSensorDataHandler(dataHandler);
     }
 
-    /**
-     *  Unsubscribes all event listenerss.
-     *
-     *  @param sensorType The type of the sensor for which the event listener will be unsubscribed.
-     */
-
-    void unsubscribeAllSensorDataListeners(SKSensorType sensorType) throws SKException {
+    void unsubscribeAllSensorDataHandlers(SKSensorType sensorType) throws SKException {
 
         Log.i(TAG, "Unsubscribe from all sensors.");
 
-        getSensor(sensorType).unsubscribeAllSensorDataListeners();
+        getSensor(sensorType).unsubscribeAllSensorDataHandlers();
     }
 
     /**

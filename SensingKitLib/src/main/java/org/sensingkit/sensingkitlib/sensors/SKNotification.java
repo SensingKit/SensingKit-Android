@@ -116,8 +116,8 @@ public class SKNotification extends SKAbstractSensor {
     }
 
     @Override
-    public void sensorDeregestered() {
-        super.sensorDeregestered();
+    public void sensorDeregistered() {
+        super.sensorDeregistered();
 
         // Release sensor
         // Not required by this sensor.

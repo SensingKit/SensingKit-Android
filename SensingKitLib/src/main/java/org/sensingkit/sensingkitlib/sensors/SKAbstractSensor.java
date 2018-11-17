@@ -25,7 +25,7 @@ import android.content.Context;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
-import org.sensingkit.sensingkitlib.SKSensorDataListener;
+import org.sensingkit.sensingkitlib.SKSensorDataHandler;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
@@ -40,7 +40,7 @@ public abstract class SKAbstractSensor implements SKSensor {
     protected final Context mApplicationContext;
     protected final SKSensorType mSensorType;
     protected boolean isSensing = false;
-    protected ArrayList<SKSensorDataListener> mSensorDataListeners;
+    protected ArrayList<SKSensorDataHandler> mSensorDataListeners;
     protected SKConfiguration mConfiguration;
 
     protected SKAbstractSensor(final Context context, final SKSensorType sensorType, final SKConfiguration configuration) throws SKException {
@@ -69,7 +69,7 @@ public abstract class SKAbstractSensor implements SKSensor {
         this.mConfiguration = configuration;
     }
 
-    public void subscribeSensorDataListener(SKSensorDataListener callback) throws SKException {
+    public void subscribeSensorDataHandler(SKSensorDataHandler handler) throws SKException {
 
         // Init the list
         if (this.mSensorDataListeners == null) {
@@ -77,18 +77,18 @@ public abstract class SKAbstractSensor implements SKSensor {
         }
 
         // Register the callback
-        if (this.mSensorDataListeners.contains(callback)) {
-            throw new SKException(TAG, "SKSensorDataListener already registered.", SKExceptionErrorCode.DATA_HANDLER_ALREADY_REGISTERED);
+        if (this.mSensorDataListeners.contains(handler)) {
+            throw new SKException(TAG, "SKSensorDataHandler already registered.", SKExceptionErrorCode.DATA_HANDLER_ALREADY_REGISTERED);
         }
 
-        this.mSensorDataListeners.add(callback);
+        this.mSensorDataListeners.add(handler);
     }
 
-    public void unsubscribeSensorDataListener(SKSensorDataListener callback) throws SKException {
+    public void unsubscribeSensorDataHandler(SKSensorDataHandler handler) throws SKException {
 
         // Unregister the callback
-        if (this.mSensorDataListeners == null || !this.mSensorDataListeners.remove(callback)) {
-            throw new SKException(TAG, "SKSensorDataListener is not registered.", SKExceptionErrorCode.DATA_HANDLER_NOT_REGISTERED);
+        if (this.mSensorDataListeners == null || !this.mSensorDataListeners.remove(handler)) {
+            throw new SKException(TAG, "SKSensorDataHandler is not registered.", SKExceptionErrorCode.DATA_HANDLER_NOT_REGISTERED);
         }
 
         // Delete the callBackList if it is empty
@@ -97,7 +97,7 @@ public abstract class SKAbstractSensor implements SKSensor {
         }
     }
 
-    public void unsubscribeAllSensorDataListeners() {
+    public void unsubscribeAllSensorDataHandlers() {
 
        // Clear all callbacks
        if (this.mSensorDataListeners != null) {
@@ -116,7 +116,7 @@ public abstract class SKAbstractSensor implements SKSensor {
             if (mSensorDataListeners != null) {
 
                 // CallBack with data as parameter
-                for (SKSensorDataListener callback : mSensorDataListeners) {
+                for (SKSensorDataHandler callback : mSensorDataListeners) {
                     callback.onDataReceived(mSensorType, data);
                 }
             }
@@ -124,7 +124,7 @@ public abstract class SKAbstractSensor implements SKSensor {
     }
 
     @Override
-    public void sensorDeregestered() {
+    public void sensorDeregistered() {
         // Override this method in the sensor subclass if needed.
     }
 

@@ -24,9 +24,9 @@ package org.sensingkit.sensingkitlib;
 import org.sensingkit.sensingkitlib.data.SKSensorData;
 
 
-public interface SKSensorDataListener {
+public interface SKSensorDataHandler {
     /**
-     *  Event Listener to be invoked when new sensor data is available. You can cast the sensorData object
+     *  Event Handler to be invoked when new sensor data is available. You can cast the sensorData object
      *  into the actual sensor data (e.g. SKAccelerometerData), based on the reported sensorType.
      *  <br>
      *  parameter sensorType The type of the sensor producing the SKSensorData object.<br>

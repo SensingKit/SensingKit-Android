@@ -142,8 +142,8 @@ public class SKAudioLevel extends SKAbstractSensor {
     }
 
     @Override
-    public void sensorDeregestered() {
-        super.sensorDeregestered();
+    public void sensorDeregistered() {
+        super.sensorDeregistered();
 
         // Release sensor
         audioRecord.release();
