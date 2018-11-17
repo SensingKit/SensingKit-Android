@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="org.sensingkit.sensingkitlib">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
  
     <application android:allowBackup="true"
