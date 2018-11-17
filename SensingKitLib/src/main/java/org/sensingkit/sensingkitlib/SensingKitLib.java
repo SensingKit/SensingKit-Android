@@ -231,11 +231,14 @@ public class SensingKitLib implements SensingKitLibInterface {
 
     //region Wake Lock methods
 
-    private void acquireWakeLock() {
+    private void acquireWakeLock(long timeout) throws SKException {
         if ((mWakeLock == null) || (!mWakeLock.isHeld())) {
             PowerManager pm = (PowerManager) mApplicationContext.getSystemService(Context.POWER_SERVICE);
+            if (pm == null) {
+                throw new SKException(TAG, "Could not access the system service: POWER_SERVICE.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            }
             mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "SensingKit:WakeLock");
-            mWakeLock.acquire();
+            mWakeLock.acquire(timeout);
         }
     }
 

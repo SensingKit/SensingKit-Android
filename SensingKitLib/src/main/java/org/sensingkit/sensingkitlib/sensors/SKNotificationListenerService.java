@@ -23,7 +23,6 @@ package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Intent;
 import android.os.Build;
-import android.os.IBinder;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.support.annotation.RequiresApi;

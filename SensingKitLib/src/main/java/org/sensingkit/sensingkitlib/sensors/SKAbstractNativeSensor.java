@@ -50,7 +50,7 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
         mSensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
 
         if (mSensorManager == null) {
-            throw new SKException(TAG, "Could not access the internal SensorManager Error: ", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Could not access the system service: SENSOR_SERVICE.", SKExceptionErrorCode.UNKNOWN_ERROR);
         }
 
         mSensor = mSensorManager.getDefaultSensor(getSensorType(sensorType));
