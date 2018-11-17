@@ -40,7 +40,7 @@ public class SensingKitLib implements SensingKitLibInterface {
     private SKSensorManager mSensorManager;
 
     @SuppressWarnings("unused")
-    public static SensingKitLibInterface getSensingKitLib(final Context context) throws SKException {
+    public static SensingKitLibInterface sharedSensingKitLib(final Context context) throws SKException {
 
         if (context == null) {
             throw new SKException(TAG, "Context cannot be null", SKExceptionErrorCode.UNKNOWN_ERROR);

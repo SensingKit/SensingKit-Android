@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         try {
-            mSensingKitLib = SensingKitLib.getSensingKitLib(this);
+            mSensingKitLib = SensingKitLib.sharedSensingKitLib(this);
         }
         catch (SKException ex) {
             // Handle Exception
