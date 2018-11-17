@@ -22,5 +22,67 @@
 package org.sensingkit.sensingkitlib;
 
 public enum SKExceptionErrorCode {
-    UNKNOWN_ERROR
+    /**
+     * An unknown error occurred.
+     */
+    UNKNOWN_ERROR,
+
+    // Sensor Availability
+
+    /**
+     * Sensor is not available.
+     */
+    SENSOR_NOT_AVAILABLE,
+
+
+    // Sensor Registration
+
+    /**
+     * Sensor is already registered.
+     */
+    SENSOR_ALREADY_REGISTERED,
+
+    /**
+     * Sensor is not registered.
+     */
+    SENSOR_NOT_REGISTERED,
+
+
+    // Sensor Sensing
+
+    /**
+     * Sensor is currently sensing.
+     */
+    SENSOR_CURRENTLY_SENSING,
+
+    /**
+     * Sensor is currently not sensing.
+     */
+    SENSOR_CURRENTLY_NOT_SENSING1,
+
+
+    // Sensor Data Handlers
+
+    /**
+     * Sensor Data Handler is already registered.
+     */
+    DATA_LISTENER_ALREADY_REGISTERED,
+
+    /**
+     * Sensor Data Handler is not registered
+     */
+    DATA_LISTENER_NOT_REGISTERED,
+
+
+    // Sensor Configuration
+
+    /**
+     * Configuration is not compatible with the registered sensor.
+     */
+    CONFIGURATION_NOT_VALID,
+
+    /**
+     * Eddystone Proximity Namespace is not valid.
+     */
+    CONFIGURATION_EDDYSTONE_PROXIMITY_NAMESPACE_NOT_VALID
 }
