@@ -110,7 +110,7 @@ mSensingKitLib.registerSensor(SKSensorType.LIGHT);
 Subscribe a sensor data listener:
 
 ```java
-mSensingKitLib.subscribeSensorDataListener(SKSensorType.LIGHT, new SKSensorDataListener() {
+mSensingKitLib.subscribeSensorDataHandler(SKSensorType.LIGHT, new SKSensorDataHandler() {
     @Override
     public void onDataReceived(final SKSensorType moduleType, final SKSensorData sensorData) {
         System.out.println(sensorData.getDataInCSV());  // Print data in CSV format
