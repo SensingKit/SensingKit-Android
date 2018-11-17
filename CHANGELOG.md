@@ -8,6 +8,7 @@
 - Added support for Notification sensor
 - Added csvHeaderForSensor method to get the headers of the csv format
 - Added missing SKMicrophoneData object
+- Added support for Exceptions (SKExceptions)
 - Added support for Android Studio 3.2
 - Added support for Android 8 SDK (Pie)
 - Added support for maven distribution (jCenter and Maven Central)
