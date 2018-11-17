@@ -67,12 +67,8 @@ dependencies {
 Import and init SensingKit as shown below:
 
 ```java
-import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKSensorType;
-import org.sensingkit.sensingkitlib.SensingKitLib;
-import org.sensingkit.sensingkitlib.SensingKitLibInterface;
-import org.sensingkit.sensingkitlib.data.SKSensorData;
-import org.sensingkit.sensingkitlib.SKSensorDataListener;
+import org.sensingkit.sensingkitlib.*;
+import org.sensingkit.sensingkitlib.data.*;
 
 public class MainActivity extends AppCompatActivity {
 
