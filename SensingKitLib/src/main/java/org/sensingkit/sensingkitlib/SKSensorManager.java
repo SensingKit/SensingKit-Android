@@ -191,7 +191,8 @@ class SKSensorManager {
                 return packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_LIGHT);
 
             case LOCATION:
-                return packageManager.hasSystemFeature(PackageManager.FEATURE_LOCATION);
+                return packageManager.hasSystemFeature(PackageManager.FEATURE_LOCATION) &&
+                        SKLocation.isGooglePlayServicesAvailable(mApplicationContext);
 
             case MOTION_ACTIVITY:
                 return SKMotionActivity.isGooglePlayServicesAvailable(mApplicationContext);

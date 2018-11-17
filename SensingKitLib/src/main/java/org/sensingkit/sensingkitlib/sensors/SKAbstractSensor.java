@@ -127,5 +127,4 @@ public abstract class SKAbstractSensor implements SKSensor {
     public void sensorDeregistered() {
         // Override this method in the sensor subclass if needed.
     }
-
 }
