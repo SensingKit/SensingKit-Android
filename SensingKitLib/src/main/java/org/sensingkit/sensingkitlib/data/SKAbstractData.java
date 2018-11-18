@@ -31,7 +31,7 @@ Abstract class for sensor data
 public abstract class SKAbstractData implements SKSensorData
 {
     @SuppressWarnings("unused")
-    private static final String TAG = SKAbstractData.class.getName();
+    private static final String TAG = SKAbstractData.class.getSimpleName();
 
     protected final SKSensorType sensorType;
     protected final long timestamp;

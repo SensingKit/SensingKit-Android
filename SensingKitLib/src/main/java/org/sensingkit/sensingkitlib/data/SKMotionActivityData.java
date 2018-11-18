@@ -34,7 +34,7 @@ import java.util.Locale;
 public class SKMotionActivityData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKMotionActivityData.class.getName();
+    private static final String TAG = SKMotionActivityData.class.getSimpleName();
 
     protected final int activityType;
     protected final int confidence;

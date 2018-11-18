@@ -37,7 +37,7 @@ import java.io.IOException;
 public class SKMicrophone extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKMicrophone.class.getName();
+    private static final String TAG = SKMicrophone.class.getSimpleName();
 
     private MediaRecorder recorder;
 

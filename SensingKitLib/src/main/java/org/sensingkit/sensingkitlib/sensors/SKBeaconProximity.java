@@ -49,7 +49,7 @@ import java.util.Collection;
 public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsumer {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKBeaconProximity.class.getName();
+    private static final String TAG = SKBeaconProximity.class.getSimpleName();
 
     private static final String BEACON_IDENTIFIER = "org.sensingkit.beaconIdentifier";
 

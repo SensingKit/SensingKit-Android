@@ -36,7 +36,7 @@ import static android.os.BatteryManager.*;
 public class SKBatteryStatusData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKBatteryStatusData.class.getName();
+    private static final String TAG = SKBatteryStatusData.class.getSimpleName();
 
     protected final int level;
     protected final int scale;

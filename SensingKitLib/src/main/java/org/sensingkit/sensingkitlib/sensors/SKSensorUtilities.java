@@ -24,6 +24,6 @@ package org.sensingkit.sensingkitlib.sensors;
 public final class SKSensorUtilities {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKSensorUtilities.class.getName();
+    private static final String TAG = SKSensorUtilities.class.getSimpleName();
 
 }

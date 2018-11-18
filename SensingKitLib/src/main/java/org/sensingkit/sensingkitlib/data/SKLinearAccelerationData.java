@@ -32,7 +32,7 @@ import java.util.Locale;
 public class SKLinearAccelerationData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKLinearAccelerationData.class.getName();
+    private static final String TAG = SKLinearAccelerationData.class.getSimpleName();
 
     protected final float x;
     protected final float y;

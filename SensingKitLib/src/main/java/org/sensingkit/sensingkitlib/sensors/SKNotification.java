@@ -37,7 +37,7 @@ import org.sensingkit.sensingkitlib.data.SKNotificationData;
 public class SKNotification extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKNotification.class.getName();
+    private static final String TAG = SKNotification.class.getSimpleName();
 
     private BroadcastReceiver mNotificationReceiver;
 

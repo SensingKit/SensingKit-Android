@@ -34,7 +34,7 @@ public class SKNotificationListenerService extends NotificationListenerService {
     public static final String NOTIFICATION_ACTION = "org.sensingkit.SensingKit-Android.SKNotificationListenerService";
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKNotificationListenerService.class.getName();
+    private static final String TAG = SKNotificationListenerService.class.getSimpleName();
 
     @Override
     public void onListenerConnected() {

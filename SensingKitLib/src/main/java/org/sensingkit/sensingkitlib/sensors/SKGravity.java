@@ -35,7 +35,7 @@ import org.sensingkit.sensingkitlib.data.SKGravityData;
 public class SKGravity extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKGravity.class.getName();
+    private static final String TAG = SKGravity.class.getSimpleName();
 
     public SKGravity(final Context context, final SKGravityConfiguration configuration) throws SKException {
         super(context, SKSensorType.GRAVITY, configuration);

@@ -31,7 +31,7 @@ import java.util.Locale;
 public class SKAmbientTemperatureData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKAmbientTemperatureData.class.getName();
+    private static final String TAG = SKAmbientTemperatureData.class.getSimpleName();
 
     protected final float temperature;
 

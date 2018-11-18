@@ -35,7 +35,7 @@ import org.sensingkit.sensingkitlib.data.SKAccelerometerData;
 public class SKAccelerometer extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKAccelerometer.class.getName();
+    private static final String TAG = SKAccelerometer.class.getSimpleName();
 
     public SKAccelerometer(final Context context, final SKAccelerometerConfiguration configuration) throws SKException {
         super(context, SKSensorType.ACCELEROMETER, configuration);

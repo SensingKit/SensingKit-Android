@@ -39,7 +39,7 @@ public class SKScreenStatus extends SKAbstractSensor {
     private final BroadcastReceiver mBroadcastReceiver;
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKScreenStatus.class.getName();
+    private static final String TAG = SKScreenStatus.class.getSimpleName();
 
     public SKScreenStatus(final Context context, final SKScreenStatusConfiguration configuration) throws SKException {
         super(context, SKSensorType.SCREEN_STATUS, configuration);

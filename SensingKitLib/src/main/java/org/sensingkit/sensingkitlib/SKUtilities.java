@@ -27,7 +27,7 @@ import android.content.pm.PackageManager;
 public final class SKUtilities {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKUtilities.class.getName();
+    private static final String TAG = SKUtilities.class.getSimpleName();
 
     /**
      * Check whether a given permission has been granted

@@ -34,7 +34,7 @@ import java.util.Locale;
 public class SKLocationData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKLocationData.class.getName();
+    private static final String TAG = SKLocationData.class.getSimpleName();
 
     protected final Location location;
 

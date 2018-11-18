@@ -47,7 +47,7 @@ import org.sensingkit.sensingkitlib.data.SKMotionActivityData;
 public class SKMotionActivity extends SKAbstractGoogleServicesSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKMotionActivity.class.getName();
+    private static final String TAG = SKMotionActivity.class.getSimpleName();
 
     private ActivityRecognitionApi mActivityRecognition;
     private PendingIntent mRecognitionPendingIntent;

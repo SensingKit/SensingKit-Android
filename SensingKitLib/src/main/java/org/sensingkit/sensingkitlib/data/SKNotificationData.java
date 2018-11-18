@@ -29,7 +29,7 @@ import java.util.Locale;
 public class SKNotificationData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKNotificationData.class.getName();
+    private static final String TAG = SKNotificationData.class.getSimpleName();
 
     private final String actionType;
     private final String packageName;

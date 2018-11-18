@@ -35,7 +35,7 @@ import org.sensingkit.sensingkitlib.data.SKStepCounterData;
 public class SKStepCounter extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKStepCounter.class.getName();
+    private static final String TAG = SKStepCounter.class.getSimpleName();
 
     public SKStepCounter(final Context context, final SKStepCounterConfiguration configuration) throws SKException {
         super(context, SKSensorType.STEP_COUNTER, configuration);

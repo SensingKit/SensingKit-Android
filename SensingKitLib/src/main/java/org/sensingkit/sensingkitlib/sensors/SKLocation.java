@@ -43,7 +43,7 @@ import org.sensingkit.sensingkitlib.data.SKLocationData;
 public class SKLocation extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKLocation.class.getName();
+    private static final String TAG = SKLocation.class.getSimpleName();
 
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest mLocationRequest;

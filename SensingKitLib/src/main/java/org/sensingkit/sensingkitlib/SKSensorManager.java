@@ -35,7 +35,7 @@ import org.sensingkit.sensingkitlib.configuration.*;
 class SKSensorManager {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKSensorManager.class.getName();
+    private static final String TAG = SKSensorManager.class.getSimpleName();
 
     private static SKSensorManager sSensorManager;
     private final Context mApplicationContext;

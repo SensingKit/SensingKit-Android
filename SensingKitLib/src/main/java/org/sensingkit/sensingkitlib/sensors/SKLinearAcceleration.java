@@ -35,7 +35,7 @@ import org.sensingkit.sensingkitlib.data.SKLinearAccelerationData;
 public class SKLinearAcceleration extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKLinearAcceleration.class.getName();
+    private static final String TAG = SKLinearAcceleration.class.getSimpleName();
 
     public SKLinearAcceleration(final Context context, final SKLinearAccelerationConfiguration configuration) throws SKException {
         super(context, SKSensorType.LINEAR_ACCELERATION, configuration);

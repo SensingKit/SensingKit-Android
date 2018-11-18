@@ -35,7 +35,7 @@ import org.sensingkit.sensingkitlib.data.SKAmbientTemperatureData;
 public class SKAmbientTemperature extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKAmbientTemperature.class.getName();
+    private static final String TAG = SKAmbientTemperature.class.getSimpleName();
 
     public SKAmbientTemperature(final Context context, final SKAmbientTemperatureConfiguration configuration) throws SKException {
         super(context, SKSensorType.AMBIENT_TEMPERATURE, configuration);

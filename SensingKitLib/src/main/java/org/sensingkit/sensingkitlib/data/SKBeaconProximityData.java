@@ -31,7 +31,7 @@ import java.util.Locale;
 public class SKBeaconProximityData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKBeaconProximityData.class.getName();
+    private static final String TAG = SKBeaconProximityData.class.getSimpleName();
 
     protected final Beacon mBeacon;
 

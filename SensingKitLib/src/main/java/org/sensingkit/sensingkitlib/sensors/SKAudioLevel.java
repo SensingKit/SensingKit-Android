@@ -37,7 +37,7 @@ import org.sensingkit.sensingkitlib.data.SKAudioLevelData;
 public class SKAudioLevel extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKAudioLevel.class.getName();
+    private static final String TAG = SKAudioLevel.class.getSimpleName();
 
     private static final int sampleRate = 8000;
     private static final int bufferSizeFactor = 1;

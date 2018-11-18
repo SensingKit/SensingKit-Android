@@ -32,7 +32,7 @@ import java.util.Locale;
 public class SKBeaconProximityCollectionData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKBeaconProximityCollectionData.class.getName();
+    private static final String TAG = SKBeaconProximityCollectionData.class.getSimpleName();
 
     private final ArrayList<SKBeaconProximityData> mDevices;
 

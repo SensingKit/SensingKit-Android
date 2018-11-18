@@ -35,7 +35,7 @@ import org.sensingkit.sensingkitlib.data.SKLightData;
 public class SKLight extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKLight.class.getName();
+    private static final String TAG = SKLight.class.getSimpleName();
 
     private float lastLightSensed = Float.MAX_VALUE;
 

@@ -35,7 +35,7 @@ import org.sensingkit.sensingkitlib.data.SKBarometerData;
 public class SKBarometer extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKBarometer.class.getName();
+    private static final String TAG = SKBarometer.class.getSimpleName();
 
     public SKBarometer(final Context context, final SKBarometerConfiguration configuration) throws SKException {
         super(context, SKSensorType.BAROMETER, configuration);
