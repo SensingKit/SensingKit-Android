@@ -21,12 +21,15 @@
 
 package org.sensingkit.sensingkitlib.sensors;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.location.Location;
 import android.util.Log;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
 import org.sensingkit.sensingkitlib.SKException;
@@ -37,79 +40,64 @@ import org.sensingkit.sensingkitlib.configuration.SKLocationConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKLocationData;
 
-public class SKLocation extends SKAbstractGoogleServicesSensor implements LocationListener {
+public class SKLocation extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
     private static final String TAG = SKLocation.class.getName();
 
+    private FusedLocationProviderClient mFusedLocationClient;
+    private LocationRequest mLocationRequest;
+
+    private LocationCallback mLocationCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            super.onLocationResult(locationResult);
+
+            if (locationResult == null) {
+                return;
+            }
+
+            // Build the data object
+            Location location = locationResult.getLastLocation();
+            SKAbstractData data = new SKLocationData(System.currentTimeMillis(), location);
+
+            // Submit sensor data object
+            submitSensorData(data);
+        }
+    };
+
     public SKLocation(final Context context, final SKLocationConfiguration configuration) throws SKException {
         super(context, SKSensorType.LOCATION, configuration);
 
-        mClient = new GoogleApiClient.Builder(context)
-                .addApi(LocationServices.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .build();
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
+        mLocationRequest = LocationRequest.create();
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void startSensing() {
 
         this.isSensing = true;
 
-        mClient.connect();
+        // Start the request
+        mFusedLocationClient.requestLocationUpdates(mLocationRequest,
+                mLocationCallback,
+                null);
     }
 
     @Override
     public void stopSensing() {
 
-        unregisterForLocationUpdates();
-        mClient.disconnect();
+        mFusedLocationClient.removeLocationUpdates(mLocationCallback);
 
         this.isSensing = false;
     }
 
     @Override
-    protected void serviceConnected()
-    {
-        Log.i(TAG, "GoogleApiClient Connected!");
-
-        registerForLocationUpdates();
-    }
-
-    @Override
-    public void onLocationChanged(android.location.Location location) {
-
-        // Build the data object
-        SKAbstractData data = new SKLocationData(System.currentTimeMillis(), location);
-
-        // Submit sensor data object
-        submitSensorData(data);
-    }
-
-    @SuppressWarnings({"MissingPermission"})
-    private void registerForLocationUpdates() {
-
-        // Cast the configuration instance
-        SKLocationConfiguration locationConfiguration = (SKLocationConfiguration)mConfiguration;
-
-        // Configure the LocationRequest
-        LocationRequest locationRequest = LocationRequest.create();
-        locationRequest.setPriority(locationConfiguration.getPriority());
-        locationRequest.setInterval(locationConfiguration.getInterval());
-        locationRequest.setFastestInterval(locationConfiguration.getFastestInterval());
-
-        // Start the request
-        LocationServices.FusedLocationApi.requestLocationUpdates(mClient, locationRequest, this);
-    }
-
-    private void unregisterForLocationUpdates() {
-
-        LocationServices.FusedLocationApi.removeLocationUpdates(mClient, this);
-    }
-
-    @Override
     public void setConfiguration(SKConfiguration configuration) throws SKException {
+
+        // Set the configuration
+        super.setConfiguration(configuration);
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKLocationConfiguration)) {
@@ -117,8 +105,13 @@ public class SKLocation extends SKAbstractGoogleServicesSensor implements Locati
                     SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
-        // Set the configuration
-        super.setConfiguration(configuration);
+        // Cast the configuration instance
+        SKLocationConfiguration locationConfiguration = (SKLocationConfiguration)mConfiguration;
+
+        // Configure the LocationRequest
+        mLocationRequest.setPriority(locationConfiguration.getPriority());
+        mLocationRequest.setInterval(locationConfiguration.getInterval());
+        mLocationRequest.setFastestInterval(locationConfiguration.getFastestInterval());
     }
 
     @Override
