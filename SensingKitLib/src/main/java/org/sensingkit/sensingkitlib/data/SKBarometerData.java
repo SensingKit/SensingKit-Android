@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.data;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -68,6 +69,24 @@ public class SKBarometerData extends SKAbstractData {
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f", this.timestamp, this.pressure);
+    }
+
+    /**
+     * Get the Barometer sensor data in dictionary format
+     *
+     * @return Dictionary containing the barometer data in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, pressure
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+        multiMap.put("pressure",this.pressure);
+
+        return multiMap;
     }
 
     /**

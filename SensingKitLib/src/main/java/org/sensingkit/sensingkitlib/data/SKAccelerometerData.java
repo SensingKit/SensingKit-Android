@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.data;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 
@@ -77,6 +78,30 @@ public class SKAccelerometerData extends SKAbstractData {
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
+    }
+
+    /**
+     * Get the accelerator measurements in dictionary format
+     *
+     * @return Dictionary containing the time stamp and accelerometer measurements in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, accelerometer in x,y,z
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+        HashMap<String,Float> accelerationMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+
+        accelerationMap.put("x",this.x);
+        accelerationMap.put("y",this.y);
+        accelerationMap.put("z",this.z);
+
+        multiMap.put("acceleration",accelerationMap);
+
+        return multiMap;
     }
 
     /**

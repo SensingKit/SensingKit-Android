@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.data;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -67,6 +68,24 @@ public class SKHumidityData extends SKAbstractData {
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f", this.timestamp, this.humidity);
+    }
+
+    /**
+     * Get humidity sensor data in dictionary format
+     *
+     * @return Dictionary containing the humidity sensor data in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, humidity
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+        multiMap.put("humidity",this.humidity);
+
+        return multiMap;
     }
 
     @SuppressWarnings("unused")

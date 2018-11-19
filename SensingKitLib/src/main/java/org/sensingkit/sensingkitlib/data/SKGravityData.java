@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.data;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -75,6 +76,30 @@ public class SKGravityData extends SKAbstractData {
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
+    }
+
+    /**
+     * Get the Gravity sensor data in dictionary format
+     *
+     * @return Dictionary containing the Gravity sensor data in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, x-axis, y-axis, z-axis
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+        HashMap<String,Float> gravityMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+
+        gravityMap.put("x",this.x);
+        gravityMap.put("y",this.y);
+        gravityMap.put("z",this.z);
+
+        multiMap.put("gravity",gravityMap);
+
+        return(multiMap);
     }
 
     /**
