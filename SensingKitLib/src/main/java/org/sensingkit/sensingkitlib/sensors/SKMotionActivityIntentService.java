@@ -27,18 +27,18 @@ import android.support.v4.content.LocalBroadcastManager;
 
 import com.google.android.gms.location.ActivityTransitionResult;
 
-public class SKMotionActivityRecognitionIntentService extends IntentService {
+public class SKMotionActivityIntentService extends IntentService {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKMotionActivityRecognitionIntentService.class.getSimpleName();
+    private static final String TAG = SKMotionActivityIntentService.class.getSimpleName();
 
     static final String RECOGNITION_RESULT = "result";
     static final String BROADCAST_UPDATE = "new_update";
 
-    public SKMotionActivityRecognitionIntentService() {
+    public SKMotionActivityIntentService() {
 
         // Set the label for the service's background thread
-        super("SKMotionActivityRecognitionIntentService");
+        super("SKMotionActivityIntentService");
     }
 
     @Override

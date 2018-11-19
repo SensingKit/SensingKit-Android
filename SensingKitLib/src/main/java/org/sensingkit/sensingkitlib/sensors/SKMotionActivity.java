@@ -71,7 +71,7 @@ public class SKMotionActivity extends SKAbstractSensor {
 
         registerLocalBroadcastManager();
 
-        Intent intent = new Intent(mApplicationContext, SKMotionActivityRecognitionIntentService.class);
+        Intent intent = new Intent(mApplicationContext, SKMotionActivityIntentService.class);
         mActivityRecognitionPendingIntent = PendingIntent.getService(mApplicationContext, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
@@ -204,7 +204,7 @@ public class SKMotionActivity extends SKAbstractSensor {
 
     private void registerLocalBroadcastManager() {
         LocalBroadcastManager manager = LocalBroadcastManager.getInstance(mApplicationContext);
-        manager.registerReceiver(mBroadcastReceiver, new IntentFilter(SKMotionActivityRecognitionIntentService.BROADCAST_UPDATE));
+        manager.registerReceiver(mBroadcastReceiver, new IntentFilter(SKMotionActivityIntentService.BROADCAST_UPDATE));
     }
 
     private void unregisterLocalBroadcastManager() {
