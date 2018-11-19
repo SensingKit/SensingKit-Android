@@ -18,6 +18,7 @@
 - Renamed Battery sensor to BatteryStatus
 - Renamed SKSensorDataListener to SKSensorDataHandler
 - Renamed all sensor modules into sensors
+- Updated deprecated code for Location and Motion Activity sensors
 - Updated SensingKit-Android API (thanks to Ming-Jiun Huang @U3D3)
 - Updated Google Play Services to 16.0.0
 

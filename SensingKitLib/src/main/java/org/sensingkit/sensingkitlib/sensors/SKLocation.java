@@ -96,14 +96,14 @@ public class SKLocation extends SKAbstractSensor {
     @Override
     public void setConfiguration(SKConfiguration configuration) throws SKException {
 
-        // Set the configuration
-        super.setConfiguration(configuration);
-
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKLocationConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKLocation.",
                     SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
+
+        // Set the configuration
+        super.setConfiguration(configuration);
 
         // Cast the configuration instance
         SKLocationConfiguration locationConfiguration = (SKLocationConfiguration)mConfiguration;

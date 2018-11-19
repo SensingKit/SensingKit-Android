@@ -23,13 +23,95 @@ package org.sensingkit.sensingkitlib.configuration;
 
 public class SKMotionActivityConfiguration extends SKAbstractConfiguration {
 
+    // Tracked Activities
+    private boolean trackStationary;
+    private boolean trackWalking;
+    private boolean trackRunning;
+    private boolean trackAutomotive;
+    private boolean trackCycling;
+
     public SKMotionActivityConfiguration() {
         super();
 
         // Set default values
+        this.trackStationary = true;
+        this.trackWalking = true;
+        this.trackRunning = true;
+        this.trackAutomotive = true;
+        this.trackCycling = true;
     }
 
+    @SuppressWarnings("unused")
+    public SKMotionActivityConfiguration(boolean trackStationary, boolean trackWalking, boolean trackRunning, boolean trackAutomotive, boolean trackCycling) {
+        super();
+
+        // Set default values
+        this.trackStationary = trackStationary;
+        this.trackWalking = trackWalking;
+        this.trackRunning = trackRunning;
+        this.trackAutomotive = trackAutomotive;
+        this.trackCycling = trackCycling;
+    }
+
+    @SuppressWarnings("unused")
     public SKMotionActivityConfiguration(SKMotionActivityConfiguration configuration) {
         super();
+
+        // Save local configuration
+        this.trackStationary = configuration.trackStationary;
+        this.trackWalking = configuration.trackWalking;
+        this.trackRunning = configuration.trackRunning;
+        this.trackAutomotive = configuration.trackAutomotive;
+        this.trackCycling = configuration.trackCycling;
+    }
+
+    @SuppressWarnings("unused")
+    public boolean getTrackStationary() {
+        return trackStationary;
+    }
+
+    @SuppressWarnings("unused")
+    public void setTrackStationary(final boolean trackStationary) {
+        this.trackStationary = trackStationary;
+    }
+
+    @SuppressWarnings("unused")
+    public boolean getTrackWalking() {
+        return trackWalking;
+    }
+
+    @SuppressWarnings("unused")
+    public void setTrackWalking(final boolean trackWalking) {
+        this.trackWalking = trackWalking;
+    }
+
+    @SuppressWarnings("unused")
+    public boolean getTrackRunning() {
+        return trackRunning;
+    }
+
+    @SuppressWarnings("unused")
+    public void setTrackRunning(final boolean trackRunning) {
+        this.trackRunning = trackRunning;
+    }
+
+    @SuppressWarnings("unused")
+    public boolean getTrackAutomotive() {
+        return trackAutomotive;
+    }
+
+    @SuppressWarnings("unused")
+    public void setTrackAutomotive(final boolean trackAutomotive) {
+        this.trackAutomotive = trackAutomotive;
+    }
+
+    @SuppressWarnings("unused")
+    public boolean getTrackCycling() {
+        return trackCycling;
+    }
+
+    @SuppressWarnings("unused")
+    public void setTrackCycling(final boolean trackCycling) {
+        this.trackCycling = trackCycling;
     }
 }

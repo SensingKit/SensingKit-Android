@@ -27,6 +27,9 @@ import android.os.Build;
 import android.util.Log;
 import android.util.SparseArray;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+
 import org.sensingkit.sensingkitlib.sensors.*;
 import org.sensingkit.sensingkitlib.data.*;
 import org.sensingkit.sensingkitlib.configuration.*;
@@ -191,11 +194,11 @@ class SKSensorManager {
                 return packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_LIGHT);
 
             case LOCATION:
-                return packageManager.hasSystemFeature(PackageManager.FEATURE_LOCATION); //TODO
-                        //SKLocation.isGooglePlayServicesAvailable(mApplicationContext);
+                return packageManager.hasSystemFeature(PackageManager.FEATURE_LOCATION) &&
+                        isGooglePlayServicesAvailable();
 
             case MOTION_ACTIVITY:
-                return SKMotionActivity.isGooglePlayServicesAvailable(mApplicationContext);
+                return isGooglePlayServicesAvailable();
 
             case BATTERY_STATUS:
                 return true;
@@ -655,6 +658,12 @@ class SKSensorManager {
             default:
                 throw new RuntimeException();
         }
+    }
+
+    private boolean isGooglePlayServicesAvailable() {
+        GoogleApiAvailability api = GoogleApiAvailability.getInstance();
+        int code = api.isGooglePlayServicesAvailable(mApplicationContext);
+        return code == ConnectionResult.SUCCESS;
     }
 
 }
