@@ -119,7 +119,6 @@ public class SKMotionActivityData extends SKAbstractData {
 
         motionActivityMap.put("activity",this.activityType);
         motionActivityMap.put("activityString",getActivityString());
-        motionActivityMap.put("confidence",this.confidence);
 
         multiMap.put("motionActivity",motionActivityMap);
 
