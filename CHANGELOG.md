@@ -2,6 +2,8 @@
 
 ### 0.5.0 (??, 2018)
 - Added Documentation using javadoc generator (thanks to Susan Crayne @crayne)
+- Added support for Permissions (Android 6.0 or greater)
+- Added support for Sensor Configuration
 - Added support for Air Pressure sensor
 - Added support for Humidity sensor
 - Added support for Beacon Proximity (iBeacon™, Eddystone™ and AltBeacon) with the help of the Android Beacon Library (thanks Radius Networks)
@@ -9,6 +11,7 @@
 - Added csvHeaderForSensor method to get the headers of the csv format
 - Added missing SKMicrophoneData object
 - Added support for Exceptions (SKExceptions)
+- Added support for Dictionary data format (thanks to Mo, Fan Vincent @mofanv)
 - Added support for Android Studio 3.2
 - Added support for Android 8 SDK (Pie)
 - Added support for maven distribution (jCenter and Maven Central)
