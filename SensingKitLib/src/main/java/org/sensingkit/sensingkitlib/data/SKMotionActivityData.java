@@ -26,6 +26,7 @@ import com.google.android.gms.location.DetectedActivity;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -99,6 +100,30 @@ public class SKMotionActivityData extends SKAbstractData {
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%d,%s", this.timestamp, this.activityType, getActivityString());
+    }
+
+    /**
+     * Get the Motion Activity sensor data in dictionary format
+     *
+     * @return Dictionary containing the Motion Activity sensor data in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, activity, activityString, confidence
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+        HashMap motionActivityMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+
+        motionActivityMap.put("activity",this.activityType);
+        motionActivityMap.put("activityString",getActivityString());
+        motionActivityMap.put("confidence",this.confidence);
+
+        multiMap.put("motionActivity",motionActivityMap);
+
+        return(multiMap);
     }
 
     /**

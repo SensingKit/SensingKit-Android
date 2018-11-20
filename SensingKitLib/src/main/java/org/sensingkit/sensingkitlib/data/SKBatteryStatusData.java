@@ -26,6 +26,7 @@ import android.os.Build;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 import static android.os.BatteryManager.*;
@@ -99,10 +100,39 @@ public class SKBatteryStatusData extends SKAbstractData {
      * status string ("charging", "discharging", "full", "not charging", "unknown" or "unsupported"),
      * health string ("cold", "dead", "good", "over heat", "over voltage", "unknown", "failure" or "unsupported")
      */
-
      @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%d,%d,%s,%s,%s", this.timestamp, this.getLevelRatio(), this.temperature, this.voltage, getPluggedString(), getBatteryStatusString(), getBatteryHealthString());
+    }
+
+    /**
+     * Get the battery properties in dictionary format
+     *
+     * @return Dictionary containing the battery properties in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970,charge,temperature,voltage,
+     * plugged string ("usb", "ac", "wireless" or "unknown"),
+     * status string ("charging", "discharging", "full", "not charging", "unknown" or "unsupported"),
+     * health string ("cold", "dead", "good", "over heat", "over voltage", "unknown", "failure" or "unsupported")
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+        HashMap batteryMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+
+        batteryMap.put("charge",this.getLevelRatio());
+        batteryMap.put("temperature",this.temperature);
+        batteryMap.put("voltage",this.voltage);
+        batteryMap.put("plugged",getPluggedString());
+        batteryMap.put("status",getBatteryStatusString());
+        batteryMap.put("health",getBatteryHealthString());
+
+        multiMap.put("battery",batteryMap);
+
+        return multiMap;
     }
 
     /**

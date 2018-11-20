@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.data;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -61,6 +62,24 @@ public class SKStepDetectorData extends SKAbstractData {
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d", this.timestamp);
+    }
+
+
+    /**
+     * Get the Step Detector sensor data in dictionary format
+     *
+     * @return Dictionary containing the Step Detector sensor data in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, numberOfSteps
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+
+        return(multiMap);
     }
 
 }

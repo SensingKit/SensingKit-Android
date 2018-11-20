@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.data;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -74,6 +75,32 @@ public class SKBluetoothData extends SKAbstractData {
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%s,%s,%d", this.timestamp, this.name, this.address, this.rssi);
     }
+
+
+    /**
+     * Get the Bluetooth data in dictionary format
+     *
+     * @return Dictionary containing the bluetooth data in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, name,address,rssi
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+        HashMap blueToothMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+
+        blueToothMap.put("name",this.name);
+        blueToothMap.put("address",this.address);
+        blueToothMap.put("rssi",this.rssi);
+
+        multiMap.put("blueTooth",blueToothMap);
+
+        return(multiMap);
+    }
+
 
     /**
      * Get the Bluetooth device name

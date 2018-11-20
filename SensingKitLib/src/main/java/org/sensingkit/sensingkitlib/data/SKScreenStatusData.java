@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.data;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -71,6 +72,29 @@ public class SKScreenStatusData extends SKAbstractData {
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%d,%s", this.timestamp, this.getStatus(), this.getStatusString());
+    }
+
+    /**
+     * Get Screen Status data in dictionary format
+     *
+     * @return Dictionary containing the Screen Status data in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, status, statusString
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+        HashMap screenStatusMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+
+        screenStatusMap.put("status",this.getStatus());
+        screenStatusMap.put("statusString",this.getStatusString());
+
+        multiMap.put("screenStatus",screenStatusMap);
+
+        return multiMap;
     }
 
     /**

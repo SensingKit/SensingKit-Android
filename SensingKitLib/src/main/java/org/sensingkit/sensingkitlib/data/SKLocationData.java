@@ -25,6 +25,7 @@ import android.location.Location;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 
@@ -72,6 +73,31 @@ public class SKLocationData extends SKAbstractData {
         return String.format(Locale.US, "%d,%f,%f,%f,%f", this.timestamp,
                 this.location.getLatitude(), this.location.getLongitude(), this.location.getAltitude(),
                 this.location.getAccuracy());
+    }
+
+    /**
+     * Get the location sensor data in dictionary format
+     *
+     * @return Dictionary containing the location sensor data in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, latitude, longitude, altitude, accuracy
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+        HashMap locationMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+
+        locationMap.put("latitude",this.location.getLatitude());
+        locationMap.put("longitude",this.location.getLongitude());
+        locationMap.put("altitude",this.location.getAltitude());
+        locationMap.put("accuracy",this.location.getAccuracy());
+
+        multiMap.put("location",locationMap);
+
+        return(multiMap);
     }
 
     /**

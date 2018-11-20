@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.data;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 
@@ -78,6 +79,31 @@ public class SKMagnetometerData extends SKAbstractData {
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
+    }
+
+
+    /**
+     * Get the Magnetometer sensor data in dictionary format
+     *
+     * @return Dictionary containing the Magnetometer sensor data in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, x force, y force, z force
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+        HashMap<String,Float> magnetometerMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+
+        magnetometerMap.put("x",this.x);
+        magnetometerMap.put("y",this.y);
+        magnetometerMap.put("z",this.z);
+
+        multiMap.put("magnetometer",magnetometerMap);
+
+        return(multiMap);
     }
 
     /**

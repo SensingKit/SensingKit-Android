@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.data;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -102,6 +103,32 @@ public class SKRotationData extends SKAbstractData {
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%f,%f,%f,%f", this.timestamp, this.x, this.y, this.z, this.cos, this.headingAccuracy);
+    }
+
+    /**
+     * Get the Rotation sensor data in dictionary format
+     *
+     * @return Dictionary containing the Rotation sensor data in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, x, y, z, cos, headingAccuracy
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+        HashMap<String,Float> rotationMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+
+        rotationMap.put("x",this.x);
+        rotationMap.put("y",this.y);
+        rotationMap.put("z",this.z);
+        rotationMap.put("cos",this.cos);
+        rotationMap.put("headingAccuracy",this.headingAccuracy);
+
+        multiMap.put("rotation",rotationMap);
+
+        return multiMap;
     }
 
     /**

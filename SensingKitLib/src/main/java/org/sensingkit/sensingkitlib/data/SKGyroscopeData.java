@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.data;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -75,6 +76,30 @@ public class SKGyroscopeData extends SKAbstractData {
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
+    }
+
+    /**
+     * Get the Gyroscope sensor data in dictionary format
+     *
+     * @return Dictionary containing the Gyroscope sensor data in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, x-axis, y-axis, z-axis
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+        HashMap<String,Float> gyroscopeMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+
+        gyroscopeMap.put("x",this.x);
+        gyroscopeMap.put("y",this.y);
+        gyroscopeMap.put("z",this.z);
+
+        multiMap.put("gyroscope",gyroscopeMap);
+
+        return(multiMap);
     }
 
     /**

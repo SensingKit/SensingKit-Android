@@ -24,6 +24,7 @@ package org.sensingkit.sensingkitlib.data;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 public class SKNotificationData extends SKAbstractData {
@@ -67,6 +68,30 @@ public class SKNotificationData extends SKAbstractData {
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%s,%s", this.timestamp, this.actionType, this.packageName);
+    }
+
+
+    /**
+     * Get the Notification sensor data in dictionary format
+     *
+     * @return Dictionary containing the Notification sensor data in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, actionType, packageName
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+        HashMap notificationMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+
+        notificationMap.put("actionType",this.actionType);
+        notificationMap.put("packageName",this.packageName);
+
+        multiMap.put("notification",notificationMap);
+
+        return(multiMap);
     }
 
     /**

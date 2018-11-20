@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.data;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -67,6 +68,24 @@ public class SKAudioLevelData extends SKAbstractData {
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%d", this.timestamp, this.level);
+    }
+
+    /**
+     * Get the audio level measurement in dictionary format
+     *
+     * @return Dictionary containing the timestamp and audio level measurements in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, level
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+        multiMap.put("audioLevel",this.level);
+
+        return multiMap;
     }
 
     /**

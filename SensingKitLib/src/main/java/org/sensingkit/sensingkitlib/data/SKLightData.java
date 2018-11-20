@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.data;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -67,6 +68,24 @@ public class SKLightData extends SKAbstractData {
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f", this.timestamp, this.light);
+    }
+
+    /**
+     * Get light sensor data in dictionary format
+     *
+     * @return Dictionary containing the light sensor data in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, light
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+        multiMap.put("light",this.light);
+
+        return multiMap;
     }
 
     /**

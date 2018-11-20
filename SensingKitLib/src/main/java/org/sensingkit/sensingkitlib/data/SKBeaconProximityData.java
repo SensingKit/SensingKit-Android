@@ -26,6 +26,7 @@ import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.Identifier;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 public class SKBeaconProximityData extends SKAbstractData {
@@ -50,13 +51,49 @@ public class SKBeaconProximityData extends SKAbstractData {
         return "timeIntervalSince1970,beaconType,manufacturer,id1,id2,id3,rssi,txPower,distance";
     }
 
+    /**
+     * Get the Beacon Proximity sensor data in csv format
+     *
+     * @return String containing the Beacon Proximity sensor data in csv format:
+     * sensor type, sensor type in string, timeIntervalSince1970, beaconType, manufacturer, id1,id2,id3,rssi,txPower,distance
+     */
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%d,%d,%s,%d,%d,%d,%d,%f",
                 this.timestamp, this.getBeaconTypeCode(), this.getManufacturer(),
                 this.getId1().toString(), this.getId2().toInt(), this.getId3().toInt(),
-                this.getRssi(), this.getTxPower(), this.getDistance() );
+                this.getRssi(), this.getTxPower(), this.getDistance());
     }
+
+    /**
+     * Get the Beacon Proximity sensor data in dictionary format
+     *
+     * @return Dictionary containing the Beacon Proximity sensor data in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, beaconType, manufacturer, id1,id2,id3,rssi,txPower,distance
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+        HashMap beaconProximityMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+
+        beaconProximityMap.put("beaconType",this.getBeaconTypeCode());
+        beaconProximityMap.put("manufacturer",this.getManufacturer());
+        beaconProximityMap.put("id1",this.getId1().toString());
+        beaconProximityMap.put("id2",this.getId2().toInt());
+        beaconProximityMap.put("id3",this.getId3().toInt());
+        beaconProximityMap.put("rssi",this.getRssi());
+        beaconProximityMap.put("txPower",this.getTxPower());
+        beaconProximityMap.put("distance",this.getDistance());
+
+        multiMap.put("beaconProximity",beaconProximityMap);
+
+        return multiMap;
+    }
+
 
     @SuppressWarnings("unused")
     public int getBeaconTypeCode() {

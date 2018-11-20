@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.data;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -68,6 +69,24 @@ public class SKAmbientTemperatureData extends SKAbstractData {
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f", this.timestamp, this.temperature);
+    }
+
+    /**
+     * Get the Ambient Temperature sensor data in dictionary format
+     *
+     * @return Dictionary containing the ambient temperature in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, temperature
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+        multiMap.put("temperature",this.temperature);
+
+        return multiMap;
     }
 
     /**

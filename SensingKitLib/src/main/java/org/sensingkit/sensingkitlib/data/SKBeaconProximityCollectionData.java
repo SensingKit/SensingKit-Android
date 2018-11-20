@@ -24,6 +24,7 @@ package org.sensingkit.sensingkitlib.data;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -84,6 +85,27 @@ public class SKBeaconProximityCollectionData extends SKAbstractData {
         // Return in String
         return stringBuilder.toString();
     }
+
+    /**
+     * Get the data for all Beacon devices in dictionary format
+     *
+     * @return Dictionary formatted as follows:  timeIntervalSince1970, device1 data, device2 data,,,
+     */
+    @Override
+    public HashMap getDataInDict() {
+
+        HashMap allBeaconProximityMap = new HashMap();
+
+        // Add deviceData
+        int i = 1;
+        for (SKBeaconProximityData deviceData : mDevices) {
+            allBeaconProximityMap.put("deviceNo" + i++, deviceData.getDataInDict());
+        }
+
+        // Return in HashMap
+        return(allBeaconProximityMap);
+    }
+
 
     /**
      * Get Beacon device data

@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.data;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -76,6 +77,30 @@ public class SKLinearAccelerationData extends SKAbstractData {
     @Override
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
+    }
+
+    /**
+     * Get the Linear Acceleration sensor data in dictionary format
+     *
+     * @return Dictionary containing the Linear Acceleration sensor data in dictionary format:
+     * sensor type, sensor type in string, timeIntervalSince1970, x-axis, y-axis, z-axis
+     */
+    @Override
+    public HashMap getDataInDict() {
+        HashMap multiMap = new HashMap<>();
+        HashMap<String,Float> linearAccelerationMap = new HashMap<>();
+
+        multiMap.put("sensorType",this.getSensorType());
+        multiMap.put("sensorTypeString",this.getSensorType().toString());
+        multiMap.put("timestamp",this.timestamp);
+
+        linearAccelerationMap.put("x",this.x);
+        linearAccelerationMap.put("y",this.y);
+        linearAccelerationMap.put("z",this.z);
+
+        multiMap.put("linearAcceleration",linearAccelerationMap);
+
+        return(multiMap);
     }
 
     /**
