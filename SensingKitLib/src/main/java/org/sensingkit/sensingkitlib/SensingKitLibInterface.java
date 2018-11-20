@@ -21,6 +21,9 @@
 
 package org.sensingkit.sensingkitlib;
 
+import android.app.Activity;
+import android.support.annotation.NonNull;
+
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 
 @SuppressWarnings("unused")
@@ -121,6 +124,15 @@ public interface SensingKitLibInterface {
      *  @return A String with the CSV header.
      */
     String csvHeaderForSensor(SKSensorType sensorType) throws SKException;
+
+    // TODO documentation
+    boolean isPermissionGrantedForSensor(SKSensorType sensorType) throws SKException;
+
+    // TODO documentation
+    void requestPermissionForSensor(SKSensorType sensorType, final @NonNull Activity activity) throws SKException;
+
+    // TODO documentation
+    void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity) throws SKException;
 
     /**
      *  Starts continuous sensing with the specified sensor.

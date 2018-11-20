@@ -21,6 +21,7 @@
 
 package org.sensingkit.sensingkitlib.sensors;
 
+import android.Manifest;
 import android.content.Context;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -147,5 +148,10 @@ public class SKAudioLevel extends SKAbstractSensor {
 
         // Release sensor
         audioRecord.release();
+    }
+
+    @Override
+    public String getRequiredPermission() {
+        return Manifest.permission.RECORD_AUDIO;
     }
 }

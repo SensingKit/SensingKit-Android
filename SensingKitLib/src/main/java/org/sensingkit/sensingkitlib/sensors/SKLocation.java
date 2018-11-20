@@ -21,6 +21,7 @@
 
 package org.sensingkit.sensingkitlib.sensors;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Location;
@@ -39,6 +40,8 @@ import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKLocationConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKLocationData;
+
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class SKLocation extends SKAbstractSensor {
 
@@ -124,6 +127,11 @@ public class SKLocation extends SKAbstractSensor {
 
         // Always post sensor data
         return true;
+    }
+
+    @Override
+    public String getRequiredPermission() {
+        return Manifest.permission.ACCESS_FINE_LOCATION;
     }
 
 }

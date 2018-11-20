@@ -30,6 +30,7 @@ import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 public interface SKSensor {
 
     SKSensorType getSensorType();
+    String getSensorName();
 
     void startSensing() throws SKException;
     void stopSensing() throws SKException;
@@ -43,4 +44,6 @@ public interface SKSensor {
     SKConfiguration getConfiguration();
 
     void sensorDeregistered();
+
+    String getRequiredPermission();
 }

@@ -21,9 +21,14 @@
 
 package org.sensingkit.sensingkitlib;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -33,6 +38,9 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import org.sensingkit.sensingkitlib.sensors.*;
 import org.sensingkit.sensingkitlib.data.*;
 import org.sensingkit.sensingkitlib.configuration.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings({"StaticFieldLeak"})
 class SKSensorManager {
@@ -144,6 +152,74 @@ class SKSensorManager {
 
         // TODO
         return null;
+    }
+
+    boolean isPermissionGrantedForSensor(SKSensorType sensorType) throws SKException {
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            Log.i(TAG, "Request permissions is only required for Android 6.0 (API level 23) or greater.");
+            return true;
+        }
+
+        SKSensor sensor = getSensor(sensorType);
+        String permission = sensor.getRequiredPermission();
+
+        // if null, no permission is required
+        if (permission == null) {
+            return true;
+        }
+        else {
+            // else check permission
+            return (ContextCompat.checkSelfPermission(mApplicationContext, permission) == PackageManager.PERMISSION_GRANTED);
+        }
+    }
+
+    void requestPermissionForSensor(SKSensorType sensorType, final @NonNull Activity activity) throws SKException {
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            Log.i(TAG, "Request permissions is only required for Android 6.0 (API level 23) or greater.");
+            return;
+        }
+
+        SKSensor sensor = getSensor(sensorType);
+        String permission = sensor.getRequiredPermission();
+        if (permission != null) {
+            // request permissions
+            ActivityCompat.requestPermissions(activity, new String[]{permission}, 0);
+        }
+
+    }
+
+    // TODO documentation
+    void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity) throws SKException {
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            Log.i(TAG, "Request permissions is only required for Android 6.0 (API level 23) or greater.");
+            return;
+        }
+
+        // List that hold all permissions
+        List<String> permissionsList = new ArrayList<>();
+
+        for (int i = 0; i < SKSensorType.getLength(); i++) {
+
+            SKSensor sensor = mSensors.get(i);
+            if (sensor != null) {
+
+                // append permission
+                permissionsList.add(sensor.getRequiredPermission());
+            }
+        }
+
+        // request permissions
+        if (permissionsList.size() > 0) {
+
+            // convert list to array
+            String[] permissions = permissionsList.toArray(new String[0]);
+
+            // request permissions
+            ActivityCompat.requestPermissions(activity, permissions, 0);
+        }
     }
 
     /**

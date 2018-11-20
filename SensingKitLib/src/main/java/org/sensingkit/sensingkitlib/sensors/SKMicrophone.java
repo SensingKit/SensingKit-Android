@@ -21,6 +21,7 @@
 
 package org.sensingkit.sensingkitlib.sensors;
 
+import android.Manifest;
 import android.content.Context;
 import android.media.MediaRecorder;
 
@@ -134,5 +135,10 @@ public class SKMicrophone extends SKAbstractSensor {
         // Release sensor
         recorder.reset();
         recorder.release();
+    }
+
+    @Override
+    public String getRequiredPermission() {
+        return Manifest.permission.RECORD_AUDIO;
     }
 }

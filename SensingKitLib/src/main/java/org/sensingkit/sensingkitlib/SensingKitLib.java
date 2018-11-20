@@ -21,8 +21,10 @@
 
 package org.sensingkit.sensingkitlib;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.PowerManager;
+import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 
@@ -171,6 +173,22 @@ public class SensingKitLib implements SensingKitLibInterface {
     @Override
     public String csvHeaderForSensor(SKSensorType sensorType) {
         return SKSensorManager.csvHeaderForSensor(sensorType);
+    }
+
+    @Override
+    public boolean isPermissionGrantedForSensor(SKSensorType sensorType) throws SKException {
+        return mSensorManager.isPermissionGrantedForSensor(sensorType);
+    }
+
+    @Override
+    public void requestPermissionForSensor(SKSensorType sensorType, final @NonNull Activity activity) throws SKException {
+        mSensorManager.requestPermissionForSensor(sensorType, activity);
+    }
+
+    // TODO documentation
+    @Override
+    public void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity) throws SKException {
+        mSensorManager.requestPermissionForAllRegisteredSensors(activity);
     }
 
     /**
