@@ -34,7 +34,7 @@ import java.util.Locale;
 public class SKBluetoothData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKBluetoothData.class.getName();
+    private static final String TAG = SKBluetoothData.class.getSimpleName();
 
     protected final String name;
     protected final String address;

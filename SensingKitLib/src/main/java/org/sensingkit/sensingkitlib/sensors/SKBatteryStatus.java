@@ -37,7 +37,7 @@ import org.sensingkit.sensingkitlib.data.SKBatteryStatusData;
 public class SKBatteryStatus extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKBatteryStatus.class.getName();
+    private static final String TAG = SKBatteryStatus.class.getSimpleName();
 
     // Last data sensed
     private int mLastLevelSensed = Integer.MAX_VALUE;
@@ -115,7 +115,7 @@ public class SKBatteryStatus extends SKAbstractSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKBatteryStatusConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKBatteryStatus.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration

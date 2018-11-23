@@ -35,7 +35,7 @@ import org.sensingkit.sensingkitlib.data.SKAccelerometerData;
 public class SKAccelerometer extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKAccelerometer.class.getName();
+    private static final String TAG = SKAccelerometer.class.getSimpleName();
 
     public SKAccelerometer(final Context context, final SKAccelerometerConfiguration configuration) throws SKException {
         super(context, SKSensorType.ACCELEROMETER, configuration);
@@ -53,7 +53,7 @@ public class SKAccelerometer extends SKAbstractNativeSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKAccelerometerConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKAccelerometer.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration

@@ -21,19 +21,26 @@
 
 package org.sensingkit.sensingkitlib.sensors;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import com.google.android.gms.location.ActivityRecognitionApi;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognition;
-import com.google.android.gms.location.ActivityRecognitionResult;
+import com.google.android.gms.location.ActivityRecognitionClient;
+import com.google.android.gms.location.ActivityTransition;
+import com.google.android.gms.location.ActivityTransitionEvent;
+import com.google.android.gms.location.ActivityTransitionRequest;
+import com.google.android.gms.location.ActivityTransitionResult;
 import com.google.android.gms.location.DetectedActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 
 import org.sensingkit.sensingkitlib.SKException;
@@ -44,79 +51,99 @@ import org.sensingkit.sensingkitlib.configuration.SKMotionActivityConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKMotionActivityData;
 
-public class SKMotionActivity extends SKAbstractGoogleServicesSensor {
+import java.util.ArrayList;
+import java.util.List;
+
+public class SKMotionActivity extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKMotionActivity.class.getName();
+    private static final String TAG = SKMotionActivity.class.getSimpleName();
 
-    private ActivityRecognitionApi mActivityRecognition;
-    private PendingIntent mRecognitionPendingIntent;
-    private BroadcastReceiver mBroadcastReceiver;
-
-    // Last data sensed
-    private int mLastActivityTypeSensed = Integer.MAX_VALUE;
-    private int mLastConfidenceSensed = Integer.MAX_VALUE;
+    private ActivityRecognitionClient mActivityRecognitionClient;
+    private PendingIntent mActivityRecognitionPendingIntent;
+    private List<ActivityTransition> mRegisteredTransitions;
 
     public SKMotionActivity(final Context context, final SKMotionActivityConfiguration configuration) throws SKException {
         super(context, SKSensorType.MOTION_ACTIVITY, configuration);
 
-        mClient = new GoogleApiClient.Builder(context)
-                .addApi(ActivityRecognition.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .build();
+        mActivityRecognitionClient = ActivityRecognition.getClient(mApplicationContext);
+        mRegisteredTransitions = buildTransitions(configuration);
 
-        mActivityRecognition = ActivityRecognition.ActivityRecognitionApi;
+        registerLocalBroadcastManager();
 
-        mBroadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-
-                ActivityRecognitionResult result = intent.getParcelableExtra(SKActivityRecognitionIntentService.RECOGNITION_RESULT);
-
-                // Get activity from the list of activities
-                DetectedActivity activity = getActivity(result);
-
-                // Get the type of activity
-                int activityType = activity.getType();
-
-                // Get the confidence percentage for the most probable activity
-                int confidence = activity.getConfidence();
-
-                // Build the data object
-                SKAbstractData data = new SKMotionActivityData(result.getTime(), activityType, confidence);
-
-                // Submit sensor data object
-                submitSensorData(data);
-            }
-        };
+        Intent intent = new Intent(mApplicationContext, SKMotionActivityIntentService.class);
+        mActivityRecognitionPendingIntent = PendingIntent.getService(mApplicationContext, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
-    private DetectedActivity getActivity(ActivityRecognitionResult result) {
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
 
-        // Get the most probable activity from the list of activities in the result
-        DetectedActivity mostProbableActivity = result.getMostProbableActivity();
+            if (ActivityTransitionResult.hasResult(intent)) {
 
-        // If the activity is ON_FOOT, choose between WALKING or RUNNING
-        if (mostProbableActivity.getType() == DetectedActivity.ON_FOOT) {
+                ActivityTransitionResult result = ActivityTransitionResult.extractResult(intent);
 
-            // Iterate through all possible activities. The activities are sorted by most probable activity first.
-            for (DetectedActivity activity : result.getProbableActivities()) {
+                if (result == null) { return; }
 
-                if (activity.getType() == DetectedActivity.WALKING || activity.getType() == DetectedActivity.RUNNING) {
-                    return activity;
+                for (ActivityTransitionEvent event : result.getTransitionEvents()) {
+                    // chronological sequence of events.
+
+                    int activityType = event.getActivityType();
+                    int transitionType = event.getTransitionType();
+                    long timestamp = event.getElapsedRealTimeNanos(); // TODO: fix
+
+
+                    // Build the data object
+                    SKAbstractData data = new SKMotionActivityData(timestamp, activityType, transitionType);
+
+                    // Submit sensor data object
+                    submitSensorData(data);
                 }
             }
-
-            // It is ON_FOOT, but not sure if it is WALKING or RUNNING
-            Log.i(TAG, "Activity ON_FOOT, but not sure if it is WALKING or RUNNING.");
-            return mostProbableActivity;
         }
-        else
-        {
-            return mostProbableActivity;
+    };
+
+    private List<ActivityTransition> buildTransitions(final SKMotionActivityConfiguration configuration) {
+
+        // reset list
+        List<ActivityTransition> transitions = new ArrayList<>();
+
+        if (configuration.getTrackStationary()) {
+            registerTrackedActivity(DetectedActivity.STILL);
         }
 
+        if (configuration.getTrackWalking()) {
+            registerTrackedActivity(DetectedActivity.WALKING);
+        }
+
+        if (configuration.getTrackRunning()) {
+            registerTrackedActivity(DetectedActivity.RUNNING);
+        }
+
+        if (configuration.getTrackAutomotive()) {
+            registerTrackedActivity(DetectedActivity.IN_VEHICLE);
+        }
+
+        if (configuration.getTrackCycling()) {
+            registerTrackedActivity(DetectedActivity.ON_BICYCLE);
+        }
+
+        return transitions;
+    }
+
+    private void registerTrackedActivity(final int activity) {
+
+        mRegisteredTransitions.add(
+                new ActivityTransition.Builder()
+                        .setActivityType(activity)
+                        .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
+                        .build());
+
+        mRegisteredTransitions.add(
+                new ActivityTransition.Builder()
+                        .setActivityType(activity)
+                        .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
+                        .build());
     }
 
     @Override
@@ -124,55 +151,60 @@ public class SKMotionActivity extends SKAbstractGoogleServicesSensor {
 
         this.isSensing = true;
 
-        mClient.connect();
+        ActivityTransitionRequest request = new ActivityTransitionRequest(mRegisteredTransitions);
+
+        @SuppressLint("MissingPermission")
+        Task<Void> task = mActivityRecognitionClient.requestActivityTransitionUpdates(request, mActivityRecognitionPendingIntent);
+
+        task.addOnSuccessListener(
+                new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void result) {
+                        // Handle success
+                    }
+                }
+        );
+
+        task.addOnFailureListener(
+                new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG, e.getMessage());
+                    }
+                }
+        );
     }
 
     @Override
     public void stopSensing() {
 
-        unregisterIntent();
+        @SuppressLint("MissingPermission")
+        Task<Void> task = mActivityRecognitionClient.removeActivityTransitionUpdates(mActivityRecognitionPendingIntent);
+
+        task.addOnSuccessListener(
+                new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void result) {
+                        mActivityRecognitionPendingIntent.cancel();
+                    }
+                });
+
+        task.addOnFailureListener(
+                new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG, e.getMessage());
+                    }
+                });
+
         unregisterLocalBroadcastManager();
 
-        mClient.disconnect();
-
         this.isSensing = false;
-
-        // Clear last sensed values
-        mLastActivityTypeSensed = Integer.MAX_VALUE;
-        mLastConfidenceSensed = Integer.MAX_VALUE;
-    }
-
-    @Override
-    protected void serviceConnected()
-    {
-        Log.i(TAG, "GoogleApiClient Connected!");
-
-        registerLocalBroadcastManager();
-        registerIntent();
-    }
-
-    @SuppressWarnings({"MissingPermission"})
-    private void registerIntent() {
-
-        if (mRecognitionPendingIntent == null) {
-            Intent intent = new Intent(mApplicationContext, SKActivityRecognitionIntentService.class);
-            mRecognitionPendingIntent = PendingIntent.getService(mApplicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        }
-
-        mActivityRecognition.requestActivityUpdates(mClient, 0, mRecognitionPendingIntent);
-    }
-
-    @SuppressWarnings({"MissingPermission"})
-    private void unregisterIntent() {
-
-        mActivityRecognition.removeActivityUpdates(mClient, mRecognitionPendingIntent);
-        mRecognitionPendingIntent.cancel();
-        mRecognitionPendingIntent = null;
     }
 
     private void registerLocalBroadcastManager() {
         LocalBroadcastManager manager = LocalBroadcastManager.getInstance(mApplicationContext);
-        manager.registerReceiver(mBroadcastReceiver, new IntentFilter(SKActivityRecognitionIntentService.BROADCAST_UPDATE));
+        manager.registerReceiver(mBroadcastReceiver, new IntentFilter(SKMotionActivityIntentService.BROADCAST_UPDATE));
     }
 
     private void unregisterLocalBroadcastManager() {
@@ -186,11 +218,17 @@ public class SKMotionActivity extends SKAbstractGoogleServicesSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKMotionActivityConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMotionActivity.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration
         super.setConfiguration(configuration);
+
+        // Cast the configuration instance
+        SKMotionActivityConfiguration motionActivityConfiguration = (SKMotionActivityConfiguration)mConfiguration;
+
+        // update transitions
+        mRegisteredTransitions = buildTransitions(motionActivityConfiguration);
     }
 
     @Override
@@ -201,21 +239,7 @@ public class SKMotionActivity extends SKAbstractGoogleServicesSensor {
     @Override
     protected boolean shouldPostSensorData(SKAbstractData data) {
 
-        // Only post when specific values changed
-
-        int activityType = ((SKMotionActivityData)data).getActivityType();
-        int confidence = ((SKMotionActivityData)data).getConfidence();
-
-        // Ignore Temperature and Voltage
-        boolean shouldPost = (mLastActivityTypeSensed != activityType ||
-                              mLastConfidenceSensed != confidence );
-
-        if (shouldPost) {
-
-            this.mLastActivityTypeSensed = activityType;
-            this.mLastConfidenceSensed = confidence;
-        }
-
-        return shouldPost;
+        // Always post sensor data
+        return true;
     }
 }

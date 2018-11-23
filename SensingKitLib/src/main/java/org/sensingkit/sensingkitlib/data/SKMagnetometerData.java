@@ -37,7 +37,7 @@ import java.util.Locale;
 public class SKMagnetometerData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKMagnetometerData.class.getName();
+    private static final String TAG = SKMagnetometerData.class.getSimpleName();
 
     protected final float x;
     protected final float y;

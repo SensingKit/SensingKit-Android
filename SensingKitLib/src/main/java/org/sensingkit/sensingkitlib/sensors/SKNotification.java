@@ -37,7 +37,7 @@ import org.sensingkit.sensingkitlib.data.SKNotificationData;
 public class SKNotification extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKNotification.class.getName();
+    private static final String TAG = SKNotification.class.getSimpleName();
 
     private BroadcastReceiver mNotificationReceiver;
 
@@ -74,7 +74,7 @@ public class SKNotification extends SKAbstractSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKNotificationConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKConfiguration.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration
@@ -113,14 +113,6 @@ public class SKNotification extends SKAbstractSensor {
 
         // Unregister receiver
         this.mApplicationContext.unregisterReceiver(mNotificationReceiver);
-    }
-
-    @Override
-    public void sensorDeregestered() {
-        super.sensorDeregestered();
-
-        // Release sensor
-        // Not required by this sensor.
     }
 
 }

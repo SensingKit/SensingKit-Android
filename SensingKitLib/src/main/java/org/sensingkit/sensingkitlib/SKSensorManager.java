@@ -21,21 +21,32 @@
 
 package org.sensingkit.sensingkitlib;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.SparseArray;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import org.sensingkit.sensingkitlib.sensors.*;
 import org.sensingkit.sensingkitlib.data.*;
 import org.sensingkit.sensingkitlib.configuration.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SuppressWarnings({"StaticFieldLeak"})
 class SKSensorManager {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKSensorManager.class.getName();
+    private static final String TAG = SKSensorManager.class.getSimpleName();
 
     private static SKSensorManager sSensorManager;
     private final Context mApplicationContext;
@@ -45,7 +56,7 @@ class SKSensorManager {
     static SKSensorManager getSensorManager(final Context context) throws SKException {
 
         if (context == null) {
-            throw new SKException(TAG, "Context cannot be null.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Context cannot be null.", SKExceptionErrorCode.CONTEXT_NULL);
         }
 
         if (sSensorManager == null) {
@@ -75,11 +86,11 @@ class SKSensorManager {
         Log.i(TAG, "Register sensor: " + sensorType.getName() + ".");
 
         if (!isSensorAvailable(sensorType)) {
-            throw new SKException(TAG, "Sensor is not available in the device.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor is not available in the device.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
         }
 
         if (isSensorRegistered(sensorType)) {
-            throw new SKException(TAG, "SensorModule is already registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor is already registered.", SKExceptionErrorCode.SENSOR_ALREADY_REGISTERED);
         }
 
         // If configuration was not provided, get the Default
@@ -103,18 +114,18 @@ class SKSensorManager {
         Log.i(TAG, "Deregister sensor: " + sensorType.getName() + ".");
 
         if (!isSensorRegistered(sensorType)) {
-            throw new SKException(TAG, "Sensor is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor is not registered.", SKExceptionErrorCode.SENSOR_NOT_REGISTERED);
         }
 
         if (isSensorSensing(sensorType)) {
-            throw new SKException(TAG, "Sensor is currently sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor is currently sensing.", SKExceptionErrorCode.SENSOR_CURRENTLY_SENSING);
         }
 
         // Clear all Callbacks from that sensor
-        getSensor(sensorType).unsubscribeAllSensorDataListeners();
+        getSensor(sensorType).unsubscribeAllSensorDataHandlers();
 
         // Deregister the Sensor
-        getSensor(sensorType).sensorDeregestered();
+        getSensor(sensorType).sensorDeregistered();
         int sensorIndex = sensorType.ordinal();
         mSensors.delete(sensorIndex);
     }
@@ -122,7 +133,7 @@ class SKSensorManager {
     void setConfiguration(SKConfiguration configuration, SKSensorType sensorType) throws SKException {
 
         if (!isSensorAvailable(sensorType)) {
-            throw new SKException(TAG, "Sensor is not available in the device.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor is not available in the device.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
         }
 
         // If configuration was not provided, get the Default
@@ -136,11 +147,79 @@ class SKSensorManager {
     SKConfiguration getConfiguration(SKSensorType sensorType) throws SKException {
 
         if (!isSensorAvailable(sensorType)) {
-            throw new SKException(TAG, "Sensor is not available.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor is not available in the device.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
         }
 
         // TODO
         return null;
+    }
+
+    boolean isPermissionGrantedForSensor(SKSensorType sensorType) throws SKException {
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            Log.i(TAG, "Request permissions is only required for Android 6.0 (API level 23) or greater.");
+            return true;
+        }
+
+        SKSensor sensor = getSensor(sensorType);
+        String permission = sensor.getRequiredPermission();
+
+        // if null, no permission is required
+        if (permission == null) {
+            return true;
+        }
+        else {
+            // else check permission
+            return (ContextCompat.checkSelfPermission(mApplicationContext, permission) == PackageManager.PERMISSION_GRANTED);
+        }
+    }
+
+    void requestPermissionForSensor(SKSensorType sensorType, final @NonNull Activity activity) throws SKException {
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            Log.i(TAG, "Request permissions is only required for Android 6.0 (API level 23) or greater.");
+            return;
+        }
+
+        SKSensor sensor = getSensor(sensorType);
+        String permission = sensor.getRequiredPermission();
+        if (permission != null) {
+            // request permissions
+            ActivityCompat.requestPermissions(activity, new String[]{permission}, 0);
+        }
+
+    }
+
+    // TODO documentation
+    void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity) throws SKException {
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            Log.i(TAG, "Request permissions is only required for Android 6.0 (API level 23) or greater.");
+            return;
+        }
+
+        // List that hold all permissions
+        List<String> permissionsList = new ArrayList<>();
+
+        for (int i = 0; i < SKSensorType.getLength(); i++) {
+
+            SKSensor sensor = mSensors.get(i);
+            if (sensor != null) {
+
+                // append permission
+                permissionsList.add(sensor.getRequiredPermission());
+            }
+        }
+
+        // request permissions
+        if (permissionsList.size() > 0) {
+
+            // convert list to array
+            String[] permissions = permissionsList.toArray(new String[0]);
+
+            // request permissions
+            ActivityCompat.requestPermissions(activity, permissions, 0);
+        }
     }
 
     /**
@@ -150,7 +229,7 @@ class SKSensorManager {
      *
      *  @return TRUE if the sensor is available on the device, or FALSE if it is not.
      */
-    boolean isSensorAvailable(SKSensorType sensorType) throws SKException {
+    boolean isSensorAvailable(SKSensorType sensorType) {
 
         // Get package manager
         PackageManager packageManager = mApplicationContext.getPackageManager();
@@ -191,10 +270,11 @@ class SKSensorManager {
                 return packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_LIGHT);
 
             case LOCATION:
-                return packageManager.hasSystemFeature(PackageManager.FEATURE_LOCATION);
+                return packageManager.hasSystemFeature(PackageManager.FEATURE_LOCATION) &&
+                        isGooglePlayServicesAvailable();
 
             case MOTION_ACTIVITY:
-                return SKMotionActivity.isGooglePlayServicesAvailable(mApplicationContext);
+                return isGooglePlayServicesAvailable();
 
             case BATTERY_STATUS:
                 return true;
@@ -226,7 +306,7 @@ class SKSensorManager {
                 return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2;
 
             default:
-                throw new SKException(TAG, "Unknown Sensor", SKExceptionErrorCode.UNKNOWN_ERROR);
+                throw new RuntimeException();
         }
     }
 
@@ -253,7 +333,7 @@ class SKSensorManager {
     boolean isSensorSensing(SKSensorType sensorType) throws SKException {
 
         if (!isSensorRegistered(sensorType)) {
-            throw new SKException(TAG, "Sensor is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor is not registered.", SKExceptionErrorCode.SENSOR_NOT_REGISTERED);
         }
 
         return getSensor(sensorType).isSensing();
@@ -262,7 +342,7 @@ class SKSensorManager {
     private SKAbstractSensor getSensor(SKSensorType sensorType) throws SKException {
 
         if (!isSensorRegistered(sensorType)) {
-            throw new SKException(TAG, "Sensor is not registered.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor is not registered.", SKExceptionErrorCode.SENSOR_NOT_REGISTERED);
         }
 
         int sensorIndex = sensorType.ordinal();
@@ -306,7 +386,7 @@ class SKSensorManager {
             case STEP_DETECTOR:
 
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-                    throw new SKException(TAG, "STEP_DETECTOR requires Android KitKat (19) or greater.", SKExceptionErrorCode.UNKNOWN_ERROR);
+                    throw new SKException(TAG, "STEP_DETECTOR requires Android KitKat (19) or greater.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
                 }
 
                 sensor = new SKStepDetector(mApplicationContext, (SKStepDetectorConfiguration)configuration);
@@ -315,7 +395,7 @@ class SKSensorManager {
             case STEP_COUNTER:
 
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-                    throw new SKException(TAG, "STEP_COUNTER requires Android KitKat (19) or greater.", SKExceptionErrorCode.UNKNOWN_ERROR);
+                    throw new SKException(TAG, "STEP_COUNTER requires Android KitKat (19) or greater.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
                 }
 
                 sensor = new SKStepCounter(mApplicationContext, (SKStepCounterConfiguration)configuration);
@@ -356,7 +436,7 @@ class SKSensorManager {
             case BEACON_PROXIMITY:
 
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                    throw new SKException(TAG, "BEACON_PROXIMITY requires Android Jelly Bean (18) or greater.", SKExceptionErrorCode.UNKNOWN_ERROR);
+                    throw new SKException(TAG, "BEACON_PROXIMITY requires Android Jelly Bean (18) or greater.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
                 }
 
                 sensor = new SKBeaconProximity(mApplicationContext, (SKBeaconProximityConfiguration)configuration);
@@ -371,19 +451,24 @@ class SKSensorManager {
                 break;
 
             case NOTIFICATION:
+
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                    throw new SKException(TAG, "NOTIFICATION requires Android Jelly Bean (18) or greater.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
+                }
+
                 sensor = new SKNotification(mApplicationContext, (SKNotificationConfiguration)configuration);
                 break;
 
             // Don't forget the break; here
 
             default:
-                throw new SKException(TAG, "Unknown Sensor", SKExceptionErrorCode.UNKNOWN_ERROR);
+                throw new RuntimeException();
         }
 
         return sensor;
     }
 
-    private static SKConfiguration defaultConfigurationForSensor(SKSensorType sensorType) throws SKException {
+    private static SKConfiguration defaultConfigurationForSensor(SKSensorType sensorType) {
 
         SKConfiguration configuration;
 
@@ -476,50 +561,31 @@ class SKSensorManager {
             // Don't forget the break; here
 
             default:
-                throw new SKException(TAG, "Unknown Sensor", SKExceptionErrorCode.UNKNOWN_ERROR);
+                throw new RuntimeException();
         }
 
         return configuration;
     }
 
-    /**
-     *  Subscribes for sensor updates using a specified event listener.
-     *
-     *  @param sensorType  The type of the sensor that the data handler will be subscribed to.
-     *
-     *  @param dataListener    An event listener that is invoked with each update to handle new sensor data. The block must conform to the SKSensorDataListener type.
-     */
-    void subscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
+    void subscribeSensorDataHandler(SKSensorType sensorType, SKSensorDataHandler dataHandler) throws SKException {
 
         Log.i(TAG, "Subscribe to sensor: " + sensorType.getName() + ".");
 
-        getSensor(sensorType).subscribeSensorDataListener(dataListener);
+        getSensor(sensorType).subscribeSensorDataHandler(dataHandler);
     }
 
-    /**
-     *  Unsubscribes an event listener.
-     *
-     *  @param sensorType The type of the sensor for which the event listener will be unsubscribed.
-     *  @param dataListener The event listener to be unsubscribed.
-     */
-    void unsubscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
+    void unsubscribeSensorDataHandler(SKSensorType sensorType, SKSensorDataHandler dataHandler) throws SKException {
 
         Log.i(TAG, "Unsubscribe from sensor: " + sensorType.getName() + ".");
 
-        getSensor(sensorType).unsubscribeSensorDataListener(dataListener);
+        getSensor(sensorType).unsubscribeSensorDataHandler(dataHandler);
     }
 
-    /**
-     *  Unsubscribes all event listenerss.
-     *
-     *  @param sensorType The type of the sensor for which the event listener will be unsubscribed.
-     */
-
-    void unsubscribeAllSensorDataListeners(SKSensorType sensorType) throws SKException {
+    void unsubscribeAllSensorDataHandlers(SKSensorType sensorType) throws SKException {
 
         Log.i(TAG, "Unsubscribe from all sensors.");
 
-        getSensor(sensorType).unsubscribeAllSensorDataListeners();
+        getSensor(sensorType).unsubscribeAllSensorDataHandlers();
     }
 
     /**
@@ -532,7 +598,7 @@ class SKSensorManager {
         Log.i(TAG, "Start sensing with sensor: " + sensorType.getName() + ".");
 
         if (isSensorSensing(sensorType)) {
-            throw new SKException(TAG, "Sensor [" + sensorType.getName() + "] is already sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor [" + sensorType.getName() + "] is already sensing.", SKExceptionErrorCode.SENSOR_CURRENTLY_SENSING);
         }
 
         // Start Sensing
@@ -549,7 +615,7 @@ class SKSensorManager {
         Log.i(TAG, "Stop sensing with sensor: " + sensorType.getName() + ".");
 
         if (!isSensorSensing(sensorType)) {
-            throw new SKException(TAG, "Sensor [" + sensorType.getName() + "] is already not sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor [" + sensorType.getName() + "] is already not sensing.", SKExceptionErrorCode.SENSOR_CURRENTLY_NOT_SENSING);
         }
 
         SKSensor sensor = getSensor(sensorType);
@@ -568,7 +634,7 @@ class SKSensorManager {
                 Log.i(TAG, "Start sensing with sensor: " + mSensors.get(i).getSensorName() + ".");
 
                 if (isSensorSensing(mSensors.get(i).getSensorType())) {
-                    throw new SKException(TAG, "Sensor [" + mSensors.get(i).getSensorName() + "] is already sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
+                    throw new SKException(TAG, "Sensor [" + mSensors.get(i).getSensorName() + "] is already sensing.", SKExceptionErrorCode.SENSOR_CURRENTLY_SENSING);
                 }
 
                 // Start Sensing
@@ -586,7 +652,7 @@ class SKSensorManager {
                 Log.i(TAG, "Stop sensing with sensor: " + mSensors.get(i).getSensorName() + ".");
 
                 if (!isSensorSensing(mSensors.get(i).getSensorType())) {
-                    throw new SKException(TAG, "Sensor [" + mSensors.get(i).getSensorName() + "] is already not sensing.", SKExceptionErrorCode.UNKNOWN_ERROR);
+                    throw new SKException(TAG, "Sensor [" + mSensors.get(i).getSensorName() + "] is already not sensing.", SKExceptionErrorCode.SENSOR_CURRENTLY_NOT_SENSING);
                 }
 
                 // Stop Sensing
@@ -598,7 +664,7 @@ class SKSensorManager {
     /**
      *  Return a string with a CSV formatted header that describes the data of the particular sensor.
      */
-    static String csvHeaderForSensor(SKSensorType sensorType) throws SKException {
+    static String csvHeaderForSensor(SKSensorType sensorType) {
 
         switch (sensorType) {
 
@@ -666,8 +732,14 @@ class SKSensorManager {
                 return SKNotificationData.csvHeader();
 
             default:
-                throw new SKException(TAG, "Unknown Sensor", SKExceptionErrorCode.UNKNOWN_ERROR);
+                throw new RuntimeException();
         }
+    }
+
+    private boolean isGooglePlayServicesAvailable() {
+        GoogleApiAvailability api = GoogleApiAvailability.getInstance();
+        int code = api.isGooglePlayServicesAvailable(mApplicationContext);
+        return code == ConnectionResult.SUCCESS;
     }
 
 }

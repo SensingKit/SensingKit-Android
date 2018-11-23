@@ -35,7 +35,7 @@ import org.sensingkit.sensingkitlib.data.SKStepCounterData;
 public class SKStepCounter extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKStepCounter.class.getName();
+    private static final String TAG = SKStepCounter.class.getSimpleName();
 
     public SKStepCounter(final Context context, final SKStepCounterConfiguration configuration) throws SKException {
         super(context, SKSensorType.STEP_COUNTER, configuration);
@@ -53,7 +53,7 @@ public class SKStepCounter extends SKAbstractNativeSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKStepCounterConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKStepCounter.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration

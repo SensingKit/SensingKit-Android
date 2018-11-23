@@ -34,9 +34,9 @@ import java.util.Locale;
 public class SKMicrophoneData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKMicrophoneData.class.getName();
+    private static final String TAG = SKMicrophoneData.class.getSimpleName();
 
-    protected String state;
+    protected final String state;
 
     /**
      * Initialize the instance

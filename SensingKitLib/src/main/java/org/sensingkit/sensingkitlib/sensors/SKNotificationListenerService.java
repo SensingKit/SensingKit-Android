@@ -23,7 +23,6 @@ package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Intent;
 import android.os.Build;
-import android.os.IBinder;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.support.annotation.RequiresApi;
@@ -35,12 +34,7 @@ public class SKNotificationListenerService extends NotificationListenerService {
     public static final String NOTIFICATION_ACTION = "org.sensingkit.SensingKit-Android.SKNotificationListenerService";
 
     @SuppressWarnings("unused")
-    private String TAG = this.getClass().getSimpleName();
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        return super.onBind(intent);
-    }
+    private static final String TAG = SKNotificationListenerService.class.getSimpleName();
 
     @Override
     public void onListenerConnected() {

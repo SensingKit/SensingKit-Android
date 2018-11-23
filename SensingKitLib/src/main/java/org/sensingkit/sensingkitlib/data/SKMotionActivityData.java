@@ -21,6 +21,7 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import com.google.android.gms.location.ActivityTransition;
 import com.google.android.gms.location.DetectedActivity;
 
 import org.json.JSONException;
@@ -31,30 +32,53 @@ import java.util.HashMap;
 import java.util.Locale;
 
 /**
- * An instance of SKMotionActivityData encapsulates measurements related to the Motion Activity sensor.
- * Activity is classified as Stationary, Walking, Running, Automotive, Cycling, Tilt, or Unknown.
+ *  An instance of SKMotionActivityData encapsulates measurements related to the Motion Activity sensor.
+ *  Activity is classified as Stationary, Walking, Running, Automotive or Cycling.
  */
 public class SKMotionActivityData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKMotionActivityData.class.getName();
+    private static final String TAG = SKMotionActivityData.class.getSimpleName();
+
+    public final class ActivityType {
+
+        public static final int STATIONARY  = DetectedActivity.STILL;
+        public static final int WALKING     = DetectedActivity.WALKING;
+        public static final int RUNNING     = DetectedActivity.RUNNING;
+        public static final int AUTOMOTIVE  = DetectedActivity.IN_VEHICLE;
+        public static final int CYCLING     = DetectedActivity.ON_BICYCLE;
+
+        ActivityType() {
+            throw new RuntimeException();
+        }
+    }
+
+    public final class TransitionType {
+
+        public static final int ENTER  = ActivityTransition.ACTIVITY_TRANSITION_ENTER;
+        public static final int EXIT  = ActivityTransition.ACTIVITY_TRANSITION_EXIT;
+
+        TransitionType() {
+            throw new RuntimeException();
+        }
+    }
 
     protected final int activityType;
-    protected final int confidence;
+    protected final int transitionType;
 
     /**
      * Initialize the instance
      *
      * @param timestamp    Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      * @param activityType The type of the activity
-     * @param confidence   Confidence percentage for the most probable activity
+     * @param transitionType Confidence percentage for the most probable activity
      */
-    public SKMotionActivityData(long timestamp, int activityType, int confidence) {
+    public SKMotionActivityData(long timestamp, int activityType, int transitionType) {
 
         super(SKSensorType.MOTION_ACTIVITY, timestamp);
 
         this.activityType = activityType;
-        this.confidence = confidence;
+        this.transitionType = transitionType;
     }
 
     /**
@@ -64,17 +88,18 @@ public class SKMotionActivityData extends SKAbstractData {
      */
     @SuppressWarnings("unused")
     public static String csvHeader() {
-        return "timeIntervalSince1970,activity,activityString,confidence";
+        return "timeIntervalSince1970,activity,activityString,transition,transitionString";
     }
 
     /**
      * Get the Motion Activity sensor data in csv format
      *
-     * @return Activity data in csv format: timeIntervalSince1970, activity, activityString, confidence
+     * @return Activity data in csv format: timeIntervalSince1970, activity, activityString
+     *
      */
     @Override
     public String getDataInCSV() {
-        return String.format(Locale.US, "%d,%d,%s,%d", this.timestamp, this.activityType, getActivityString(), this.confidence);
+        return String.format(Locale.US, "%d,%d,%s", this.timestamp, this.activityType, getActivityString());
     }
 
     /**
@@ -116,13 +141,24 @@ public class SKMotionActivityData extends SKAbstractData {
     }
 
     /**
-     * Get the confidence percentage
+     * Get the name of the activity type
      *
-     * @return Confidence
+     * @return Name of the activity type
      */
     @SuppressWarnings("unused")
-    public int getConfidence() {
-        return this.confidence;
+    public String getActivityString() {
+        return getNameFromActivityType(this.activityType);
+    }
+
+    /**
+     * Get the activity type
+     *
+     * @return Activity type
+     *
+     */
+    @SuppressWarnings("unused")
+    public int getTransitionType() {
+        return this.transitionType;
     }
 
     /**
@@ -131,8 +167,8 @@ public class SKMotionActivityData extends SKAbstractData {
      * @return Name of the activity type
      */
     @SuppressWarnings("unused")
-    public String getActivityString() {
-        return getNameFromActivityType(this.activityType);
+    public String getTransitionString() {
+        return getNameFromTransitionType(this.transitionType);
     }
 
     /**
@@ -145,29 +181,43 @@ public class SKMotionActivityData extends SKAbstractData {
 
         switch (activityType) {
 
-            case DetectedActivity.IN_VEHICLE:
-                return "in_vehicle";
+            case ActivityType.STATIONARY:
+                return "stationary";
 
-            case DetectedActivity.ON_BICYCLE:
-                return "on_bicycle";
-
-            case DetectedActivity.ON_FOOT:
-                return "on_foot";
-
-            case DetectedActivity.STILL:
-                return "still";
-
-            case DetectedActivity.UNKNOWN:
-                return "unknown";
-
-            case DetectedActivity.TILTING:
-                return "tilting";
-
-            case DetectedActivity.WALKING:
+            case ActivityType.WALKING:
                 return "walking";
 
-            case DetectedActivity.RUNNING:
+            case ActivityType.RUNNING:
                 return "running";
+
+            case ActivityType.AUTOMOTIVE:
+                return "automotive";
+
+            case ActivityType.CYCLING:
+                return "cycling";
+
+            default:
+                return "unsupported";
+        }
+
+    }
+
+    /**
+     * Get the name of an activity type
+     *
+     * @param transitionType The type of the transition (i.e. 'enter' or 'exit')
+     *
+     * @return name
+     */
+    public static String getNameFromTransitionType(int transitionType) {
+
+        switch (transitionType) {
+
+            case TransitionType.ENTER:
+                return "enter";
+
+            case TransitionType.EXIT:
+                return "exit";
 
             default:
                 return "unsupported";

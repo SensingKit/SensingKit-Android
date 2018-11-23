@@ -39,7 +39,7 @@ public class SKScreenStatus extends SKAbstractSensor {
     private final BroadcastReceiver mBroadcastReceiver;
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKScreenStatus.class.getName();
+    private static final String TAG = SKScreenStatus.class.getSimpleName();
 
     public SKScreenStatus(final Context context, final SKScreenStatusConfiguration configuration) throws SKException {
         super(context, SKSensorType.SCREEN_STATUS, configuration);
@@ -54,19 +54,24 @@ public class SKScreenStatus extends SKAbstractSensor {
 
                 String action = intent.getAction();
 
-                switch (action) {
-                    case Intent.ACTION_SCREEN_OFF:
-                        status = SKScreenStatusData.SCREEN_OFF;
-                        break;
-                    case Intent.ACTION_SCREEN_ON:
-                        status = SKScreenStatusData.SCREEN_ON;
-                        break;
-                    case Intent.ACTION_USER_PRESENT:
-                        status = SKScreenStatusData.SCREEN_UNLOCKED;
-                        break;
-                    default:
-                        status = SKScreenStatusData.SCREEN_UNKNOWN;
-                        break;
+                if (action == null) {
+                    status = SKScreenStatusData.SCREEN_UNKNOWN;
+                }
+                else {
+                    switch (action) {
+                        case Intent.ACTION_SCREEN_OFF:
+                            status = SKScreenStatusData.SCREEN_OFF;
+                            break;
+                        case Intent.ACTION_SCREEN_ON:
+                            status = SKScreenStatusData.SCREEN_ON;
+                            break;
+                        case Intent.ACTION_USER_PRESENT:
+                            status = SKScreenStatusData.SCREEN_UNLOCKED;
+                            break;
+                        default:
+                            status = SKScreenStatusData.SCREEN_UNKNOWN;
+                            break;
+                    }
                 }
 
                 // Build the data object
@@ -84,7 +89,7 @@ public class SKScreenStatus extends SKAbstractSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKScreenStatusConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKScreenStatus.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration

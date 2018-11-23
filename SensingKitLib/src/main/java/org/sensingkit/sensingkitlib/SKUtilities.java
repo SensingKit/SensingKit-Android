@@ -27,7 +27,7 @@ import android.content.pm.PackageManager;
 public final class SKUtilities {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKUtilities.class.getName();
+    private static final String TAG = SKUtilities.class.getSimpleName();
 
     /**
      * Check whether a given permission has been granted
@@ -37,13 +37,11 @@ public final class SKUtilities {
      * @param permission Android permission
      *
      * @return 1 if permission is granted; 0 if it is not
-     *
-     * @throws SKException
      */
     public static boolean checkPermission(Context context, String permission) throws SKException {
 
         if (context == null) {
-            throw new SKException(TAG, "Context cannot be null.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Context cannot be null.", SKExceptionErrorCode.CONTEXT_NULL);
         }
 
         int res = context.checkCallingOrSelfPermission(permission);

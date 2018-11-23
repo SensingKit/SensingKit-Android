@@ -36,7 +36,7 @@ import java.util.Locale;
 public class SKAccelerometerData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKAccelerometerData.class.getName();
+    private static final String TAG = SKAccelerometerData.class.getSimpleName();
 
     protected final float x;
     protected final float y;

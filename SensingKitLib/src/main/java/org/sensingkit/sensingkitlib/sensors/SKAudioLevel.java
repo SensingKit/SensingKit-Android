@@ -21,6 +21,7 @@
 
 package org.sensingkit.sensingkitlib.sensors;
 
+import android.Manifest;
 import android.content.Context;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -37,7 +38,7 @@ import org.sensingkit.sensingkitlib.data.SKAudioLevelData;
 public class SKAudioLevel extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKAudioLevel.class.getName();
+    private static final String TAG = SKAudioLevel.class.getSimpleName();
 
     private static final int sampleRate = 8000;
     private static final int bufferSizeFactor = 1;
@@ -59,7 +60,7 @@ public class SKAudioLevel extends SKAbstractSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKAudioLevelConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKAudioLevel.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration
@@ -142,10 +143,15 @@ public class SKAudioLevel extends SKAbstractSensor {
     }
 
     @Override
-    public void sensorDeregestered() {
-        super.sensorDeregestered();
+    public void sensorDeregistered() {
+        super.sensorDeregistered();
 
         // Release sensor
         audioRecord.release();
+    }
+
+    @Override
+    public String getRequiredPermission() {
+        return Manifest.permission.RECORD_AUDIO;
     }
 }

@@ -25,30 +25,34 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 
-import com.google.android.gms.location.ActivityRecognitionResult;
+import com.google.android.gms.location.ActivityTransitionResult;
 
-public class SKActivityRecognitionIntentService extends IntentService {
+public class SKMotionActivityIntentService extends IntentService {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKActivityRecognitionIntentService.class.getName();
+    private static final String TAG = SKMotionActivityIntentService.class.getSimpleName();
 
     static final String RECOGNITION_RESULT = "result";
     static final String BROADCAST_UPDATE = "new_update";
 
-    public SKActivityRecognitionIntentService() {
+    public SKMotionActivityIntentService() {
 
         // Set the label for the service's background thread
-        super("ActivityRecognitionIntentService");
+        super("SKMotionActivityIntentService");
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
 
+        if (intent == null) {
+            return;
+        }
+
         // If the intent contains an update
-        if (ActivityRecognitionResult.hasResult(intent)) {
+        if (ActivityTransitionResult.hasResult(intent)) {
 
             // Get the update
-            ActivityRecognitionResult result = ActivityRecognitionResult.extractResult(intent);
+            ActivityTransitionResult result = ActivityTransitionResult.extractResult(intent);
 
             Intent i = new Intent(BROADCAST_UPDATE);
             i.putExtra(RECOGNITION_RESULT, result);

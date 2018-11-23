@@ -38,7 +38,7 @@ import org.sensingkit.sensingkitlib.data.SKAbstractData;
 public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKAbstractNativeSensor.class.getName();
+    private static final String TAG = SKAbstractNativeSensor.class.getSimpleName();
 
     private final SensorManager mSensorManager;
     private final Sensor mSensor;
@@ -47,8 +47,17 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
     protected SKAbstractNativeSensor(final Context context, final SKSensorType sensorType, final SKConfiguration configuration) throws SKException {
         super(context, sensorType, configuration);
 
-        mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        mSensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
+
+        if (mSensorManager == null) {
+            throw new SKException(TAG, "Could not access the system service: SENSOR_SERVICE.", SKExceptionErrorCode.UNKNOWN_ERROR);
+        }
+
         mSensor = mSensorManager.getDefaultSensor(getSensorType(sensorType));
+
+        if (mSensor == null) {
+            throw new SKException(TAG, "Sensor [" + sensorType.getName() + "] is not available in the device.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
+        }
 
         mSensorEventListener = new SensorEventListener() {
 
@@ -80,7 +89,7 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
         boolean status = mSensorManager.registerListener(mSensorEventListener, mSensor, configuration.getSamplingRate());
 
         if (!status) {
-            throw new SKException(TAG, "SensorModule '" + getSensorName() + "' could not be started.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Sensor '" + getSensorName() + "' could not be started.", SKExceptionErrorCode.SENSOR_ERROR);
         }
     }
 
@@ -95,7 +104,7 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
     protected abstract SKAbstractData buildData(SensorEvent event);
 
     @SuppressLint("InlinedApi")  // There is a check in SKSensorManager
-    private static int getSensorType(SKSensorType sensorType) throws SKException {
+    private static int getSensorType(SKSensorType sensorType) {
 
         switch (sensorType) {
 
@@ -136,8 +145,7 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
                 return Sensor.TYPE_PRESSURE;
 
             default:
-                throw new SKException(TAG, "Not a native SensorModule.", SKExceptionErrorCode.UNKNOWN_ERROR);
-
+                throw new RuntimeException();
         }
     }
 

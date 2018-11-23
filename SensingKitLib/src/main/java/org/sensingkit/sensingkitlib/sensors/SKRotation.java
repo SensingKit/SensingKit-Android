@@ -35,7 +35,7 @@ import org.sensingkit.sensingkitlib.data.SKRotationData;
 public class SKRotation extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKRotation.class.getName();
+    private static final String TAG = SKRotation.class.getSimpleName();
 
     public SKRotation(final Context context, final SKRotationConfiguration configuration) throws SKException {
         super(context, SKSensorType.ROTATION, configuration);
@@ -58,7 +58,7 @@ public class SKRotation extends SKAbstractNativeSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKRotationConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKRotation.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration

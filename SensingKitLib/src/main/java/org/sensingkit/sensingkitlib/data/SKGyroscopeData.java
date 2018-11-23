@@ -34,7 +34,7 @@ import java.util.Locale;
 public class SKGyroscopeData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKGyroscopeData.class.getName();
+    private static final String TAG = SKGyroscopeData.class.getSimpleName();
 
     protected final float x;
     protected final float y;

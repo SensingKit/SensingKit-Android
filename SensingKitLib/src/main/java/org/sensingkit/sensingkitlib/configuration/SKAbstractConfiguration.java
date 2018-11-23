@@ -23,8 +23,22 @@ package org.sensingkit.sensingkitlib.configuration;
 
 public abstract class SKAbstractConfiguration implements SKConfiguration {
 
-    public SKAbstractConfiguration() {
+    //protected boolean requestPermissions;
 
-    }
+    // TODO: Add Documentation
+
+//    public SKAbstractConfiguration() {
+//
+//        // Set default
+//        this.requestPermissions = true;
+//    }
+//
+//    public void setRequestPermissions(final boolean requestPermissions) {
+//        this.requestPermissions = requestPermissions;
+//    }
+//
+//    public boolean getRequestPermissions() {
+//        return this.requestPermissions;
+//    }
 
 }

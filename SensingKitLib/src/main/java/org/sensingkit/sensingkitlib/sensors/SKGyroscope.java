@@ -35,7 +35,7 @@ import org.sensingkit.sensingkitlib.data.SKGyroscopeData;
 public class SKGyroscope extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKGyroscope.class.getName();
+    private static final String TAG = SKGyroscope.class.getSimpleName();
 
     public SKGyroscope(final Context context, final SKGyroscopeConfiguration configuration) throws SKException {
         super(context, SKSensorType.GYROSCOPE, configuration);
@@ -53,7 +53,7 @@ public class SKGyroscope extends SKAbstractNativeSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKGyroscopeConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKGyroscope.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration

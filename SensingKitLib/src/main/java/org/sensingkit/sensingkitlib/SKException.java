@@ -32,7 +32,7 @@ public class SKException extends Exception {
      * @param message - error message
      * @param errorCode - error code
      */
-    public SKException(String TAG, String message, SKExceptionErrorCode errorCode) {
+    public SKException(final String TAG, final String message, final SKExceptionErrorCode errorCode) {
         super(message);
         this.TAG = TAG;
         this.errorCode = errorCode;

@@ -34,7 +34,7 @@ import java.util.Locale;
 public class SKRotationData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKRotationData.class.getName();
+    private static final String TAG = SKRotationData.class.getSimpleName();
 
     protected final float x;
     protected final float y;

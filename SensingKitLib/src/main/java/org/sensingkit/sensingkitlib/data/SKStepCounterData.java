@@ -34,7 +34,7 @@ import java.util.Locale;
 public class SKStepCounterData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKStepCounterData.class.getName();
+    private static final String TAG = SKStepCounterData.class.getSimpleName();
 
     protected final int steps;
 

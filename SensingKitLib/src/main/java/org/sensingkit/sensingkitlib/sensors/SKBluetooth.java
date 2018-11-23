@@ -43,7 +43,7 @@ import java.util.ArrayList;
 public class SKBluetooth extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKBluetooth.class.getName();
+    private static final String TAG = SKBluetooth.class.getSimpleName();
 
     private final BluetoothAdapter mBluetoothAdapter;
     private ArrayList<SKBluetoothData> mBluetoothDevices;
@@ -55,7 +55,7 @@ public class SKBluetooth extends SKAbstractSensor {
         mBluetoothDevices = new ArrayList<>();
 
         if (mBluetoothAdapter == null) {
-            throw new SKException(TAG, "Bluetooth sensor is not supported from the device.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Bluetooth sensor is not supported from the device.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
         }
     }
 
@@ -104,7 +104,7 @@ public class SKBluetooth extends SKAbstractSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKBluetoothConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKBluetooth.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration
@@ -127,11 +127,11 @@ public class SKBluetooth extends SKAbstractSensor {
     public void startSensing() throws SKException {
 
         if (mBluetoothAdapter == null) {
-            throw new SKException(TAG, "Bluetooth sensor module is not supported from the device.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Bluetooth sensor is not supported from the device.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
         }
 
         if (!mBluetoothAdapter.isEnabled()) {
-            throw new SKException(TAG, "Bluetooth is not enabled.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Bluetooth is not enabled.", SKExceptionErrorCode.SENSOR_ERROR);
         }
 
         this.isSensing = true;

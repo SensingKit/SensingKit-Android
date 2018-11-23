@@ -21,6 +21,9 @@
 
 package org.sensingkit.sensingkitlib;
 
+import android.app.Activity;
+import android.support.annotation.NonNull;
+
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 
 @SuppressWarnings("unused")
@@ -91,27 +94,27 @@ public interface SensingKitLibInterface {
     SKConfiguration getConfiguration(SKSensorType sensorType) throws SKException;
 
     /**
-     *  Subscribes for sensor updates using a specified event listener.
+     *  Subscribes for sensor updates using a specified data handler.
      *
      *  @param sensorType  The type of the sensor that the data handler will be subscribed to.
-     *  @param dataListener    An event listener that is invoked with each update to handle new sensor data. The block must conform to the SKSensorDataListener type.
+     *  @param dataHandler A data handler that is invoked with each update to handle new sensor data. The block must conform to the SKSensorDataHandler type.
      */
-    void subscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException;
+    void subscribeSensorDataHandler(SKSensorType sensorType, SKSensorDataHandler dataHandler) throws SKException;
 
     /**
-     *  Unsubscribes an event listener.
+     *  Unsubscribes a data handler.
      *
      *  @param sensorType The type of the sensor for which the event listener will be unsubscribed.
-     *  @param dataListener The event listener to be unsubscribed.
+     *  @param dataHandler The data handler to be unsubscribed.
      */
-    void unsubscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException;
+    void unsubscribeSensorDataHandler(SKSensorType sensorType, SKSensorDataHandler dataHandler) throws SKException;
 
     /**
-     *  Unsubscribes all event listeners.
+     *  Unsubscribes all data handlers.
      *
-     *  @param sensorType The type of the sensor for which the event listener will be unsubscribed.
+     *  @param sensorType The type of the sensor for which the data handlers will be unsubscribed.
      */
-    void unsubscribeAllSensorDataListeners(SKSensorType sensorType) throws SKException;
+    void unsubscribeAllSensorDataHandlers(SKSensorType sensorType) throws SKException;
 
     /**
      *  A string with a CSV formatted header that describes the data of the particular sensor. This method is useful in combination with the toString() or csvString() instance method of an SKSensorData object.
@@ -121,6 +124,15 @@ public interface SensingKitLibInterface {
      *  @return A String with the CSV header.
      */
     String csvHeaderForSensor(SKSensorType sensorType) throws SKException;
+
+    // TODO documentation
+    boolean isPermissionGrantedForSensor(SKSensorType sensorType) throws SKException;
+
+    // TODO documentation
+    void requestPermissionForSensor(SKSensorType sensorType, final @NonNull Activity activity) throws SKException;
+
+    // TODO documentation
+    void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity) throws SKException;
 
     /**
      *  Starts continuous sensing with the specified sensor.

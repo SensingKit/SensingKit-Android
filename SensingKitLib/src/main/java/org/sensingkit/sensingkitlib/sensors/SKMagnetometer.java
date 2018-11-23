@@ -35,7 +35,7 @@ import org.sensingkit.sensingkitlib.data.SKMagnetometerData;
 public class SKMagnetometer extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKMagnetometer.class.getName();
+    private static final String TAG = SKMagnetometer.class.getSimpleName();
 
     public SKMagnetometer(final Context context, final SKMagnetometerConfiguration configuration) throws SKException {
         super(context, SKSensorType.MAGNETOMETER, configuration);
@@ -53,7 +53,7 @@ public class SKMagnetometer extends SKAbstractNativeSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKMagnetometerConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMagnetometer.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration

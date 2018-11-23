@@ -37,9 +37,9 @@ The following sensor modules are currently supported in SensingKit-Android, (lis
 ./gradlew build
 ```
 
-- Create an app/libs directory inside your project and copy the generated SensingKitLib/build/outputs/aar/SensingKitLib-release.aar (or the equivalent debug) file there.
+- Create an `app/libs` directory inside your project and copy the generated `SensingKitLib/build/outputs/aar/SensingKitLib-release.aar` (or the equivalent debug) file there.
 
-- Edit your app/build.gradle file and add a flatDir entry as shown bellow:
+- Edit your app/build.gradle file and add a flatDir entry as shown below:
 
 ```
 repositories {
@@ -51,52 +51,66 @@ repositories {
 ```
 
 
-- In the same app/build.gradle file, add SensingKitLib as a dependency as shown below:
+- In the same `app/build.gradle` file, add SensingKit as a dependency as shown below:
 
 ```
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'org.sensingkit:SensingKitLib-release@aar'
-    compile 'com.android.support:appcompat-v7:23.0.0’
-    compile 'com.google.android.gms:play-services-location:8.4.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'org.sensingkit:SensingKitLib-release@aar'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
 }
 ```
 
 
 ## How to Use this Library
 
-- The imports you will need are:
+Import and init SensingKit as shown below:
 
 ```java
-import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKSensorType;
-import org.sensingkit.sensingkitlib.SensingKitLib;
-import org.sensingkit.sensingkitlib.SensingKitLibInterface;  //Document:  needed to add this to init SensingKit
-import org.sensingkit.sensingkitlib.data.SKSensorData;
-import org.sensingkit.sensingkitlib.SKSensorDataListener;
+import org.sensingkit.sensingkitlib.*;
+import org.sensingkit.sensingkitlib.data.*;
+
+public class MainActivity extends AppCompatActivity {
+
+    SensingKitLibInterface mSensingKitLib;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        try {
+            mSensingKitLib = SensingKitLib.sharedSensingKitLib(this);
+        }
+        catch (SKException ex) {
+            // Handle Exception
+        }
+    }
+
+}
 ```
 
-- Init SensingKit in your Activity class as shown below:
+
+Check if a sensor is available in the device:
 
 ```java
-//You will need a try..catch block around this code
-SensingKitLibInterface mSensingKitLib = SensingKitLib.getSensingKitLib(this);
+if (mSensingKitLib.isSensorAvailable(SKSensorType.LIGHT)) {
+    // You can access the sensor
+}
 ```
 
 
-- Register a sensor module (e.g. a Light sensor) as shown below:
+Register a sensor (e.g. a Light sensor) as shown below:
 
 ```java
-//You will need a try..catch block around this code
 mSensingKitLib.registerSensor(SKSensorType.LIGHT);
 ```
 
 
-- Subscribe a sensor data listener:
+Subscribe a sensor data listener:
 
 ```java
-//You will need a try..catch block around this code
-mSensingKitLib.subscribeSensorDataListener(SKSensorType.LIGHT, new SKSensorDataListener() {
+mSensingKitLib.subscribeSensorDataHandler(SKSensorType.LIGHT, new SKSensorDataHandler() {
     @Override
     public void onDataReceived(final SKSensorType moduleType, final SKSensorData sensorData) {
         System.out.println(sensorData.getDataInCSV());  // Print data in CSV format
@@ -105,21 +119,82 @@ mSensingKitLib.subscribeSensorDataListener(SKSensorType.LIGHT, new SKSensorDataL
 ```
 
 
-- You can cast the data object into the actual sensor data object in order to access all the sensor data properties:
- 
+You can cast the data object into the actual sensor data object in order to access all the sensor data properties:
+
 ```java
 SKLightData lightData = (SKLightData)sensorData;
 ```
 
 
-
-- You can Start and Stop the Continuous Sensing using the following commands:
+You can Start and Stop the Continuous Sensing using the following commands:
 
 ```java
-//You will need try..catch blocks around these statements
+// Start
 mSensingKitLib.startContinuousSensingWithSensor(SKSensorType.LIGHT);
+
+// Stop
 mSensingKitLib.stopContinuousSensingWithSensor(SKSensorType.LIGHT);
 ```
+
+## Required Permissions
+
+Depending on the used sensor and its configuration, some additional permissions are required to be granted by the user. Using the following example you can request permission to access the Microphone sensor for recording audio (`RECORD_AUDIO`):
+
+```java
+public void requestPermissions() {
+    if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] {
+                    Manifest.permission.RECORD_AUDIO
+            }, 0);
+    }
+}
+
+@Override
+public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    if (requestCode == 0) {
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            // Permission was granted, all good.
+        }
+        else {
+            // Report error.
+        }
+    }
+}
+```
+
+You will also need to add a `<uses-permission>` element in your app manifest, as a child of the top-level `<manifest>` element:
+
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="org.sensingkit.crowdsensing_android">
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- other permissions go here -->
+
+    <application ...>
+        ...
+    </application>
+</manifest>
+```
+
+The permissions needed by the following SensingKit sensors are:
+
+### Microphone
+
+- `RECORD_AUDIO`
+
+
+### Location
+- `ACCESS_FINE_LOCATION`
+
+
+### Motion Activity
+
+- `com.google.android.gms.permission.ACTIVITY_RECOGNITION` (in Manifest only)
+
+
+For more information about Android's App Permissions, please visit: https://developer.android.com/training/permissions/requesting.
+
 
 
 For a complete description of our API, please refer to the [project website](https://www.sensingkit.org).

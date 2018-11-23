@@ -35,7 +35,7 @@ import org.sensingkit.sensingkitlib.data.SKHumidityData;
 public class SKHumidity extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKHumidity.class.getName();
+    private static final String TAG = SKHumidity.class.getSimpleName();
 
     public SKHumidity(final Context context, final SKHumidityConfiguration configuration) throws SKException {
         super(context, SKSensorType.HUMIDITY, configuration);
@@ -53,7 +53,7 @@ public class SKHumidity extends SKAbstractNativeSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKHumidityConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKHumidity.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration

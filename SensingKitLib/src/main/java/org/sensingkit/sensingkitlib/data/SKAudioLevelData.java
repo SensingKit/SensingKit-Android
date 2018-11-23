@@ -34,7 +34,7 @@ import java.util.Locale;
 public class SKAudioLevelData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKAudioLevelData.class.getName();
+    private static final String TAG = SKAudioLevelData.class.getSimpleName();
 
     protected final int level;
 

@@ -35,7 +35,7 @@ import org.sensingkit.sensingkitlib.data.SKLightData;
 public class SKLight extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKLight.class.getName();
+    private static final String TAG = SKLight.class.getSimpleName();
 
     private float lastLightSensed = Float.MAX_VALUE;
 
@@ -55,7 +55,7 @@ public class SKLight extends SKAbstractNativeSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKLightConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKLight.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration

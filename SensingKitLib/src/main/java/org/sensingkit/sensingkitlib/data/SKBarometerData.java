@@ -34,7 +34,7 @@ import java.util.Locale;
 public class SKBarometerData extends SKAbstractData {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKBarometerData.class.getName();
+    private static final String TAG = SKBarometerData.class.getSimpleName();
 
     protected final float pressure;
 

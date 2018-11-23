@@ -21,8 +21,10 @@
 
 package org.sensingkit.sensingkitlib;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.PowerManager;
+import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 
@@ -30,7 +32,7 @@ import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 public class SensingKitLib implements SensingKitLibInterface {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SensingKitLib.class.getName();
+    private static final String TAG = SensingKitLib.class.getSimpleName();
 
     private static SensingKitLib sSensingKitLib;
 
@@ -40,10 +42,10 @@ public class SensingKitLib implements SensingKitLibInterface {
     private SKSensorManager mSensorManager;
 
     @SuppressWarnings("unused")
-    public static SensingKitLibInterface getSensingKitLib(final Context context) throws SKException {
+    public static SensingKitLibInterface sharedSensingKitLib(final Context context) throws SKException {
 
         if (context == null) {
-            throw new SKException(TAG, "Context cannot be null", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Context cannot be null.", SKExceptionErrorCode.CONTEXT_NULL);
         }
 
         if (sSensingKitLib == null) {
@@ -66,7 +68,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      *  @return TRUE if the sensor is available on the device, or FALSE if it is not.
      */
     @Override
-    public boolean isSensorAvailable(SKSensorType sensorType) throws SKException {
+    public boolean isSensorAvailable(SKSensorType sensorType) {
         return mSensorManager.isSensorAvailable(sensorType);
     }
 
@@ -130,35 +132,35 @@ public class SensingKitLib implements SensingKitLibInterface {
     }
 
     /**
-     *  Subscribes for sensor updates using a specified event listener.
+     *  Subscribes for sensor updates using a specified data handler.
      *
      *  @param sensorType  The type of the sensor that the data handler will be subscribed to.
-     *  @param dataListener    An event listener that is invoked with each update to handle new sensor data. The block must conform to the SKSensorDataListener type.
+     *  @param dataHandler A data handler that is invoked with each update to handle new sensor data. The block must conform to the SKSensorDataHandler type.
      */
     @Override
-    public void subscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
-        mSensorManager.subscribeSensorDataListener(sensorType, dataListener);
+    public void subscribeSensorDataHandler(SKSensorType sensorType, SKSensorDataHandler dataHandler) throws SKException {
+        mSensorManager.subscribeSensorDataHandler(sensorType, dataHandler);
     }
 
     /**
-     *  Unsubscribes an event listener.
+     *  Unsubscribes a data handler.
      *
      *  @param sensorType The type of the sensor for which the event listener will be unsubscribed.
-     *  @param dataListener The event listener to be unsubscribed.
+     *  @param dataHandler The data handler to be unsubscribed.
      */
-     @Override
-    public void unsubscribeSensorDataListener(SKSensorType sensorType, SKSensorDataListener dataListener) throws SKException {
-        mSensorManager.unsubscribeSensorDataListener(sensorType, dataListener);
+    @Override
+    public void unsubscribeSensorDataHandler(SKSensorType sensorType, SKSensorDataHandler dataHandler) throws SKException {
+        mSensorManager.unsubscribeSensorDataHandler(sensorType, dataHandler);
     }
 
-     /**
-      *  Unsubscribes all event listeners.
-      *
-      *  @param sensorType The type of the sensor for which the event listener will be unsubscribed.
-      */
-     @Override
-    public void unsubscribeAllSensorDataListeners(SKSensorType sensorType) throws SKException {
-        mSensorManager.unsubscribeAllSensorDataListeners(sensorType);
+    /**
+     *  Unsubscribes all data handlers.
+     *
+     *  @param sensorType The type of the sensor for which the data handlers will be unsubscribed.
+     */
+    @Override
+    public void unsubscribeAllSensorDataHandlers(SKSensorType sensorType) throws SKException {
+        mSensorManager.unsubscribeAllSensorDataHandlers(sensorType);
     }
 
     /**
@@ -169,8 +171,24 @@ public class SensingKitLib implements SensingKitLibInterface {
      *  @return A String with the CSV header.
      */
     @Override
-    public String csvHeaderForSensor(SKSensorType sensorType) throws SKException {
+    public String csvHeaderForSensor(SKSensorType sensorType) {
         return SKSensorManager.csvHeaderForSensor(sensorType);
+    }
+
+    @Override
+    public boolean isPermissionGrantedForSensor(SKSensorType sensorType) throws SKException {
+        return mSensorManager.isPermissionGrantedForSensor(sensorType);
+    }
+
+    @Override
+    public void requestPermissionForSensor(SKSensorType sensorType, final @NonNull Activity activity) throws SKException {
+        mSensorManager.requestPermissionForSensor(sensorType, activity);
+    }
+
+    // TODO documentation
+    @Override
+    public void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity) throws SKException {
+        mSensorManager.requestPermissionForAllRegisteredSensors(activity);
     }
 
     /**
@@ -231,11 +249,14 @@ public class SensingKitLib implements SensingKitLibInterface {
 
     //region Wake Lock methods
 
-    private void acquireWakeLock() {
+    private void acquireWakeLock(long timeout) throws SKException {
         if ((mWakeLock == null) || (!mWakeLock.isHeld())) {
             PowerManager pm = (PowerManager) mApplicationContext.getSystemService(Context.POWER_SERVICE);
+            if (pm == null) {
+                throw new SKException(TAG, "Could not access the system service: POWER_SERVICE.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            }
             mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "SensingKit:WakeLock");
-            mWakeLock.acquire();
+            mWakeLock.acquire(timeout);
         }
     }
 

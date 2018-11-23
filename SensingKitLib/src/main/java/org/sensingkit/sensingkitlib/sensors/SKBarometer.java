@@ -35,7 +35,7 @@ import org.sensingkit.sensingkitlib.data.SKBarometerData;
 public class SKBarometer extends SKAbstractNativeSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKBarometer.class.getName();
+    private static final String TAG = SKBarometer.class.getSimpleName();
 
     public SKBarometer(final Context context, final SKBarometerConfiguration configuration) throws SKException {
         super(context, SKSensorType.BAROMETER, configuration);
@@ -53,7 +53,7 @@ public class SKBarometer extends SKAbstractNativeSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKBarometerConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKBarometer.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration

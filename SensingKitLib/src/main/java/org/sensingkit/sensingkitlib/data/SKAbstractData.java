@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import android.support.annotation.NonNull;
+
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 /*
@@ -28,7 +30,7 @@ Abstract class for sensor data
  */
 public abstract class SKAbstractData implements SKSensorData {
     @SuppressWarnings("unused")
-    private static final String TAG = SKAbstractData.class.getName();
+    private static final String TAG = SKAbstractData.class.getSimpleName();
 
     protected final SKSensorType sensorType;
     protected final long timestamp;
@@ -49,6 +51,7 @@ public abstract class SKAbstractData implements SKSensorData {
      *
      * @return String in csv format
      */
+    @NonNull
     public String toString() {
         return this.getDataInCSV();
     }

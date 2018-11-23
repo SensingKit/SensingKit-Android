@@ -21,6 +21,7 @@
 
 package org.sensingkit.sensingkitlib.sensors;
 
+import android.Manifest;
 import android.content.Context;
 import android.media.MediaRecorder;
 
@@ -37,7 +38,7 @@ import java.io.IOException;
 public class SKMicrophone extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
-    private static final String TAG = SKMicrophone.class.getName();
+    private static final String TAG = SKMicrophone.class.getSimpleName();
 
     private MediaRecorder recorder;
 
@@ -51,7 +52,7 @@ public class SKMicrophone extends SKAbstractSensor {
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKMicrophoneConfiguration)) {
             throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMicrophone.",
-                    SKExceptionErrorCode.UNKNOWN_ERROR);
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
         // Set the configuration
@@ -82,7 +83,7 @@ public class SKMicrophone extends SKAbstractSensor {
         try {
             recorder.prepare();
         } catch (IOException e) {
-            throw new SKException(TAG, "Microphone sensor could not be prepared.", SKExceptionErrorCode.UNKNOWN_ERROR);
+            throw new SKException(TAG, "Microphone sensor could not be prepared.", SKExceptionErrorCode.SENSOR_ERROR);
         }
     }
 
@@ -128,11 +129,16 @@ public class SKMicrophone extends SKAbstractSensor {
     }
 
     @Override
-    public void sensorDeregestered() {
-        super.sensorDeregestered();
+    public void sensorDeregistered() {
+        super.sensorDeregistered();
 
         // Release sensor
         recorder.reset();
         recorder.release();
+    }
+
+    @Override
+    public String getRequiredPermission() {
+        return Manifest.permission.RECORD_AUDIO;
     }
 }
