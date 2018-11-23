@@ -8,10 +8,10 @@
 - Added support for Humidity sensor
 - Added support for Beacon Proximity (iBeacon™, Eddystone™ and AltBeacon) with the help of the Android Beacon Library (thanks Radius Networks)
 - Added support for Notification sensor
-- Added csvHeaderForSensor method to get the headers of the csv format
+- Added csvHeaderForSensor method to get the headers of the CSV data format
 - Added missing SKMicrophoneData object
 - Added support for Exceptions (SKExceptions)
-- Added support for Dictionary data format (thanks to Mo, Fan Vincent @mofanv)
+- Added support for JSON data format (thanks to Mo, Fan Vincent @mofanv)
 - Added support for Android Studio 3.2
 - Added support for Android 8 SDK (Pie)
 - Added support for maven distribution (jCenter and Maven Central)
