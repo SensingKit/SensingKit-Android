@@ -119,7 +119,8 @@ public class SKMotionActivityData extends SKAbstractData {
             JSONObject subJsonObject = new JSONObject();
             subJsonObject.put("activity", this.activityType);
             subJsonObject.put("activityString", getActivityString());
-            subJsonObject.put("confidence", this.confidence);
+            subJsonObject.put("transition", this.transitionType);
+            subJsonObject.put("transitionString", this.getTransitionString());
 
             jsonObject.put("motionActivity", subJsonObject);
 
