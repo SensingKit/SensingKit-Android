@@ -21,13 +21,15 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.HashMap;
 import java.util.Locale;
 
 /**
- *  An instance of SKAudioLevelData encapsulates measurements related to the Audio Level sensor.
+ * An instance of SKAudioLevelData encapsulates measurements related to the Audio Level sensor.
  */
 public class SKAudioLevelData extends SKAbstractData {
 
@@ -40,8 +42,7 @@ public class SKAudioLevelData extends SKAbstractData {
      * Initialize the instance
      *
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
-     *
-     * @param level - Audio Level
+     * @param level     - Audio Level
      */
     public SKAudioLevelData(long timestamp, int level) {
 
@@ -71,21 +72,24 @@ public class SKAudioLevelData extends SKAbstractData {
     }
 
     /**
-     * Get the audio level measurement in dictionary format
+     * Get the audio level measurement in JSONObject format
      *
-     * @return Dictionary containing the timestamp and audio level measurements in dictionary format:
+     * @return JSONObject containing the timestamp and audio level measurements in JSONObject format:
      * sensor type, sensor type in string, timeIntervalSince1970, level
      */
     @Override
-    public HashMap getDataInDict() {
-        HashMap multiMap = new HashMap<>();
+    public JSONObject getDataInJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("sensorType", this.getSensorType());
+            jsonObject.put("sensorTypeString", this.getSensorType().toString());
+            jsonObject.put("timestamp", this.timestamp);
+            jsonObject.put("audioLevel", this.level);
 
-        multiMap.put("sensorType",this.getSensorType());
-        multiMap.put("sensorTypeString",this.getSensorType().toString());
-        multiMap.put("timestamp",this.timestamp);
-        multiMap.put("audioLevel",this.level);
-
-        return multiMap;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     /**

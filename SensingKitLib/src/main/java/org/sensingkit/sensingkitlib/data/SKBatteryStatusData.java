@@ -23,6 +23,8 @@ package org.sensingkit.sensingkitlib.data;
 
 import android.os.BatteryManager;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.HashMap;
@@ -31,7 +33,7 @@ import java.util.Locale;
 import static android.os.BatteryManager.*;
 
 /**
- *  An instance of SKBatteryStatusData encapsulates Battery properties
+ * An instance of SKBatteryStatusData encapsulates Battery properties
  */
 public class SKBatteryStatusData extends SKAbstractData {
 
@@ -49,23 +51,16 @@ public class SKBatteryStatusData extends SKAbstractData {
     /**
      * Initialize the instance
      *
-     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
-     *
-     * @param level Indicates the current battery charge level. Value ranges from 0 to maximum battery level
-     *
-     * @param scale Maximum battery level
-     *
+     * @param timestamp   Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     * @param level       Indicates the current battery charge level. Value ranges from 0 to maximum battery level
+     * @param scale       Maximum battery level
      * @param temperature Current battery temperature
-     *
-     * @param voltage Current battery voltage
-     *
-     * @param plugged Values are: 0 - on battery, BATTERY_PLUGGED_AC, BATTERY_PLUGGED_USB, BATTERY_PLUGGED_WIRELESS
-     *
-     * @param status Values are: BATTERY_STATUS_CHARGING, BATTERY_STATUS_DISCHARGING, BATTERY_STATUS_FULL,
-     *               BATTERY_STATUS_NOT_CHARGING, BATTERY_STATUS_UNKNOWN
-     *
-     * @param health Values are: BATTERY_HEALTH_COLD, BATTERY_HEALTH_DEAD, BATTERY_HEALTH_GOOD, BATTERY_HEALTH_OVERHEAT,
-     *               BATTERY_HEALTH_OVER_VOLTAGE, BATTERY_HEALTH_UNKNOWN
+     * @param voltage     Current battery voltage
+     * @param plugged     Values are: 0 - on battery, BATTERY_PLUGGED_AC, BATTERY_PLUGGED_USB, BATTERY_PLUGGED_WIRELESS
+     * @param status      Values are: BATTERY_STATUS_CHARGING, BATTERY_STATUS_DISCHARGING, BATTERY_STATUS_FULL,
+     *                    BATTERY_STATUS_NOT_CHARGING, BATTERY_STATUS_UNKNOWN
+     * @param health      Values are: BATTERY_HEALTH_COLD, BATTERY_HEALTH_DEAD, BATTERY_HEALTH_GOOD, BATTERY_HEALTH_OVERHEAT,
+     *                    BATTERY_HEALTH_OVER_VOLTAGE, BATTERY_HEALTH_UNKNOWN
      */
     public SKBatteryStatusData(long timestamp, int level, int scale, int temperature, int voltage, int plugged, int status, int health) {
 
@@ -99,39 +94,43 @@ public class SKBatteryStatusData extends SKAbstractData {
      * status string ("charging", "discharging", "full", "not charging", "unknown" or "unsupported"),
      * health string ("cold", "dead", "good", "over heat", "over voltage", "unknown", "failure" or "unsupported")
      */
-     @Override
+    @Override
     public String getDataInCSV() {
-        return String.format(Locale.US, "%d,%f,%d,%d,%s,%s,%s", this.timestamp, this.getLevelRatio(), this.temperature, this.voltage, getPluggedString(), getBatteryStatusString(), getBatteryHealthString());
+        return String.format(Locale.US, "%d,%f,%d,%d,%s,%s,%s", this.timestamp, this.getLevelRatio(), this.temperature, this.voltage,
+                getPluggedString(), getBatteryStatusString(), getBatteryHealthString());
     }
 
     /**
-     * Get the battery properties in dictionary format
+     * Get the battery properties in JSONObject format
      *
-     * @return Dictionary containing the battery properties in dictionary format:
+     * @return JSONObject containing the battery properties in JSONObject format:
      * sensor type, sensor type in string, timeIntervalSince1970,charge,temperature,voltage,
      * plugged string ("usb", "ac", "wireless" or "unknown"),
      * status string ("charging", "discharging", "full", "not charging", "unknown" or "unsupported"),
      * health string ("cold", "dead", "good", "over heat", "over voltage", "unknown", "failure" or "unsupported")
      */
     @Override
-    public HashMap getDataInDict() {
-        HashMap multiMap = new HashMap<>();
-        HashMap batteryMap = new HashMap<>();
+    public JSONObject getDataInJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("sensorType", this.getSensorType());
+            jsonObject.put("sensorTypeString", this.getSensorType().toString());
+            jsonObject.put("timestamp", this.timestamp);
 
-        multiMap.put("sensorType",this.getSensorType());
-        multiMap.put("sensorTypeString",this.getSensorType().toString());
-        multiMap.put("timestamp",this.timestamp);
+            JSONObject subJsonObject = new JSONObject();
+            subJsonObject.put("charge", this.getLevelRatio());
+            subJsonObject.put("temperature", this.temperature);
+            subJsonObject.put("voltage", this.voltage);
+            subJsonObject.put("plugged", getPluggedString());
+            subJsonObject.put("status", getBatteryStatusString());
+            subJsonObject.put("health", getBatteryHealthString());
 
-        batteryMap.put("charge",this.getLevelRatio());
-        batteryMap.put("temperature",this.temperature);
-        batteryMap.put("voltage",this.voltage);
-        batteryMap.put("plugged",getPluggedString());
-        batteryMap.put("status",getBatteryStatusString());
-        batteryMap.put("health",getBatteryHealthString());
+            jsonObject.put("battery", subJsonObject);
 
-        multiMap.put("battery",batteryMap);
-
-        return multiMap;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     /**
@@ -144,9 +143,8 @@ public class SKBatteryStatusData extends SKAbstractData {
 
         // Calculate the level: level/scale
         if (level >= 0 && scale > 0) {
-            return level / (float)scale;
-        }
-        else {
+            return level / (float) scale;
+        } else {
             return 0;
         }
     }

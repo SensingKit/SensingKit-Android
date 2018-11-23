@@ -23,14 +23,16 @@ package org.sensingkit.sensingkitlib.data;
 
 import com.google.android.gms.location.DetectedActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.HashMap;
 import java.util.Locale;
 
 /**
- *  An instance of SKMotionActivityData encapsulates measurements related to the Motion Activity sensor.
- *  Activity is classified as Stationary, Walking, Running, Automotive, Cycling, Tilt, or Unknown.
+ * An instance of SKMotionActivityData encapsulates measurements related to the Motion Activity sensor.
+ * Activity is classified as Stationary, Walking, Running, Automotive, Cycling, Tilt, or Unknown.
  */
 public class SKMotionActivityData extends SKAbstractData {
 
@@ -43,11 +45,9 @@ public class SKMotionActivityData extends SKAbstractData {
     /**
      * Initialize the instance
      *
-     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
-     *
+     * @param timestamp    Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      * @param activityType The type of the activity
-     *
-     * @param confidence Confidence percentage for the most probable activity
+     * @param confidence   Confidence percentage for the most probable activity
      */
     public SKMotionActivityData(long timestamp, int activityType, int confidence) {
 
@@ -71,7 +71,6 @@ public class SKMotionActivityData extends SKAbstractData {
      * Get the Motion Activity sensor data in csv format
      *
      * @return Activity data in csv format: timeIntervalSince1970, activity, activityString, confidence
-     *
      */
     @Override
     public String getDataInCSV() {
@@ -79,34 +78,37 @@ public class SKMotionActivityData extends SKAbstractData {
     }
 
     /**
-     * Get the Motion Activity sensor data in dictionary format
+     * Get the Motion Activity sensor data in JSONObject format
      *
-     * @return Dictionary containing the Motion Activity sensor data in dictionary format:
+     * @return JSONObject containing the Motion Activity sensor data in JSONObject format:
      * sensor type, sensor type in string, timeIntervalSince1970, activity, activityString, confidence
      */
     @Override
-    public HashMap getDataInDict() {
-        HashMap multiMap = new HashMap<>();
-        HashMap motionActivityMap = new HashMap<>();
+    public JSONObject getDataInJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("sensorType", this.getSensorType());
+            jsonObject.put("sensorTypeString", this.getSensorType().toString());
+            jsonObject.put("timestamp", this.timestamp);
 
-        multiMap.put("sensorType",this.getSensorType());
-        multiMap.put("sensorTypeString",this.getSensorType().toString());
-        multiMap.put("timestamp",this.timestamp);
+            JSONObject subJsonObject = new JSONObject();
+            subJsonObject.put("activity", this.activityType);
+            subJsonObject.put("activityString", getActivityString());
+            subJsonObject.put("confidence", this.confidence);
 
-        motionActivityMap.put("activity",this.activityType);
-        motionActivityMap.put("activityString",getActivityString());
-        motionActivityMap.put("confidence",this.confidence);
+            jsonObject.put("motionActivity", subJsonObject);
 
-        multiMap.put("motionActivity",motionActivityMap);
-
-        return(multiMap);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
+
 
     /**
      * Get the activity type
      *
      * @return Activity type
-     *
      */
     @SuppressWarnings("unused")
     public int getActivityType() {
@@ -117,7 +119,6 @@ public class SKMotionActivityData extends SKAbstractData {
      * Get the confidence percentage
      *
      * @return Confidence
-     *
      */
     @SuppressWarnings("unused")
     public int getConfidence() {
@@ -138,7 +139,6 @@ public class SKMotionActivityData extends SKAbstractData {
      * Get the name of an activity type
      *
      * @param activityType The type of the activity
-     *
      * @return name
      */
     public static String getNameFromActivityType(int activityType) {

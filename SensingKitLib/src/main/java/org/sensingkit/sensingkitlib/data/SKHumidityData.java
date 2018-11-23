@@ -21,13 +21,15 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.HashMap;
 import java.util.Locale;
 
 /**
- *  An instance of SKHumidityData encapsulates measurements related to the Humidity sensor.
+ * An instance of SKHumidityData encapsulates measurements related to the Humidity sensor.
  */
 public class SKHumidityData extends SKAbstractData {
 
@@ -40,8 +42,7 @@ public class SKHumidityData extends SKAbstractData {
      * Initialize the instance
      *
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
-     *
-     * @param humidity Humidity measurement
+     * @param humidity  Humidity measurement
      */
     public SKHumidityData(long timestamp, float humidity) {
 
@@ -71,22 +72,26 @@ public class SKHumidityData extends SKAbstractData {
     }
 
     /**
-     * Get humidity sensor data in dictionary format
+     * Get humidity sensor data in JSONObject format
      *
-     * @return Dictionary containing the humidity sensor data in dictionary format:
+     * @return JSONObject containing the humidity sensor data in JSONObject format:
      * sensor type, sensor type in string, timeIntervalSince1970, humidity
      */
     @Override
-    public HashMap getDataInDict() {
-        HashMap multiMap = new HashMap<>();
+    public JSONObject getDataInJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("sensorType", this.getSensorType());
+            jsonObject.put("sensorTypeString", this.getSensorType().toString());
+            jsonObject.put("timestamp", this.timestamp);
+            jsonObject.put("humidity", this.humidity);
 
-        multiMap.put("sensorType",this.getSensorType());
-        multiMap.put("sensorTypeString",this.getSensorType().toString());
-        multiMap.put("timestamp",this.timestamp);
-        multiMap.put("humidity",this.humidity);
-
-        return multiMap;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
+
 
     @SuppressWarnings("unused")
     public float getHumidity() {

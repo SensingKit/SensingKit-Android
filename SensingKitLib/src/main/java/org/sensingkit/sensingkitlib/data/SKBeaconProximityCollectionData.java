@@ -21,14 +21,15 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
 
 /**
- *  An instance of SKBeaconProximityCollectionData encapsulates measurements related to all the Beacon devices.
+ * An instance of SKBeaconProximityCollectionData encapsulates measurements related to all the Beacon devices.
  */
 public class SKBeaconProximityCollectionData extends SKAbstractData {
 
@@ -41,10 +42,10 @@ public class SKBeaconProximityCollectionData extends SKAbstractData {
      * Initialize the instance
      *
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
-     *
-     * @param devices One SKBeaconProximityData object for each Beacon device
+     * @param devices   One SKBeaconProximityData object for each Beacon device
      */
-    public SKBeaconProximityCollectionData(long timestamp, ArrayList<SKBeaconProximityData> devices) {
+    public SKBeaconProximityCollectionData(long timestamp, ArrayList<SKBeaconProximityData>
+            devices) {
 
         super(SKSensorType.BEACON_PROXIMITY, timestamp);
 
@@ -80,30 +81,32 @@ public class SKBeaconProximityCollectionData extends SKAbstractData {
         }
 
         // Delete last \n
-        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
 
         // Return in String
         return stringBuilder.toString();
     }
 
+
     /**
-     * Get the data for all Beacon devices in dictionary format
+     * Get the data for all Beacon devices in JSONObject format
      *
-     * @return Dictionary formatted as follows:  timeIntervalSince1970, device1 data, device2 data,,,
+     * @return JSONObject formatted as follows: device1 data, device, data,,,
      */
     @Override
-    public HashMap getDataInDict() {
+    public JSONObject getDataInJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            // Add deviceData
+            int i = 1;
+            for (SKBeaconProximityData deviceData : mDevices) {
+                jsonObject.put("beaconDeviceNo" + i++, deviceData.getDataInJSON());
+            }
 
-        HashMap allBeaconProximityMap = new HashMap();
-
-        // Add deviceData
-        int i = 1;
-        for (SKBeaconProximityData deviceData : mDevices) {
-            allBeaconProximityMap.put("deviceNo" + i++, deviceData.getDataInDict());
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-
-        // Return in HashMap
-        return(allBeaconProximityMap);
+        return jsonObject;
     }
 
 

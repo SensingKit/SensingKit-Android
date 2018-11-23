@@ -21,13 +21,15 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.HashMap;
 import java.util.Locale;
 
 /**
- *  An instance of SKLightData encapsulates measurements related to the Light sensor.
+ * An instance of SKLightData encapsulates measurements related to the Light sensor.
  */
 public class SKLightData extends SKAbstractData {
 
@@ -40,8 +42,7 @@ public class SKLightData extends SKAbstractData {
      * Initialize the instance
      *
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
-     *
-     * @param light Ambient light in lux
+     * @param light     Ambient light in lux
      */
     public SKLightData(long timestamp, float light) {
 
@@ -71,21 +72,24 @@ public class SKLightData extends SKAbstractData {
     }
 
     /**
-     * Get light sensor data in dictionary format
+     * Get light sensor data in JSONObject format
      *
-     * @return Dictionary containing the light sensor data in dictionary format:
+     * @return JSONObject containing the light sensor data in JSONObject format:
      * sensor type, sensor type in string, timeIntervalSince1970, light
      */
     @Override
-    public HashMap getDataInDict() {
-        HashMap multiMap = new HashMap<>();
+    public JSONObject getDataInJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("sensorType", this.getSensorType());
+            jsonObject.put("sensorTypeString", this.getSensorType().toString());
+            jsonObject.put("timestamp", this.timestamp);
+            jsonObject.put("light", this.light);
 
-        multiMap.put("sensorType",this.getSensorType());
-        multiMap.put("sensorTypeString",this.getSensorType().toString());
-        multiMap.put("timestamp",this.timestamp);
-        multiMap.put("light",this.light);
-
-        return multiMap;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     /**

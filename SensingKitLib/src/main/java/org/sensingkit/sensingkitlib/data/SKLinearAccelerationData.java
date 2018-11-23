@@ -21,13 +21,15 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.HashMap;
 import java.util.Locale;
 
 /**
- *  An instance of SKLinearAccelerationData encapsulates measurements related to the Linear Acceleration sensor.
+ * An instance of SKLinearAccelerationData encapsulates measurements related to the Linear Acceleration sensor.
  * Measures the acceleration force in mass/seconds**2, excluding the force of gravity
  */
 public class SKLinearAccelerationData extends SKAbstractData {
@@ -43,12 +45,9 @@ public class SKLinearAccelerationData extends SKAbstractData {
      * Initialize the instance
      *
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
-     *
-     * @param x Force in X direction
-     *
-     * @param y Force in Y direction
-     *
-     * @param z Force in Z direction
+     * @param x         Force in X direction
+     * @param y         Force in Y direction
+     * @param z         Force in Z direction
      */
     public SKLinearAccelerationData(long timestamp, float x, float y, float z) {
 
@@ -80,27 +79,30 @@ public class SKLinearAccelerationData extends SKAbstractData {
     }
 
     /**
-     * Get the Linear Acceleration sensor data in dictionary format
+     * Get the Linear Acceleration sensor data in JSONObject format
      *
-     * @return Dictionary containing the Linear Acceleration sensor data in dictionary format:
+     * @return JSONObject containing the Linear Acceleration sensor data in JSONObject format:
      * sensor type, sensor type in string, timeIntervalSince1970, x-axis, y-axis, z-axis
      */
     @Override
-    public HashMap getDataInDict() {
-        HashMap multiMap = new HashMap<>();
-        HashMap<String,Float> linearAccelerationMap = new HashMap<>();
+    public JSONObject getDataInJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("sensorType", this.getSensorType());
+            jsonObject.put("sensorTypeString", this.getSensorType().toString());
+            jsonObject.put("timestamp", this.timestamp);
 
-        multiMap.put("sensorType",this.getSensorType());
-        multiMap.put("sensorTypeString",this.getSensorType().toString());
-        multiMap.put("timestamp",this.timestamp);
+            JSONObject subJsonObject = new JSONObject();
+            subJsonObject.put("x", this.x);
+            subJsonObject.put("y", this.y);
+            subJsonObject.put("z", this.z);
 
-        linearAccelerationMap.put("x",this.x);
-        linearAccelerationMap.put("y",this.y);
-        linearAccelerationMap.put("z",this.z);
+            jsonObject.put("linearAcceleration", subJsonObject);
 
-        multiMap.put("linearAcceleration",linearAccelerationMap);
-
-        return(multiMap);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     /**

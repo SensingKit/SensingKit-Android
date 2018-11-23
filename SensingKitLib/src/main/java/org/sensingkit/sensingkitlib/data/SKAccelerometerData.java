@@ -83,12 +83,6 @@ public class SKAccelerometerData extends SKAbstractData {
         return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
     }
 
-    @Override
-    public HashMap getDataInDict() {
-        return null;
-    }
-
-
     /**
      * Get the accelerator measurements in JSONObject format
      *
@@ -96,6 +90,7 @@ public class SKAccelerometerData extends SKAbstractData {
      * format:
      * sensor type, sensor type in string, timeIntervalSince1970, accelerometer in x,y,z
      */
+    @Override
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {
@@ -103,12 +98,12 @@ public class SKAccelerometerData extends SKAbstractData {
             jsonObject.put("sensorTypeString", this.getSensorType().toString());
             jsonObject.put("timestamp", this.timestamp);
 
-            JSONArray jsonArray = new JSONArray();
-            jsonArray.put(this.x);
-            jsonArray.put(this.y);
-            jsonArray.put(this.z);
+            JSONObject subJsonObject = new JSONObject();
+            subJsonObject.put("x", this.x);
+            subJsonObject.put("y", this.y);
+            subJsonObject.put("z", this.z);
 
-            jsonObject.put("acceleration", jsonArray);
+            jsonObject.put("acceleration", subJsonObject);
 
         } catch (JSONException e) {
             e.printStackTrace();

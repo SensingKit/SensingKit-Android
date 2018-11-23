@@ -21,13 +21,15 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.HashMap;
 import java.util.Locale;
 
 /**
- *  An instance of SKScreenStatusData encapsulates measurements related to the Screen Status sensor.
+ * An instance of SKScreenStatusData encapsulates measurements related to the Screen Status sensor.
  */
 public class SKScreenStatusData extends SKAbstractData {
 
@@ -45,7 +47,7 @@ public class SKScreenStatusData extends SKAbstractData {
      * Initialize the instance
      *
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
-     * @param status Screen status
+     * @param status    Screen status
      */
     public SKScreenStatusData(long timestamp, int status) {
 
@@ -75,26 +77,29 @@ public class SKScreenStatusData extends SKAbstractData {
     }
 
     /**
-     * Get Screen Status data in dictionary format
+     * Get Screen Status data in JSONObject format
      *
-     * @return Dictionary containing the Screen Status data in dictionary format:
+     * @return JSONObject containing the Screen Status data in JSONObject format:
      * sensor type, sensor type in string, timeIntervalSince1970, status, statusString
      */
     @Override
-    public HashMap getDataInDict() {
-        HashMap multiMap = new HashMap<>();
-        HashMap screenStatusMap = new HashMap<>();
+    public JSONObject getDataInJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("sensorType", this.getSensorType());
+            jsonObject.put("sensorTypeString", this.getSensorType().toString());
+            jsonObject.put("timestamp", this.timestamp);
 
-        multiMap.put("sensorType",this.getSensorType());
-        multiMap.put("sensorTypeString",this.getSensorType().toString());
-        multiMap.put("timestamp",this.timestamp);
+            JSONObject subJsonObject = new JSONObject();
+            subJsonObject.put("status", this.getStatus());
+            subJsonObject.put("statusString", this.getStatusString());
 
-        screenStatusMap.put("status",this.getStatus());
-        screenStatusMap.put("statusString",this.getStatusString());
+            jsonObject.put("screenStatus", subJsonObject);
 
-        multiMap.put("screenStatus",screenStatusMap);
-
-        return multiMap;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     /**
