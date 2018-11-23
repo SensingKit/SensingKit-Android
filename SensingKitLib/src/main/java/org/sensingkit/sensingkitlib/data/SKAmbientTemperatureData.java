@@ -21,13 +21,15 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.HashMap;
 import java.util.Locale;
 
 /**
- *  An instance of SKAmbientTemperatureData encapsulates measurements related to the Ambient Temperature sensor.
+ * An instance of SKAmbientTemperatureData encapsulates measurements related to the Ambient Temperature sensor.
  */
 public class SKAmbientTemperatureData extends SKAbstractData {
 
@@ -39,8 +41,7 @@ public class SKAmbientTemperatureData extends SKAbstractData {
     /**
      * Initialize Ambient Temperature data instance
      *
-     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
-     *
+     * @param timestamp   Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      * @param temperature In degrees Celsius
      */
     public SKAmbientTemperatureData(long timestamp, float temperature) {
@@ -64,7 +65,6 @@ public class SKAmbientTemperatureData extends SKAbstractData {
      * Get the Ambient Temperature sensor data in csv format
      *
      * @return Ambient Temperature data in csv format: timeIntervalSince1970,temperature
-     *
      */
     @Override
     public String getDataInCSV() {
@@ -72,21 +72,24 @@ public class SKAmbientTemperatureData extends SKAbstractData {
     }
 
     /**
-     * Get the Ambient Temperature sensor data in dictionary format
+     * Get the Ambient Temperature sensor data in JSONObject format
      *
-     * @return Dictionary containing the ambient temperature in dictionary format:
+     * @return JSONObject containing the ambient temperature in JSONObject format:
      * sensor type, sensor type in string, timeIntervalSince1970, temperature
      */
     @Override
-    public HashMap getDataInDict() {
-        HashMap multiMap = new HashMap<>();
+    public JSONObject getDataInJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("sensorType", this.getSensorType());
+            jsonObject.put("sensorTypeString", this.getSensorType().toString());
+            jsonObject.put("timestamp", this.timestamp);
+            jsonObject.put("temperature", this.temperature);
 
-        multiMap.put("sensorType",this.getSensorType());
-        multiMap.put("sensorTypeString",this.getSensorType().toString());
-        multiMap.put("timestamp",this.timestamp);
-        multiMap.put("temperature",this.temperature);
-
-        return multiMap;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     /**

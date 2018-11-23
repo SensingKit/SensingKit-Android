@@ -23,11 +23,13 @@ package org.sensingkit.sensingkitlib.data;
 
 
 import org.sensingkit.sensingkitlib.SKSensorType;
-import java.util.HashMap;
+import org.json.JSONObject;
 
 @SuppressWarnings("unused")
 public interface SKSensorData {
     SKSensorType getSensorType();
+
     String getDataInCSV();
-    HashMap getDataInDict();
+
+    JSONObject getDataInJSON();
 }

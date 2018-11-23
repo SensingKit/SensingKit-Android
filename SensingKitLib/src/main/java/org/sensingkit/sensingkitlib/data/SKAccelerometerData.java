@@ -21,6 +21,9 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.HashMap;
@@ -28,7 +31,7 @@ import java.util.Locale;
 
 
 /**
- *  An instance of SKAccelerometerData encapsulates measurements related to the Accelerometer sensor.
+ * An instance of SKAccelerometerData encapsulates measurements related to the Accelerometer sensor.
  */
 public class SKAccelerometerData extends SKAbstractData {
 
@@ -42,13 +45,11 @@ public class SKAccelerometerData extends SKAbstractData {
     /**
      * Initialize the instance
      *
-     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
-     *
-     * @param x X-axis value of the Accelerometer sensor
-     *
-     * @param y Y-axis value of the Accelerometer sensor
-     *
-     * @param z Z-axis value of the Accelerometer sensor
+     * @param timestamp Time in milliseconds (the difference between the current time and
+     *                  midnight, January 1, 1970 UTC)
+     * @param x         X-axis value of the Accelerometer sensor
+     * @param y         Y-axis value of the Accelerometer sensor
+     * @param z         Z-axis value of the Accelerometer sensor
      */
 
     public SKAccelerometerData(long timestamp, float x, float y, float z) {
@@ -63,7 +64,8 @@ public class SKAccelerometerData extends SKAbstractData {
     /**
      * Get the csv header of the Accelerometer sensor data
      *
-     * @return String with a CSV formatted header that describes the data of the Accelerometer sensor.
+     * @return String with a CSV formatted header that describes the data of the Accelerometer
+     * sensor.
      */
     @SuppressWarnings("unused")
     public static String csvHeader() {
@@ -73,7 +75,8 @@ public class SKAccelerometerData extends SKAbstractData {
     /**
      * Get the accelerator measurements in csv format
      *
-     * @return String containing the timestamp and accelerometer measurements in csv format:  timeIntervalSince1970,x,y,z
+     * @return String containing the timestamp and accelerometer measurements in csv format:
+     * timeIntervalSince1970,x,y,z
      */
     @Override
     public String getDataInCSV() {
@@ -81,31 +84,35 @@ public class SKAccelerometerData extends SKAbstractData {
     }
 
     /**
-     * Get the accelerator measurements in dictionary format
+     * Get the accelerator measurements in JSONObject format
      *
-     * @return Dictionary containing the time stamp and accelerometer measurements in dictionary format:
+     * @return JSONObject containing the time stamp and accelerometer measurements in JSONObject
+     * format:
      * sensor type, sensor type in string, timeIntervalSince1970, accelerometer in x,y,z
      */
     @Override
-    public HashMap getDataInDict() {
-        HashMap multiMap = new HashMap<>();
-        HashMap<String,Float> accelerationMap = new HashMap<>();
+    public JSONObject getDataInJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("sensorType", this.getSensorType());
+            jsonObject.put("sensorTypeString", this.getSensorType().toString());
+            jsonObject.put("timestamp", this.timestamp);
 
-        multiMap.put("sensorType",this.getSensorType());
-        multiMap.put("sensorTypeString",this.getSensorType().toString());
-        multiMap.put("timestamp",this.timestamp);
+            JSONObject subJsonObject = new JSONObject();
+            subJsonObject.put("x", this.x);
+            subJsonObject.put("y", this.y);
+            subJsonObject.put("z", this.z);
 
-        accelerationMap.put("x",this.x);
-        accelerationMap.put("y",this.y);
-        accelerationMap.put("z",this.z);
+            jsonObject.put("acceleration", subJsonObject);
 
-        multiMap.put("acceleration",accelerationMap);
-
-        return multiMap;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     /**
-     * Get the X-axis acceleromator measurement
+     * Get the X-axis accelerator measurement
      *
      * @return Float containing the X-axis value of the Accelerometer sensor
      */

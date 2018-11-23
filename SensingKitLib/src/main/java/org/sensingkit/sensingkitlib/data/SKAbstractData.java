@@ -28,8 +28,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 /*
 Abstract class for sensor data
  */
-public abstract class SKAbstractData implements SKSensorData
-{
+public abstract class SKAbstractData implements SKSensorData {
     @SuppressWarnings("unused")
     private static final String TAG = SKAbstractData.class.getSimpleName();
 
@@ -40,8 +39,7 @@ public abstract class SKAbstractData implements SKSensorData
      * Initialize the instance
      *
      * @param sensorType of type SKSensorType
-     *
-     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     * @param timestamp  Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      */
     public SKAbstractData(SKSensorType sensorType, long timestamp) {
         this.sensorType = sensorType;

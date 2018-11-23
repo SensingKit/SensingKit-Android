@@ -23,6 +23,8 @@ package org.sensingkit.sensingkitlib.data;
 
 import android.location.Location;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.HashMap;
@@ -30,7 +32,7 @@ import java.util.Locale;
 
 
 /**
- *  An instance of SKLocationData encapsulates measurements related to the Location sensor.
+ * An instance of SKLocationData encapsulates measurements related to the Location sensor.
  */
 public class SKLocationData extends SKAbstractData {
 
@@ -43,8 +45,7 @@ public class SKLocationData extends SKAbstractData {
      * Initialize the instance
      *
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
-     *
-     * @param location Location object
+     * @param location  Location object
      */
     public SKLocationData(long timestamp, Location location) {
 
@@ -76,28 +77,31 @@ public class SKLocationData extends SKAbstractData {
     }
 
     /**
-     * Get the location sensor data in dictionary format
+     * Get the location sensor data in JSONObject format
      *
-     * @return Dictionary containing the location sensor data in dictionary format:
+     * @return JSONObject containing the location sensor data in JSONObject format:
      * sensor type, sensor type in string, timeIntervalSince1970, latitude, longitude, altitude, accuracy
      */
     @Override
-    public HashMap getDataInDict() {
-        HashMap multiMap = new HashMap<>();
-        HashMap locationMap = new HashMap<>();
+    public JSONObject getDataInJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("sensorType", this.getSensorType());
+            jsonObject.put("sensorTypeString", this.getSensorType().toString());
+            jsonObject.put("timestamp", this.timestamp);
 
-        multiMap.put("sensorType",this.getSensorType());
-        multiMap.put("sensorTypeString",this.getSensorType().toString());
-        multiMap.put("timestamp",this.timestamp);
+            JSONObject subJsonObject = new JSONObject();
+            subJsonObject.put("latitude", this.location.getLatitude());
+            subJsonObject.put("longitude", this.location.getLongitude());
+            subJsonObject.put("altitude", this.location.getAltitude());
+            subJsonObject.put("accuracy", this.location.getAccuracy());
 
-        locationMap.put("latitude",this.location.getLatitude());
-        locationMap.put("longitude",this.location.getLongitude());
-        locationMap.put("altitude",this.location.getAltitude());
-        locationMap.put("accuracy",this.location.getAccuracy());
+            jsonObject.put("location", subJsonObject);
 
-        multiMap.put("location",locationMap);
-
-        return(multiMap);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     /**

@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.HashMap;
@@ -28,8 +30,8 @@ import java.util.Locale;
 
 
 /**
- *  An instance of SKMagnetometerData encapsulates measurements related to the Magnetometer sensor.
- *  Measures the magnetic force in micro-Tesla
+ * An instance of SKMagnetometerData encapsulates measurements related to the Magnetometer sensor.
+ * Measures the magnetic force in micro-Tesla
  */
 
 public class SKMagnetometerData extends SKAbstractData {
@@ -45,12 +47,9 @@ public class SKMagnetometerData extends SKAbstractData {
      * Initialize the instance
      *
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
-     *
-     * @param x Force in X-direction
-     *
-     * @param y Force in Y-direction
-     *
-     * @param z Force in Z-direction
+     * @param x         Force in X-direction
+     * @param y         Force in Y-direction
+     * @param z         Force in Z-direction
      */
     public SKMagnetometerData(long timestamp, float x, float y, float z) {
 
@@ -83,27 +82,30 @@ public class SKMagnetometerData extends SKAbstractData {
 
 
     /**
-     * Get the Magnetometer sensor data in dictionary format
+     * Get the Magnetometer sensor data in JSONObject format
      *
-     * @return Dictionary containing the Magnetometer sensor data in dictionary format:
+     * @return JSONObject containing the Magnetometer sensor data in JSONObject format:
      * sensor type, sensor type in string, timeIntervalSince1970, x force, y force, z force
      */
     @Override
-    public HashMap getDataInDict() {
-        HashMap multiMap = new HashMap<>();
-        HashMap<String,Float> magnetometerMap = new HashMap<>();
+    public JSONObject getDataInJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("sensorType", this.getSensorType());
+            jsonObject.put("sensorTypeString", this.getSensorType().toString());
+            jsonObject.put("timestamp", this.timestamp);
 
-        multiMap.put("sensorType",this.getSensorType());
-        multiMap.put("sensorTypeString",this.getSensorType().toString());
-        multiMap.put("timestamp",this.timestamp);
+            JSONObject subJsonObject = new JSONObject();
+            subJsonObject.put("x", this.x);
+            subJsonObject.put("y", this.y);
+            subJsonObject.put("z", this.z);
 
-        magnetometerMap.put("x",this.x);
-        magnetometerMap.put("y",this.y);
-        magnetometerMap.put("z",this.z);
+            jsonObject.put("magnetometer", subJsonObject);
 
-        multiMap.put("magnetometer",magnetometerMap);
-
-        return(multiMap);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     /**

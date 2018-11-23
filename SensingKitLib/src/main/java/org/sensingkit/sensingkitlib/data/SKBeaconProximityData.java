@@ -24,6 +24,8 @@ package org.sensingkit.sensingkitlib.data;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.Identifier;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.HashMap;
@@ -66,34 +68,36 @@ public class SKBeaconProximityData extends SKAbstractData {
     }
 
     /**
-     * Get the Beacon Proximity sensor data in dictionary format
+     * Get the Beacon Proximity sensor data in JSONObject format
      *
-     * @return Dictionary containing the Beacon Proximity sensor data in dictionary format:
+     * @return JSONObject containing the Beacon Proximity sensor data in JSONObject format:
      * sensor type, sensor type in string, timeIntervalSince1970, beaconType, manufacturer, id1,id2,id3,rssi,txPower,distance
      */
     @Override
-    public HashMap getDataInDict() {
-        HashMap multiMap = new HashMap<>();
-        HashMap beaconProximityMap = new HashMap<>();
+    public JSONObject getDataInJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("sensorType", this.getSensorType());
+            jsonObject.put("sensorTypeString", this.getSensorType().toString());
+            jsonObject.put("timestamp", this.timestamp);
 
-        multiMap.put("sensorType",this.getSensorType());
-        multiMap.put("sensorTypeString",this.getSensorType().toString());
-        multiMap.put("timestamp",this.timestamp);
+            JSONObject subJsonObject = new JSONObject();
+            subJsonObject.put("beaconType", this.getBeaconTypeCode());
+            subJsonObject.put("manufacturer", this.getManufacturer());
+            subJsonObject.put("id1", this.getId1().toString());
+            subJsonObject.put("id2", this.getId2().toInt());
+            subJsonObject.put("id3", this.getId3().toInt());
+            subJsonObject.put("rssi", this.getRssi());
+            subJsonObject.put("txPower", this.getTxPower());
+            subJsonObject.put("distance", this.getDistance());
 
-        beaconProximityMap.put("beaconType",this.getBeaconTypeCode());
-        beaconProximityMap.put("manufacturer",this.getManufacturer());
-        beaconProximityMap.put("id1",this.getId1().toString());
-        beaconProximityMap.put("id2",this.getId2().toInt());
-        beaconProximityMap.put("id3",this.getId3().toInt());
-        beaconProximityMap.put("rssi",this.getRssi());
-        beaconProximityMap.put("txPower",this.getTxPower());
-        beaconProximityMap.put("distance",this.getDistance());
+            jsonObject.put("beaconProximity", subJsonObject);
 
-        multiMap.put("beaconProximity",beaconProximityMap);
-
-        return multiMap;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
-
 
     @SuppressWarnings("unused")
     public int getBeaconTypeCode() {
@@ -106,27 +110,27 @@ public class SKBeaconProximityData extends SKAbstractData {
     }
 
     @SuppressWarnings("unused")
-    public Identifier getId1(){
+    public Identifier getId1() {
         return mBeacon.getId1();
     }
 
     @SuppressWarnings("unused")
-    public Identifier getId2(){
+    public Identifier getId2() {
         return mBeacon.getId2();
     }
 
     @SuppressWarnings("unused")
-    public Identifier getId3(){
+    public Identifier getId3() {
         return mBeacon.getId3();
     }
 
     @SuppressWarnings("unused")
-    public int getRssi(){
+    public int getRssi() {
         return mBeacon.getRssi();
     }
 
     @SuppressWarnings("unused")
-    public int getTxPower(){
+    public int getTxPower() {
         return mBeacon.getTxPower();
     }
 

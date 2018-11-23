@@ -21,13 +21,15 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.HashMap;
 import java.util.Locale;
 
 /**
- *  An instance of SKRotationData encapsulates measurements related to the Rotation sensor.
+ * An instance of SKRotationData encapsulates measurements related to the Rotation sensor.
  */
 public class SKRotationData extends SKAbstractData {
 
@@ -43,18 +45,13 @@ public class SKRotationData extends SKAbstractData {
     /**
      * Initialize the instance
      *
-     * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
-     *
-     * @param x Rotation axis x-component*sin(theta/2)
-     *
-     * @param y Rotation axis y-component*sin(theta/2)
-     *
-     * @param z Rotation axis z-component*sin(theta/2)
-     *
-     * @param cos Cos(theta)
-     *
-     * where theta is the angle of rotation
-     *
+     * @param timestamp       Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
+     * @param x               Rotation axis x-component*sin(theta/2)
+     * @param y               Rotation axis y-component*sin(theta/2)
+     * @param z               Rotation axis z-component*sin(theta/2)
+     * @param cos             Cos(theta)
+     *                        <p>
+     *                        where theta is the angle of rotation
      * @param headingAccuracy Estimated accuracy in radians
      */
     public SKRotationData(long timestamp, float x, float y, float z, float cos, float headingAccuracy) {
@@ -72,14 +69,11 @@ public class SKRotationData extends SKAbstractData {
      * Initialize the instance
      *
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
-     *
-     * @param x Rotation axis x-component*sin(theta/2)
-     *
-     * @param y Rotation axis y-component*sin(theta/2)
-     *
-     * @param z Rotation axis z-component*sin(theta/2)
-     *
-     * where theta is the angle of rotation
+     * @param x         Rotation axis x-component*sin(theta/2)
+     * @param y         Rotation axis y-component*sin(theta/2)
+     * @param z         Rotation axis z-component*sin(theta/2)
+     *                  <p>
+     *                  where theta is the angle of rotation
      */
     public SKRotationData(long timestamp, float x, float y, float z) {
         this(timestamp, x, y, z, 0, 0);
@@ -106,29 +100,32 @@ public class SKRotationData extends SKAbstractData {
     }
 
     /**
-     * Get the Rotation sensor data in dictionary format
+     * Get the Rotation sensor data in JSONObject format
      *
-     * @return Dictionary containing the Rotation sensor data in dictionary format:
+     * @return JSONObject containing the Rotation sensor data in JSONObject format:
      * sensor type, sensor type in string, timeIntervalSince1970, x, y, z, cos, headingAccuracy
      */
     @Override
-    public HashMap getDataInDict() {
-        HashMap multiMap = new HashMap<>();
-        HashMap<String,Float> rotationMap = new HashMap<>();
+    public JSONObject getDataInJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("sensorType", this.getSensorType());
+            jsonObject.put("sensorTypeString", this.getSensorType().toString());
+            jsonObject.put("timestamp", this.timestamp);
 
-        multiMap.put("sensorType",this.getSensorType());
-        multiMap.put("sensorTypeString",this.getSensorType().toString());
-        multiMap.put("timestamp",this.timestamp);
+            JSONObject subJsonObject = new JSONObject();
+            subJsonObject.put("x", this.x);
+            subJsonObject.put("y", this.y);
+            subJsonObject.put("z", this.z);
+            subJsonObject.put("cos", this.cos);
+            subJsonObject.put("headingAccuracy", this.headingAccuracy);
 
-        rotationMap.put("x",this.x);
-        rotationMap.put("y",this.y);
-        rotationMap.put("z",this.z);
-        rotationMap.put("cos",this.cos);
-        rotationMap.put("headingAccuracy",this.headingAccuracy);
+            jsonObject.put("rotation", subJsonObject);
 
-        multiMap.put("rotation",rotationMap);
-
-        return multiMap;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     /**
@@ -147,7 +144,7 @@ public class SKRotationData extends SKAbstractData {
      * @return Y component
      */
     @SuppressWarnings("unused")
-     public float getY() {
+    public float getY() {
         return this.y;
     }
 

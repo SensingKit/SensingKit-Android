@@ -21,13 +21,15 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.HashMap;
 import java.util.Locale;
 
 /**
- *  An instance of SKStepCounterData encapsulates measurements related to the Step Counter sensor.
+ * An instance of SKStepCounterData encapsulates measurements related to the Step Counter sensor.
  */
 public class SKStepDetectorData extends SKAbstractData {
 
@@ -66,20 +68,23 @@ public class SKStepDetectorData extends SKAbstractData {
 
 
     /**
-     * Get the Step Detector sensor data in dictionary format
+     * Get the Step Detector sensor data in JSONObject format
      *
-     * @return Dictionary containing the Step Detector sensor data in dictionary format:
+     * @return JSONObject containing the Step Detector sensor data in JSONObject format:
      * sensor type, sensor type in string, timeIntervalSince1970, numberOfSteps
      */
     @Override
-    public HashMap getDataInDict() {
-        HashMap multiMap = new HashMap<>();
+    public JSONObject getDataInJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("sensorType", this.getSensorType());
+            jsonObject.put("sensorTypeString", this.getSensorType().toString());
+            jsonObject.put("timestamp", this.timestamp);
 
-        multiMap.put("sensorType",this.getSensorType());
-        multiMap.put("sensorTypeString",this.getSensorType().toString());
-        multiMap.put("timestamp",this.timestamp);
-
-        return(multiMap);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
 }

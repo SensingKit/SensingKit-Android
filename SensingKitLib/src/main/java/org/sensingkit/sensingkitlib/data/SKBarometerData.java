@@ -21,13 +21,15 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.HashMap;
 import java.util.Locale;
 
 /**
- *  An instance of SKBarometerData encapsulates measurements related to the Air Pressure sensor.
+ * An instance of SKBarometerData encapsulates measurements related to the Air Pressure sensor.
  */
 public class SKBarometerData extends SKAbstractData {
 
@@ -40,8 +42,7 @@ public class SKBarometerData extends SKAbstractData {
      * Initialize the Barometer data instance
      *
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
-     *
-     * @param pressure Air pressure
+     * @param pressure  Air pressure
      */
     public SKBarometerData(long timestamp, float pressure) {
 
@@ -64,7 +65,6 @@ public class SKBarometerData extends SKAbstractData {
      * Get the Barometer sensor data in csv format
      *
      * @return Barometer data in csv format: timeIntervalSince1970,pressure
-     *
      */
     @Override
     public String getDataInCSV() {
@@ -72,21 +72,24 @@ public class SKBarometerData extends SKAbstractData {
     }
 
     /**
-     * Get the Barometer sensor data in dictionary format
+     * Get the Barometer sensor data in JSONObject format
      *
-     * @return Dictionary containing the barometer data in dictionary format:
+     * @return JSONObject containing the barometer data in JSONObject format:
      * sensor type, sensor type in string, timeIntervalSince1970, pressure
      */
     @Override
-    public HashMap getDataInDict() {
-        HashMap multiMap = new HashMap<>();
+    public JSONObject getDataInJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("sensorType", this.getSensorType());
+            jsonObject.put("sensorTypeString", this.getSensorType().toString());
+            jsonObject.put("timestamp", this.timestamp);
+            jsonObject.put("pressure", this.pressure);
 
-        multiMap.put("sensorType",this.getSensorType());
-        multiMap.put("sensorTypeString",this.getSensorType().toString());
-        multiMap.put("timestamp",this.timestamp);
-        multiMap.put("pressure",this.pressure);
-
-        return multiMap;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     /**
