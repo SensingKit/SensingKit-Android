@@ -27,6 +27,7 @@ import org.json.JSONObject;
 
 @SuppressWarnings("unused")
 public interface SKSensorData {
+
     SKSensorType getSensorType();
 
     String getDataInCSV();
