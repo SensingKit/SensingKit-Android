@@ -24,7 +24,7 @@ android:
   - android-28
 
 before_install:
-  - yes | sdkmanager --licenses
+  - yes | sdkmanager "platforms;android-28"
 
 licenses:
   - android-sdk-preview-license-.+
