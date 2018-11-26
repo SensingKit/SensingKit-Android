@@ -1,14 +1,13 @@
 language: android
 android:
   components:
-    # Uncomment the lines below if you want to
-    # use the latest revision of Android SDK Tools
-    - tools
-    - platform-tools
+  # Uncomment the lines below if you want to
+  # use the latest revision of Android SDK Tools
+  - tools
+  - platform-tools
+  - extra-google-google_play_services
 
   licenses:
-    - 'android-sdk-license-.+'
-    - 'android-sdk-preview-license-.+'
-
-  before_install:
-    - yes | sdkmanager "platforms;android-28"
+  - android-sdk-preview-license-.+
+  - android-sdk-license-.+
+  - google-gdk-license-.+
