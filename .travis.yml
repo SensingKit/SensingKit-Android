@@ -1,6 +1,6 @@
 language: android
 sudo: required
-jdk: oraclejdk8
+jdk: oraclejdk11
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -17,8 +17,8 @@ android:
     - tools
     - platform-tools
     - build-tools-28.0.3
-    - extra-google-google_play_services
     - android-28
+    - extra-google-google_play_services
 
 before_install:
   - yes | sdkmanager "platforms;android-28"
