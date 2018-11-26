@@ -1,6 +1,6 @@
 language: android
 sudo: required
-jdk: oraclejdk11
+jdk: oraclejdk9
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
