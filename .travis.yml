@@ -16,6 +16,7 @@ android:
   components:
     - tools
     - platform-tools
+    - build-tools-28.0.3
     - extra-google-google_play_services
     - android-28
 
@@ -26,5 +27,3 @@ licenses:
   - android-sdk-preview-license-.+
   - android-sdk-license-.+
   - google-gdk-license-.+
-
-
