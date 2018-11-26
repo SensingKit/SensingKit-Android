@@ -14,14 +14,10 @@ cache:
 
 android:
   components:
-  # Uncomment the lines below if you want to
-  # use the latest revision of Android SDK Tools
-  - tools
-  - tools
-  - platform-tools
-  - build-tools-28.0.3
-  - extra-google-google_play_services
-  - android-28
+    - tools
+    - platform-tools
+    - extra-google-google_play_services
+    - android-28
 
 before_install:
   - yes | sdkmanager "platforms;android-28"
