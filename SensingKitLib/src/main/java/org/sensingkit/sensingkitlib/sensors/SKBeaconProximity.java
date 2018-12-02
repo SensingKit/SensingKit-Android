@@ -165,7 +165,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
     @Override
     public void startSensing() throws SKException {
 
-        this.isSensing = true;
+        super.startSensing();
 
         try {
             mBeaconManager.startRangingBeaconsInRegion(mRegion);
@@ -182,7 +182,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
         try {
             mBeaconManager.stopRangingBeaconsInRegion(mRegion);
-            this.isSensing = false;
+            super.stopSensing();
 
         } catch (RemoteException ex) {
             throw new SKException(TAG, "Beacon Proximity sensor could not be stopped.", SKExceptionErrorCode.SENSOR_ERROR);

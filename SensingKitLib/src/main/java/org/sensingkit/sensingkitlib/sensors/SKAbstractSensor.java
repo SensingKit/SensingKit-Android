@@ -22,6 +22,7 @@
 package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Context;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
@@ -51,6 +52,16 @@ public abstract class SKAbstractSensor implements SKSensor {
 
         // Set the configuration
         setConfiguration(configuration);
+    }
+
+    @CallSuper
+    public void startSensing() throws SKException {
+        this.isSensing = true;
+    }
+
+    @CallSuper
+    public void stopSensing() throws SKException {
+        this.isSensing = false;
     }
 
     public boolean isSensing() {

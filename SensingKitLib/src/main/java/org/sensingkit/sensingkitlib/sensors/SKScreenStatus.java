@@ -111,19 +111,19 @@ public class SKScreenStatus extends SKAbstractSensor {
     }
 
     @Override
-    public void startSensing() {
+    public void startSensing() throws SKException {
 
-        this.isSensing = true;
+        super.startSensing();
 
         registerLocalBroadcastManager();
     }
 
     @Override
-    public void stopSensing() {
+    public void stopSensing() throws SKException {
 
         unregisterLocalBroadcastManager();
 
-        this.isSensing = false;
+        super.stopSensing();
     }
 
     private void registerLocalBroadcastManager() {

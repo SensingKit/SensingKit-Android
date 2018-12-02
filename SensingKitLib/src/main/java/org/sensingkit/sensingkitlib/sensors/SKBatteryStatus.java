@@ -77,19 +77,19 @@ public class SKBatteryStatus extends SKAbstractSensor {
     }
 
     @Override
-    public void startSensing() {
+    public void startSensing() throws SKException {
 
-        this.isSensing = true;
+        super.startSensing();
 
         registerLocalBroadcastManager();
     }
 
     @Override
-    public void stopSensing() {
+    public void stopSensing() throws SKException {
 
         unregisterLocalBroadcastManager();
 
-        this.isSensing = false;
+        super.stopSensing();
 
         // Clear last sensed values
         mLastLevelSensed = Integer.MAX_VALUE;

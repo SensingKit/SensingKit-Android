@@ -136,7 +136,7 @@ public class SKBluetooth extends SKAbstractSensor {
             throw new SKException(TAG, "Bluetooth is not enabled.", SKExceptionErrorCode.SENSOR_ERROR);
         }
 
-        this.isSensing = true;
+        super.startSensing();
 
         registerLocalBroadcastManager();
 
@@ -145,14 +145,14 @@ public class SKBluetooth extends SKAbstractSensor {
     }
 
     @Override
-    public void stopSensing() {
+    public void stopSensing() throws SKException {
 
         // Stop Bluetooth Scanning
         mBluetoothAdapter.cancelDiscovery();
 
         unregisterLocalBroadcastManager();
 
-        this.isSensing = false;
+        super.stopSensing();
     }
 
     private void registerLocalBroadcastManager() {

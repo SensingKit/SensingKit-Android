@@ -82,9 +82,9 @@ public class SKAudioLevel extends SKAbstractSensor {
     }
 
     @Override
-    public void startSensing() {
+    public void startSensing() throws SKException {
 
-        this.isSensing = true;
+        super.startSensing();
 
         // monitor audio
         audioRecord.startRecording();
@@ -102,11 +102,11 @@ public class SKAudioLevel extends SKAbstractSensor {
     }
 
     @Override
-    public void stopSensing() {
+    public void stopSensing() throws SKException {
 
         audioRecord.stop();
 
-        this.isSensing = false;
+        super.stopSensing();
     }
 
     private void readAudioBuffer() {

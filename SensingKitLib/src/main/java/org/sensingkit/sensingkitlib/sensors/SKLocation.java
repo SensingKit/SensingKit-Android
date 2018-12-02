@@ -77,9 +77,9 @@ public class SKLocation extends SKAbstractSensor {
 
     @SuppressLint("MissingPermission")
     @Override
-    public void startSensing() {
+    public void startSensing() throws SKException {
 
-        this.isSensing = true;
+        super.startSensing();
 
         // Start the request
         mFusedLocationClient.requestLocationUpdates(mLocationRequest,
@@ -88,11 +88,11 @@ public class SKLocation extends SKAbstractSensor {
     }
 
     @Override
-    public void stopSensing() {
+    public void stopSensing() throws SKException {
 
         mFusedLocationClient.removeLocationUpdates(mLocationCallback);
 
-        this.isSensing = false;
+        super.stopSensing();
     }
 
     @Override

@@ -82,7 +82,7 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
     @Override
     public void startSensing() throws SKException {
 
-        this.isSensing = true;
+        super.startSensing();
 
         // Get the configuration
         SKAbstractNativeSensorConfiguration configuration = (SKAbstractNativeSensorConfiguration)mConfiguration;
@@ -95,11 +95,11 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
     }
 
     @Override
-    public void stopSensing() {
+    public void stopSensing() throws SKException {
 
         mSensorManager.unregisterListener(mSensorEventListener);
 
-        this.isSensing = false;
+        super.stopSensing();
     }
 
     @NonNull

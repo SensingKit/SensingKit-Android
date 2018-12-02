@@ -102,9 +102,9 @@ public class SKMicrophone extends SKAbstractSensor {
     }
 
     @Override
-    public void startSensing() {
+    public void startSensing() throws SKException {
 
-        this.isSensing = true;
+        super.startSensing();
 
         recorder.start();
 
@@ -116,9 +116,7 @@ public class SKMicrophone extends SKAbstractSensor {
     }
 
     @Override
-    public void stopSensing() {
-
-        this.isSensing = false;
+    public void stopSensing() throws SKException {
 
         // Stop recording
         recorder.stop();
@@ -128,6 +126,8 @@ public class SKMicrophone extends SKAbstractSensor {
 
         // Submit sensor data object
         submitSensorData(data);
+
+        super.stopSensing();
     }
 
     @Override

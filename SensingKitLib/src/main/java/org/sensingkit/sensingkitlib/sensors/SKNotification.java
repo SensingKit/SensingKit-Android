@@ -96,9 +96,9 @@ public class SKNotification extends SKAbstractSensor {
     }
 
     @Override
-    public void startSensing() {
+    public void startSensing() throws SKException {
 
-        this.isSensing = true;
+        super.startSensing();
 
         // Register Receiver
         IntentFilter filter = null;
@@ -109,12 +109,12 @@ public class SKNotification extends SKAbstractSensor {
     }
 
     @Override
-    public void stopSensing() {
-
-        this.isSensing = false;
+    public void stopSensing() throws SKException {
 
         // Unregister receiver
         this.mApplicationContext.unregisterReceiver(mNotificationReceiver);
+
+        super.stopSensing();
     }
 
 }

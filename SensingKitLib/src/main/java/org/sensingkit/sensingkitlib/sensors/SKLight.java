@@ -86,7 +86,7 @@ public class SKLight extends SKAbstractNativeSensor {
         return shouldPost;
     }
 
-    public void stopSensing() {
+    public void stopSensing() throws SKException {
 
         super.stopSensing();
 

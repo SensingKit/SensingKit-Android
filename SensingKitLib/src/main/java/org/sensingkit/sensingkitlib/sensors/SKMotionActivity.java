@@ -147,9 +147,9 @@ public class SKMotionActivity extends SKAbstractSensor {
     }
 
     @Override
-    public void startSensing() {
+    public void startSensing() throws SKException {
 
-        this.isSensing = true;
+        super.startSensing();
 
         ActivityTransitionRequest request = new ActivityTransitionRequest(mRegisteredTransitions);
 
@@ -176,7 +176,7 @@ public class SKMotionActivity extends SKAbstractSensor {
     }
 
     @Override
-    public void stopSensing() {
+    public void stopSensing() throws SKException {
 
         @SuppressLint("MissingPermission")
         Task<Void> task = mActivityRecognitionClient.removeActivityTransitionUpdates(mActivityRecognitionPendingIntent);
@@ -199,7 +199,7 @@ public class SKMotionActivity extends SKAbstractSensor {
 
         unregisterLocalBroadcastManager();
 
-        this.isSensing = false;
+        super.stopSensing();
     }
 
     private void registerLocalBroadcastManager() {
