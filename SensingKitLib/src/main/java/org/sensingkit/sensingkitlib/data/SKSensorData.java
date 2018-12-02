@@ -22,6 +22,8 @@
 package org.sensingkit.sensingkitlib.data;
 
 
+import android.support.annotation.NonNull;
+
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.json.JSONObject;
 
@@ -30,7 +32,9 @@ public interface SKSensorData {
 
     SKSensorType getSensorType();
 
+    @NonNull
     String getDataInCSV();
 
+    @NonNull
     JSONObject getDataInJSON();
 }

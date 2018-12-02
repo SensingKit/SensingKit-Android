@@ -25,6 +25,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -39,9 +40,9 @@ public class SKNotification extends SKAbstractSensor {
     @SuppressWarnings("unused")
     private static final String TAG = SKNotification.class.getSimpleName();
 
-    private BroadcastReceiver mNotificationReceiver;
+    private final BroadcastReceiver mNotificationReceiver;
 
-    public SKNotification(final Context context, final SKNotificationConfiguration configuration) throws SKException {
+    public SKNotification(final @NonNull Context context, final @NonNull SKNotificationConfiguration configuration) throws SKException {
         super(context, SKSensorType.NOTIFICATION, configuration);
 
         // init NotificationReceiver
@@ -69,7 +70,7 @@ public class SKNotification extends SKAbstractSensor {
     }
 
     @Override
-    public void setConfiguration(SKConfiguration configuration) throws SKException {
+    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKNotificationConfiguration)) {
@@ -82,12 +83,13 @@ public class SKNotification extends SKAbstractSensor {
     }
 
     @Override
+    @NonNull
     public SKConfiguration getConfiguration() {
         return new SKNotificationConfiguration((SKNotificationConfiguration)mConfiguration);
     }
 
     @Override
-    protected boolean shouldPostSensorData(SKAbstractData data) {
+    protected boolean shouldPostSensorData(final @NonNull SKAbstractData data) {
 
         // Always post sensor data
         return true;

@@ -25,6 +25,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -110,7 +111,7 @@ public class SKBatteryStatus extends SKAbstractSensor {
     }
 
     @Override
-    public void setConfiguration(SKConfiguration configuration) throws SKException {
+    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKBatteryStatusConfiguration)) {
@@ -123,12 +124,13 @@ public class SKBatteryStatus extends SKAbstractSensor {
     }
 
     @Override
+    @NonNull
     public SKConfiguration getConfiguration() {
         return new SKBatteryStatusConfiguration((SKBatteryStatusConfiguration)mConfiguration);
     }
 
     @Override
-    protected boolean shouldPostSensorData(SKAbstractData data) {
+    protected boolean shouldPostSensorData(final @NonNull SKAbstractData data) {
 
         // Only post when specific values changed
 

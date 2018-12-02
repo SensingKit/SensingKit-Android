@@ -41,7 +41,7 @@ public abstract class SKAbstractData implements SKSensorData {
      * @param sensorType of type SKSensorType
      * @param timestamp  Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      */
-    public SKAbstractData(SKSensorType sensorType, long timestamp) {
+    public SKAbstractData(final SKSensorType sensorType, final long timestamp) {
         this.sensorType = sensorType;
         this.timestamp = timestamp;
     }

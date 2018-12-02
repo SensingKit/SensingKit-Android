@@ -21,11 +21,12 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -36,7 +37,7 @@ public class SKAudioLevelData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKAudioLevelData.class.getSimpleName();
 
-    protected final int level;
+    private final int level;
 
     /**
      * Initialize the instance
@@ -44,8 +45,7 @@ public class SKAudioLevelData extends SKAbstractData {
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      * @param level     - Audio Level
      */
-    public SKAudioLevelData(long timestamp, int level) {
-
+    public SKAudioLevelData(final long timestamp, final int level) {
         super(SKSensorType.AUDIO_LEVEL, timestamp);
 
         this.level = level;
@@ -57,6 +57,7 @@ public class SKAudioLevelData extends SKAbstractData {
      * @return String with a CSV formatted header that describes the data of the Audio Level sensor.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,level";
     }
@@ -67,6 +68,7 @@ public class SKAudioLevelData extends SKAbstractData {
      * @return String containing the timestamp and audio level measurements in csv format: timeIntervalSince1970,level
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%d", this.timestamp, this.level);
     }
@@ -78,6 +80,7 @@ public class SKAudioLevelData extends SKAbstractData {
      * sensor type, sensor type in string, timeIntervalSince1970, level
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {

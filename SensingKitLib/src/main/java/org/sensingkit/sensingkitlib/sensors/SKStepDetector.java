@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Context;
 import android.hardware.SensorEvent;
+import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -37,18 +38,19 @@ public class SKStepDetector extends SKAbstractNativeSensor {
     @SuppressWarnings("unused")
     private static final String TAG = SKStepDetector.class.getSimpleName();
 
-    public SKStepDetector(final Context context, final SKStepDetectorConfiguration configuration) throws SKException {
+    public SKStepDetector(final @NonNull Context context, final @NonNull SKStepDetectorConfiguration configuration) throws SKException {
         super(context, SKSensorType.STEP_DETECTOR, configuration);
     }
 
     @Override
-    protected SKAbstractData buildData(SensorEvent event)
+    @NonNull
+    protected SKAbstractData buildData(final @NonNull SensorEvent event)
     {
         return new SKStepDetectorData(System.currentTimeMillis());
     }
 
     @Override
-    public void setConfiguration(SKConfiguration configuration) throws SKException {
+    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKStepDetectorConfiguration)) {
@@ -61,12 +63,13 @@ public class SKStepDetector extends SKAbstractNativeSensor {
     }
 
     @Override
+    @NonNull
     public SKConfiguration getConfiguration() {
         return new SKStepDetectorConfiguration((SKStepDetectorConfiguration)mConfiguration);
     }
 
     @Override
-    protected boolean shouldPostSensorData(SKAbstractData data) {
+    protected boolean shouldPostSensorData(final @NonNull SKAbstractData data) {
 
         // Always post sensor data
         return true;

@@ -27,6 +27,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -44,7 +45,7 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
     private final Sensor mSensor;
     private final SensorEventListener mSensorEventListener;
 
-    protected SKAbstractNativeSensor(final Context context, final SKSensorType sensorType, final SKConfiguration configuration) throws SKException {
+    protected SKAbstractNativeSensor(final @NonNull Context context, final SKSensorType sensorType, final SKConfiguration configuration) throws SKException {
         super(context, sensorType, configuration);
 
         mSensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
@@ -101,10 +102,11 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
         this.isSensing = false;
     }
 
-    protected abstract SKAbstractData buildData(SensorEvent event);
+    @NonNull
+    protected abstract SKAbstractData buildData(final SensorEvent event);
 
     @SuppressLint("InlinedApi")  // There is a check in SKSensorManager
-    private static int getSensorType(SKSensorType sensorType) {
+    private static int getSensorType(final SKSensorType sensorType) {
 
         switch (sensorType) {
 
@@ -145,7 +147,7 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
                 return Sensor.TYPE_PRESSURE;
 
             default:
-                throw new RuntimeException();
+                throw new RuntimeException("Sensor '" + sensorType.getName() + "' is not a native sensor.");
         }
     }
 

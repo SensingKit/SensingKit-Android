@@ -21,11 +21,12 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -36,7 +37,7 @@ public class SKBarometerData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKBarometerData.class.getSimpleName();
 
-    protected final float pressure;
+    private final float pressure;
 
     /**
      * Initialize the Barometer data instance
@@ -44,8 +45,7 @@ public class SKBarometerData extends SKAbstractData {
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      * @param pressure  Air pressure
      */
-    public SKBarometerData(long timestamp, float pressure) {
-
+    public SKBarometerData(final long timestamp, final float pressure) {
         super(SKSensorType.BAROMETER, timestamp);
 
         this.pressure = pressure;
@@ -57,6 +57,7 @@ public class SKBarometerData extends SKAbstractData {
      * @return String with a CSV formatted header that describes the data of the Barometer sensor.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,pressure";
     }
@@ -67,6 +68,7 @@ public class SKBarometerData extends SKAbstractData {
      * @return Barometer data in csv format: timeIntervalSince1970,pressure
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f", this.timestamp, this.pressure);
     }
@@ -78,6 +80,7 @@ public class SKBarometerData extends SKAbstractData {
      * sensor type, sensor type in string, timeIntervalSince1970, pressure
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {

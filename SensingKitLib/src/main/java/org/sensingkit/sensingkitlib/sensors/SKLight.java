@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Context;
 import android.hardware.SensorEvent;
+import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -39,18 +40,19 @@ public class SKLight extends SKAbstractNativeSensor {
 
     private float lastLightSensed = Float.MAX_VALUE;
 
-    public SKLight(final Context context, final SKLightConfiguration configuration) throws SKException {
+    public SKLight(final @NonNull Context context, final @NonNull SKLightConfiguration configuration) throws SKException {
         super(context, SKSensorType.LIGHT, configuration);
     }
 
     @Override
-    protected SKAbstractData buildData(SensorEvent event)
+    @NonNull
+    protected SKAbstractData buildData(final @NonNull SensorEvent event)
     {
         return new SKLightData(System.currentTimeMillis(), event.values[0]);
     }
 
     @Override
-    public void setConfiguration(SKConfiguration configuration) throws SKException {
+    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKLightConfiguration)) {
@@ -63,12 +65,13 @@ public class SKLight extends SKAbstractNativeSensor {
     }
 
     @Override
+    @NonNull
     public SKConfiguration getConfiguration() {
         return new SKLightConfiguration((SKLightConfiguration)mConfiguration);
     }
 
     @Override
-    protected boolean shouldPostSensorData(SKAbstractData data) {
+    protected boolean shouldPostSensorData(final @NonNull SKAbstractData data) {
 
         // Only post when light value changes
 

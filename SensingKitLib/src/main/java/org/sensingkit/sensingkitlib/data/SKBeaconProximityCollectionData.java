@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
@@ -44,9 +46,7 @@ public class SKBeaconProximityCollectionData extends SKAbstractData {
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      * @param devices   One SKBeaconProximityData object for each Beacon device
      */
-    public SKBeaconProximityCollectionData(long timestamp, ArrayList<SKBeaconProximityData>
-            devices) {
-
+    public SKBeaconProximityCollectionData(final long timestamp, final @NonNull ArrayList<SKBeaconProximityData> devices) {
         super(SKSensorType.BEACON_PROXIMITY, timestamp);
 
         this.mDevices = devices;
@@ -58,6 +58,7 @@ public class SKBeaconProximityCollectionData extends SKAbstractData {
      * @return String with a CSV formatted header that describes the data of the Beacon Proximity sensor.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public static String csvHeader() {
         return SKBeaconProximityData.csvHeader();
     }
@@ -68,6 +69,7 @@ public class SKBeaconProximityCollectionData extends SKAbstractData {
      * @return String formatted as follows: timeIntervalSince1970,device1 data, device2 data,,,
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
 
         // Calculate capacity and init StringBuilder
@@ -94,6 +96,7 @@ public class SKBeaconProximityCollectionData extends SKAbstractData {
      * @return JSONObject formatted as follows: device1 data, device, data,,,
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {

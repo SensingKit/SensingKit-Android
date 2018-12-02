@@ -24,6 +24,7 @@ package org.sensingkit.sensingkitlib.sensors;
 import android.Manifest;
 import android.content.Context;
 import android.media.MediaRecorder;
+import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -42,12 +43,12 @@ public class SKMicrophone extends SKAbstractSensor {
 
     private MediaRecorder recorder;
 
-    public SKMicrophone(final Context context, final SKMicrophoneConfiguration configuration) throws SKException {
+    public SKMicrophone(final @NonNull Context context, final @NonNull SKMicrophoneConfiguration configuration) throws SKException {
         super(context, SKSensorType.MICROPHONE, configuration);
     }
 
     @Override
-    public void setConfiguration(SKConfiguration configuration) throws SKException {
+    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKMicrophoneConfiguration)) {
@@ -88,12 +89,13 @@ public class SKMicrophone extends SKAbstractSensor {
     }
 
     @Override
+    @NonNull
     public SKConfiguration getConfiguration() {
         return new SKMicrophoneConfiguration((SKMicrophoneConfiguration)mConfiguration);
     }
 
     @Override
-    protected boolean shouldPostSensorData(SKAbstractData data) {
+    protected boolean shouldPostSensorData(final @NonNull SKAbstractData data) {
 
         // Always post sensor data
         return true;

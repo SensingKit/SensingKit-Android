@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.sensors;
 
+import android.support.annotation.NonNull;
+
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorDataHandler;
 import org.sensingkit.sensingkitlib.SKSensorType;
@@ -30,18 +32,18 @@ import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 public interface SKSensor {
 
     SKSensorType getSensorType();
-    String getSensorName();
+    @NonNull String getSensorName();
 
     void startSensing() throws SKException;
     void stopSensing() throws SKException;
     boolean isSensing();
 
-    void subscribeSensorDataHandler(SKSensorDataHandler handler) throws SKException;
-    void unsubscribeSensorDataHandler(SKSensorDataHandler handler) throws SKException;
+    void subscribeSensorDataHandler(final @NonNull SKSensorDataHandler handler) throws SKException;
+    void unsubscribeSensorDataHandler(final @NonNull SKSensorDataHandler handler) throws SKException;
     void unsubscribeAllSensorDataHandlers() throws SKException;
 
-    void setConfiguration(SKConfiguration configuration) throws SKException;
-    SKConfiguration getConfiguration();
+    void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException;
+    @NonNull SKConfiguration getConfiguration();
 
     void sensorDeregistered();
 

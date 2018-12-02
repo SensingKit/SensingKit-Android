@@ -25,6 +25,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -41,7 +42,7 @@ public class SKScreenStatus extends SKAbstractSensor {
     @SuppressWarnings("unused")
     private static final String TAG = SKScreenStatus.class.getSimpleName();
 
-    public SKScreenStatus(final Context context, final SKScreenStatusConfiguration configuration) throws SKException {
+    public SKScreenStatus(final @NonNull Context context, final @NonNull SKScreenStatusConfiguration configuration) throws SKException {
         super(context, SKSensorType.SCREEN_STATUS, configuration);
 
         mBroadcastReceiver = new BroadcastReceiver() {
@@ -84,7 +85,7 @@ public class SKScreenStatus extends SKAbstractSensor {
     }
 
     @Override
-    public void setConfiguration(SKConfiguration configuration) throws SKException {
+    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKScreenStatusConfiguration)) {
@@ -97,12 +98,13 @@ public class SKScreenStatus extends SKAbstractSensor {
     }
 
     @Override
+    @NonNull
     public SKConfiguration getConfiguration() {
         return new SKScreenStatusConfiguration((SKScreenStatusConfiguration)mConfiguration);
     }
 
     @Override
-    protected boolean shouldPostSensorData(SKAbstractData data) {
+    protected boolean shouldPostSensorData(final @NonNull SKAbstractData data) {
 
         // Always post sensor data
         return true;

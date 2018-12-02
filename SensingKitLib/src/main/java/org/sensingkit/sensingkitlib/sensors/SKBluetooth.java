@@ -27,6 +27,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -48,7 +49,7 @@ public class SKBluetooth extends SKAbstractSensor {
     private final BluetoothAdapter mBluetoothAdapter;
     private ArrayList<SKBluetoothData> mBluetoothDevices;
 
-    public SKBluetooth(final Context context, final SKBluetoothConfiguration configuration) throws SKException {
+    public SKBluetooth(final @NonNull Context context, final @NonNull SKBluetoothConfiguration configuration) throws SKException {
         super(context, SKSensorType.BLUETOOTH, configuration);
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -99,7 +100,7 @@ public class SKBluetooth extends SKAbstractSensor {
     };
 
     @Override
-    public void setConfiguration(SKConfiguration configuration) throws SKException {
+    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKBluetoothConfiguration)) {
@@ -112,12 +113,13 @@ public class SKBluetooth extends SKAbstractSensor {
     }
 
     @Override
+    @NonNull
     public SKConfiguration getConfiguration() {
         return new SKBluetoothConfiguration((SKBluetoothConfiguration)mConfiguration);
     }
 
     @Override
-    protected boolean shouldPostSensorData(SKAbstractData data) {
+    protected boolean shouldPostSensorData(final @NonNull SKAbstractData data) {
 
         // Always post sensor data
         return true;

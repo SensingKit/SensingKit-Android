@@ -22,6 +22,7 @@
 package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -43,7 +44,7 @@ public abstract class SKAbstractSensor implements SKSensor {
     protected ArrayList<SKSensorDataHandler> mSensorDataListeners;
     protected SKConfiguration mConfiguration;
 
-    protected SKAbstractSensor(final Context context, final SKSensorType sensorType, final SKConfiguration configuration) throws SKException {
+    protected SKAbstractSensor(final @NonNull Context context, final SKSensorType sensorType, final @NonNull SKConfiguration configuration) throws SKException {
 
         this.mApplicationContext = context;
         this.mSensorType = sensorType;
@@ -60,16 +61,17 @@ public abstract class SKAbstractSensor implements SKSensor {
         return this.mSensorType;
     }
 
+    @NonNull
     public String getSensorName() {
         return mSensorType.getName();
     }
 
     @Override
-    public void setConfiguration(SKConfiguration configuration) throws SKException {
+    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
         this.mConfiguration = configuration;
     }
 
-    public void subscribeSensorDataHandler(SKSensorDataHandler handler) throws SKException {
+    public void subscribeSensorDataHandler(final @NonNull SKSensorDataHandler handler) throws SKException {
 
         // Init the list
         if (this.mSensorDataListeners == null) {
@@ -84,7 +86,7 @@ public abstract class SKAbstractSensor implements SKSensor {
         this.mSensorDataListeners.add(handler);
     }
 
-    public void unsubscribeSensorDataHandler(SKSensorDataHandler handler) throws SKException {
+    public void unsubscribeSensorDataHandler(final @NonNull SKSensorDataHandler handler) throws SKException {
 
         // Unregister the callback
         if (this.mSensorDataListeners == null || !this.mSensorDataListeners.remove(handler)) {
@@ -106,9 +108,9 @@ public abstract class SKAbstractSensor implements SKSensor {
        }
     }
 
-    protected abstract boolean shouldPostSensorData(SKAbstractData data);
+    protected abstract boolean shouldPostSensorData(final @NonNull SKAbstractData data);
 
-    protected void submitSensorData(SKAbstractData data) {
+    protected void submitSensorData(final @NonNull SKAbstractData data) {
 
         // If there is a significant change
         if (shouldPostSensorData(data)) {

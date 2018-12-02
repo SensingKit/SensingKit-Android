@@ -21,11 +21,12 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -36,7 +37,7 @@ public class SKMicrophoneData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKMicrophoneData.class.getSimpleName();
 
-    protected final String state;
+    private final String state;
 
     /**
      * Initialize the instance
@@ -44,8 +45,7 @@ public class SKMicrophoneData extends SKAbstractData {
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      * @param state     Microphone sensor status (Start, Stop)
      */
-    public SKMicrophoneData(long timestamp, String state) {
-
+    public SKMicrophoneData(final long timestamp, final @NonNull String state) {
         super(SKSensorType.STEP_DETECTOR, timestamp);
 
         this.state = state;
@@ -57,6 +57,7 @@ public class SKMicrophoneData extends SKAbstractData {
      * @return String with a CSV formatted header that describes the data of the Step Counter sensor.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,state";
     }
@@ -67,6 +68,7 @@ public class SKMicrophoneData extends SKAbstractData {
      * @return String in CSV format: timeIntervalSince1970
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%s", this.timestamp, this.state);
     }
@@ -78,6 +80,7 @@ public class SKMicrophoneData extends SKAbstractData {
      * sensor type, sensor type in string, timeIntervalSince1970, state
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {

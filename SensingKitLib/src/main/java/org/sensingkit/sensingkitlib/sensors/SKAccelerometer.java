@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Context;
 import android.hardware.SensorEvent;
+import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -37,18 +38,19 @@ public class SKAccelerometer extends SKAbstractNativeSensor {
     @SuppressWarnings("unused")
     private static final String TAG = SKAccelerometer.class.getSimpleName();
 
-    public SKAccelerometer(final Context context, final SKAccelerometerConfiguration configuration) throws SKException {
+    public SKAccelerometer(final Context context, final @NonNull SKAccelerometerConfiguration configuration) throws SKException {
         super(context, SKSensorType.ACCELEROMETER, configuration);
     }
 
     @Override
-    protected SKAbstractData buildData(SensorEvent event)
+    @NonNull
+    protected SKAbstractData buildData(final SensorEvent event)
     {
         return new SKAccelerometerData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
     }
 
     @Override
-    public void setConfiguration(SKConfiguration configuration) throws SKException {
+    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKAccelerometerConfiguration)) {
@@ -61,12 +63,13 @@ public class SKAccelerometer extends SKAbstractNativeSensor {
     }
 
     @Override
+    @NonNull
     public SKConfiguration getConfiguration() {
         return new SKAccelerometerConfiguration((SKAccelerometerConfiguration)mConfiguration);
     }
 
     @Override
-    protected boolean shouldPostSensorData(SKAbstractData data) {
+    protected boolean shouldPostSensorData(final @NonNull SKAbstractData data) {
 
         // Always post sensor data
         return true;

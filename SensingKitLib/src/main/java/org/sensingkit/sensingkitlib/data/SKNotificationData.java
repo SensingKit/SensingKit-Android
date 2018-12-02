@@ -22,11 +22,12 @@
 package org.sensingkit.sensingkitlib.data;
 
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 public class SKNotificationData extends SKAbstractData {
@@ -42,8 +43,7 @@ public class SKNotificationData extends SKAbstractData {
      *
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      */
-    public SKNotificationData(long timestamp, String actionType, String packageName) {
-
+    public SKNotificationData(final long timestamp, final @NonNull String actionType, final @NonNull String packageName) {
         super(SKSensorType.NOTIFICATION, timestamp);
 
         this.actionType = actionType;
@@ -56,6 +56,7 @@ public class SKNotificationData extends SKAbstractData {
      * @return String with a CSV formatted header that describes the data of the Notification sensor.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,actionType,packageName";
     }
@@ -66,6 +67,7 @@ public class SKNotificationData extends SKAbstractData {
      * @return Notification data in csv format: timeIntervalSince1970,actionType,packageName
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%s,%s", this.timestamp, this.actionType, this.packageName);
     }
@@ -78,6 +80,7 @@ public class SKNotificationData extends SKAbstractData {
      * sensor type, sensor type in string, timeIntervalSince1970, actionType, packageName
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {

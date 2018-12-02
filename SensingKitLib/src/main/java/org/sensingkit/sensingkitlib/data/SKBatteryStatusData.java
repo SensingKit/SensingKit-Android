@@ -23,12 +23,12 @@ package org.sensingkit.sensingkitlib.data;
 
 import android.os.BatteryManager;
 import android.os.Build;
+import android.support.annotation.NonNull;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 import static android.os.BatteryManager.*;
@@ -41,13 +41,13 @@ public class SKBatteryStatusData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKBatteryStatusData.class.getSimpleName();
 
-    protected final int level;
-    protected final int scale;
-    protected final int temperature;
-    protected final int voltage;
-    protected final int plugged;
-    protected final int status;
-    protected final int health;
+    private final int level;
+    private final int scale;
+    private final int temperature;
+    private final int voltage;
+    private final int plugged;
+    private final int status;
+    private final int health;
 
     /**
      * Initialize the instance
@@ -63,8 +63,7 @@ public class SKBatteryStatusData extends SKAbstractData {
      * @param health      Values are: BATTERY_HEALTH_COLD, BATTERY_HEALTH_DEAD, BATTERY_HEALTH_GOOD, BATTERY_HEALTH_OVERHEAT,
      *                    BATTERY_HEALTH_OVER_VOLTAGE, BATTERY_HEALTH_UNKNOWN
      */
-    public SKBatteryStatusData(long timestamp, int level, int scale, int temperature, int voltage, int plugged, int status, int health) {
-
+    public SKBatteryStatusData(final long timestamp, final int level, final int scale, final int temperature, final int voltage, final int plugged, final int status, final int health) {
         super(SKSensorType.BATTERY_STATUS, timestamp);
 
         this.level = level;
@@ -96,6 +95,7 @@ public class SKBatteryStatusData extends SKAbstractData {
      * health string ("cold", "dead", "good", "over heat", "over voltage", "unknown", "failure" or "unsupported")
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%d,%d,%s,%s,%s", this.timestamp, this.getLevelRatio(), this.temperature, this.voltage,
                 getPluggedString(), getBatteryStatusString(), getBatteryHealthString());
@@ -111,6 +111,7 @@ public class SKBatteryStatusData extends SKAbstractData {
      * health string ("cold", "dead", "good", "over heat", "over voltage", "unknown", "failure" or "unsupported")
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {

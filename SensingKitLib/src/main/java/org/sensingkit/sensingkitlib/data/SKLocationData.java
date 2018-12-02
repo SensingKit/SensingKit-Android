@@ -22,12 +22,12 @@
 package org.sensingkit.sensingkitlib.data;
 
 import android.location.Location;
+import android.support.annotation.NonNull;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 
@@ -39,7 +39,7 @@ public class SKLocationData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKLocationData.class.getSimpleName();
 
-    protected final Location location;
+    private final Location location;
 
     /**
      * Initialize the instance
@@ -47,8 +47,7 @@ public class SKLocationData extends SKAbstractData {
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      * @param location  Location object
      */
-    public SKLocationData(long timestamp, Location location) {
-
+    public SKLocationData(final long timestamp, final @NonNull Location location) {
         super(SKSensorType.LOCATION, timestamp);
 
         this.location = location;
@@ -60,6 +59,7 @@ public class SKLocationData extends SKAbstractData {
      * @return String with a CSV formatted header that describes the data of the Location sensor.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,latitude,longitude,altitude,accuracy";
     }
@@ -70,6 +70,7 @@ public class SKLocationData extends SKAbstractData {
      * @return String in CSV format: timeIntervalSince1970, latitude, longitude, altitude, accuracy
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%f,%f,%f", this.timestamp,
                 this.location.getLatitude(), this.location.getLongitude(), this.location.getAltitude(),
@@ -83,6 +84,7 @@ public class SKLocationData extends SKAbstractData {
      * sensor type, sensor type in string, timeIntervalSince1970, latitude, longitude, altitude, accuracy
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {

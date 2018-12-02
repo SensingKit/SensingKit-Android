@@ -21,11 +21,12 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -41,7 +42,7 @@ public class SKScreenStatusData extends SKAbstractData {
     public static final int SCREEN_UNLOCKED = 2;
     public static final int SCREEN_UNKNOWN = 3;
 
-    protected final int status;
+    private final int status;
 
     /**
      * Initialize the instance
@@ -49,8 +50,7 @@ public class SKScreenStatusData extends SKAbstractData {
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      * @param status    Screen status
      */
-    public SKScreenStatusData(long timestamp, int status) {
-
+    public SKScreenStatusData(final long timestamp, final int status) {
         super(SKSensorType.SCREEN_STATUS, timestamp);
 
         this.status = status;
@@ -62,6 +62,7 @@ public class SKScreenStatusData extends SKAbstractData {
      * @return String with a CSV formatted header that describes the data of the Screen Status sensor.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,status,statusString";
     }
@@ -72,6 +73,7 @@ public class SKScreenStatusData extends SKAbstractData {
      * @return String in CSV format: timestamp, status, statusString
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%d,%s", this.timestamp, this.getStatus(), this.getStatusString());
     }
@@ -83,6 +85,7 @@ public class SKScreenStatusData extends SKAbstractData {
      * sensor type, sensor type in string, timeIntervalSince1970, status, statusString
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {

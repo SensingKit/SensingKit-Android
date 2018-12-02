@@ -21,11 +21,12 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -36,7 +37,7 @@ public class SKHumidityData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKHumidityData.class.getSimpleName();
 
-    protected final float humidity;
+    private final float humidity;
 
     /**
      * Initialize the instance
@@ -44,7 +45,7 @@ public class SKHumidityData extends SKAbstractData {
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      * @param humidity  Humidity measurement
      */
-    public SKHumidityData(long timestamp, float humidity) {
+    public SKHumidityData(final long timestamp, final float humidity) {
 
         super(SKSensorType.HUMIDITY, timestamp);
 
@@ -57,6 +58,7 @@ public class SKHumidityData extends SKAbstractData {
      * @return String with a CSV formatted header that describes the data of the Humidity sensor.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,humidity";
     }
@@ -67,6 +69,7 @@ public class SKHumidityData extends SKAbstractData {
      * @return String in CSV format: timeIntervalSince1970, humidity
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f", this.timestamp, this.humidity);
     }
@@ -78,6 +81,7 @@ public class SKHumidityData extends SKAbstractData {
      * sensor type, sensor type in string, timeIntervalSince1970, humidity
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {
@@ -91,7 +95,6 @@ public class SKHumidityData extends SKAbstractData {
         }
         return jsonObject;
     }
-
 
     @SuppressWarnings("unused")
     public float getHumidity() {

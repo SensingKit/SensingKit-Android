@@ -26,6 +26,7 @@ import android.content.Context;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -55,7 +56,7 @@ public class SKAudioLevel extends SKAbstractSensor {
     }
 
     @Override
-    public void setConfiguration(SKConfiguration configuration) throws SKException {
+    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKAudioLevelConfiguration)) {
@@ -68,12 +69,13 @@ public class SKAudioLevel extends SKAbstractSensor {
     }
 
     @Override
+    @NonNull
     public SKConfiguration getConfiguration() {
         return new SKAudioLevelConfiguration((SKAudioLevelConfiguration)mConfiguration);
     }
 
     @Override
-    protected boolean shouldPostSensorData(SKAbstractData data) {
+    protected boolean shouldPostSensorData(final @NonNull SKAbstractData data) {
 
         // Always post sensor data
         return true;
@@ -130,7 +132,7 @@ public class SKAudioLevel extends SKAbstractSensor {
     }
 
     // Get the Max Abs of the raw data
-    private int getMaxAbs(short[] raw) {
+    private int getMaxAbs(final short[] raw) {
 
         int max = Math.abs(raw[0]);
 

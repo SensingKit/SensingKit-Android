@@ -21,7 +21,6 @@
 
 package org.sensingkit.sensingkitlib;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -53,11 +52,7 @@ class SKSensorManager {
 
     private final SparseArray<SKAbstractSensor> mSensors;
 
-    static SKSensorManager getSensorManager(final Context context) throws SKException {
-
-        if (context == null) {
-            throw new SKException(TAG, "Context cannot be null.", SKExceptionErrorCode.CONTEXT_NULL);
-        }
+    static SKSensorManager getSensorManager(final @NonNull Context context) {
 
         if (sSensorManager == null) {
             sSensorManager = new SKSensorManager(context);
@@ -66,7 +61,7 @@ class SKSensorManager {
         return sSensorManager;
     }
 
-    private SKSensorManager(final Context context) {
+    private SKSensorManager(final @NonNull Context context) {
 
         mApplicationContext = context;
 
@@ -81,7 +76,7 @@ class SKSensorManager {
      *  @param sensorType The type of the sensor that will be initialized and registered in the library.
      *  @param configuration TODO
      */
-    void registerSensor(SKSensorType sensorType, SKConfiguration configuration) throws SKException {
+    void registerSensor(final SKSensorType sensorType, SKConfiguration configuration) throws SKException {
 
         Log.i(TAG, "Register sensor: " + sensorType.getName() + ".");
 
@@ -109,7 +104,7 @@ class SKSensorManager {
      *
      *  @param sensorType The type of the sensor that will be deregistered.
      */
-    void deregisterSensor(SKSensorType sensorType) throws SKException {
+    void deregisterSensor(final SKSensorType sensorType) throws SKException {
 
         Log.i(TAG, "Deregister sensor: " + sensorType.getName() + ".");
 
@@ -130,7 +125,7 @@ class SKSensorManager {
         mSensors.delete(sensorIndex);
     }
 
-    void setConfiguration(SKConfiguration configuration, SKSensorType sensorType) throws SKException {
+    void setConfiguration(SKConfiguration configuration, final SKSensorType sensorType) throws SKException {
 
         if (!isSensorAvailable(sensorType)) {
             throw new SKException(TAG, "Sensor is not available in the device.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
@@ -144,7 +139,7 @@ class SKSensorManager {
         // TODO
     }
 
-    SKConfiguration getConfiguration(SKSensorType sensorType) throws SKException {
+    SKConfiguration getConfiguration(final SKSensorType sensorType) throws SKException {
 
         if (!isSensorAvailable(sensorType)) {
             throw new SKException(TAG, "Sensor is not available in the device.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
@@ -154,7 +149,7 @@ class SKSensorManager {
         return null;
     }
 
-    boolean isPermissionGrantedForSensor(SKSensorType sensorType) throws SKException {
+    boolean isPermissionGrantedForSensor(final SKSensorType sensorType) throws SKException {
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             Log.i(TAG, "Request permissions is only required for Android 6.0 (API level 23) or greater.");
@@ -174,7 +169,7 @@ class SKSensorManager {
         }
     }
 
-    void requestPermissionForSensor(SKSensorType sensorType, final @NonNull Activity activity) throws SKException {
+    void requestPermissionForSensor(final SKSensorType sensorType, final @NonNull Activity activity) throws SKException {
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             Log.i(TAG, "Request permissions is only required for Android 6.0 (API level 23) or greater.");
@@ -229,7 +224,7 @@ class SKSensorManager {
      *
      *  @return TRUE if the sensor is available on the device, or FALSE if it is not.
      */
-    boolean isSensorAvailable(SKSensorType sensorType) {
+    boolean isSensorAvailable(final SKSensorType sensorType) {
 
         // Get package manager
         PackageManager packageManager = mApplicationContext.getPackageManager();
@@ -317,7 +312,7 @@ class SKSensorManager {
      *
      *  @return TRUE if the sensor is registered or FALSE if it is not.
      */
-    boolean isSensorRegistered(SKSensorType sensorType) {
+    boolean isSensorRegistered(final SKSensorType sensorType) {
 
         int sensorIndex = sensorType.ordinal();
         return (mSensors.get(sensorIndex) != null);
@@ -330,7 +325,7 @@ class SKSensorManager {
      *
      *  @return TRUE if the sensor is currently sensing or FALSE if it is not.
      */
-    boolean isSensorSensing(SKSensorType sensorType) throws SKException {
+    boolean isSensorSensing(final SKSensorType sensorType) throws SKException {
 
         if (!isSensorRegistered(sensorType)) {
             throw new SKException(TAG, "Sensor is not registered.", SKExceptionErrorCode.SENSOR_NOT_REGISTERED);
@@ -339,7 +334,7 @@ class SKSensorManager {
         return getSensor(sensorType).isSensing();
     }
 
-    private SKAbstractSensor getSensor(SKSensorType sensorType) throws SKException {
+    private SKAbstractSensor getSensor(final SKSensorType sensorType) throws SKException {
 
         if (!isSensorRegistered(sensorType)) {
             throw new SKException(TAG, "Sensor is not registered.", SKExceptionErrorCode.SENSOR_NOT_REGISTERED);
@@ -349,7 +344,7 @@ class SKSensorManager {
         return mSensors.get(sensorIndex);
     }
 
-    private SKAbstractSensor createSensor(SKSensorType sensorType, SKConfiguration configuration) throws SKException {
+    private SKAbstractSensor createSensor(final SKSensorType sensorType, final SKConfiguration configuration) throws SKException {
 
         SKAbstractSensor sensor;
 
@@ -468,7 +463,7 @@ class SKSensorManager {
         return sensor;
     }
 
-    private static SKConfiguration defaultConfigurationForSensor(SKSensorType sensorType) {
+    private static SKConfiguration defaultConfigurationForSensor(final SKSensorType sensorType) {
 
         SKConfiguration configuration;
 
@@ -567,21 +562,21 @@ class SKSensorManager {
         return configuration;
     }
 
-    void subscribeSensorDataHandler(SKSensorType sensorType, SKSensorDataHandler dataHandler) throws SKException {
+    void subscribeSensorDataHandler(final SKSensorType sensorType, final SKSensorDataHandler dataHandler) throws SKException {
 
         Log.i(TAG, "Subscribe to sensor: " + sensorType.getName() + ".");
 
         getSensor(sensorType).subscribeSensorDataHandler(dataHandler);
     }
 
-    void unsubscribeSensorDataHandler(SKSensorType sensorType, SKSensorDataHandler dataHandler) throws SKException {
+    void unsubscribeSensorDataHandler(final SKSensorType sensorType, final SKSensorDataHandler dataHandler) throws SKException {
 
         Log.i(TAG, "Unsubscribe from sensor: " + sensorType.getName() + ".");
 
         getSensor(sensorType).unsubscribeSensorDataHandler(dataHandler);
     }
 
-    void unsubscribeAllSensorDataHandlers(SKSensorType sensorType) throws SKException {
+    void unsubscribeAllSensorDataHandlers(final SKSensorType sensorType) throws SKException {
 
         Log.i(TAG, "Unsubscribe from all sensors.");
 
@@ -593,7 +588,7 @@ class SKSensorManager {
      *
      *  @param sensorType The type of the sensor that will be started.
      */
-    void startContinuousSensingWithSensor(SKSensorType sensorType) throws SKException {
+    void startContinuousSensingWithSensor(final SKSensorType sensorType) throws SKException {
 
         Log.i(TAG, "Start sensing with sensor: " + sensorType.getName() + ".");
 
@@ -610,7 +605,7 @@ class SKSensorManager {
      *
      *  @param sensorType The type of the sensor that will be stopped.
      */
-    void stopContinuousSensingWithSensor(SKSensorType sensorType) throws SKException {
+    void stopContinuousSensingWithSensor(final SKSensorType sensorType) throws SKException {
 
         Log.i(TAG, "Stop sensing with sensor: " + sensorType.getName() + ".");
 
@@ -664,7 +659,7 @@ class SKSensorManager {
     /**
      *  Return a string with a CSV formatted header that describes the data of the particular sensor.
      */
-    static String csvHeaderForSensor(SKSensorType sensorType) {
+    static String csvHeaderForSensor(final SKSensorType sensorType) {
 
         switch (sensorType) {
 

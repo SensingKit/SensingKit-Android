@@ -21,11 +21,12 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -41,7 +42,7 @@ public class SKStepDetectorData extends SKAbstractData {
      *
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      */
-    public SKStepDetectorData(long timestamp) {
+    public SKStepDetectorData(final long timestamp) {
 
         super(SKSensorType.STEP_DETECTOR, timestamp);
     }
@@ -52,6 +53,7 @@ public class SKStepDetectorData extends SKAbstractData {
      * @return String with a CSV formatted header that describes the data of the Step Counter sensor.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970";
     }
@@ -62,6 +64,7 @@ public class SKStepDetectorData extends SKAbstractData {
      * @return String in CSV format: timeIntervalSince1970
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
         return String.format(Locale.US, "%d", this.timestamp);
     }
@@ -74,6 +77,7 @@ public class SKStepDetectorData extends SKAbstractData {
      * sensor type, sensor type in string, timeIntervalSince1970, numberOfSteps
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {

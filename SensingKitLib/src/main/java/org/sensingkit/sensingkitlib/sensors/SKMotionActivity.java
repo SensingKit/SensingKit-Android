@@ -63,7 +63,7 @@ public class SKMotionActivity extends SKAbstractSensor {
     private PendingIntent mActivityRecognitionPendingIntent;
     private List<ActivityTransition> mRegisteredTransitions;
 
-    public SKMotionActivity(final Context context, final SKMotionActivityConfiguration configuration) throws SKException {
+    public SKMotionActivity(final @NonNull Context context, final @NonNull SKMotionActivityConfiguration configuration) throws SKException {
         super(context, SKSensorType.MOTION_ACTIVITY, configuration);
 
         mActivityRecognitionClient = ActivityRecognition.getClient(mApplicationContext);
@@ -75,7 +75,7 @@ public class SKMotionActivity extends SKAbstractSensor {
         mActivityRecognitionPendingIntent = PendingIntent.getService(mApplicationContext, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
 
@@ -103,7 +103,7 @@ public class SKMotionActivity extends SKAbstractSensor {
         }
     };
 
-    private List<ActivityTransition> buildTransitions(final SKMotionActivityConfiguration configuration) {
+    private @NonNull List<ActivityTransition> buildTransitions(final @NonNull SKMotionActivityConfiguration configuration) {
 
         // reset list
         List<ActivityTransition> transitions = new ArrayList<>();
@@ -213,7 +213,7 @@ public class SKMotionActivity extends SKAbstractSensor {
     }
 
     @Override
-    public void setConfiguration(SKConfiguration configuration) throws SKException {
+    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKMotionActivityConfiguration)) {
@@ -232,12 +232,13 @@ public class SKMotionActivity extends SKAbstractSensor {
     }
 
     @Override
+    @NonNull
     public SKConfiguration getConfiguration() {
         return new SKMotionActivityConfiguration((SKMotionActivityConfiguration)mConfiguration);
     }
 
     @Override
-    protected boolean shouldPostSensorData(SKAbstractData data) {
+    protected boolean shouldPostSensorData(final @NonNull SKAbstractData data) {
 
         // Always post sensor data
         return true;

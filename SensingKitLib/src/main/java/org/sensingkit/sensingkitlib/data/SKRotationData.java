@@ -21,11 +21,12 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -36,11 +37,11 @@ public class SKRotationData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKRotationData.class.getSimpleName();
 
-    protected final float x;
-    protected final float y;
-    protected final float z;
-    protected final float cos;
-    protected final float headingAccuracy;
+    private final float x;
+    private final float y;
+    private final float z;
+    private final float cos;
+    private final float headingAccuracy;
 
     /**
      * Initialize the instance
@@ -54,8 +55,7 @@ public class SKRotationData extends SKAbstractData {
      *                        where theta is the angle of rotation
      * @param headingAccuracy Estimated accuracy in radians
      */
-    public SKRotationData(long timestamp, float x, float y, float z, float cos, float headingAccuracy) {
-
+    public SKRotationData(final long timestamp, final float x, final float y, final float z, final float cos, final float headingAccuracy) {
         super(SKSensorType.ROTATION, timestamp);
 
         this.x = x;
@@ -75,7 +75,7 @@ public class SKRotationData extends SKAbstractData {
      *                  <p>
      *                  where theta is the angle of rotation
      */
-    public SKRotationData(long timestamp, float x, float y, float z) {
+    public SKRotationData(final long timestamp, final float x, final float y, final float z) {
         this(timestamp, x, y, z, 0, 0);
     }
 
@@ -85,6 +85,7 @@ public class SKRotationData extends SKAbstractData {
      * @return String with a CSV formatted header that describes the data of the Rotation sensor.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,x,y,z,cos,headingAccuracy";
     }
@@ -95,6 +96,7 @@ public class SKRotationData extends SKAbstractData {
      * @return String in CSV format: timeIntervalSince1970, x, y, z, cos, headingAccuracy
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%f,%f,%f,%f", this.timestamp, this.x, this.y, this.z, this.cos, this.headingAccuracy);
     }
@@ -106,6 +108,7 @@ public class SKRotationData extends SKAbstractData {
      * sensor type, sensor type in string, timeIntervalSince1970, x, y, z, cos, headingAccuracy
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {

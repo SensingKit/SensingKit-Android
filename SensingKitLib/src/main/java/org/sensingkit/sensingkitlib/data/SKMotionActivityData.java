@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import android.support.annotation.NonNull;
+
 import com.google.android.gms.location.ActivityTransition;
 import com.google.android.gms.location.DetectedActivity;
 
@@ -28,7 +30,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -63,8 +64,8 @@ public class SKMotionActivityData extends SKAbstractData {
         }
     }
 
-    protected final int activityType;
-    protected final int transitionType;
+    private final int activityType;
+    private final int transitionType;
 
     /**
      * Initialize the instance
@@ -73,7 +74,7 @@ public class SKMotionActivityData extends SKAbstractData {
      * @param activityType The type of the activity
      * @param transitionType Confidence percentage for the most probable activity
      */
-    public SKMotionActivityData(long timestamp, int activityType, int transitionType) {
+    public SKMotionActivityData(final long timestamp, final int activityType, final int transitionType) {
 
         super(SKSensorType.MOTION_ACTIVITY, timestamp);
 
@@ -87,6 +88,7 @@ public class SKMotionActivityData extends SKAbstractData {
      * @return String with a CSV formatted header that describes the data of the Motion Activity sensor.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,activity,activityString,transition,transitionString";
     }
@@ -98,6 +100,7 @@ public class SKMotionActivityData extends SKAbstractData {
      *
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%d,%s", this.timestamp, this.activityType, getActivityString());
     }
@@ -109,6 +112,7 @@ public class SKMotionActivityData extends SKAbstractData {
      * sensor type, sensor type in string, timeIntervalSince1970, activity, activityString, confidence
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {

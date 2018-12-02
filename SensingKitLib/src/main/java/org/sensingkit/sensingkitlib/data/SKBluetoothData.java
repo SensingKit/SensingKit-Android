@@ -21,11 +21,12 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -36,9 +37,9 @@ public class SKBluetoothData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKBluetoothData.class.getSimpleName();
 
-    protected final String name;
-    protected final String address;
-    protected final int rssi;
+    private final String name;
+    private final String address;
+    private final int rssi;
 
     /**
      * Initialize the instance
@@ -48,8 +49,7 @@ public class SKBluetoothData extends SKAbstractData {
      * @param address   Device Address
      * @param rssi      Device RSSI
      */
-    public SKBluetoothData(long timestamp, String name, String address, int rssi) {
-
+    public SKBluetoothData(final long timestamp, final @NonNull String name, final @NonNull String address, final int rssi) {
         super(SKSensorType.BLUETOOTH, timestamp);
 
         this.name = name;
@@ -63,6 +63,7 @@ public class SKBluetoothData extends SKAbstractData {
      * @return String with a CSV formatted header that describes the data of the Bluetooth sensor.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,name,address,rssi";
     }
@@ -73,6 +74,7 @@ public class SKBluetoothData extends SKAbstractData {
      * @return String formatted as a CSV, containing: timeIntervalSince1970,name,address,rssi
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%s,%s,%d", this.timestamp, this.name, this.address, this.rssi);
     }
@@ -85,6 +87,7 @@ public class SKBluetoothData extends SKAbstractData {
      * sensor type, sensor type in string, timeIntervalSince1970, name,address,rssi
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {
@@ -112,6 +115,7 @@ public class SKBluetoothData extends SKAbstractData {
      * @return Bluetooth device name
      */
     @SuppressWarnings("unused")
+    @NonNull
     public String getName() {
         return this.name;
     }
@@ -122,6 +126,7 @@ public class SKBluetoothData extends SKAbstractData {
      * @return Bluetooth device address
      */
     @SuppressWarnings("unused")
+    @NonNull
     public String getAddress() {
         return this.address;
     }

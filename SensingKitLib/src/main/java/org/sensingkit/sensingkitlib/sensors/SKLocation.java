@@ -25,7 +25,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Location;
-import android.util.Log;
+import android.support.annotation.NonNull;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -41,7 +41,6 @@ import org.sensingkit.sensingkitlib.configuration.SKLocationConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKLocationData;
 
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class SKLocation extends SKAbstractSensor {
 
@@ -51,7 +50,7 @@ public class SKLocation extends SKAbstractSensor {
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest mLocationRequest;
 
-    private LocationCallback mLocationCallback = new LocationCallback() {
+    private final LocationCallback mLocationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
             super.onLocationResult(locationResult);
@@ -69,7 +68,7 @@ public class SKLocation extends SKAbstractSensor {
         }
     };
 
-    public SKLocation(final Context context, final SKLocationConfiguration configuration) throws SKException {
+    public SKLocation(final @NonNull Context context, final @NonNull SKLocationConfiguration configuration) throws SKException {
         super(context, SKSensorType.LOCATION, configuration);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
@@ -97,7 +96,7 @@ public class SKLocation extends SKAbstractSensor {
     }
 
     @Override
-    public void setConfiguration(SKConfiguration configuration) throws SKException {
+    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKLocationConfiguration)) {
@@ -118,12 +117,13 @@ public class SKLocation extends SKAbstractSensor {
     }
 
     @Override
+    @NonNull
     public SKConfiguration getConfiguration() {
         return new SKLocationConfiguration((SKLocationConfiguration)mConfiguration);
     }
 
     @Override
-    protected boolean shouldPostSensorData(SKAbstractData data) {
+    protected boolean shouldPostSensorData(final @NonNull SKAbstractData data) {
 
         // Always post sensor data
         return true;

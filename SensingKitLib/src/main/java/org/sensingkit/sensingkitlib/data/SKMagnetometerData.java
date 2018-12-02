@@ -21,11 +21,12 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 
@@ -39,9 +40,9 @@ public class SKMagnetometerData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKMagnetometerData.class.getSimpleName();
 
-    protected final float x;
-    protected final float y;
-    protected final float z;
+    private final float x;
+    private final float y;
+    private final float z;
 
     /**
      * Initialize the instance
@@ -51,8 +52,7 @@ public class SKMagnetometerData extends SKAbstractData {
      * @param y         Force in Y-direction
      * @param z         Force in Z-direction
      */
-    public SKMagnetometerData(long timestamp, float x, float y, float z) {
-
+    public SKMagnetometerData(final long timestamp, final float x, final float y, final float z) {
         super(SKSensorType.MAGNETOMETER, timestamp);
 
         this.x = x;
@@ -66,6 +66,7 @@ public class SKMagnetometerData extends SKAbstractData {
      * @return String with a CSV formatted header that describes the data of the Magnetometer sensor.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,x,y,z";
     }
@@ -76,6 +77,7 @@ public class SKMagnetometerData extends SKAbstractData {
      * @return String in CSV format: timeIntervalSince1970, x force, y force, z force
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
     }
@@ -88,6 +90,7 @@ public class SKMagnetometerData extends SKAbstractData {
      * sensor type, sensor type in string, timeIntervalSince1970, x force, y force, z force
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {

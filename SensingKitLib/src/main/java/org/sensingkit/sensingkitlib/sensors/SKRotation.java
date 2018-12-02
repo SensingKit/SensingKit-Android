@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Context;
 import android.hardware.SensorEvent;
+import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -42,7 +43,8 @@ public class SKRotation extends SKAbstractNativeSensor {
     }
 
     @Override
-    protected SKAbstractData buildData(SensorEvent event)
+    @NonNull
+    protected SKAbstractData buildData(final @NonNull SensorEvent event)
     {
         if (event.values.length >= 6) {
             return new SKRotationData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2], event.values[3], event.values[4]);
@@ -53,7 +55,7 @@ public class SKRotation extends SKAbstractNativeSensor {
     }
 
     @Override
-    public void setConfiguration(SKConfiguration configuration) throws SKException {
+    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKRotationConfiguration)) {
@@ -66,12 +68,13 @@ public class SKRotation extends SKAbstractNativeSensor {
     }
 
     @Override
+    @NonNull
     public SKConfiguration getConfiguration() {
         return new SKRotationConfiguration((SKRotationConfiguration)mConfiguration);
     }
 
     @Override
-    protected boolean shouldPostSensorData(SKAbstractData data) {
+    protected boolean shouldPostSensorData(final @NonNull SKAbstractData data) {
 
         // Always post sensor data
         return true;

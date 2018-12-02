@@ -39,14 +39,10 @@ public class SensingKitLib implements SensingKitLibInterface {
     private final Context mApplicationContext;
     private PowerManager.WakeLock mWakeLock;
 
-    private SKSensorManager mSensorManager;
+    private final SKSensorManager mSensorManager;
 
     @SuppressWarnings("unused")
-    public static SensingKitLibInterface sharedSensingKitLib(final Context context) throws SKException {
-
-        if (context == null) {
-            throw new SKException(TAG, "Context cannot be null.", SKExceptionErrorCode.CONTEXT_NULL);
-        }
+    public static SensingKitLibInterface sharedSensingKitLib(final @NonNull Context context) {
 
         if (sSensingKitLib == null) {
             sSensingKitLib = new SensingKitLib(context);
@@ -55,7 +51,7 @@ public class SensingKitLib implements SensingKitLibInterface {
         return sSensingKitLib;
     }
 
-    private SensingKitLib(final Context context) throws SKException {
+    private SensingKitLib(final @NonNull Context context) {
         mApplicationContext = context;
         mSensorManager = SKSensorManager.getSensorManager(context);
     }
@@ -68,7 +64,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      *  @return TRUE if the sensor is available on the device, or FALSE if it is not.
      */
     @Override
-    public boolean isSensorAvailable(SKSensorType sensorType) {
+    public boolean isSensorAvailable(final SKSensorType sensorType) {
         return mSensorManager.isSensorAvailable(sensorType);
     }
 
@@ -80,7 +76,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      *  @return TRUE if the sensor is registered or FALSE if it is not.
      */
     @Override
-    public boolean isSensorRegistered(SKSensorType sensorType) {
+    public boolean isSensorRegistered(final SKSensorType sensorType) {
         return mSensorManager.isSensorRegistered(sensorType);
     }
 
@@ -92,7 +88,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      *  @return TRUE if the sensor is currently sensing or FALSE if it is not.
      */
     @Override
-    public boolean isSensorSensing(SKSensorType sensorType) throws SKException {
+    public boolean isSensorSensing(final SKSensorType sensorType) throws SKException {
         return mSensorManager.isSensorSensing(sensorType);
     }
 
@@ -102,12 +98,12 @@ public class SensingKitLib implements SensingKitLibInterface {
      *  @param sensorType The type of the sensor that will be initialized and registered in the library.
      */
     @Override
-    public void registerSensor(SKSensorType sensorType) throws SKException {
+    public void registerSensor(final SKSensorType sensorType) throws SKException {
         registerSensor(sensorType, null);
     }
 
     @Override
-    public void registerSensor(SKSensorType sensorType, SKConfiguration configuration) throws SKException {
+    public void registerSensor(final SKSensorType sensorType, final SKConfiguration configuration) throws SKException {
         mSensorManager.registerSensor(sensorType, configuration);
     }
 
@@ -117,17 +113,17 @@ public class SensingKitLib implements SensingKitLibInterface {
      *  @param sensorType The type of the sensor that will be deregistered.
      */
     @Override
-    public void deregisterSensor(SKSensorType sensorType) throws SKException {
+    public void deregisterSensor(final SKSensorType sensorType) throws SKException {
         mSensorManager.deregisterSensor(sensorType);
     }
 
     @Override
-    public void setConfiguration(SKConfiguration configuration, SKSensorType sensorType) throws SKException {
+    public void setConfiguration(final SKConfiguration configuration, final SKSensorType sensorType) throws SKException {
         mSensorManager.setConfiguration(configuration, sensorType);
     }
 
     @Override
-    public SKConfiguration getConfiguration(SKSensorType sensorType) throws SKException {
+    public @NonNull SKConfiguration getConfiguration(final SKSensorType sensorType) throws SKException {
         return mSensorManager.getConfiguration(sensorType);
     }
 
@@ -138,7 +134,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      *  @param dataHandler A data handler that is invoked with each update to handle new sensor data. The block must conform to the SKSensorDataHandler type.
      */
     @Override
-    public void subscribeSensorDataHandler(SKSensorType sensorType, SKSensorDataHandler dataHandler) throws SKException {
+    public void subscribeSensorDataHandler(final SKSensorType sensorType, final @NonNull SKSensorDataHandler dataHandler) throws SKException {
         mSensorManager.subscribeSensorDataHandler(sensorType, dataHandler);
     }
 
@@ -149,7 +145,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      *  @param dataHandler The data handler to be unsubscribed.
      */
     @Override
-    public void unsubscribeSensorDataHandler(SKSensorType sensorType, SKSensorDataHandler dataHandler) throws SKException {
+    public void unsubscribeSensorDataHandler(final SKSensorType sensorType, final @NonNull SKSensorDataHandler dataHandler) throws SKException {
         mSensorManager.unsubscribeSensorDataHandler(sensorType, dataHandler);
     }
 
@@ -159,7 +155,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      *  @param sensorType The type of the sensor for which the data handlers will be unsubscribed.
      */
     @Override
-    public void unsubscribeAllSensorDataHandlers(SKSensorType sensorType) throws SKException {
+    public void unsubscribeAllSensorDataHandlers(final SKSensorType sensorType) throws SKException {
         mSensorManager.unsubscribeAllSensorDataHandlers(sensorType);
     }
 
@@ -171,17 +167,17 @@ public class SensingKitLib implements SensingKitLibInterface {
      *  @return A String with the CSV header.
      */
     @Override
-    public String csvHeaderForSensor(SKSensorType sensorType) {
+    public @NonNull String csvHeaderForSensor(final SKSensorType sensorType) {
         return SKSensorManager.csvHeaderForSensor(sensorType);
     }
 
     @Override
-    public boolean isPermissionGrantedForSensor(SKSensorType sensorType) throws SKException {
+    public boolean isPermissionGrantedForSensor(final SKSensorType sensorType) throws SKException {
         return mSensorManager.isPermissionGrantedForSensor(sensorType);
     }
 
     @Override
-    public void requestPermissionForSensor(SKSensorType sensorType, final @NonNull Activity activity) throws SKException {
+    public void requestPermissionForSensor(final SKSensorType sensorType, final @NonNull Activity activity) throws SKException {
         mSensorManager.requestPermissionForSensor(sensorType, activity);
     }
 
@@ -197,7 +193,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      *  @param sensorType The type of the sensor that will be started.
      */
     @Override
-    public void startContinuousSensingWithSensor(SKSensorType sensorType) throws SKException {
+    public void startContinuousSensingWithSensor(final SKSensorType sensorType) throws SKException {
         mSensorManager.startContinuousSensingWithSensor(sensorType);
     }
 
@@ -207,7 +203,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      *  @param sensorType The type of the sensor that will be stopped.
      */
     @Override
-    public void stopContinuousSensingWithSensor(SKSensorType sensorType) throws SKException {
+    public void stopContinuousSensingWithSensor(final SKSensorType sensorType) throws SKException {
         mSensorManager.stopContinuousSensingWithSensor(sensorType);
     }
 
@@ -249,7 +245,7 @@ public class SensingKitLib implements SensingKitLibInterface {
 
     //region Wake Lock methods
 
-    private void acquireWakeLock(long timeout) throws SKException {
+    private void acquireWakeLock(final long timeout) throws SKException {
         if ((mWakeLock == null) || (!mWakeLock.isHeld())) {
             PowerManager pm = (PowerManager) mApplicationContext.getSystemService(Context.POWER_SERVICE);
             if (pm == null) {

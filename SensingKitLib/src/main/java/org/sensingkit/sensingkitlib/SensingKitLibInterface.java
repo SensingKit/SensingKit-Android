@@ -36,7 +36,7 @@ public interface SensingKitLibInterface {
      *
      *  @return TRUE if the sensor is available on the device, or FALSE if it is not.
      */
-    boolean isSensorAvailable(SKSensorType sensorType) throws SKException;
+    boolean isSensorAvailable(final SKSensorType sensorType) throws SKException;
 
     /**
      *  A Boolean value that indicates whether the sensor is registered.
@@ -45,7 +45,7 @@ public interface SensingKitLibInterface {
      *
      *  @return TRUE if the sensor is registered or FALSE if it is not.
      */
-    boolean isSensorRegistered(SKSensorType sensorType) throws SKException;
+    boolean isSensorRegistered(final SKSensorType sensorType) throws SKException;
 
     /**
      *  A Boolean value that indicates whether the sensor is currently sensing.
@@ -54,14 +54,14 @@ public interface SensingKitLibInterface {
      *
      *  @return TRUE if the sensor is currently sensing or FALSE if it is not.
      */
-    boolean isSensorSensing(SKSensorType sensorType) throws SKException;
+    boolean isSensorSensing(final SKSensorType sensorType) throws SKException;
 
     /**
      *  Initializes and registers a sensor into the library with a default sensor configuration.
      *
      *  @param sensorType The type of the sensor that will be initialized and registered in the library.
      */
-    void registerSensor(SKSensorType sensorType) throws SKException;
+    void registerSensor(final SKSensorType sensorType) throws SKException;
 
     /**
      *  Initializes and registers a sensor into the library with a default sensor configuration.
@@ -69,14 +69,14 @@ public interface SensingKitLibInterface {
      *  @param sensorType The type of the sensor that will be initialized and registered in the library.
      *  @param configuration ...
      */
-    void registerSensor(SKSensorType sensorType, SKConfiguration configuration) throws SKException;
+    void registerSensor(final SKSensorType sensorType, final SKConfiguration configuration) throws SKException;
 
     /**
      *  Deregisters a sensor from the library. Sensor should not be actively sensing when this method is called. All previously subscribed blocks will also be unsubscribed.
      *
      *  @param sensorType The type of the sensor that will be deregistered.
      */
-    void deregisterSensor(SKSensorType sensorType) throws SKException;
+    void deregisterSensor(final SKSensorType sensorType) throws SKException;
 
     /**
      *  TODO
@@ -84,14 +84,15 @@ public interface SensingKitLibInterface {
      *  @param configuration TODO
      *  @param sensorType TODO
      */
-    void setConfiguration(SKConfiguration configuration, SKSensorType sensorType) throws SKException;
+    void setConfiguration(final SKConfiguration configuration, final SKSensorType sensorType) throws SKException;
 
     /**
      *  TODO
      *
      *  @param sensorType TODO
      */
-    SKConfiguration getConfiguration(SKSensorType sensorType) throws SKException;
+    @NonNull
+    SKConfiguration getConfiguration(final SKSensorType sensorType) throws SKException;
 
     /**
      *  Subscribes for sensor updates using a specified data handler.
@@ -99,7 +100,7 @@ public interface SensingKitLibInterface {
      *  @param sensorType  The type of the sensor that the data handler will be subscribed to.
      *  @param dataHandler A data handler that is invoked with each update to handle new sensor data. The block must conform to the SKSensorDataHandler type.
      */
-    void subscribeSensorDataHandler(SKSensorType sensorType, SKSensorDataHandler dataHandler) throws SKException;
+    void subscribeSensorDataHandler(final SKSensorType sensorType, final @NonNull SKSensorDataHandler dataHandler) throws SKException;
 
     /**
      *  Unsubscribes a data handler.
@@ -107,14 +108,14 @@ public interface SensingKitLibInterface {
      *  @param sensorType The type of the sensor for which the event listener will be unsubscribed.
      *  @param dataHandler The data handler to be unsubscribed.
      */
-    void unsubscribeSensorDataHandler(SKSensorType sensorType, SKSensorDataHandler dataHandler) throws SKException;
+    void unsubscribeSensorDataHandler(final SKSensorType sensorType, final @NonNull SKSensorDataHandler dataHandler) throws SKException;
 
     /**
      *  Unsubscribes all data handlers.
      *
      *  @param sensorType The type of the sensor for which the data handlers will be unsubscribed.
      */
-    void unsubscribeAllSensorDataHandlers(SKSensorType sensorType) throws SKException;
+    void unsubscribeAllSensorDataHandlers(final SKSensorType sensorType) throws SKException;
 
     /**
      *  A string with a CSV formatted header that describes the data of the particular sensor. This method is useful in combination with the toString() or csvString() instance method of an SKSensorData object.
@@ -123,13 +124,14 @@ public interface SensingKitLibInterface {
      *
      *  @return A String with the CSV header.
      */
-    String csvHeaderForSensor(SKSensorType sensorType) throws SKException;
+    @NonNull
+    String csvHeaderForSensor(final SKSensorType sensorType) throws SKException;
 
     // TODO documentation
-    boolean isPermissionGrantedForSensor(SKSensorType sensorType) throws SKException;
+    boolean isPermissionGrantedForSensor(final SKSensorType sensorType) throws SKException;
 
     // TODO documentation
-    void requestPermissionForSensor(SKSensorType sensorType, final @NonNull Activity activity) throws SKException;
+    void requestPermissionForSensor(final SKSensorType sensorType, final @NonNull Activity activity) throws SKException;
 
     // TODO documentation
     void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity) throws SKException;
@@ -139,14 +141,14 @@ public interface SensingKitLibInterface {
      *
      *  @param sensorType The type of the sensor that will be started.
      */
-    void startContinuousSensingWithSensor(SKSensorType sensorType) throws SKException;
+    void startContinuousSensingWithSensor(final SKSensorType sensorType) throws SKException;
 
     /**
      *  Stops continuous sensing with the specified sensor.
      *
      *  @param sensorType The type of the sensor that will be stopped.
      */
-    void stopContinuousSensingWithSensor(SKSensorType sensorType) throws SKException;
+    void stopContinuousSensingWithSensor(final SKSensorType sensorType) throws SKException;
 
     /**
      *  Starts continuous sensing with all registered sensors.

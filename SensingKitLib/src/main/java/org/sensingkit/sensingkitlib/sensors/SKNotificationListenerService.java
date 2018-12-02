@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
@@ -42,16 +43,16 @@ public class SKNotificationListenerService extends NotificationListenerService {
     }
 
     @Override
-    public void onNotificationPosted(StatusBarNotification sbn) {
+    public void onNotificationPosted(final StatusBarNotification sbn) {
         sendNotification("posted", sbn);
     }
 
     @Override
-    public void onNotificationRemoved(StatusBarNotification sbn) {
+    public void onNotificationRemoved(final StatusBarNotification sbn) {
         sendNotification("removed", sbn);
     }
 
-    private void sendNotification(String actionType, StatusBarNotification sbn) {
+    private void sendNotification(final @NonNull String actionType, final @NonNull StatusBarNotification sbn) {
 
         Intent i2 = new Intent(NOTIFICATION_ACTION);
         i2.putExtra("actionType", actionType);

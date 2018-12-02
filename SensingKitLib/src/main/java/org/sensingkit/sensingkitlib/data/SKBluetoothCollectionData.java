@@ -21,12 +21,13 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -45,8 +46,7 @@ public class SKBluetoothCollectionData extends SKAbstractData {
      * @param timestamp Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      * @param devices   One BluetoothData object for each Bluetooth device
      */
-    public SKBluetoothCollectionData(long timestamp, ArrayList<SKBluetoothData> devices) {
-
+    public SKBluetoothCollectionData(final long timestamp, final @NonNull ArrayList<SKBluetoothData> devices) {
         super(SKSensorType.BLUETOOTH, timestamp);
 
         this.mDevices = devices;
@@ -58,6 +58,7 @@ public class SKBluetoothCollectionData extends SKAbstractData {
      * @return String with a CSV formatted header that describes the data of the Bluetooth sensor.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public static String csvHeader() {
         return SKBluetoothData.csvHeader();
     }
@@ -68,6 +69,7 @@ public class SKBluetoothCollectionData extends SKAbstractData {
      * @return String formatted as follows:  timestamp,device1 data, device2 data,,,
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
 
         // Calculate capacity and init StringBuilder
@@ -93,6 +95,7 @@ public class SKBluetoothCollectionData extends SKAbstractData {
      * @return JSONObject formatted as follows: device1 data, device2 data,,,
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {

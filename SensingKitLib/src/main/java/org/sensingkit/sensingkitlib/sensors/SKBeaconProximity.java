@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.RemoteException;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import org.altbeacon.beacon.Beacon;
@@ -82,13 +83,13 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
         }
     };
 
-    public SKBeaconProximity(final Context context, final SKBeaconProximityConfiguration configuration) throws SKException {
+    public SKBeaconProximity(final @NonNull Context context, final @NonNull SKBeaconProximityConfiguration configuration) throws SKException {
         super(context, SKSensorType.BEACON_PROXIMITY, configuration);
 
     }
 
     @Override
-    public void setConfiguration(SKConfiguration configuration) throws SKException {
+    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKBeaconProximityConfiguration)) {
@@ -128,6 +129,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
     }
 
     @Override
+    @NonNull
     public SKConfiguration getConfiguration() {
         return new SKBeaconProximityConfiguration((SKBeaconProximityConfiguration)mConfiguration);
     }
@@ -145,16 +147,16 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
     }
 
     @Override
-    public void unbindService(ServiceConnection serviceConnection) {
+    public void unbindService(final @NonNull ServiceConnection serviceConnection) {
         mApplicationContext.unbindService(serviceConnection);
     }
 
-    public boolean bindService(Intent intent, ServiceConnection serviceConnection, int i) {
+    public boolean bindService(final @NonNull Intent intent, final @NonNull ServiceConnection serviceConnection, final int i) {
         return mApplicationContext.bindService(intent, serviceConnection, i);
     }
 
     @Override
-    protected boolean shouldPostSensorData(SKAbstractData data) {
+    protected boolean shouldPostSensorData(final @NonNull SKAbstractData data) {
 
         // Always post sensor data
         return true;

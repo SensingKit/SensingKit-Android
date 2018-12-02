@@ -22,13 +22,14 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import android.support.annotation.NonNull;
+
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.Identifier;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 public class SKBeaconProximityData extends SKAbstractData {
@@ -36,10 +37,11 @@ public class SKBeaconProximityData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKBeaconProximityData.class.getSimpleName();
 
-    protected final Beacon mBeacon;
+    private final Beacon mBeacon;
 
-    public SKBeaconProximityData(long timestamp, Beacon beacon) {
+    public SKBeaconProximityData(final long timestamp, final @NonNull Beacon beacon) {
         super(SKSensorType.BEACON_PROXIMITY, timestamp);
+
         this.mBeacon = beacon;
     }
 
@@ -49,6 +51,7 @@ public class SKBeaconProximityData extends SKAbstractData {
      * @return String with a CSV formatted header that describes the data of the Beacon Proximity sensor.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,beaconType,manufacturer,id1,id2,id3,rssi,txPower,distance";
     }
@@ -60,6 +63,7 @@ public class SKBeaconProximityData extends SKAbstractData {
      * sensor type, sensor type in string, timeIntervalSince1970, beaconType, manufacturer, id1,id2,id3,rssi,txPower,distance
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%d,%d,%s,%d,%d,%d,%d,%f",
                 this.timestamp, this.getBeaconTypeCode(), this.getManufacturer(),
@@ -74,6 +78,7 @@ public class SKBeaconProximityData extends SKAbstractData {
      * sensor type, sensor type in string, timeIntervalSince1970, beaconType, manufacturer, id1,id2,id3,rssi,txPower,distance
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {

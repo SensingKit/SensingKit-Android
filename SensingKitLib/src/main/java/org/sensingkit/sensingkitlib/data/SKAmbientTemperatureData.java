@@ -21,11 +21,12 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -36,7 +37,7 @@ public class SKAmbientTemperatureData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKAmbientTemperatureData.class.getSimpleName();
 
-    protected final float temperature;
+    private final float temperature;
 
     /**
      * Initialize Ambient Temperature data instance
@@ -44,8 +45,7 @@ public class SKAmbientTemperatureData extends SKAbstractData {
      * @param timestamp   Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
      * @param temperature In degrees Celsius
      */
-    public SKAmbientTemperatureData(long timestamp, float temperature) {
-
+    public SKAmbientTemperatureData(final long timestamp, final float temperature) {
         super(SKSensorType.AMBIENT_TEMPERATURE, timestamp);
 
         this.temperature = temperature;
@@ -57,6 +57,7 @@ public class SKAmbientTemperatureData extends SKAbstractData {
      * @return String with a CSV formatted header that describes the data of the Ambient Temperature sensor.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,temperature";
     }
@@ -67,6 +68,7 @@ public class SKAmbientTemperatureData extends SKAbstractData {
      * @return Ambient Temperature data in csv format: timeIntervalSince1970,temperature
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f", this.timestamp, this.temperature);
     }
@@ -78,6 +80,7 @@ public class SKAmbientTemperatureData extends SKAbstractData {
      * sensor type, sensor type in string, timeIntervalSince1970, temperature
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {

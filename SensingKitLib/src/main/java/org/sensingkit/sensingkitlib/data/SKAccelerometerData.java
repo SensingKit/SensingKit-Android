@@ -21,12 +21,12 @@
 
 package org.sensingkit.sensingkitlib.data;
 
-import org.json.JSONArray;
+import android.support.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 
@@ -38,9 +38,9 @@ public class SKAccelerometerData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKAccelerometerData.class.getSimpleName();
 
-    protected final float x;
-    protected final float y;
-    protected final float z;
+    private final float x;
+    private final float y;
+    private final float z;
 
     /**
      * Initialize the instance
@@ -52,8 +52,7 @@ public class SKAccelerometerData extends SKAbstractData {
      * @param z         Z-axis value of the Accelerometer sensor
      */
 
-    public SKAccelerometerData(long timestamp, float x, float y, float z) {
-
+    public SKAccelerometerData(final long timestamp, final float x, final float y, final float z) {
         super(SKSensorType.ACCELEROMETER, timestamp);
 
         this.x = x;
@@ -68,6 +67,7 @@ public class SKAccelerometerData extends SKAbstractData {
      * sensor.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,x,y,z";
     }
@@ -79,6 +79,7 @@ public class SKAccelerometerData extends SKAbstractData {
      * timeIntervalSince1970,x,y,z
      */
     @Override
+    @NonNull
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%f,%f", this.timestamp, this.x, this.y, this.z);
     }
@@ -91,6 +92,7 @@ public class SKAccelerometerData extends SKAbstractData {
      * sensor type, sensor type in string, timeIntervalSince1970, accelerometer in x,y,z
      */
     @Override
+    @NonNull
     public JSONObject getDataInJSON() {
         JSONObject jsonObject = new JSONObject();
         try {

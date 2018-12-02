@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.sensors;
 
 import android.content.Context;
 import android.hardware.SensorEvent;
+import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -37,18 +38,19 @@ public class SKGravity extends SKAbstractNativeSensor {
     @SuppressWarnings("unused")
     private static final String TAG = SKGravity.class.getSimpleName();
 
-    public SKGravity(final Context context, final SKGravityConfiguration configuration) throws SKException {
+    public SKGravity(final @NonNull Context context, final @NonNull SKGravityConfiguration configuration) throws SKException {
         super(context, SKSensorType.GRAVITY, configuration);
     }
 
     @Override
-    protected SKAbstractData buildData(SensorEvent event)
+    @NonNull
+    protected SKAbstractData buildData(final @NonNull SensorEvent event)
     {
         return new SKGravityData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
     }
 
     @Override
-    public void setConfiguration(SKConfiguration configuration) throws SKException {
+    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
 
         // Check if the correct configuration type provided
         if (!(configuration instanceof SKGravityConfiguration)) {
@@ -61,12 +63,13 @@ public class SKGravity extends SKAbstractNativeSensor {
     }
 
     @Override
+    @NonNull
     public SKConfiguration getConfiguration() {
         return new SKGravityConfiguration((SKGravityConfiguration)mConfiguration);
     }
 
     @Override
-    protected boolean shouldPostSensorData(SKAbstractData data) {
+    protected boolean shouldPostSensorData(final @NonNull SKAbstractData data) {
 
         // Always post sensor data
         return true;
