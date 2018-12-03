@@ -210,6 +210,10 @@ class SKSensorManager {
         }
     }
 
+    boolean isSensorAvailable(final SKSensorType sensorType) {
+        return SKSensorUtilities.isSensorAvailable(sensorType, mApplicationContext);
+    }
+
     /**
      *  A Boolean value that indicates whether the sensor is registered.
      *

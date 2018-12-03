@@ -36,8 +36,6 @@ public class SensingKitLib implements SensingKitLibInterface {
 
     private static SensingKitLib sSensingKitLib;
 
-    private final Context mApplicationContext;
-
     private final SKSensorManager mSensorManager;
 
     @SuppressWarnings("unused")
@@ -51,7 +49,6 @@ public class SensingKitLib implements SensingKitLibInterface {
     }
 
     private SensingKitLib(final @NonNull Context context) {
-        mApplicationContext = context;
         mSensorManager = SKSensorManager.getSensorManager(context);
     }
 
@@ -64,7 +61,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      */
     @Override
     public boolean isSensorAvailable(final SKSensorType sensorType) {
-        return SKSensorUtilities.isSensorAvailable(sensorType, mApplicationContext);
+        return mSensorManager.isSensorAvailable(sensorType);
     }
 
     /**
