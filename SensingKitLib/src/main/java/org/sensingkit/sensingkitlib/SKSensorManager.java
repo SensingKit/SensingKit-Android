@@ -168,11 +168,6 @@ class SKSensorManager {
 
     void requestPermissionForSensor(final SKSensorType sensorType, final @NonNull Activity activity) throws SKException {
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            Log.i(TAG, "Request permissions is only required for Android 6.0 (API level 23) or greater.");
-            return;
-        }
-
         SKSensor sensor = getSensor(sensorType);
         String permission = sensor.getRequiredPermission();
         if (permission != null) {
