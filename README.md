@@ -72,7 +72,7 @@ import org.sensingkit.sensingkitlib.data.*;
 
 public class MainActivity extends AppCompatActivity {
 
-    SensingKitLibInterface mSensingKitLib;
+    SensingKitLibInterface mSensingKit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         try {
-            mSensingKitLib = SensingKitLib.sharedSensingKitLib(this);
+            mSensingKit = SensingKitLib.sharedSensingKitLib(this);
         }
         catch (SKException ex) {
             // Handle Exception
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 Check if a sensor is available in the device:
 
 ```java
-if (mSensingKitLib.isSensorAvailable(SKSensorType.LIGHT)) {
+if (mSensingKit.isSensorAvailable(SKSensorType.LIGHT)) {
     // You can access the sensor
 }
 ```
@@ -103,14 +103,14 @@ if (mSensingKitLib.isSensorAvailable(SKSensorType.LIGHT)) {
 Register a sensor (e.g. a Light sensor) as shown below:
 
 ```java
-mSensingKitLib.registerSensor(SKSensorType.LIGHT);
+mSensingKit.registerSensor(SKSensorType.LIGHT);
 ```
 
 
 Subscribe a sensor data listener:
 
 ```java
-mSensingKitLib.subscribeSensorDataHandler(SKSensorType.LIGHT, new SKSensorDataHandler() {
+mSensingKit.subscribeSensorDataHandler(SKSensorType.LIGHT, new SKSensorDataHandler() {
     @Override
     public void onDataReceived(final SKSensorType moduleType, final SKSensorData sensorData) {
         System.out.println(sensorData.getDataInCSV());  // Print data in CSV format
@@ -130,10 +130,10 @@ You can Start and Stop the Continuous Sensing using the following commands:
 
 ```java
 // Start
-mSensingKitLib.startContinuousSensingWithSensor(SKSensorType.LIGHT);
+mSensingKit.startContinuousSensingWithSensor(SKSensorType.LIGHT);
 
 // Stop
-mSensingKitLib.stopContinuousSensingWithSensor(SKSensorType.LIGHT);
+mSensingKit.stopContinuousSensingWithSensor(SKSensorType.LIGHT);
 ```
 
 ## Required Permissions
