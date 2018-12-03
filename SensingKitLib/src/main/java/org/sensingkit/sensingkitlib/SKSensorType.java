@@ -139,7 +139,7 @@ public enum SKSensorType {
     private final String name;
     private final String nonspacedName;
 
-    SKSensorType(String name, String nonspacedName) {
+    SKSensorType(final @NonNull String name, final @NonNull String nonspacedName) {
         this.name = name;
         this.nonspacedName = nonspacedName;
     }
@@ -150,12 +150,12 @@ public enum SKSensorType {
     }
 
     @SuppressWarnings("unused")
-    public String getName() {
+    public @NonNull String getName() {
         return this.name;
     }
 
     @SuppressWarnings("unused")
-    public String getNonspacedName() {
+    public @NonNull String getNonspacedName() {
         return this.nonspacedName;
     }
 

@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib;
 
+import android.support.annotation.NonNull;
+
 public class SKException extends Exception {
 
     private final SKExceptionErrorCode errorCode;
@@ -32,7 +34,7 @@ public class SKException extends Exception {
      * @param message - error message
      * @param errorCode - error code
      */
-    public SKException(final String TAG, final String message, final SKExceptionErrorCode errorCode) {
+    public SKException(final @NonNull String TAG, final @NonNull String message, final SKExceptionErrorCode errorCode) {
         super(message);
         this.TAG = TAG;
         this.errorCode = errorCode;
@@ -54,7 +56,7 @@ public class SKException extends Exception {
      * @return tag
      */
     @SuppressWarnings("unused")
-    public String getTAG() {
+    public @NonNull String getTAG() {
         return this.TAG;
     }
 }

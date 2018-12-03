@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib;
 
+import android.support.annotation.NonNull;
+
 import org.sensingkit.sensingkitlib.data.SKSensorData;
 
 
@@ -33,6 +35,6 @@ public interface SKSensorDataHandler {
      *  parameter sensorData The new sensor data produced by the SKSensorType sensor.
      */
 
-    void onDataReceived(final SKSensorType sensorType, final SKSensorData sensorData);
+    void onDataReceived(final SKSensorType sensorType, final @NonNull SKSensorData sensorData);
 
 }
