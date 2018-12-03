@@ -28,13 +28,6 @@ public enum SKExceptionErrorCode {
      */
     UNKNOWN_ERROR,
 
-    // Context
-
-    /**
-     * Context cannot be null.
-     */
-    CONTEXT_NULL,
-
 
     // Sensor Availability
 
