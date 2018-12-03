@@ -28,6 +28,7 @@ import android.os.PowerManager;
 import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
+import org.sensingkit.sensingkitlib.sensors.SKSensorUtilities;
 
 @SuppressWarnings({"StaticFieldLeak"})
 public class SensingKitLib implements SensingKitLibInterface {
@@ -66,7 +67,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      */
     @Override
     public boolean isSensorAvailable(final SKSensorType sensorType) {
-        return SKUtilities.isSensorAvailable(sensorType, mApplicationContext);
+        return SKSensorUtilities.isSensorAvailable(sensorType, mApplicationContext);
     }
 
     /**
@@ -169,7 +170,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      */
     @Override
     public @NonNull String csvHeaderForSensor(final SKSensorType sensorType) {
-        return SKUtilities.csvHeaderForSensor(sensorType);
+        return SKSensorUtilities.csvHeaderForSensor(sensorType);
     }
 
     @Override

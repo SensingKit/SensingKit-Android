@@ -23,11 +23,9 @@ package org.sensingkit.sensingkitlib;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -76,7 +74,7 @@ class SKSensorManager {
 
         Log.i(TAG, "Register sensor: " + sensorType.getName() + ".");
 
-        if (!SKUtilities.isSensorAvailable(sensorType, mApplicationContext)) {
+        if (!SKSensorUtilities.isSensorAvailable(sensorType, mApplicationContext)) {
             throw new SKException(TAG, "Sensor is not available in the device.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
         }
 
@@ -123,7 +121,7 @@ class SKSensorManager {
 
     void setConfiguration(SKConfiguration configuration, final SKSensorType sensorType) throws SKException {
 
-        if (!SKUtilities.isSensorAvailable(sensorType, mApplicationContext)) {
+        if (!SKSensorUtilities.isSensorAvailable(sensorType, mApplicationContext)) {
             throw new SKException(TAG, "Sensor is not available in the device.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
         }
 
@@ -137,7 +135,7 @@ class SKSensorManager {
 
     SKConfiguration getConfiguration(final SKSensorType sensorType) throws SKException {
 
-        if (!SKUtilities.isSensorAvailable(sensorType, mApplicationContext)) {
+        if (!SKSensorUtilities.isSensorAvailable(sensorType, mApplicationContext)) {
             throw new SKException(TAG, "Sensor is not available in the device.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
         }
 
