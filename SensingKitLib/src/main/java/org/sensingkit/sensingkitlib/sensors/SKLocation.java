@@ -72,7 +72,6 @@ public class SKLocation extends SKAbstractSensor {
         super(context, SKSensorType.LOCATION, configuration);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
-        mLocationRequest = LocationRequest.create();
     }
 
     @SuppressLint("MissingPermission")
@@ -111,6 +110,7 @@ public class SKLocation extends SKAbstractSensor {
         SKLocationConfiguration locationConfiguration = (SKLocationConfiguration)mConfiguration;
 
         // Configure the LocationRequest
+        mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(locationConfiguration.getPriority());
         mLocationRequest.setInterval(locationConfiguration.getInterval());
         mLocationRequest.setFastestInterval(locationConfiguration.getFastestInterval());
