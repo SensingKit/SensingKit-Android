@@ -188,11 +188,6 @@ class SKSensorManager {
     // TODO documentation
     void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity) throws SKException {
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            Log.i(TAG, "Request permissions is only required for Android 6.0 (API level 23) or greater.");
-            return;
-        }
-
         // List that holds all permissions
         List<String> permissionsList = new ArrayList<>();
 
