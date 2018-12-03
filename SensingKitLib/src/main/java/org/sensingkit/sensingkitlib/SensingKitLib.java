@@ -21,6 +21,7 @@
 
 package org.sensingkit.sensingkitlib;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.os.PowerManager;
@@ -65,7 +66,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      */
     @Override
     public boolean isSensorAvailable(final SKSensorType sensorType) {
-        return mSensorManager.isSensorAvailable(sensorType);
+        return SKUtilities.isSensorAvailable(sensorType, mApplicationContext);
     }
 
     /**
@@ -168,7 +169,7 @@ public class SensingKitLib implements SensingKitLibInterface {
      */
     @Override
     public @NonNull String csvHeaderForSensor(final SKSensorType sensorType) {
-        return SKSensorManager.csvHeaderForSensor(sensorType);
+        return SKUtilities.csvHeaderForSensor(sensorType);
     }
 
     @Override
@@ -264,8 +265,7 @@ public class SensingKitLib implements SensingKitLibInterface {
 
     private boolean checkWakeLockPermission() throws SKException {
         return SKUtilities.checkPermission(
-                mApplicationContext,
-                "android.permission.WAKE_LOCK");
+                Manifest.permission.WAKE_LOCK, mApplicationContext);
     }
 
     //endregion
