@@ -21,9 +21,12 @@
 
 package org.sensingkit.sensingkitlib;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 @SuppressWarnings("WeakerAccess")
 final class SKUtilities {
@@ -40,10 +43,14 @@ final class SKUtilities {
      *
      * @return 1 if permission is granted; 0 if it is not
      */
-    static boolean checkPermission(final @NonNull String permission, final @NonNull Context context) {
+    static boolean isPermissionGranted(final @NonNull String permission, final @NonNull Context context) {
 
-        int res = context.checkCallingOrSelfPermission(permission);
+        int res = ContextCompat.checkSelfPermission(context, permission);
         return (res == PackageManager.PERMISSION_GRANTED);
+    }
+
+    static void requestPermissions(final @NonNull Activity activity, final @NonNull String[] permissions) {
+        ActivityCompat.requestPermissions(activity, permissions, 0);
     }
 
     /**

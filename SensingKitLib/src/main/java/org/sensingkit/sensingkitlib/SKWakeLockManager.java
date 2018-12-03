@@ -43,7 +43,7 @@ public class SKWakeLockManager {
 
     private SKWakeLockManager(final @NonNull Context context) throws SKException {
 
-        if (!SKUtilities.checkPermission(Manifest.permission.WAKE_LOCK, context)) {
+        if (!SKUtilities.isPermissionGranted(Manifest.permission.WAKE_LOCK, context)) {
             throw new SKException(TAG, "Permission WAKE_LOCK is missing.", SKExceptionErrorCode.PERMISSION_MISSING);
         }
 
@@ -58,9 +58,9 @@ public class SKWakeLockManager {
     private PowerManager.WakeLock mWakeLock;
     private int mLocksCounter;
 
-    public boolean isWakeLockActive() {
-        return mWakeLock.isHeld();
-    }
+//    public boolean isWakeLockActive() {
+//        return mWakeLock.isHeld();
+//    }
 
     @SuppressLint("WakelockTimeout")
     public void acquireWakeLock() {

@@ -25,7 +25,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -158,7 +157,7 @@ class SKSensorManager {
         }
         else {
             // else check permission
-            return SKUtilities.checkPermission(permission, mApplicationContext);
+            return SKUtilities.isPermissionGranted(permission, mApplicationContext);
         }
     }
 
@@ -172,10 +171,13 @@ class SKSensorManager {
         SKSensor sensor = getSensor(sensorType);
         String permission = sensor.getRequiredPermission();
         if (permission != null) {
-            // request permissions
-            ActivityCompat.requestPermissions(activity, new String[]{permission}, 0);
-        }
 
+            if (!SKUtilities.isPermissionGranted(permission, mApplicationContext)) {
+
+                // request permissions
+                SKUtilities.requestPermissions(activity, new String[]{permission});
+            }
+        }
     }
 
     // TODO documentation
@@ -186,7 +188,7 @@ class SKSensorManager {
             return;
         }
 
-        // List that hold all permissions
+        // List that holds all permissions
         List<String> permissionsList = new ArrayList<>();
 
         for (int i = 0; i < SKSensorType.getLength(); i++) {
@@ -194,8 +196,13 @@ class SKSensorManager {
             SKSensor sensor = mSensors.get(i);
             if (sensor != null) {
 
-                // append permission
-                permissionsList.add(sensor.getRequiredPermission());
+                String permission = sensor.getRequiredPermission();
+
+                if (!SKUtilities.isPermissionGranted(permission, mApplicationContext)) {
+
+                    // append permission
+                    permissionsList.add(permission);
+                }
             }
         }
 
@@ -206,7 +213,7 @@ class SKSensorManager {
             String[] permissions = permissionsList.toArray(new String[0]);
 
             // request permissions
-            ActivityCompat.requestPermissions(activity, permissions, 0);
+            SKUtilities.requestPermissions(activity, permissions);
         }
     }
 
