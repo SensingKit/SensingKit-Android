@@ -87,7 +87,7 @@ public class SKMotionActivityData extends SKAbstractData {
      *
      * @return String with a CSV formatted header that describes the data of the Motion Activity sensor.
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "SameReturnValue"})
     @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,activity,activityString,transition,transitionString";

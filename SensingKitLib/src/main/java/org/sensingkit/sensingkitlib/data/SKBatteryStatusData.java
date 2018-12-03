@@ -80,7 +80,7 @@ public class SKBatteryStatusData extends SKAbstractData {
      *
      * @return String with a CSV formatted header that describes the data of the Battery sensor.
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "SameReturnValue"})
     public static String csvHeader() {
         return "timeIntervalSince1970,charge,temperature,voltage,plugged,status,health";
     }

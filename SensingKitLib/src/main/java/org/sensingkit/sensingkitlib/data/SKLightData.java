@@ -56,7 +56,7 @@ public class SKLightData extends SKAbstractData {
      *
      * @return String with a CSV formatted header that describes the data of the Light sensor.
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "SameReturnValue"})
     @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,lux";

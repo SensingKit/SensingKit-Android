@@ -50,7 +50,7 @@ public class SKBeaconProximityData extends SKAbstractData {
      *
      * @return String with a CSV formatted header that describes the data of the Beacon Proximity sensor.
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "SameReturnValue"})
     @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,beaconType,manufacturer,id1,id2,id3,rssi,txPower,distance";

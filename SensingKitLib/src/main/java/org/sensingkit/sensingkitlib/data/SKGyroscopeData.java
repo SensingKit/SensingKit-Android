@@ -62,7 +62,7 @@ public class SKGyroscopeData extends SKAbstractData {
      *
      * @return String with a CSV formatted header that describes the data of the Gyroscope sensor.
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "SameReturnValue"})
     @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,x,y,z";

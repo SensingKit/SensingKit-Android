@@ -56,7 +56,7 @@ public class SKBarometerData extends SKAbstractData {
      *
      * @return String with a CSV formatted header that describes the data of the Barometer sensor.
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "SameReturnValue"})
     @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,pressure";

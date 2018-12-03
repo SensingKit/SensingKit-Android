@@ -62,7 +62,7 @@ public class SKBluetoothData extends SKAbstractData {
      *
      * @return String with a CSV formatted header that describes the data of the Bluetooth sensor.
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "SameReturnValue"})
     @NonNull
     public static String csvHeader() {
         return "timeIntervalSince1970,name,address,rssi";
