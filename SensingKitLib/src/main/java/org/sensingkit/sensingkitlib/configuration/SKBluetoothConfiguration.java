@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 public class SKBluetoothConfiguration extends SKAbstractConfiguration {
 
     public SKBluetoothConfiguration() {
@@ -31,5 +33,9 @@ public class SKBluetoothConfiguration extends SKAbstractConfiguration {
 
     public SKBluetoothConfiguration(SKBluetoothConfiguration configuration) {
         super();
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.BLUETOOTH);
     }
 }

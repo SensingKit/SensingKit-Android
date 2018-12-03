@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 public class SKGyroscopeConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKGyroscopeConfiguration() {
@@ -31,5 +33,9 @@ public class SKGyroscopeConfiguration extends SKAbstractNativeSensorConfiguratio
 
     public SKGyroscopeConfiguration(SKGyroscopeConfiguration configuration) {
         super(configuration.samplingRate);
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.GYROSCOPE);
     }
 }

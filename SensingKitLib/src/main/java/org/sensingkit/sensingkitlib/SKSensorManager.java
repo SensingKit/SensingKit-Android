@@ -126,9 +126,16 @@ class SKSensorManager {
         // If configuration was not provided, get the Default
         if (configuration == null) {
             configuration = SKSensorManager.defaultConfigurationForSensor(sensorType);
+        }  // if configuration is provided, check the type
+        else if (!configuration.isValidForSensor(sensorType)) {
+            throw new SKException(TAG, "Configuration is not compatible with the registered sensor.", SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
         }
 
-        // TODO
+        // Get Sensor
+        SKSensor sensor = getSensor(sensorType);
+
+        // Set the configuration
+        sensor.setConfiguration(configuration);
     }
 
     SKConfiguration getConfiguration(final SKSensorType sensorType) throws SKException {
@@ -137,8 +144,11 @@ class SKSensorManager {
             throw new SKException(TAG, "Sensor is not available in the device.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
         }
 
-        // TODO
-        return null;
+        // Get Sensor
+        SKSensor sensor = getSensor(sensorType);
+
+        // return the configuration
+        return sensor.getConfiguration();
     }
 
     boolean isPermissionGrantedForSensor(final SKSensorType sensorType) throws SKException {

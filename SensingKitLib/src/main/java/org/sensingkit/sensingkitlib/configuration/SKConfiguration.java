@@ -21,6 +21,10 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 public interface SKConfiguration {
+
+    boolean isValidForSensor(final SKSensorType sensorType);
 
 }

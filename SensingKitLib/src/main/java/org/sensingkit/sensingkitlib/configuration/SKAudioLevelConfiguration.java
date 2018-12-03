@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 public class SKAudioLevelConfiguration extends SKAbstractConfiguration {
 
     public SKAudioLevelConfiguration() {
@@ -31,5 +33,9 @@ public class SKAudioLevelConfiguration extends SKAbstractConfiguration {
 
     public SKAudioLevelConfiguration(SKAudioLevelConfiguration configuration) {
         super();
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.AUDIO_LEVEL);
     }
 }

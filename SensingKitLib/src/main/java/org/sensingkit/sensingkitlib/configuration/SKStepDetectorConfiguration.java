@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 public class SKStepDetectorConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKStepDetectorConfiguration() {
@@ -31,5 +33,9 @@ public class SKStepDetectorConfiguration extends SKAbstractNativeSensorConfigura
 
     public SKStepDetectorConfiguration(SKStepDetectorConfiguration configuration) {
         super(configuration.samplingRate);
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.STEP_DETECTOR);
     }
 }

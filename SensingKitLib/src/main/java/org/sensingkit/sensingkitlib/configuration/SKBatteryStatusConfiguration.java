@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 public class SKBatteryStatusConfiguration extends SKAbstractConfiguration {
 
     public SKBatteryStatusConfiguration() {
@@ -31,5 +33,9 @@ public class SKBatteryStatusConfiguration extends SKAbstractConfiguration {
 
     public SKBatteryStatusConfiguration(SKBatteryStatusConfiguration configuration) {
         super();
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.BATTERY_STATUS);
     }
 }

@@ -22,6 +22,7 @@
 package org.sensingkit.sensingkitlib.configuration;
 
 import org.altbeacon.beacon.Identifier;
+import org.sensingkit.sensingkitlib.SKSensorType;
 
 public class SKBeaconProximityConfiguration extends SKAbstractConfiguration {
 
@@ -42,6 +43,10 @@ public class SKBeaconProximityConfiguration extends SKAbstractConfiguration {
     private Identifier filterId1;
     private Identifier filterId2;
     private Identifier filterId3;
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.BEACON_PROXIMITY);
+    }
 
     @SuppressWarnings("unused")
     public SKBeaconProximityConfiguration() {

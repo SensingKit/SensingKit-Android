@@ -23,6 +23,8 @@ package org.sensingkit.sensingkitlib.configuration;
 
 import com.google.android.gms.location.LocationRequest;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 public class SKLocationConfiguration extends SKAbstractConfiguration {
 
     public final class Priority {
@@ -57,6 +59,10 @@ public class SKLocationConfiguration extends SKAbstractConfiguration {
         this.priority = configuration.priority;
         this.interval = configuration.interval;
         this.fastestInterval = configuration.fastestInterval;
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.LOCATION);
     }
 
     @SuppressWarnings("unused")

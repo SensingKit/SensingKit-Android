@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 public class SKHumidityConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKHumidityConfiguration() {
@@ -31,5 +33,9 @@ public class SKHumidityConfiguration extends SKAbstractNativeSensorConfiguration
 
     public SKHumidityConfiguration(SKHumidityConfiguration configuration) {
         super(configuration.samplingRate);
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.HUMIDITY);
     }
 }

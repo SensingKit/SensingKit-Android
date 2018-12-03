@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 public class SKAmbientTemperatureConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKAmbientTemperatureConfiguration() {
@@ -31,5 +33,9 @@ public class SKAmbientTemperatureConfiguration extends SKAbstractNativeSensorCon
 
     public SKAmbientTemperatureConfiguration(SKAmbientTemperatureConfiguration configuration) {
         super(configuration.samplingRate);
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.AMBIENT_TEMPERATURE);
     }
 }

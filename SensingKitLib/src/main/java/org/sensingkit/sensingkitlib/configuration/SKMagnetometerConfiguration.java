@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 public class SKMagnetometerConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKMagnetometerConfiguration() {
@@ -31,5 +33,9 @@ public class SKMagnetometerConfiguration extends SKAbstractNativeSensorConfigura
 
     public SKMagnetometerConfiguration(SKMagnetometerConfiguration configuration) {
         super(configuration.samplingRate);
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.MAGNETOMETER);
     }
 }

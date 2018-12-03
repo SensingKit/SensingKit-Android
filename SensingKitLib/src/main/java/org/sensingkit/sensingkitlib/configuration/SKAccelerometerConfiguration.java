@@ -21,6 +21,9 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+import org.sensingkit.sensingkitlib.sensors.SKAccelerometer;
+
 public class SKAccelerometerConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKAccelerometerConfiguration() {
@@ -31,5 +34,9 @@ public class SKAccelerometerConfiguration extends SKAbstractNativeSensorConfigur
 
     public SKAccelerometerConfiguration(SKAccelerometerConfiguration configuration) {
         super(configuration.samplingRate);
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.ACCELEROMETER);
     }
 }

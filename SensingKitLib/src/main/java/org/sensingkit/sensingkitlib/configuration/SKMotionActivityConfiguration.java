@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 public class SKMotionActivityConfiguration extends SKAbstractConfiguration {
 
     // Tracked Activities
@@ -63,6 +65,10 @@ public class SKMotionActivityConfiguration extends SKAbstractConfiguration {
         this.trackRunning = configuration.trackRunning;
         this.trackAutomotive = configuration.trackAutomotive;
         this.trackCycling = configuration.trackCycling;
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.MOTION_ACTIVITY);
     }
 
     @SuppressWarnings("unused")

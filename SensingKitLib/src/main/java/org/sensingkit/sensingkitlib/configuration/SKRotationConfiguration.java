@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 public class SKRotationConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKRotationConfiguration() {
@@ -31,5 +33,9 @@ public class SKRotationConfiguration extends SKAbstractNativeSensorConfiguration
 
     public SKRotationConfiguration(SKRotationConfiguration configuration) {
         super(configuration.samplingRate);
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.ROTATION);
     }
 }

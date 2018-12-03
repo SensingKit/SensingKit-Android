@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 public class SKBarometerConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKBarometerConfiguration() {
@@ -31,5 +33,9 @@ public class SKBarometerConfiguration extends SKAbstractNativeSensorConfiguratio
 
     public SKBarometerConfiguration(SKBarometerConfiguration configuration) {
         super(configuration.samplingRate);
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.BAROMETER);
     }
 }

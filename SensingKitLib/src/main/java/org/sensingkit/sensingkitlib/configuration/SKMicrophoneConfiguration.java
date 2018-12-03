@@ -24,6 +24,8 @@ package org.sensingkit.sensingkitlib.configuration;
 import android.media.MediaRecorder;
 import android.os.Environment;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 import java.io.File;
 
 public class SKMicrophoneConfiguration extends SKAbstractConfiguration {
@@ -103,6 +105,10 @@ public class SKMicrophoneConfiguration extends SKAbstractConfiguration {
         this.bitrate = configuration.bitrate;
         this.samplingRate = configuration.samplingRate;
         this.audioChannels = configuration.audioChannels;
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.MICROPHONE);
     }
 
     @SuppressWarnings("unused")

@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 public class SKScreenStatusConfiguration extends SKAbstractConfiguration {
 
     public SKScreenStatusConfiguration() {
@@ -31,5 +33,9 @@ public class SKScreenStatusConfiguration extends SKAbstractConfiguration {
 
     public SKScreenStatusConfiguration(SKScreenStatusConfiguration configuration) {
         super();
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.SCREEN_STATUS);
     }
 }

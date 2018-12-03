@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 public class SKGravityConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKGravityConfiguration() {
@@ -31,5 +33,9 @@ public class SKGravityConfiguration extends SKAbstractNativeSensorConfiguration 
 
     public SKGravityConfiguration(SKGravityConfiguration configuration) {
         super(configuration.samplingRate);
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.GRAVITY);
     }
 }

@@ -22,6 +22,8 @@
 package org.sensingkit.sensingkitlib.configuration;
 
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 public class SKNotificationConfiguration extends SKAbstractConfiguration {
 
     public SKNotificationConfiguration() {
@@ -32,5 +34,9 @@ public class SKNotificationConfiguration extends SKAbstractConfiguration {
 
     public SKNotificationConfiguration(SKNotificationConfiguration configuration) {
         super();
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.NOTIFICATION);
     }
 }

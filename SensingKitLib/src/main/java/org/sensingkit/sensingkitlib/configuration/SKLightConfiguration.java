@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 public class SKLightConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKLightConfiguration() {
@@ -31,5 +33,9 @@ public class SKLightConfiguration extends SKAbstractNativeSensorConfiguration {
 
     public SKLightConfiguration(SKLightConfiguration configuration) {
         super(configuration.samplingRate);
+    }
+
+    public boolean isValidForSensor(final SKSensorType sensorType) {
+        return (sensorType == SKSensorType.LIGHT);
     }
 }
