@@ -110,7 +110,7 @@ public final class SKSensorUtilities {
                 return SKNotificationData.csvHeader();
 
             default:
-                throw new RuntimeException();
+                throw new RuntimeException("csvHeader for Sensor '" + sensorType.getName() + "' is missing.");
         }
     }
 
@@ -198,7 +198,7 @@ public final class SKSensorUtilities {
                 return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2;
 
             default:
-                throw new RuntimeException();
+                throw new RuntimeException("Availability check for Sensor '" + sensorType.getName() + "' is missing.");
         }
     }
 

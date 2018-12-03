@@ -362,7 +362,7 @@ class SKSensorManager {
             // Don't forget the break; here
 
             default:
-                throw new RuntimeException();
+                throw new RuntimeException("createSensor case for Sensor '" + sensorType.getName() + "' is missing.");
         }
 
         return sensor;
@@ -461,7 +461,7 @@ class SKSensorManager {
             // Don't forget the break; here
 
             default:
-                throw new RuntimeException();
+                throw new RuntimeException("Default configuration for Sensor '" + sensorType.getName() + "' is missing.");
         }
 
         return configuration;
