@@ -42,8 +42,8 @@ class SKSensorManager {
     private static final String TAG = SKSensorManager.class.getSimpleName();
 
     private static SKSensorManager sSensorManager;
-    private final Context mApplicationContext;
 
+    private final Context mApplicationContext;
     private final SparseArray<SKAbstractSensor> mSensors;
 
     static SKSensorManager getSensorManager(final @NonNull Context context) {
@@ -62,7 +62,6 @@ class SKSensorManager {
         // Init Sensor Array
         mSensors = new SparseArray<>(SKSensorType.getLength());
     }
-
 
     /**
      *  Initializes and registers a sensor into the library with a default sensor configuration.
@@ -502,6 +501,9 @@ class SKSensorManager {
             throw new SKException(TAG, "Sensor [" + sensorType.getName() + "] is already sensing.", SKExceptionErrorCode.SENSOR_CURRENTLY_SENSING);
         }
 
+        // Request WakeLock
+        SKWakeLockManager.getInstance(mApplicationContext).acquireWakeLock();
+
         // Start Sensing
         getSensor(sensorType).startSensing();
     }
@@ -523,6 +525,9 @@ class SKSensorManager {
 
         // Stop Sensing
         sensor.stopSensing();
+
+        // Release WakeLock
+        SKWakeLockManager.getInstance(mApplicationContext).releaseWakeLock();
     }
 
     /**

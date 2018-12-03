@@ -21,10 +21,8 @@
 
 package org.sensingkit.sensingkitlib;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.os.PowerManager;
 import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
@@ -39,7 +37,6 @@ public class SensingKitLib implements SensingKitLibInterface {
     private static SensingKitLib sSensingKitLib;
 
     private final Context mApplicationContext;
-    private PowerManager.WakeLock mWakeLock;
 
     private final SKSensorManager mSensorManager;
 
@@ -245,29 +242,4 @@ public class SensingKitLib implements SensingKitLibInterface {
         return SKUtilities.getNanoTime();
     }
 
-    //region Wake Lock methods
-
-    private void acquireWakeLock(final long timeout) throws SKException {
-        if ((mWakeLock == null) || (!mWakeLock.isHeld())) {
-            PowerManager pm = (PowerManager) mApplicationContext.getSystemService(Context.POWER_SERVICE);
-            if (pm == null) {
-                throw new SKException(TAG, "Could not access the system service: POWER_SERVICE.", SKExceptionErrorCode.UNKNOWN_ERROR);
-            }
-            mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "SensingKit:WakeLock");
-            mWakeLock.acquire(timeout);
-        }
-    }
-
-    private void releaseWakeLock() {
-        if (mWakeLock != null && mWakeLock.isHeld()) {
-            mWakeLock.release();
-        }
-    }
-
-    private boolean checkWakeLockPermission() throws SKException {
-        return SKUtilities.checkPermission(
-                Manifest.permission.WAKE_LOCK, mApplicationContext);
-    }
-
-    //endregion
 }
