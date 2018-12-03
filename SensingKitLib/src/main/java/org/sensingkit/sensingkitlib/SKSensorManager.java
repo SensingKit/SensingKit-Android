@@ -203,10 +203,13 @@ class SKSensorManager {
 
                 String permission = sensor.getRequiredPermission();
 
-                if (!SKUtilities.isPermissionGranted(permission, mApplicationContext)) {
+                if (permission != null) {
 
-                    // append permission
-                    permissionsList.add(permission);
+                    if (!SKUtilities.isPermissionGranted(permission, mApplicationContext)) {
+
+                        // append permission
+                        permissionsList.add(permission);
+                    }
                 }
             }
         }
