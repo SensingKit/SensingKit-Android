@@ -36,6 +36,8 @@ public class SKMotionActivityIntentService extends IntentService {
     @SuppressWarnings("unused")
     private static final String TAG = SKMotionActivityIntentService.class.getSimpleName();
 
+    private final LocalBroadcastManager mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);
+
     public SKMotionActivityIntentService() {
 
         // Set the label for the service's background thread
@@ -51,9 +53,6 @@ public class SKMotionActivityIntentService extends IntentService {
 
         // If the intent contains an update
         if (ActivityTransitionResult.hasResult(intent)) {
-
-            // init local manager
-            LocalBroadcastManager manager = LocalBroadcastManager.getInstance(this);
 
             // Get the update
             ActivityTransitionResult result = ActivityTransitionResult.extractResult(intent);
@@ -71,7 +70,7 @@ public class SKMotionActivityIntentService extends IntentService {
                 i.putExtra("elapsedRealTimeNanos", event.getElapsedRealTimeNanos());
 
                 // send the broadcast to the SKMotionActivity.BroadcastReceiver
-                manager.sendBroadcast(i);
+                mLocalBroadcastManager.sendBroadcast(i);
             }
         }
     }

@@ -60,7 +60,7 @@ public class SKMotionActivity extends SKAbstractSensor {
     private ActivityRecognitionClient mActivityRecognitionClient;
     private PendingIntent mActivityRecognitionPendingIntent;
     private List<ActivityTransition> mRegisteredTransitions;
-    private LocalBroadcastManager mLocalBroadcastManager;
+    private final LocalBroadcastManager mLocalBroadcastManager;
 
     public SKMotionActivity(final @NonNull Context context, final @NonNull SKMotionActivityConfiguration configuration) throws SKException {
         super(context, SKSensorType.MOTION_ACTIVITY, configuration);

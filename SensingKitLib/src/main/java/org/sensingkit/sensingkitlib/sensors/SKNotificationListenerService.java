@@ -27,12 +27,15 @@ import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class SKNotificationListenerService extends NotificationListenerService {
 
     public static final String NOTIFICATION_ACTION = "org.sensingkit.SensingKit-Android.SKNotificationListenerService";
+
+    private final LocalBroadcastManager mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);
 
     @SuppressWarnings("unused")
     private static final String TAG = SKNotificationListenerService.class.getSimpleName();
@@ -54,12 +57,13 @@ public class SKNotificationListenerService extends NotificationListenerService {
 
     private void sendNotification(final @NonNull String actionType, final @NonNull StatusBarNotification sbn) {
 
+        // Build intent
         Intent i = new Intent(NOTIFICATION_ACTION);
         i.putExtra("actionType", actionType);
         i.putExtra("postTime", sbn.getPostTime());
         i.putExtra("packageName", sbn.getPackageName());
 
         // send the broadcast to the SKNotification.NotificationServiceReceiver
-        sendBroadcast(i);
+        mLocalBroadcastManager.sendBroadcast(i);
     }
 }
