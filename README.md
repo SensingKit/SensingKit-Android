@@ -133,27 +133,21 @@ mSensingKit.stopContinuousSensingWithSensor(SKSensorType.LIGHT);
 
 ## Required Permissions
 
-Depending on the used sensor and its configuration, some additional permissions are required to be granted by the user. Using the following example you can request permission to access the Microphone sensor for recording audio (`RECORD_AUDIO`):
+Depending on the used sensor and its configuration, some additional permissions are required to be granted by the user. SensingKit automates this process by providing the following APIs:
 
 ```java
-public void requestPermissions() {
-    if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] {
-                    Manifest.permission.RECORD_AUDIO
-            }, 0);
-    }
-}
+boolean isPermissionGrantedForSensor(final SKSensorType sensorType) throws SKException;
 
-@Override
-public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-    if (requestCode == 0) {
-        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            // Permission was granted, all good.
-        }
-        else {
-            // Report error.
-        }
-    }
+void requestPermissionForSensor(final SKSensorType sensorType, final @NonNull Activity activity) throws SKException;
+
+void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity) throws SKException;
+```
+
+For example, in order to request permission to access the Location sensor:
+
+```java
+if (!isPermissionGrantedForSensor(SKSensorType.LOCATION) {
+    requestPermissionForSensor(SKSensorType.LOCATION, this);
 }
 ```
 
@@ -163,7 +157,7 @@ You will also need to add a `<uses-permission>` element in your app manifest, as
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="org.sensingkit.crowdsensing_android">
 
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- other permissions go here -->
 
     <application ...>
@@ -172,24 +166,45 @@ You will also need to add a `<uses-permission>` element in your app manifest, as
 </manifest>
 ```
 
-The permissions needed by the following SensingKit sensors are:
-
-### Microphone
-
-- `RECORD_AUDIO`
-
+The permissions required by the following SensingKit sensors are:
 
 ### Location
-- `ACCESS_FINE_LOCATION`
+- `android.permission.ACCESS_FINE_LOCATION`
 
 
 ### Motion Activity
 
-- `com.google.android.gms.permission.ACTIVITY_RECOGNITION` (in Manifest only)
+- `com.google.android.gms.permission.ACTIVITY_RECOGNITION`
+
+
+### Microphone
+
+- `android.permission.RECORD_AUDIO`
+
+
+### Bluetooth
+
+- `android.permission.BLUETOOTH`
+- `android.permission.BLUETOOTH_ADMIN`
+
+
+### Beacon Proximity
+
+- `android.permission.ACCESS_FINE_LOCATION`
 
 
 For more information about Android's App Permissions, please visit: https://developer.android.com/training/permissions/requesting.
 
+
+### Special Permissions
+
+Some sensors (i.e. the Notification sensor at this moment) require some special actions from the user to acquire permision to access it. The user needs to visit the phone's `Settings > Advanced > App Permissions > Special app access` and grant the special access to the app (i.e. `Notification access` in the case of Notification sensor).
+
+This long proccess can be simplified by sending the user directly to that screen, using the following call:
+
+```java
+startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
+```
 
 
 For a complete description of our API, please refer to the [project website](https://www.sensingkit.org).
