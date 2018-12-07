@@ -28,6 +28,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.io.File;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class SKMicrophoneConfiguration extends SKAbstractConfiguration {
 
     public final class AudioSource {
