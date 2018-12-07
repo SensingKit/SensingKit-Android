@@ -23,8 +23,11 @@ package org.sensingkit.sensingkitlib.configuration;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+@SuppressWarnings("unused")
 public interface SKConfiguration {
 
     boolean isValidForSensor(final SKSensorType sensorType);
 
+    void setRequestWakeLock(final boolean requestWakeLock);
+    boolean getRequestWakeLock();
 }

@@ -21,24 +21,24 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+@SuppressWarnings("unused")
 public abstract class SKAbstractConfiguration implements SKConfiguration {
 
-    //protected boolean requestPermissions;
+    private boolean requestWakeLock;
 
     // TODO: Add Documentation
+    public SKAbstractConfiguration() {
 
-//    public SKAbstractConfiguration() {
-//
-//        // Set default
-//        this.requestPermissions = true;
-//    }
-//
-//    public void setRequestPermissions(final boolean requestPermissions) {
-//        this.requestPermissions = requestPermissions;
-//    }
-//
-//    public boolean getRequestPermissions() {
-//        return this.requestPermissions;
-//    }
+        // Set default
+        this.requestWakeLock = true;
+    }
+
+    public void setRequestWakeLock(final boolean requestWakeLock) {
+        this.requestWakeLock = requestWakeLock;
+    }
+
+    public boolean getRequestWakeLock() {
+        return this.requestWakeLock;
+    }
 
 }

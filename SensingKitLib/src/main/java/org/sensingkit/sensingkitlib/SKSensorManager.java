@@ -527,7 +527,9 @@ class SKSensorManager {
         }
 
         // Request WakeLock
-        SKWakeLockManager.getInstance(mApplicationContext).acquireWakeLock();
+        if (getSensor(sensorType).getConfiguration().getRequestWakeLock()) {
+            SKWakeLockManager.getInstance(mApplicationContext).acquireWakeLock();
+        }
 
         // Start Sensing
         getSensor(sensorType).startSensing();
@@ -552,7 +554,9 @@ class SKSensorManager {
         sensor.stopSensing();
 
         // Release WakeLock
-        SKWakeLockManager.getInstance(mApplicationContext).releaseWakeLock();
+        if (getSensor(sensorType).getConfiguration().getRequestWakeLock()) {
+            SKWakeLockManager.getInstance(mApplicationContext).releaseWakeLock();
+        }
     }
 
     /**
