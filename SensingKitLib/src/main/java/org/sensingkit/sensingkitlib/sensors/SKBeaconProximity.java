@@ -39,7 +39,7 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKBeaconProximityConfiguration;
-import org.sensingkit.sensingkitlib.configuration.SKBeaconProximityConfiguration.BeaconType;
+import org.sensingkit.sensingkitlib.configuration.SKBeaconProximityConfiguration.SKBeaconType;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKBeaconProximityCollectionData;
@@ -202,7 +202,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
         mBeaconManager.unbind(this);
     }
 
-    private static String getBeaconLayout(final BeaconType beaconType) {
+    private static String getBeaconLayout(final SKBeaconType beaconType) {
 
         switch (beaconType) {
 
