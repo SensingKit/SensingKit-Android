@@ -32,6 +32,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
+@SuppressWarnings("WeakerAccess")
 public class SKBeaconProximityData extends SKAbstractData {
 
     @SuppressWarnings("unused")

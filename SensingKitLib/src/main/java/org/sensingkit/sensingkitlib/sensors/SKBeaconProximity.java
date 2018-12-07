@@ -21,6 +21,7 @@
 
 package org.sensingkit.sensingkitlib.sensors;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -38,6 +39,7 @@ import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKBeaconProximityConfiguration;
+import org.sensingkit.sensingkitlib.configuration.SKBeaconProximityConfiguration.BeaconType;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKBeaconProximityCollectionData;
@@ -200,23 +202,23 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
         mBeaconManager.unbind(this);
     }
 
-    private static String getBeaconLayout(final int beaconType) {
+    private static String getBeaconLayout(final BeaconType beaconType) {
 
         switch (beaconType) {
 
-            case SKBeaconProximityConfiguration.BeaconType.ALTBEACON:
+            case ALTBEACON:
                 return "m:2-3=beac,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25";
 
-            case SKBeaconProximityConfiguration.BeaconType.IBEACON:
+            case IBEACON:
                 return "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24";
 
-            case SKBeaconProximityConfiguration.BeaconType.EDDYSTONE_UID:
+            case EDDYSTONE_UID:
                 return "s:0-1=feaa,m:2-2=00,p:3-3:-41,i:4-13,i:14-19";
 
-            //case SKBeaconProximityConfiguration.BeaconType.EDDYSTONE_TLM:
+            //case EDDYSTONE_TLM:
             //    return "x,s:0-1=feaa,m:2-2=20,d:3-3,d:4-5,d:6-7,d:8-11,d:12-15";
 
-            //case SKBeaconProximityConfiguration.BeaconType.EDDYSTONE_URL:
+            //case EDDYSTONE_URL:
             //    return "s:0-1=feaa,m:2-2=10,p:3-3:-41,i:4-21v";
 
             default:

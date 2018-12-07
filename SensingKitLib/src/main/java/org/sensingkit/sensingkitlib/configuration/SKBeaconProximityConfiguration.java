@@ -24,20 +24,17 @@ package org.sensingkit.sensingkitlib.configuration;
 import org.altbeacon.beacon.Identifier;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
+@SuppressWarnings("WeakerAccess")
 public class SKBeaconProximityConfiguration extends SKAbstractConfiguration {
 
-    public final class BeaconType {
+    public enum BeaconType {
 
-        public static final int ALTBEACON = 0;
-        public static final int IBEACON = 1;
-        public static final int EDDYSTONE_UID = 2;
-
-        BeaconType() {
-            throw new RuntimeException();
-        }
+        ALTBEACON,
+        IBEACON,
+        EDDYSTONE_UID
     }
 
-    private int beaconType;
+    private BeaconType beaconType;
 
     // Filters
     private Identifier filterId1;
@@ -50,25 +47,30 @@ public class SKBeaconProximityConfiguration extends SKAbstractConfiguration {
 
     @SuppressWarnings("unused")
     public SKBeaconProximityConfiguration() {
-        this(null, null, null);
+        this(BeaconType.ALTBEACON, null, null, null);
     }
 
     @SuppressWarnings("unused")
-    public SKBeaconProximityConfiguration(Identifier filterId1) {
-        this(filterId1, null, null);
+    public SKBeaconProximityConfiguration(final BeaconType beaconType) {
+        this(beaconType, null, null, null);
     }
 
     @SuppressWarnings("unused")
-    public SKBeaconProximityConfiguration(Identifier filterId1, Identifier filterId2) {
-        this(filterId1, filterId2, null);
+    public SKBeaconProximityConfiguration(final BeaconType beaconType, Identifier filterId1) {
+        this(beaconType, filterId1, null, null);
     }
 
     @SuppressWarnings("unused")
-    public SKBeaconProximityConfiguration(Identifier filterId1, Identifier filterId2, Identifier filterId3) {
+    public SKBeaconProximityConfiguration(final BeaconType beaconType, Identifier filterId1, Identifier filterId2) {
+        this(beaconType, filterId1, filterId2, null);
+    }
+
+    @SuppressWarnings("unused")
+    public SKBeaconProximityConfiguration(final BeaconType beaconType, Identifier filterId1, Identifier filterId2, Identifier filterId3) {
         super();
 
         // Set default values
-        beaconType = BeaconType.ALTBEACON;
+        this.beaconType = beaconType;
         this.filterId1 = filterId1;
         this.filterId2 = filterId2;
         this.filterId3 = filterId3;
@@ -85,12 +87,12 @@ public class SKBeaconProximityConfiguration extends SKAbstractConfiguration {
     }
 
     @SuppressWarnings("unused")
-    public int getBeaconType() {
+    public BeaconType getBeaconType() {
         return beaconType;
     }
 
     @SuppressWarnings("unused")
-    public void setBeaconType(final int beaconType) {
+    public void setBeaconType(final BeaconType beaconType) {
         this.beaconType = beaconType;
     }
 
