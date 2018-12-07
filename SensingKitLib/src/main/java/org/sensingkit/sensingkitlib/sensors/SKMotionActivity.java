@@ -67,7 +67,6 @@ public class SKMotionActivity extends SKAbstractSensor {
         super(context, SKSensorType.MOTION_ACTIVITY, configuration);
 
         mActivityRecognitionClient = ActivityRecognition.getClient(mApplicationContext);
-        mRegisteredTransitions = buildTransitions(configuration);
 
         registerLocalBroadcastManager();
 
@@ -109,37 +108,37 @@ public class SKMotionActivity extends SKAbstractSensor {
         List<ActivityTransition> transitions = new ArrayList<>();
 
         if (configuration.getTrackStationary()) {
-            registerTrackedActivity(DetectedActivity.STILL);
+            registerTrackedActivity(transitions, DetectedActivity.STILL);
         }
 
         if (configuration.getTrackWalking()) {
-            registerTrackedActivity(DetectedActivity.WALKING);
+            registerTrackedActivity(transitions, DetectedActivity.WALKING);
         }
 
         if (configuration.getTrackRunning()) {
-            registerTrackedActivity(DetectedActivity.RUNNING);
+            registerTrackedActivity(transitions, DetectedActivity.RUNNING);
         }
 
         if (configuration.getTrackAutomotive()) {
-            registerTrackedActivity(DetectedActivity.IN_VEHICLE);
+            registerTrackedActivity(transitions, DetectedActivity.IN_VEHICLE);
         }
 
         if (configuration.getTrackCycling()) {
-            registerTrackedActivity(DetectedActivity.ON_BICYCLE);
+            registerTrackedActivity(transitions, DetectedActivity.ON_BICYCLE);
         }
 
         return transitions;
     }
 
-    private void registerTrackedActivity(final int activity) {
+    private void registerTrackedActivity(@NonNull List<ActivityTransition> transitions, final int activity) {
 
-        mRegisteredTransitions.add(
+        transitions.add(
                 new ActivityTransition.Builder()
                         .setActivityType(activity)
                         .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
                         .build());
 
-        mRegisteredTransitions.add(
+        transitions.add(
                 new ActivityTransition.Builder()
                         .setActivityType(activity)
                         .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
