@@ -54,12 +54,12 @@ public class SKNotificationListenerService extends NotificationListenerService {
 
     private void sendNotification(final @NonNull String actionType, final @NonNull StatusBarNotification sbn) {
 
-        Intent i2 = new Intent(NOTIFICATION_ACTION);
-        i2.putExtra("actionType", actionType);
-        i2.putExtra("postTime", sbn.getPostTime());
-        i2.putExtra("packageName", sbn.getPackageName());
+        Intent i = new Intent(NOTIFICATION_ACTION);
+        i.putExtra("actionType", actionType);
+        i.putExtra("postTime", sbn.getPostTime());
+        i.putExtra("packageName", sbn.getPackageName());
 
         // send the broadcast to the SKNotification.NotificationServiceReceiver
-        sendBroadcast(i2);
+        sendBroadcast(i);
     }
 }
