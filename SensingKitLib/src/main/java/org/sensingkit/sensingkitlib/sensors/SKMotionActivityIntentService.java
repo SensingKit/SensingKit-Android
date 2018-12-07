@@ -24,16 +24,17 @@ package org.sensingkit.sensingkitlib.sensors;
 import android.app.IntentService;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
+import com.google.android.gms.location.ActivityTransitionEvent;
 import com.google.android.gms.location.ActivityTransitionResult;
 
 public class SKMotionActivityIntentService extends IntentService {
 
+    public static final String ACTIVITY_TRANSITION_ACTION = "org.sensingkit.SensingKit-Android.SKMotionActivityIntentService";
+
     @SuppressWarnings("unused")
     private static final String TAG = SKMotionActivityIntentService.class.getSimpleName();
-
-    static final String RECOGNITION_RESULT = "result";
-    static final String BROADCAST_UPDATE = "new_update";
 
     public SKMotionActivityIntentService() {
 
@@ -51,15 +52,27 @@ public class SKMotionActivityIntentService extends IntentService {
         // If the intent contains an update
         if (ActivityTransitionResult.hasResult(intent)) {
 
+            // init local manager
+            LocalBroadcastManager manager = LocalBroadcastManager.getInstance(this);
+
             // Get the update
             ActivityTransitionResult result = ActivityTransitionResult.extractResult(intent);
 
-            Intent i = new Intent(BROADCAST_UPDATE);
-            i.putExtra(RECOGNITION_RESULT, result);
-            LocalBroadcastManager manager = LocalBroadcastManager.getInstance(this);
-            manager.sendBroadcast(i);
+            if (result == null) {
+                return;
+            }
+
+            for (ActivityTransitionEvent event : result.getTransitionEvents()) {
+                // chronological sequence of events.
+
+                Intent i = new Intent(ACTIVITY_TRANSITION_ACTION);
+                i.putExtra("activityType", event.getActivityType());
+                i.putExtra("transitionType", event.getTransitionType());
+                i.putExtra("elapsedRealTimeNanos", event.getElapsedRealTimeNanos());
+
+                // send the broadcast to the SKMotionActivity.BroadcastReceiver
+                manager.sendBroadcast(i);
+            }
         }
-
     }
-
 }

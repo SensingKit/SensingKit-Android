@@ -34,9 +34,7 @@ import android.util.Log;
 import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.ActivityRecognitionClient;
 import com.google.android.gms.location.ActivityTransition;
-import com.google.android.gms.location.ActivityTransitionEvent;
 import com.google.android.gms.location.ActivityTransitionRequest;
-import com.google.android.gms.location.ActivityTransitionResult;
 import com.google.android.gms.location.DetectedActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -62,13 +60,13 @@ public class SKMotionActivity extends SKAbstractSensor {
     private ActivityRecognitionClient mActivityRecognitionClient;
     private PendingIntent mActivityRecognitionPendingIntent;
     private List<ActivityTransition> mRegisteredTransitions;
+    private LocalBroadcastManager mLocalBroadcastManager;
 
     public SKMotionActivity(final @NonNull Context context, final @NonNull SKMotionActivityConfiguration configuration) throws SKException {
         super(context, SKSensorType.MOTION_ACTIVITY, configuration);
 
         mActivityRecognitionClient = ActivityRecognition.getClient(mApplicationContext);
-
-        registerLocalBroadcastManager();
+        mLocalBroadcastManager = LocalBroadcastManager.getInstance(mApplicationContext);
 
         Intent intent = new Intent(mApplicationContext, SKMotionActivityIntentService.class);
         mActivityRecognitionPendingIntent = PendingIntent.getService(mApplicationContext, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -78,27 +76,15 @@ public class SKMotionActivity extends SKAbstractSensor {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            if (ActivityTransitionResult.hasResult(intent)) {
+            int activityType = intent.getIntExtra("activityType", -1);
+            int transitionType = intent.getIntExtra("transitionType", -1);
+            //long timestamp = intent.getLongExtra("elapsedRealTimeNanos", -1); // TODO: fix
 
-                ActivityTransitionResult result = ActivityTransitionResult.extractResult(intent);
+            // Build the data object
+            SKAbstractData data = new SKMotionActivityData(System.currentTimeMillis(), activityType, transitionType);
 
-                if (result == null) { return; }
-
-                for (ActivityTransitionEvent event : result.getTransitionEvents()) {
-                    // chronological sequence of events.
-
-                    int activityType = event.getActivityType();
-                    int transitionType = event.getTransitionType();
-                    long timestamp = event.getElapsedRealTimeNanos(); // TODO: fix
-
-
-                    // Build the data object
-                    SKAbstractData data = new SKMotionActivityData(timestamp, activityType, transitionType);
-
-                    // Submit sensor data object
-                    submitSensorData(data);
-                }
-            }
+            // Submit sensor data object
+            submitSensorData(data);
         }
     };
 
@@ -150,6 +136,11 @@ public class SKMotionActivity extends SKAbstractSensor {
 
         super.startSensing();
 
+        // Register Receiver
+        IntentFilter filter = new IntentFilter(SKMotionActivityIntentService.ACTIVITY_TRANSITION_ACTION);
+        mLocalBroadcastManager.registerReceiver(mBroadcastReceiver, filter);
+
+        assert(mRegisteredTransitions != null);
         ActivityTransitionRequest request = new ActivityTransitionRequest(mRegisteredTransitions);
 
         @SuppressLint("MissingPermission")
@@ -196,19 +187,10 @@ public class SKMotionActivity extends SKAbstractSensor {
                     }
                 });
 
-        unregisterLocalBroadcastManager();
+        // Unregister receiver
+        this.mLocalBroadcastManager.unregisterReceiver(mBroadcastReceiver);
 
         super.stopSensing();
-    }
-
-    private void registerLocalBroadcastManager() {
-        LocalBroadcastManager manager = LocalBroadcastManager.getInstance(mApplicationContext);
-        manager.registerReceiver(mBroadcastReceiver, new IntentFilter(SKMotionActivityIntentService.BROADCAST_UPDATE));
-    }
-
-    private void unregisterLocalBroadcastManager() {
-        LocalBroadcastManager manager = LocalBroadcastManager.getInstance(mApplicationContext);
-        manager.unregisterReceiver(mBroadcastReceiver);
     }
 
     @Override
