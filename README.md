@@ -196,7 +196,7 @@ The permissions required by the following SensingKit sensors are:
 For more information about Android's App Permissions, please visit: https://developer.android.com/training/permissions/requesting.
 
 
-### Special Permissions
+## Special Permissions
 
 Some sensors (i.e. the Notification sensor at this moment) require some special actions from the user to acquire permision to access it. The user needs to visit the phone's `Settings > Advanced > App Permissions > Special app access` and grant the special access to the app (i.e. `Notification access` in the case of Notification sensor).
 
