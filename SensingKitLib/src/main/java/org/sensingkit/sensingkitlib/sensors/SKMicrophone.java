@@ -140,7 +140,7 @@ public class SKMicrophone extends SKAbstractSensor {
     }
 
     @Override
-    public String getRequiredPermission() {
-        return Manifest.permission.RECORD_AUDIO;
+    public String[] getRequiredPermissions() {
+        return new String[]{Manifest.permission.RECORD_AUDIO};
     }
 }

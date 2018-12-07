@@ -130,8 +130,8 @@ public class SKLocation extends SKAbstractSensor {
     }
 
     @Override
-    public String getRequiredPermission() {
-        return Manifest.permission.ACCESS_FINE_LOCATION;
+    public String[] getRequiredPermissions() {
+        return new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
     }
 
 }

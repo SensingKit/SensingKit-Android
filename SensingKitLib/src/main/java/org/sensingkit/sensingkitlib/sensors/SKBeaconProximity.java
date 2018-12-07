@@ -227,7 +227,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
     }
 
     @Override
-    public String getRequiredPermission() {
-        return Manifest.permission.ACCESS_FINE_LOCATION;
+    public String[] getRequiredPermissions() {
+        return new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
     }
 }

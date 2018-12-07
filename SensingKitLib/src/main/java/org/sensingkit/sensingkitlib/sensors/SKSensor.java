@@ -47,5 +47,5 @@ public interface SKSensor {
 
     void sensorDeregistered();
 
-    String getRequiredPermission();
+    String[] getRequiredPermissions();
 }

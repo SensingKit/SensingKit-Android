@@ -32,6 +32,7 @@ import org.sensingkit.sensingkitlib.sensors.*;
 import org.sensingkit.sensingkitlib.configuration.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @SuppressWarnings({"StaticFieldLeak"})
@@ -151,37 +152,55 @@ class SKSensorManager {
         return sensor.getConfiguration();
     }
 
+    private @NonNull String[] filterPermissions(final String[] permissions) {
+
+        if (permissions == null || permissions.length == 0) {
+            return new String[]{};
+        }
+
+        // List that holds all permissions
+        List<String> permissionsList = new ArrayList<>();
+
+        for (String permission : permissions) {
+
+            if (SKUtilities.isPermissionGranted(permission, mApplicationContext)) { // TODO: CHECK FILTER
+                permissionsList.add(permission);
+            }
+        }
+
+        return permissionsList.toArray(new String[0]);
+    }
+
     boolean isPermissionGrantedForSensor(final SKSensorType sensorType) throws SKException {
 
         SKSensor sensor = getSensor(sensorType);
-        String permission = sensor.getRequiredPermission();
+        String[] permissions = sensor.getRequiredPermissions();
 
         // if null, no permission is required
-        if (permission == null) {
+        if (permissions == null || permissions.length == 0) {
             return true;
         }
         else {
-            // else check permission
-            return SKUtilities.isPermissionGranted(permission, mApplicationContext);
+            // Only keep permissions that are not granted
+            String[] filteredPermissions = filterPermissions(permissions);
+            return(filteredPermissions.length != 0);
         }
     }
 
     void requestPermissionForSensor(final SKSensorType sensorType, final @NonNull Activity activity) throws SKException {
 
         SKSensor sensor = getSensor(sensorType);
-        String permission = sensor.getRequiredPermission();
-        if (permission != null) {
+        String[] permissions = sensor.getRequiredPermissions();
 
-            if (!SKUtilities.isPermissionGranted(permission, mApplicationContext)) {
+        // Only keep permissions that are not granted
+        String[] filteredPermissions = filterPermissions(permissions);
 
-                // request permissions
-                SKUtilities.requestPermissions(activity, new String[]{permission});
-            }
-        }
+        // request permissions
+        SKUtilities.requestPermissions(activity, filteredPermissions);
     }
 
     // TODO documentation
-    void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity) throws SKException {
+    void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity) {
 
         // List that holds all permissions
         List<String> permissionsList = new ArrayList<>();
@@ -191,16 +210,13 @@ class SKSensorManager {
             SKSensor sensor = mSensors.get(i);
             if (sensor != null) {
 
-                String permission = sensor.getRequiredPermission();
+                String permissions[] = sensor.getRequiredPermissions();
 
-                if (permission != null) {
+                // Only keep permissions that are not granted
+                String[] filteredPermissions = filterPermissions(permissions);
 
-                    if (!SKUtilities.isPermissionGranted(permission, mApplicationContext)) {
-
-                        // append permission
-                        permissionsList.add(permission);
-                    }
-                }
+                // Add to the list
+                Collections.addAll(permissionsList, filteredPermissions);
             }
         }
 

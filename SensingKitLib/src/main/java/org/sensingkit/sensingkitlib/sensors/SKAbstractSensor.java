@@ -142,8 +142,8 @@ public abstract class SKAbstractSensor implements SKSensor {
     }
 
     @Override
-    public String getRequiredPermission() {
+    public String[] getRequiredPermissions() {
         // Override this method in the sensor subclass if a special permission is needed.
-        return null;
+        return new String[]{};
     }
 }

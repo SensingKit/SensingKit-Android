@@ -21,6 +21,7 @@
 
 package org.sensingkit.sensingkitlib.sensors;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -166,5 +167,10 @@ public class SKBluetooth extends SKAbstractSensor {
 
     private void unregisterLocalBroadcastManager() {
         mApplicationContext.unregisterReceiver(mReceiver);
+    }
+
+    @Override
+    public String[] getRequiredPermissions() {
+        return new String[]{Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN};
     }
 }
