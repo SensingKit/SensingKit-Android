@@ -225,4 +225,9 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
                 throw new RuntimeException();
         }
     }
+
+    @Override
+    public String getRequiredPermission() {
+        return Manifest.permission.ACCESS_FINE_LOCATION;
+    }
 }
