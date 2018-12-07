@@ -179,7 +179,7 @@ public class SensingKitLib implements SensingKitLibInterface {
 
     // TODO documentation
     @Override
-    public void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity) throws SKException {
+    public void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity) {
         mSensorManager.requestPermissionForAllRegisteredSensors(activity);
     }
 

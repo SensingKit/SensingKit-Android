@@ -140,7 +140,7 @@ boolean isPermissionGrantedForSensor(final SKSensorType sensorType) throws SKExc
 
 void requestPermissionForSensor(final SKSensorType sensorType, final @NonNull Activity activity) throws SKException;
 
-void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity) throws SKException;
+void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity);
 ```
 
 For example, in order to request permission to access the Location sensor:

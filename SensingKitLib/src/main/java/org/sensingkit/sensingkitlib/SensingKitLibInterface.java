@@ -131,10 +131,10 @@ public interface SensingKitLibInterface {
     boolean isPermissionGrantedForSensor(final SKSensorType sensorType) throws SKException;
 
     // TODO documentation
-    void requestPermissionForSensor(final SKSensorType sensorType, final @NonNull Activity activity) throws SKException;
+    void requestPermissionForSensor(final SKSensorType sensorType, final @NonNull Activity activity) throws SKException ;
 
     // TODO documentation
-    void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity) throws SKException;
+    void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity);
 
     /**
      *  Starts continuous sensing with the specified sensor.
