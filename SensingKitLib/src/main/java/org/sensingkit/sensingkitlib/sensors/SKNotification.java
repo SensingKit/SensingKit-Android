@@ -26,7 +26,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.annotation.NonNull;
-import android.support.v4.content.LocalBroadcastManager;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -42,12 +41,9 @@ public class SKNotification extends SKAbstractSensor {
     private static final String TAG = SKNotification.class.getSimpleName();
 
     private final BroadcastReceiver mNotificationReceiver;
-    private final LocalBroadcastManager mLocalBroadcastManager;
 
     public SKNotification(final @NonNull Context context, final @NonNull SKNotificationConfiguration configuration) throws SKException {
         super(context, SKSensorType.NOTIFICATION, configuration);
-
-        mLocalBroadcastManager = LocalBroadcastManager.getInstance(mApplicationContext);
 
         // init NotificationReceiver
         mNotificationReceiver = new BroadcastReceiver() {
@@ -107,7 +103,7 @@ public class SKNotification extends SKAbstractSensor {
         // Register Receiver
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
             IntentFilter filter = new IntentFilter(SKNotificationListenerService.NOTIFICATION_ACTION);
-            mLocalBroadcastManager.registerReceiver(mNotificationReceiver, filter);
+            mApplicationContext.registerReceiver(mNotificationReceiver, filter);
         }
     }
 
@@ -115,7 +111,7 @@ public class SKNotification extends SKAbstractSensor {
     public void stopSensing() throws SKException {
 
         // Unregister receiver
-        mLocalBroadcastManager.unregisterReceiver(mNotificationReceiver);
+        mApplicationContext.unregisterReceiver(mNotificationReceiver);
 
         super.stopSensing();
     }
