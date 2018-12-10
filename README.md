@@ -131,6 +131,9 @@ mSensingKit.startContinuousSensingWithSensor(SKSensorType.LIGHT);
 mSensingKit.stopContinuousSensingWithSensor(SKSensorType.LIGHT);
 ```
 
+For a complete description of our API, please refer to the [project website](https://www.sensingkit.org).
+
+
 ## Required Permissions
 
 Depending on the used sensor and its configuration, some additional permissions are required to be granted by the user. SensingKit automates this process by providing the following APIs:
@@ -182,6 +185,11 @@ The permissions required by the following SensingKit sensors are:
 - `android.permission.RECORD_AUDIO`
 
 
+### Audio Level
+
+- `android.permission.RECORD_AUDIO`
+
+
 ### Bluetooth
 
 - `android.permission.BLUETOOTH`
@@ -198,7 +206,7 @@ For more information about Android's App Permissions, please visit: https://deve
 
 ## Special Permissions
 
-Some sensors (i.e. the Notification sensor at this moment) require some special actions from the user to acquire permision to access it. The user needs to visit the phone's `Settings > Advanced > App Permissions > Special app access` and grant the special access to the app (i.e. `Notification access` in the case of Notification sensor).
+Some sensors (i.e. only the Notification sensor at this moment) require some special actions from the user to acquire permision to access it. The user needs to visit the phone's `Settings > Advanced > App Permissions > Special app access` and grant the special access to the app (i.e. `Notification access` in the case of the Notification sensor).
 
 This long proccess can be simplified by sending the user directly to that screen, using the following call:
 
@@ -206,8 +214,6 @@ This long proccess can be simplified by sending the user directly to that screen
 startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
 ```
 
-
-For a complete description of our API, please refer to the [project website](https://www.sensingkit.org).
 
 ## License
 
