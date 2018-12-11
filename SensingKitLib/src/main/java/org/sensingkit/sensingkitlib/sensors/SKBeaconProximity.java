@@ -116,7 +116,6 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
         // Configure BeaconParsers
         String layout = SKBeaconProximity.getBeaconLayout(beaconProximityConfiguration.getBeaconType());
-
         mBeaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout(layout));
 
         // Configure Region
@@ -138,6 +137,8 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
     @Override
     public void onBeaconServiceConnect() {
+
+        Log.i(TAG, "Beacon Service Connected!");
 
         // Register the callback
         mBeaconManager.addRangeNotifier(mRangeNotifier);
