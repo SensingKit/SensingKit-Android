@@ -32,6 +32,7 @@ import org.sensingkit.sensingkitlib.sensors.*;
 import org.sensingkit.sensingkitlib.configuration.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -216,7 +217,7 @@ class SKSensorManager {
                 String[] filteredPermissions = filterPermissions(permissions);
 
                 // Add to the list
-                Collections.addAll(permissionsList, filteredPermissions);
+                permissionsList.addAll(Arrays.asList(filteredPermissions));
             }
         }
 
