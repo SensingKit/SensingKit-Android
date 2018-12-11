@@ -164,7 +164,7 @@ class SKSensorManager {
 
         for (String permission : permissions) {
 
-            if (SKUtilities.isPermissionGranted(permission, mApplicationContext)) { // TODO: CHECK FILTER
+            if (SKUtilities.isPermissionGranted(permission, mApplicationContext)) {
                 permissionsList.add(permission);
             }
         }
