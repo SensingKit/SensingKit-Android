@@ -64,11 +64,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
         @Override
         public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
 
-            Log.i(TAG, "***********RangeNotifier before");
-
             if (beacons.size() > 0) {
-
-                Log.i(TAG, "****************RangeNotifier after");
 
                 // Get the timestamp
                 long timestamp = System.currentTimeMillis();
