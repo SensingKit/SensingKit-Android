@@ -54,7 +54,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
     @SuppressWarnings("unused")
     private static final String TAG = SKBeaconProximity.class.getSimpleName();
 
-    private static final String BEACON_IDENTIFIER = "org.sensingkit.beaconIdentifier";
+    private static final String BEACON_RANGING_IDENTIFIER = "org.sensingkit.beaconRangingIdentifier";
 
     private BeaconManager mBeaconManager;
     private Region mRegion;
@@ -64,7 +64,11 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
         @Override
         public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
 
-            if (!beacons.isEmpty()) {
+            Log.i(TAG, "***********RangeNotifier before");
+
+            if (beacons.size() > 0) {
+
+                Log.i(TAG, "****************RangeNotifier after");
 
                 // Get the timestamp
                 long timestamp = System.currentTimeMillis();
@@ -87,7 +91,6 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
     public SKBeaconProximity(final @NonNull Context context, final @NonNull SKBeaconProximityConfiguration configuration) throws SKException {
         super(context, SKSensorType.BEACON_PROXIMITY, configuration);
-
     }
 
     @Override
@@ -102,25 +105,28 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
         // Set the configuration
         super.setConfiguration(configuration);
 
-        // Init MediaRecorder
+        // Init BeaconManager
         if (mBeaconManager == null) {
             mBeaconManager = BeaconManager.getInstanceForApplication(mApplicationContext);
+            //BeaconManager.setDebug(true);  // Debug only
         }
-        else {
-            // Reset Beacon Parsers
-            mBeaconManager.getBeaconParsers().clear();
+
+        // Unbind first if needed
+        if (mBeaconManager.isBound(this)) {
+            mBeaconManager.unbind(this);
         }
 
         // Cast the configuration instance
         SKBeaconProximityConfiguration beaconProximityConfiguration = (SKBeaconProximityConfiguration)configuration;
 
         // Configure BeaconParsers
+        mBeaconManager.getBeaconParsers().clear();
         String layout = SKBeaconProximity.getBeaconLayout(beaconProximityConfiguration.getBeaconType());
         mBeaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout(layout));
 
         // Configure Region
         mRegion = new Region(
-                BEACON_IDENTIFIER,
+                BEACON_RANGING_IDENTIFIER,
                 beaconProximityConfiguration.getFilterId1(),
                 beaconProximityConfiguration.getFilterId2(),
                 beaconProximityConfiguration.getFilterId3());
@@ -139,9 +145,6 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
     public void onBeaconServiceConnect() {
 
         Log.i(TAG, "Beacon Service Connected!");
-
-        // Register the callback
-        mBeaconManager.addRangeNotifier(mRangeNotifier);
     }
 
     @Override
@@ -154,6 +157,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
         mApplicationContext.unbindService(serviceConnection);
     }
 
+    @Override
     public boolean bindService(final @NonNull Intent intent, final @NonNull ServiceConnection serviceConnection, final int i) {
         return mApplicationContext.bindService(intent, serviceConnection, i);
     }
@@ -170,6 +174,10 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
         super.startSensing();
 
+        // Register the callback
+        mBeaconManager.removeAllRangeNotifiers();
+        mBeaconManager.addRangeNotifier(mRangeNotifier);
+
         try {
             mBeaconManager.startRangingBeaconsInRegion(mRegion);
 
@@ -177,7 +185,6 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
             Log.e(TAG, ex.toString());
             throw new SKException(TAG, "Beacon Proximity sensor could not be started on this device.", SKExceptionErrorCode.SENSOR_ERROR);
         }
-
     }
 
     @Override
@@ -208,19 +215,19 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
         switch (beaconType) {
 
             case ALTBEACON:
-                return "m:2-3=beac,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25";
+                return BeaconParser.ALTBEACON_LAYOUT;
 
             case IBEACON:
                 return "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24";
 
             case EDDYSTONE_UID:
-                return "s:0-1=feaa,m:2-2=00,p:3-3:-41,i:4-13,i:14-19";
+                return BeaconParser.EDDYSTONE_UID_LAYOUT;
 
             //case EDDYSTONE_TLM:
-            //    return "x,s:0-1=feaa,m:2-2=20,d:3-3,d:4-5,d:6-7,d:8-11,d:12-15";
+            //    return BeaconParser.EDDYSTONE_TLM_LAYOUT;
 
             //case EDDYSTONE_URL:
-            //    return "s:0-1=feaa,m:2-2=10,p:3-3:-41,i:4-21v";
+            //    return BeaconParser.EDDYSTONE_URL_LAYOUT;
 
             default:
                 throw new RuntimeException();
