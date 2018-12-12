@@ -25,12 +25,14 @@ package org.sensingkit.sensingkitlib.configuration;
 public abstract class SKAbstractConfiguration implements SKConfiguration {
 
     private boolean requestWakeLock;
+    private boolean debug;
 
     // TODO: Add Documentation
     public SKAbstractConfiguration() {
 
         // Set default
         this.requestWakeLock = true;
+        this.debug = false;
     }
 
     public void setRequestWakeLock(final boolean requestWakeLock) {
@@ -39,6 +41,14 @@ public abstract class SKAbstractConfiguration implements SKConfiguration {
 
     public boolean getRequestWakeLock() {
         return this.requestWakeLock;
+    }
+
+    public void setDebug(final boolean debug) {
+        this.debug = debug;
+    }
+
+    public boolean getDebug() {
+        return this.debug;
     }
 
 }
