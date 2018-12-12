@@ -44,7 +44,7 @@ public class SKBeaconProximityConfiguration extends SKAbstractConfiguration {
         /**
          * TODO
          */
-        EDDYSTONE_UID("Eddystone");
+        EDDYSTONE_UID("Eddystone-UID");
 
         private final String name;
 
