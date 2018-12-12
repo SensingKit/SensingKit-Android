@@ -33,6 +33,7 @@ import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
 import org.altbeacon.beacon.BeaconManager;
 import org.altbeacon.beacon.BeaconParser;
+import org.altbeacon.beacon.Identifier;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 import org.sensingkit.sensingkitlib.SKException;
@@ -113,7 +114,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
         }
 
         // Cast the configuration instance
-        SKBeaconProximityConfiguration beaconProximityConfiguration = (SKBeaconProximityConfiguration)configuration;
+        SKBeaconProximityConfiguration beaconProximityConfiguration = (SKBeaconProximityConfiguration) configuration;
 
         // Configure BeaconParsers
         mBeaconManager.getBeaconParsers().clear();
@@ -121,11 +122,10 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
         mBeaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout(layout));
 
         // Configure Region
-        mRegion = new Region(
-                BEACON_RANGING_IDENTIFIER,
-                beaconProximityConfiguration.getFilterId1(),
-                beaconProximityConfiguration.getFilterId2(),
-                beaconProximityConfiguration.getFilterId3());
+        Identifier id1 = (beaconProximityConfiguration.getFilterId1() != null? Identifier.parse(beaconProximityConfiguration.getFilterId1()) : null);
+        Identifier id2 = (beaconProximityConfiguration.getFilterId2() != null? Identifier.parse(beaconProximityConfiguration.getFilterId2()) : null);
+        Identifier id3 = (beaconProximityConfiguration.getFilterId3() != null? Identifier.parse(beaconProximityConfiguration.getFilterId3()) : null);
+        mRegion = new Region(BEACON_RANGING_IDENTIFIER, id1, id2, id3);
 
         // Bind
         mBeaconManager.bind(this);

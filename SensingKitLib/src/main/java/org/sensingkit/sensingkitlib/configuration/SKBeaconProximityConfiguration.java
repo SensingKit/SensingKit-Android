@@ -23,7 +23,6 @@ package org.sensingkit.sensingkitlib.configuration;
 
 import android.support.annotation.NonNull;
 
-import org.altbeacon.beacon.Identifier;
 import org.sensingkit.sensingkitlib.SKSensorType;
 
 @SuppressWarnings("WeakerAccess")
@@ -67,9 +66,9 @@ public class SKBeaconProximityConfiguration extends SKAbstractConfiguration {
     private SKBeaconType beaconType;
 
     // Filters
-    private Identifier filterId1;
-    private Identifier filterId2;
-    private Identifier filterId3;
+    private String filterId1;
+    private String filterId2;
+    private String filterId3;
 
     public boolean isValidForSensor(final SKSensorType sensorType) {
         return (sensorType == SKSensorType.BEACON_PROXIMITY);
@@ -101,9 +100,9 @@ public class SKBeaconProximityConfiguration extends SKAbstractConfiguration {
 
         // Set default values
         this.beaconType = beaconType;
-        this.filterId1 = Identifier.parse(filterId1);
-        this.filterId2 = Identifier.parse(filterId2);
-        this.filterId3 = Identifier.parse(filterId3);
+        this.filterId1 = filterId1;
+        this.filterId2 = filterId2;
+        this.filterId3 = filterId3;
     }
 
     public SKBeaconProximityConfiguration(SKBeaconProximityConfiguration configuration) {
@@ -127,32 +126,32 @@ public class SKBeaconProximityConfiguration extends SKAbstractConfiguration {
     }
 
     @SuppressWarnings("unused")
-    public final Identifier getFilterId1() {
+    public final String getFilterId1() {
         return filterId1;
     }
 
     @SuppressWarnings("unused")
-    public void setFilterId1(final Identifier filterId1) {
+    public void setFilterId1(final String filterId1) {
         this.filterId1 = filterId1;
     }
 
     @SuppressWarnings("unused")
-    public final Identifier getFilterId2() {
+    public final String getFilterId2() {
         return filterId2;
     }
 
     @SuppressWarnings("unused")
-    public void setFilterId2(final Identifier filterId2) {
+    public void setFilterId2(final String filterId2) {
         this.filterId2 = filterId2;
     }
 
     @SuppressWarnings("unused")
-    public final Identifier getFilterId3() {
+    public final String getFilterId3() {
         return filterId3;
     }
 
     @SuppressWarnings("unused")
-    public void setFilterId3(final Identifier filterId3) {
+    public void setFilterId3(final String filterId3) {
         this.filterId3 = filterId3;
     }
 
