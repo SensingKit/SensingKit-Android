@@ -86,24 +86,24 @@ public class SKBeaconProximityConfiguration extends SKAbstractConfiguration {
     }
 
     @SuppressWarnings("unused")
-    public SKBeaconProximityConfiguration(final SKBeaconType beaconType, Identifier filterId1) {
+    public SKBeaconProximityConfiguration(final SKBeaconType beaconType, String filterId1) {
         this(beaconType, filterId1, null, null);
     }
 
     @SuppressWarnings("unused")
-    public SKBeaconProximityConfiguration(final SKBeaconType beaconType, Identifier filterId1, Identifier filterId2) {
+    public SKBeaconProximityConfiguration(final SKBeaconType beaconType, String filterId1, String filterId2) {
         this(beaconType, filterId1, filterId2, null);
     }
 
     @SuppressWarnings("unused")
-    public SKBeaconProximityConfiguration(final SKBeaconType beaconType, Identifier filterId1, Identifier filterId2, Identifier filterId3) {
+    public SKBeaconProximityConfiguration(final SKBeaconType beaconType, String filterId1, String filterId2, String filterId3) {
         super();
 
         // Set default values
         this.beaconType = beaconType;
-        this.filterId1 = filterId1;
-        this.filterId2 = filterId2;
-        this.filterId3 = filterId3;
+        this.filterId1 = Identifier.parse(filterId1);
+        this.filterId2 = Identifier.parse(filterId2);
+        this.filterId3 = Identifier.parse(filterId3);
     }
 
     public SKBeaconProximityConfiguration(SKBeaconProximityConfiguration configuration) {
