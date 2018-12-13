@@ -27,6 +27,7 @@ import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
@@ -43,7 +44,7 @@ public class SKAudioLevel extends SKAbstractSensor {
     private static final int sampleRate = 8000;
     private static final int bufferSizeFactor = 1;
 
-    private final int bufferSize = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT) * bufferSizeFactor;
+    private int bufferSize;
 
     private AudioRecord audioRecord;
 
@@ -54,8 +55,11 @@ public class SKAudioLevel extends SKAbstractSensor {
     @Override
     protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
 
+        this.bufferSize = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT) * bufferSizeFactor;
+        Log.i(TAG, "Init sensor with BufferSize: " + this.bufferSize);
+
         // Configure the AudioRecord
-        audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize);
+        this.audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize);
 
         // configure sensor
         updateSensor(context, sensorType, configuration);
