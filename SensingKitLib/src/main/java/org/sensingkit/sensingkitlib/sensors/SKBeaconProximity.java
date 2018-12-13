@@ -91,22 +91,14 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
     }
 
     @Override
-    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
-
-        // Check if the correct configuration type provided
-        if (!(configuration instanceof SKBeaconProximityConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKBeaconProximity.",
-                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
-        }
-
-        // Set the configuration
-        super.setConfiguration(configuration);
-
+    protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
         // Init BeaconManager
-        if (mBeaconManager == null) {
-            mBeaconManager = BeaconManager.getInstanceForApplication(mApplicationContext);
-            //BeaconManager.setDebug(true);  // Debug only
-        }
+        mBeaconManager = BeaconManager.getInstanceForApplication(mApplicationContext);
+        //BeaconManager.setDebug(true);  // Debug only
+    }
+
+    @Override
+    protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
 
         // Unbind first if needed
         if (mBeaconManager.isBound(this)) {

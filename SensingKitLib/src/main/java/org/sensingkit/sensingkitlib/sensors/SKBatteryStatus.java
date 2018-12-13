@@ -28,13 +28,13 @@ import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKBatteryStatusConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 import org.sensingkit.sensingkitlib.data.SKBatteryStatusData;
 
+@SuppressWarnings("unused")
 public class SKBatteryStatus extends SKAbstractSensor {
 
     @SuppressWarnings("unused")
@@ -49,31 +49,39 @@ public class SKBatteryStatus extends SKAbstractSensor {
     private int mLastStatusSensed = Integer.MAX_VALUE;
     private int mLastHealthSensed = Integer.MAX_VALUE;
 
-    private final BroadcastReceiver mBroadcastReceiver;
+    private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            // Read Battery
+            int level = intent.getIntExtra("level", -1);
+            int scale = intent.getIntExtra("scale", -1);
+            int temperature = intent.getIntExtra("temperature", 0);
+            int voltage = intent.getIntExtra("voltage", 0);
+            int plugged = intent.getIntExtra("plugged", -1);
+            int status = intent.getIntExtra("status", 0);
+            int health = intent.getIntExtra("health", 0);
+
+            // Build the data object
+            SKAbstractData data = new SKBatteryStatusData(System.currentTimeMillis(), level, scale, temperature, voltage, plugged, status, health);
+
+            // Submit sensor data object
+            submitSensorData(data);
+        }
+    };
 
     public SKBatteryStatus(final Context context, SKBatteryStatusConfiguration configuration) throws SKException {
         super(context, SKSensorType.BATTERY_STATUS, configuration);
+    }
 
-        mBroadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
+    @Override
+    protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        // Not required for this type of sensor
+    }
 
-                // Read Battery
-                int level = intent.getIntExtra("level", -1);
-                int scale = intent.getIntExtra("scale", -1);
-                int temperature = intent.getIntExtra("temperature", 0);
-                int voltage = intent.getIntExtra("voltage", 0);
-                int plugged = intent.getIntExtra("plugged", -1);
-                int status = intent.getIntExtra("status", 0);
-                int health = intent.getIntExtra("health", 0);
-
-                // Build the data object
-                SKAbstractData data = new SKBatteryStatusData(System.currentTimeMillis(), level, scale, temperature, voltage, plugged, status, health);
-
-                // Submit sensor data object
-                submitSensorData(data);
-            }
-        };
+    @Override
+    protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        // Not required for this type of sensor
     }
 
     @Override
@@ -108,19 +116,6 @@ public class SKBatteryStatus extends SKAbstractSensor {
 
     private void unregisterLocalBroadcastManager() {
         mApplicationContext.unregisterReceiver(mBroadcastReceiver);
-    }
-
-    @Override
-    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
-
-        // Check if the correct configuration type provided
-        if (!(configuration instanceof SKBatteryStatusConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKBatteryStatus.",
-                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
-        }
-
-        // Set the configuration
-        super.setConfiguration(configuration);
     }
 
     @Override

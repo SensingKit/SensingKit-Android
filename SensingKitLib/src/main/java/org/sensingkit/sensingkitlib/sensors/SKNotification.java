@@ -28,7 +28,6 @@ import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKNotificationConfiguration;
@@ -40,46 +39,40 @@ public class SKNotification extends SKAbstractSensor {
     @SuppressWarnings("unused")
     private static final String TAG = SKNotification.class.getSimpleName();
 
-    private final BroadcastReceiver mNotificationReceiver;
+    private final BroadcastReceiver mNotificationReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            if (isSensing) {
+
+                // Get properties
+                String actionType = intent.getStringExtra("actionType");
+                long postTime = intent.getLongExtra("postTime", -1);
+                String packageName = intent.getStringExtra("packageName");
+
+                // Build the data object
+                SKAbstractData data = new SKNotificationData(postTime, actionType, packageName);
+
+                // Submit sensor data object
+                submitSensorData(data);
+            }
+
+        }
+    };
 
     public SKNotification(final @NonNull Context context, final @NonNull SKNotificationConfiguration configuration) throws SKException {
         super(context, SKSensorType.NOTIFICATION, configuration);
-
-        // init NotificationReceiver
-        mNotificationReceiver = new BroadcastReceiver() {
-
-            @Override
-            public void onReceive(Context context, Intent intent) {
-
-                if (isSensing) {
-
-                    // Get properties
-                    String actionType = intent.getStringExtra("actionType");
-                    long postTime = intent.getLongExtra("postTime", -1);
-                    String packageName = intent.getStringExtra("packageName");
-
-                    // Build the data object
-                    SKAbstractData data = new SKNotificationData(postTime, actionType, packageName);
-
-                    // Submit sensor data object
-                    submitSensorData(data);
-                }
-
-            }
-        };
     }
 
     @Override
-    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
+    protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        // Not required for this type of sensor
+    }
 
-        // Check if the correct configuration type provided
-        if (!(configuration instanceof SKNotificationConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKConfiguration.",
-                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
-        }
-
-        // Set the configuration
-        super.setConfiguration(configuration);
+    @Override
+    protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        // Not required for this type of sensor
     }
 
     @Override

@@ -42,23 +42,19 @@ public class SKMicrophone extends SKAbstractSensor {
     @SuppressWarnings("unused")
     private static final String TAG = SKMicrophone.class.getSimpleName();
 
-    private MediaRecorder recorder;
+    private MediaRecorder mMediaRecorder;
 
     public SKMicrophone(final @NonNull Context context, final @NonNull SKMicrophoneConfiguration configuration) throws SKException {
         super(context, SKSensorType.MICROPHONE, configuration);
     }
 
     @Override
-    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
+    protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        mMediaRecorder = new MediaRecorder();
+    }
 
-        // Check if the correct configuration type provided
-        if (!(configuration instanceof SKMicrophoneConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMicrophone.",
-                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
-        }
-
-        // Set the configuration
-        super.setConfiguration(configuration);
+    @Override
+    protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) throws SKException {
 
         // Cast the configuration instance
         SKMicrophoneConfiguration microphoneConfiguration = (SKMicrophoneConfiguration)configuration;
@@ -69,27 +65,20 @@ public class SKMicrophone extends SKAbstractSensor {
                     microphoneConfiguration.getRecordingPath() + ").", SKExceptionErrorCode.FILE_WRITER_PERMISSION_DENIED);
         }
 
-        // Init MediaRecorder
-        if (recorder == null) {
-            recorder = new MediaRecorder();
-        }
-        else {
-            // Reset if the sensor is already prepared for recording
-            recorder.reset();
-        }
+        mMediaRecorder.reset();
 
         // Set configuration
-        recorder.setAudioSource(microphoneConfiguration.getAudioSource());
-        recorder.setOutputFormat(microphoneConfiguration.getOutputFormat());
-        recorder.setAudioEncoder(microphoneConfiguration.getAudioEncoder());
-        recorder.setOutputFile(microphoneConfiguration.getRecordingPath());
-        recorder.setAudioEncodingBitRate(microphoneConfiguration.getBitrate());
-        recorder.setAudioSamplingRate(microphoneConfiguration.getSamplingRate());
-        recorder.setAudioChannels(microphoneConfiguration.getAudioChannels());
+        mMediaRecorder.setAudioSource(microphoneConfiguration.getAudioSource());
+        mMediaRecorder.setOutputFormat(microphoneConfiguration.getOutputFormat());
+        mMediaRecorder.setAudioEncoder(microphoneConfiguration.getAudioEncoder());
+        mMediaRecorder.setOutputFile(microphoneConfiguration.getRecordingPath());
+        mMediaRecorder.setAudioEncodingBitRate(microphoneConfiguration.getBitrate());
+        mMediaRecorder.setAudioSamplingRate(microphoneConfiguration.getSamplingRate());
+        mMediaRecorder.setAudioChannels(microphoneConfiguration.getAudioChannels());
 
         // Prepare for recording
         try {
-            recorder.prepare();
+            mMediaRecorder.prepare();
         } catch (IOException e) {
             Log.e(TAG, e.getLocalizedMessage());
             throw new SKException(TAG, "Microphone sensor could not be prepared.", SKExceptionErrorCode.SENSOR_ERROR);
@@ -114,7 +103,7 @@ public class SKMicrophone extends SKAbstractSensor {
 
         super.startSensing();
 
-        recorder.start();
+        mMediaRecorder.start();
 
         // Build the data object
         SKAbstractData data = new SKMicrophoneData(System.currentTimeMillis(), "Started");
@@ -127,7 +116,7 @@ public class SKMicrophone extends SKAbstractSensor {
     public void stopSensing() throws SKException {
 
         // Stop recording
-        recorder.stop();
+        mMediaRecorder.stop();
 
         // Build the data object
         SKAbstractData data = new SKMicrophoneData(System.currentTimeMillis(), "Stopped");
@@ -143,8 +132,8 @@ public class SKMicrophone extends SKAbstractSensor {
         super.sensorDeregistered();
 
         // Release sensor
-        recorder.reset();
-        recorder.release();
+        mMediaRecorder.reset();
+        mMediaRecorder.release();
     }
 
     @Override

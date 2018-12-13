@@ -26,7 +26,6 @@ import android.hardware.SensorEvent;
 import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKBarometerConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
@@ -47,19 +46,6 @@ public class SKBarometer extends SKAbstractNativeSensor {
     protected SKAbstractData buildData(final @NonNull SensorEvent event)
     {
         return new SKBarometerData(System.currentTimeMillis(), event.values[0]);
-    }
-
-    @Override
-    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
-
-        // Check if the correct configuration type provided
-        if (!(configuration instanceof SKBarometerConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKBarometer.",
-                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
-        }
-
-        // Set the configuration
-        super.setConfiguration(configuration);
     }
 
     @Override

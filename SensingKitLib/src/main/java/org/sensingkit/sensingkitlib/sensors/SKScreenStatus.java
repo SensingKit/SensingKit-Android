@@ -28,7 +28,6 @@ import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKScreenStatusConfiguration;
@@ -37,64 +36,59 @@ import org.sensingkit.sensingkitlib.data.SKScreenStatusData;
 
 public class SKScreenStatus extends SKAbstractSensor {
 
-    private final BroadcastReceiver mBroadcastReceiver;
+    private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            // Read Status
+            int status;
+
+            String action = intent.getAction();
+
+            if (action == null) {
+                status = SKScreenStatusData.SCREEN_UNKNOWN;
+            }
+            else {
+                switch (action) {
+                    case Intent.ACTION_SCREEN_OFF:
+                        status = SKScreenStatusData.SCREEN_OFF;
+                        break;
+                    case Intent.ACTION_SCREEN_ON:
+                        status = SKScreenStatusData.SCREEN_ON;
+                        break;
+                    case Intent.ACTION_USER_PRESENT:
+                        status = SKScreenStatusData.SCREEN_UNLOCKED;
+                        break;
+                    default:
+                        status = SKScreenStatusData.SCREEN_UNKNOWN;
+                        break;
+                }
+            }
+
+            // Build the data object
+            SKAbstractData data = new SKScreenStatusData(System.currentTimeMillis(), status);
+
+            // Submit sensor data object
+            submitSensorData(data);
+        }
+    };
 
     @SuppressWarnings("unused")
     private static final String TAG = SKScreenStatus.class.getSimpleName();
 
     public SKScreenStatus(final @NonNull Context context, final @NonNull SKScreenStatusConfiguration configuration) throws SKException {
         super(context, SKSensorType.SCREEN_STATUS, configuration);
-
-        mBroadcastReceiver = new BroadcastReceiver() {
-
-            @Override
-            public void onReceive(Context context, Intent intent) {
-
-                // Read Status
-                int status;
-
-                String action = intent.getAction();
-
-                if (action == null) {
-                    status = SKScreenStatusData.SCREEN_UNKNOWN;
-                }
-                else {
-                    switch (action) {
-                        case Intent.ACTION_SCREEN_OFF:
-                            status = SKScreenStatusData.SCREEN_OFF;
-                            break;
-                        case Intent.ACTION_SCREEN_ON:
-                            status = SKScreenStatusData.SCREEN_ON;
-                            break;
-                        case Intent.ACTION_USER_PRESENT:
-                            status = SKScreenStatusData.SCREEN_UNLOCKED;
-                            break;
-                        default:
-                            status = SKScreenStatusData.SCREEN_UNKNOWN;
-                            break;
-                    }
-                }
-
-                // Build the data object
-                SKAbstractData data = new SKScreenStatusData(System.currentTimeMillis(), status);
-
-                // Submit sensor data object
-                submitSensorData(data);
-            }
-        };
     }
 
     @Override
-    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
+    protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        // Not required for this type of sensor
+    }
 
-        // Check if the correct configuration type provided
-        if (!(configuration instanceof SKScreenStatusConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKScreenStatus.",
-                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
-        }
-
-        // Set the configuration
-        super.setConfiguration(configuration);
+    @Override
+    protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        // Not required for this type of sensor
     }
 
     @Override

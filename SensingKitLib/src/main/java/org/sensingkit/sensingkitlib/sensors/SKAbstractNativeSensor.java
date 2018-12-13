@@ -41,12 +41,16 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
     @SuppressWarnings("unused")
     private static final String TAG = SKAbstractNativeSensor.class.getSimpleName();
 
-    private final SensorManager mSensorManager;
-    private final Sensor mSensor;
-    private final SensorEventListener mSensorEventListener;
+    private SensorManager mSensorManager;
+    private Sensor mSensor;
+    private SensorEventListener mSensorEventListener;
 
-    protected SKAbstractNativeSensor(final @NonNull Context context, final SKSensorType sensorType, final SKConfiguration configuration) throws SKException {
+    protected SKAbstractNativeSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) throws SKException {
         super(context, sensorType, configuration);
+    }
+
+    @Override
+    protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) throws SKException {
 
         mSensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
 
@@ -77,6 +81,11 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
                 submitSensorData(data);
             }
         };
+    }
+
+    @Override
+    protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        // Not required for this type of sensor
     }
 
     @Override

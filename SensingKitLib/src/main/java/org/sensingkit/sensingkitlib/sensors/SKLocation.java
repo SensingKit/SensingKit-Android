@@ -34,7 +34,6 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKLocationConfiguration;
@@ -70,8 +69,24 @@ public class SKLocation extends SKAbstractSensor {
 
     public SKLocation(final @NonNull Context context, final @NonNull SKLocationConfiguration configuration) throws SKException {
         super(context, SKSensorType.LOCATION, configuration);
+    }
 
+    @Override
+    protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
+    }
+
+    @Override
+    protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+
+        // Cast the configuration instance
+        SKLocationConfiguration locationConfiguration = (SKLocationConfiguration)mConfiguration;
+
+        // Configure the LocationRequest
+        mLocationRequest = LocationRequest.create();
+        mLocationRequest.setPriority(locationConfiguration.getPriority());
+        mLocationRequest.setInterval(locationConfiguration.getInterval());
+        mLocationRequest.setFastestInterval(locationConfiguration.getFastestInterval());
     }
 
     @SuppressLint("MissingPermission")
@@ -92,28 +107,6 @@ public class SKLocation extends SKAbstractSensor {
         mFusedLocationClient.removeLocationUpdates(mLocationCallback);
 
         super.stopSensing();
-    }
-
-    @Override
-    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
-
-        // Check if the correct configuration type provided
-        if (!(configuration instanceof SKLocationConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKLocation.",
-                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
-        }
-
-        // Set the configuration
-        super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKLocationConfiguration locationConfiguration = (SKLocationConfiguration)mConfiguration;
-
-        // Configure the LocationRequest
-        mLocationRequest = LocationRequest.create();
-        mLocationRequest.setPriority(locationConfiguration.getPriority());
-        mLocationRequest.setInterval(locationConfiguration.getInterval());
-        mLocationRequest.setFastestInterval(locationConfiguration.getFastestInterval());
     }
 
     @Override

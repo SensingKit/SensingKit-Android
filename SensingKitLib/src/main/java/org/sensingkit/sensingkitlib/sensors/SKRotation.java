@@ -26,7 +26,6 @@ import android.hardware.SensorEvent;
 import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKRotationConfiguration;
@@ -52,19 +51,6 @@ public class SKRotation extends SKAbstractNativeSensor {
         else {
             return new SKRotationData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
         }
-    }
-
-    @Override
-    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
-
-        // Check if the correct configuration type provided
-        if (!(configuration instanceof SKRotationConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKRotation.",
-                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
-        }
-
-        // Set the configuration
-        super.setConfiguration(configuration);
     }
 
     @Override

@@ -42,7 +42,6 @@ import com.google.android.gms.tasks.Task;
 
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKMotionActivityConfiguration;
@@ -60,16 +59,29 @@ public class SKMotionActivity extends SKAbstractSensor {
     private ActivityRecognitionClient mActivityRecognitionClient;
     private PendingIntent mActivityRecognitionPendingIntent;
     private List<ActivityTransition> mRegisteredTransitions;
-    private final LocalBroadcastManager mLocalBroadcastManager;
+    private LocalBroadcastManager mLocalBroadcastManager;
 
     public SKMotionActivity(final @NonNull Context context, final @NonNull SKMotionActivityConfiguration configuration) throws SKException {
         super(context, SKSensorType.MOTION_ACTIVITY, configuration);
+    }
 
+    @Override
+    protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
         mActivityRecognitionClient = ActivityRecognition.getClient(mApplicationContext);
         mLocalBroadcastManager = LocalBroadcastManager.getInstance(mApplicationContext);
 
         Intent intent = new Intent(mApplicationContext, SKMotionActivityIntentService.class);
         mActivityRecognitionPendingIntent = PendingIntent.getService(mApplicationContext, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
+    @Override
+    protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+
+        // Cast the configuration instance
+        SKMotionActivityConfiguration motionActivityConfiguration = (SKMotionActivityConfiguration)mConfiguration;
+
+        // update transitions
+        mRegisteredTransitions = buildTransitions(motionActivityConfiguration);
     }
 
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -191,25 +203,6 @@ public class SKMotionActivity extends SKAbstractSensor {
         this.mLocalBroadcastManager.unregisterReceiver(mBroadcastReceiver);
 
         super.stopSensing();
-    }
-
-    @Override
-    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
-
-        // Check if the correct configuration type provided
-        if (!(configuration instanceof SKMotionActivityConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKMotionActivity.",
-                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
-        }
-
-        // Set the configuration
-        super.setConfiguration(configuration);
-
-        // Cast the configuration instance
-        SKMotionActivityConfiguration motionActivityConfiguration = (SKMotionActivityConfiguration)mConfiguration;
-
-        // update transitions
-        mRegisteredTransitions = buildTransitions(motionActivityConfiguration);
     }
 
     @Override

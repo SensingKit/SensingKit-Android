@@ -29,7 +29,6 @@ import android.media.MediaRecorder;
 import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKAudioLevelConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
@@ -46,26 +45,22 @@ public class SKAudioLevel extends SKAbstractSensor {
 
     private final int bufferSize = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT) * bufferSizeFactor;
 
-    private final AudioRecord audioRecord;
+    private AudioRecord audioRecord;
 
     public SKAudioLevel(final Context context, final SKAudioLevelConfiguration configuration) throws SKException {
         super(context, SKSensorType.AUDIO_LEVEL, configuration);
+    }
+
+    @Override
+    protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
 
         // Configure the AudioRecord
         audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize);
     }
 
     @Override
-    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
-
-        // Check if the correct configuration type provided
-        if (!(configuration instanceof SKAudioLevelConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKAudioLevel.",
-                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
-        }
-
-        // Set the configuration
-        super.setConfiguration(configuration);
+    protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        // Not required for this type of sensor
     }
 
     @Override

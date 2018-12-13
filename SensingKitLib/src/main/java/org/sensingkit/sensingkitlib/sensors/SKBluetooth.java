@@ -47,18 +47,11 @@ public class SKBluetooth extends SKAbstractSensor {
     @SuppressWarnings("unused")
     private static final String TAG = SKBluetooth.class.getSimpleName();
 
-    private final BluetoothAdapter mBluetoothAdapter;
+    private BluetoothAdapter mBluetoothAdapter;
     private ArrayList<SKBluetoothData> mBluetoothDevices;
 
     public SKBluetooth(final @NonNull Context context, final @NonNull SKBluetoothConfiguration configuration) throws SKException {
         super(context, SKSensorType.BLUETOOTH, configuration);
-
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        mBluetoothDevices = new ArrayList<>();
-
-        if (mBluetoothAdapter == null) {
-            throw new SKException(TAG, "Bluetooth sensor is not supported from the device.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
-        }
     }
 
     // Create a BroadcastReceiver for ACTION_FOUND and ACTION_DISCOVERY_FINISHED
@@ -101,16 +94,19 @@ public class SKBluetooth extends SKAbstractSensor {
     };
 
     @Override
-    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
+    protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) throws SKException {
 
-        // Check if the correct configuration type provided
-        if (!(configuration instanceof SKBluetoothConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKBluetooth.",
-                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mBluetoothDevices = new ArrayList<>();
+
+        if (mBluetoothAdapter == null) {
+            throw new SKException(TAG, "Bluetooth sensor is not supported from the device.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
         }
+    }
 
-        // Set the configuration
-        super.setConfiguration(configuration);
+    @Override
+    protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        // Not required for this type of sensor
     }
 
     @Override

@@ -26,7 +26,6 @@ import android.hardware.SensorEvent;
 import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.configuration.SKStepDetectorConfiguration;
@@ -47,19 +46,6 @@ public class SKStepDetector extends SKAbstractNativeSensor {
     protected SKAbstractData buildData(final @NonNull SensorEvent event)
     {
         return new SKStepDetectorData(System.currentTimeMillis());
-    }
-
-    @Override
-    public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
-
-        // Check if the correct configuration type provided
-        if (!(configuration instanceof SKStepDetectorConfiguration)) {
-            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor SKStepDetector.",
-                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
-        }
-
-        // Set the configuration
-        super.setConfiguration(configuration);
     }
 
     @Override

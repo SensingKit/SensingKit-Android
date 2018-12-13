@@ -42,17 +42,29 @@ public abstract class SKAbstractSensor implements SKSensor {
     protected final Context mApplicationContext;
     protected final SKSensorType mSensorType;
     protected boolean isSensing = false;
-    protected ArrayList<SKSensorDataHandler> mSensorDataListeners;
     protected SKConfiguration mConfiguration;
+
+    private ArrayList<SKSensorDataHandler> mSensorDataListeners;
 
     protected SKAbstractSensor(final @NonNull Context context, final SKSensorType sensorType, final @NonNull SKConfiguration configuration) throws SKException {
 
+        // Check if the correct configuration type provided
+        if (!configuration.isValidForSensor(sensorType)) {
+            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor " + sensorType.getName() + ".",
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
+        }
+
         this.mApplicationContext = context;
         this.mSensorType = sensorType;
+        this.mConfiguration = configuration;
 
-        // Set the configuration
-        setConfiguration(configuration);
+        // call sensor init method
+        initSensor(context, sensorType, configuration);
     }
+
+    protected abstract void initSensor(final @NonNull Context context, final SKSensorType sensorType, final @NonNull SKConfiguration configuration) throws SKException;
+
+    protected abstract void updateSensor(final @NonNull Context context, final SKSensorType sensorType, final @NonNull SKConfiguration configuration) throws SKException;
 
     @CallSuper
     public void startSensing() throws SKException {
@@ -79,7 +91,17 @@ public abstract class SKAbstractSensor implements SKSensor {
 
     @Override
     public void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException {
+
+        // Check if the correct configuration type provided
+        if (!configuration.isValidForSensor(mSensorType)) {
+            throw new SKException(TAG, "Wrong SKConfiguration class provided (" + configuration.getClass() + ") for sensor " + mSensorType.getName() + ".",
+                    SKExceptionErrorCode.CONFIGURATION_NOT_VALID);
+        }
+
         this.mConfiguration = configuration;
+
+        // call update sensor configuration
+        updateSensor(mApplicationContext, mSensorType, configuration);
     }
 
     public void subscribeSensorDataHandler(final @NonNull SKSensorDataHandler handler) throws SKException {
