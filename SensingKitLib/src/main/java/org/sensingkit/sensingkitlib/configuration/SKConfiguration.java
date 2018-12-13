@@ -31,6 +31,6 @@ public interface SKConfiguration {
     void setRequestWakeLock(final boolean requestWakeLock);
     boolean getRequestWakeLock();
 
-    void setDebugSensor(final boolean debugSensor);
-    boolean getDebugSensor();
+    void setDebugStatus(final boolean debugStatus);
+    boolean getDebugStatus();
 }
