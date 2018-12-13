@@ -74,6 +74,9 @@ public class SKLocation extends SKAbstractSensor {
     @Override
     protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
+
+        // configure sensor
+        updateSensor(context, sensorType, configuration);
     }
 
     @Override

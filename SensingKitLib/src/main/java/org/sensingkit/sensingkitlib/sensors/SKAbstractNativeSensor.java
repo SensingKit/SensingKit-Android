@@ -81,6 +81,9 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
                 submitSensorData(data);
             }
         };
+
+        // configure sensor
+        updateSensor(context, sensorType, configuration);
     }
 
     @Override

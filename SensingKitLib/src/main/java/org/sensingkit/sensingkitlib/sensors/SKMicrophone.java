@@ -49,8 +49,11 @@ public class SKMicrophone extends SKAbstractSensor {
     }
 
     @Override
-    protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+    protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) throws SKException {
         mMediaRecorder = new MediaRecorder();
+
+        // configure sensor
+        updateSensor(context, sensorType, configuration);
     }
 
     @Override

@@ -102,6 +102,9 @@ public class SKBluetooth extends SKAbstractSensor {
         if (mBluetoothAdapter == null) {
             throw new SKException(TAG, "Bluetooth sensor is not supported from the device.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
         }
+
+        // configure sensor
+        updateSensor(context, sensorType, configuration);
     }
 
     @Override

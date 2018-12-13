@@ -95,6 +95,9 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
         // Init BeaconManager
         mBeaconManager = BeaconManager.getInstanceForApplication(mApplicationContext);
         //BeaconManager.setDebug(true);  // Debug only
+
+        // configure sensor
+        updateSensor(context, sensorType, configuration);
     }
 
     @Override

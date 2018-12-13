@@ -72,6 +72,9 @@ public class SKMotionActivity extends SKAbstractSensor {
 
         Intent intent = new Intent(mApplicationContext, SKMotionActivityIntentService.class);
         mActivityRecognitionPendingIntent = PendingIntent.getService(mApplicationContext, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        // configure sensor
+        updateSensor(context, sensorType, configuration);
     }
 
     @Override

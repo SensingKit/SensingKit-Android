@@ -56,6 +56,9 @@ public class SKAudioLevel extends SKAbstractSensor {
 
         // Configure the AudioRecord
         audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize);
+
+        // configure sensor
+        updateSensor(context, sensorType, configuration);
     }
 
     @Override

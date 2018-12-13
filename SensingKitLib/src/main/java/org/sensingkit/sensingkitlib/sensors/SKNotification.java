@@ -68,6 +68,9 @@ public class SKNotification extends SKAbstractSensor {
     @Override
     protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
         // Not required for this type of sensor
+
+        // configure sensor
+        updateSensor(context, sensorType, configuration);
     }
 
     @Override
