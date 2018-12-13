@@ -104,5 +104,10 @@ public enum SKExceptionErrorCode {
     /**
      * TODO
      */
-    FILE_WRITER_PERMISSION_DENIED
+    FILE_WRITER_PERMISSION_DENIED,
+
+    /**
+     * TODO
+     */
+    FILE_EXISTS
 }

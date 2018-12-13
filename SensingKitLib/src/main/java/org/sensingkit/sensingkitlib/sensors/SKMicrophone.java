@@ -63,9 +63,15 @@ public class SKMicrophone extends SKAbstractSensor {
         SKMicrophoneConfiguration microphoneConfiguration = (SKMicrophoneConfiguration)configuration;
 
         // Check if permission to file writing is granted
-        if (!microphoneConfiguration.getRecordingFile().canWrite()) {
-            throw new SKException(TAG, "Microphone sensor does not have the permission to record in the given outputDirectory (" +
-                    microphoneConfiguration.getRecordingPath() + ").", SKExceptionErrorCode.FILE_WRITER_PERMISSION_DENIED);
+        if (!microphoneConfiguration.getOutputDirectory().canWrite()) {
+            throw new SKException(TAG, "Microphone sensor does not have the permission to record in the following outputDirectory: " +
+                    microphoneConfiguration.getRecordingPath() + ".", SKExceptionErrorCode.FILE_WRITER_PERMISSION_DENIED);
+        }
+
+        // Check if file already exists
+        if (microphoneConfiguration.getRecordingFile().exists()) {
+            throw new SKException(TAG, "Filename already exists (" +
+                    microphoneConfiguration.getRecordingFile() + ").", SKExceptionErrorCode.FILE_EXISTS);
         }
 
         mMediaRecorder.reset();
