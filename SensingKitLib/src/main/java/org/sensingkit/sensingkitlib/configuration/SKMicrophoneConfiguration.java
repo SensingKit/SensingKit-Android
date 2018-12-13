@@ -85,7 +85,7 @@ public class SKMicrophoneConfiguration extends SKAbstractConfiguration {
 
         // Set default values
         this.filename = "recording";
-        this.outputDirectory = Environment.getExternalStorageDirectory().getAbsoluteFile();
+        this.outputDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
         this.audioSource = AudioSource.MIC;
         this.outputFormat = OutputFormat.MPEG_4;
         this.audioEncoder = AudioEncoder.AAC;
