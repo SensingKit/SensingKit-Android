@@ -25,6 +25,7 @@ import android.Manifest;
 import android.content.Context;
 import android.media.MediaRecorder;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -62,6 +63,12 @@ public class SKMicrophone extends SKAbstractSensor {
         // Cast the configuration instance
         SKMicrophoneConfiguration microphoneConfiguration = (SKMicrophoneConfiguration)configuration;
 
+        // Check if permission to file writing is granted
+        if (!microphoneConfiguration.getRecordingFile().canWrite()) {
+            throw new SKException(TAG, "Microphone sensor does not have the permission to record in the given outputDirectory (" +
+                    microphoneConfiguration.getRecordingPath() + ").", SKExceptionErrorCode.FILE_WRITER_PERMISSION_DENIED);
+        }
+
         // Init MediaRecorder
         if (recorder == null) {
             recorder = new MediaRecorder();
@@ -84,6 +91,7 @@ public class SKMicrophone extends SKAbstractSensor {
         try {
             recorder.prepare();
         } catch (IOException e) {
+            Log.e(TAG, e.getLocalizedMessage());
             throw new SKException(TAG, "Microphone sensor could not be prepared.", SKExceptionErrorCode.SENSOR_ERROR);
         }
     }
@@ -141,6 +149,6 @@ public class SKMicrophone extends SKAbstractSensor {
 
     @Override
     public String[] getRequiredPermissions() {
-        return new String[]{Manifest.permission.RECORD_AUDIO};
+        return new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     }
 }

@@ -99,5 +99,10 @@ public enum SKExceptionErrorCode {
     /**
      * TODO
      */
-    PERMISSION_MISSING
+    PERMISSION_MISSING,
+
+    /**
+     * TODO
+     */
+    FILE_WRITER_PERMISSION_DENIED
 }
