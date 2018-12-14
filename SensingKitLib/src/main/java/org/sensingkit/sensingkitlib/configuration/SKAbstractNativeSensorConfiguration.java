@@ -25,13 +25,26 @@ import android.hardware.SensorManager;
 
 public abstract class SKAbstractNativeSensorConfiguration extends SKAbstractConfiguration {
 
+    @SuppressWarnings({"unused", "WeakerAccess"})
+    public final class SKSensorDelay {
+
+        public static final int FASTEST = SensorManager.SENSOR_DELAY_FASTEST;
+        public static final int GAME    = SensorManager.SENSOR_DELAY_GAME;
+        public static final int NORMAL  = SensorManager.SENSOR_DELAY_NORMAL;
+        public static final int UI      = SensorManager.SENSOR_DELAY_UI;
+
+        SKSensorDelay() {
+            throw new RuntimeException();
+        }
+    }
+
     protected int samplingRate;
 
     public SKAbstractNativeSensorConfiguration() {
         super();
 
         // Set default values
-        this.samplingRate = SensorManager.SENSOR_DELAY_NORMAL;
+        this.samplingRate = SKSensorDelay.NORMAL;
     }
 
     public SKAbstractNativeSensorConfiguration(final int samplingRate) {
