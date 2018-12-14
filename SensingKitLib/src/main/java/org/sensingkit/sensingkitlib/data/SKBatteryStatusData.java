@@ -21,6 +21,7 @@
 
 package org.sensingkit.sensingkitlib.data;
 
+import android.annotation.TargetApi;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -31,23 +32,254 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 import java.util.Locale;
 
-import static android.os.BatteryManager.*;
-
 /**
  * An instance of SKBatteryStatusData encapsulates Battery properties
  */
+@SuppressWarnings("WeakerAccess")
 public class SKBatteryStatusData extends SKAbstractData {
 
     @SuppressWarnings("unused")
     private static final String TAG = SKBatteryStatusData.class.getSimpleName();
 
+    public enum SKBatteryPlugged {
+
+        /**
+         * TODO
+         */
+        USB("USB", BatteryManager.BATTERY_PLUGGED_USB),
+
+        /**
+         * TODO
+         */
+        AC("AC", BatteryManager.BATTERY_PLUGGED_AC),
+
+        /**
+         * TODO
+         */
+        @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+        WIRELESS("Wireless", BatteryManager.BATTERY_PLUGGED_WIRELESS);
+
+        private final @NonNull String batteryPlugged;
+        private final int batteryPluggedCode;
+
+        SKBatteryPlugged(final @NonNull String batteryPlugged, final int batteryPluggedCode) {
+            this.batteryPlugged = batteryPlugged;
+            this.batteryPluggedCode = batteryPluggedCode;
+        }
+
+        @SuppressWarnings("WeakerAccess")
+        public static SKBatteryPlugged valueOf(final int batteryPluggedCode) {
+
+            switch (batteryPluggedCode) {
+
+                case BatteryManager.BATTERY_PLUGGED_USB:
+                    return USB;
+
+                case BatteryManager.BATTERY_PLUGGED_AC:
+                    return AC;
+
+                case BatteryManager.BATTERY_PLUGGED_WIRELESS:
+                    return WIRELESS;
+
+                default:
+                    throw new RuntimeException("Unsupported SKBatteryPlugged with code: " + batteryPluggedCode);
+            }
+        }
+
+        @SuppressWarnings("unused")
+        public @NonNull String getBatteryPlugged() {
+            return this.batteryPlugged;
+        }
+
+        @SuppressWarnings("unused")
+        public int getBatteryPluggedCode() {
+            return this.batteryPluggedCode;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return this.getBatteryPlugged();
+        }
+    }
+
+    public enum SKBatteryStatus {
+
+        /**
+         * TODO
+         */
+        CHARGING("Charging", BatteryManager.BATTERY_STATUS_CHARGING),
+
+        /**
+         * TODO
+         */
+        DISCHARGING("Discharging", BatteryManager.BATTERY_STATUS_DISCHARGING),
+
+        /**
+         * TODO
+         */
+        FULL("Full", BatteryManager.BATTERY_STATUS_FULL),
+
+        /**
+         * TODO
+         */
+        NOT_CHARGING("Not Charging", BatteryManager.BATTERY_STATUS_NOT_CHARGING),
+
+        /**
+         * TODO
+         */
+        UNKNOWN("Unknown", BatteryManager.BATTERY_STATUS_UNKNOWN);
+
+        private final @NonNull String batteryStatus;
+        private final int batteryStatusCode;
+
+        SKBatteryStatus(final @NonNull String batteryStatus, final int batteryStatusCode) {
+            this.batteryStatus = batteryStatus;
+            this.batteryStatusCode = batteryStatusCode;
+        }
+
+        @SuppressWarnings("WeakerAccess")
+        public static SKBatteryStatus valueOf(final int batteryStatusCode) {
+
+            switch (batteryStatusCode) {
+
+                case BatteryManager.BATTERY_STATUS_CHARGING:
+                    return CHARGING;
+
+                case BatteryManager.BATTERY_STATUS_DISCHARGING:
+                    return DISCHARGING;
+
+                case BatteryManager.BATTERY_STATUS_FULL:
+                    return FULL;
+
+                case BatteryManager.BATTERY_STATUS_NOT_CHARGING:
+                    return NOT_CHARGING;
+
+                case BatteryManager.BATTERY_STATUS_UNKNOWN:
+                    return UNKNOWN;
+
+                default:
+                    throw new RuntimeException("Unsupported SKBatteryStatus with code: " + batteryStatusCode);
+            }
+        }
+
+        @SuppressWarnings("unused")
+        public @NonNull String getBatteryStatus() {
+            return this.batteryStatus;
+        }
+
+        @SuppressWarnings("unused")
+        public int getBatteryStatusCode() {
+            return this.batteryStatusCode;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return this.getBatteryStatus();
+        }
+    }
+
+    public enum SKBatteryHealth {
+
+        /**
+         * TODO
+         */
+        COLD("Cold", BatteryManager.BATTERY_HEALTH_COLD),
+
+        /**
+         * TODO
+         */
+        DEAD("Dead", BatteryManager.BATTERY_HEALTH_DEAD),
+
+        /**
+         * TODO
+         */
+        GOOD("Good", BatteryManager.BATTERY_HEALTH_GOOD),
+
+        /**
+         * TODO
+         */
+        OVERHEAT("Overheat", BatteryManager.BATTERY_HEALTH_OVERHEAT),
+
+        /**
+         * TODO
+         */
+        OVER_VOLTAGE("Over Voltage", BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE),
+
+        /**
+         * TODO
+         */
+        UNKNOWN("Unknown", BatteryManager.BATTERY_HEALTH_UNKNOWN),
+
+        /**
+         * TODO
+         */
+        UNSPECIFIED_FAILURE("Unspecified Failure", BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE);
+
+        private final @NonNull String batteryHealth;
+        private final int batteryHealthCode;
+
+        SKBatteryHealth(final @NonNull String batteryHealth, final int batteryHealthCode) {
+            this.batteryHealth = batteryHealth;
+            this.batteryHealthCode = batteryHealthCode;
+        }
+
+        @SuppressWarnings("WeakerAccess")
+        public static SKBatteryHealth valueOf(final int batteryHealthCode) {
+
+            switch (batteryHealthCode) {
+
+                case BatteryManager.BATTERY_HEALTH_COLD:
+                    return COLD;
+
+                case BatteryManager.BATTERY_HEALTH_DEAD:
+                    return DEAD;
+
+                case BatteryManager.BATTERY_HEALTH_GOOD:
+                    return GOOD;
+
+                case BatteryManager.BATTERY_HEALTH_OVERHEAT:
+                    return OVERHEAT;
+
+                case BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE:
+                    return OVER_VOLTAGE;
+
+                case BatteryManager.BATTERY_HEALTH_UNKNOWN:
+                    return UNKNOWN;
+
+                case BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE:
+                    return UNSPECIFIED_FAILURE;
+
+                default:
+                    throw new RuntimeException("Unsupported SKBatteryHealth with code: " + batteryHealthCode);
+            }
+        }
+
+        @SuppressWarnings("unused")
+        public @NonNull String getBatteryHealth() {
+            return this.batteryHealth;
+        }
+
+        @SuppressWarnings("unused")
+        public int getBatteryHealthCode() {
+            return this.batteryHealthCode;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return this.getBatteryHealth();
+        }
+    }
+
     private final int level;
     private final int scale;
     private final int temperature;
     private final int voltage;
-    private final int plugged;
-    private final int status;
-    private final int health;
+    private final SKBatteryPlugged plugged;
+    private final SKBatteryStatus status;
+    private final SKBatteryHealth health;
 
     /**
      * Initialize the instance
@@ -57,22 +289,22 @@ public class SKBatteryStatusData extends SKAbstractData {
      * @param scale       Maximum battery level
      * @param temperature Current battery temperature
      * @param voltage     Current battery voltage
-     * @param plugged     Values are: 0 - on battery, BATTERY_PLUGGED_AC, BATTERY_PLUGGED_USB, BATTERY_PLUGGED_WIRELESS
-     * @param status      Values are: BATTERY_STATUS_CHARGING, BATTERY_STATUS_DISCHARGING, BATTERY_STATUS_FULL,
+     * @param pluggedCode Values are: 0 - on battery, BATTERY_PLUGGED_AC, BATTERY_PLUGGED_USB, BATTERY_PLUGGED_WIRELESS
+     * @param statusCode  Values are: BATTERY_STATUS_CHARGING, BATTERY_STATUS_DISCHARGING, BATTERY_STATUS_FULL,
      *                    BATTERY_STATUS_NOT_CHARGING, BATTERY_STATUS_UNKNOWN
-     * @param health      Values are: BATTERY_HEALTH_COLD, BATTERY_HEALTH_DEAD, BATTERY_HEALTH_GOOD, BATTERY_HEALTH_OVERHEAT,
+     * @param healthCode  Values are: BATTERY_HEALTH_COLD, BATTERY_HEALTH_DEAD, BATTERY_HEALTH_GOOD, BATTERY_HEALTH_OVERHEAT,
      *                    BATTERY_HEALTH_OVER_VOLTAGE, BATTERY_HEALTH_UNKNOWN
      */
-    public SKBatteryStatusData(final long timestamp, final int level, final int scale, final int temperature, final int voltage, final int plugged, final int status, final int health) {
+    public SKBatteryStatusData(final long timestamp, final int level, final int scale, final int temperature, final int voltage, final int pluggedCode, final int statusCode, final int healthCode) {
         super(SKSensorType.BATTERY_STATUS, timestamp);
 
         this.level = level;
         this.scale = scale;
         this.temperature = temperature;
         this.voltage = voltage;
-        this.plugged = plugged;
-        this.status = status;
-        this.health = health;
+        this.plugged = SKBatteryPlugged.valueOf(pluggedCode);
+        this.status = SKBatteryStatus.valueOf(statusCode);
+        this.health = SKBatteryHealth.valueOf(healthCode);
     }
 
     /**
@@ -98,7 +330,7 @@ public class SKBatteryStatusData extends SKAbstractData {
     @NonNull
     public String getDataInCSV() {
         return String.format(Locale.US, "%d,%f,%d,%d,%s,%s,%s", this.timestamp, this.getLevelRatio(), this.temperature, this.voltage,
-                getPluggedString(), getBatteryStatusString(), getBatteryHealthString());
+                this.plugged.getBatteryPlugged(), this.status.getBatteryStatus(), this.health.getBatteryHealth());
     }
 
     /**
@@ -123,9 +355,9 @@ public class SKBatteryStatusData extends SKAbstractData {
             subJsonObject.put("charge", this.getLevelRatio());
             subJsonObject.put("temperature", this.temperature);
             subJsonObject.put("voltage", this.voltage);
-            subJsonObject.put("plugged", getPluggedString());
-            subJsonObject.put("status", getBatteryStatusString());
-            subJsonObject.put("health", getBatteryHealthString());
+            subJsonObject.put("plugged", this.plugged.getBatteryPlugged());
+            subJsonObject.put("status", this.status.getBatteryStatus());
+            subJsonObject.put("health", this.health.getBatteryHealth());
 
             jsonObject.put("battery", subJsonObject);
 
@@ -197,7 +429,7 @@ public class SKBatteryStatusData extends SKAbstractData {
      * @return plugged
      */
     @SuppressWarnings("unused")
-    public int getPlugged() {
+    public SKBatteryPlugged getBatteryPlugged() {
         return this.plugged;
     }
 
@@ -207,7 +439,7 @@ public class SKBatteryStatusData extends SKAbstractData {
      * @return status
      */
     @SuppressWarnings("unused")
-    public int getBatteryStatus() {
+    public SKBatteryStatus getBatteryStatus() {
         return this.status;
     }
 
@@ -217,108 +449,8 @@ public class SKBatteryStatusData extends SKAbstractData {
      * @return health
      */
     @SuppressWarnings("unused")
-    public int getBatteryHealth() {
+    public SKBatteryHealth getBatteryHealth() {
         return this.health;
-    }
-
-    /**
-     * Get the battery plugged state in string format
-     *
-     * @return plugged in string format
-     */
-    @SuppressWarnings("unused")
-    public String getPluggedString() {
-        return getPluggedString(this.plugged);
-    }
-
-    /**
-     * Get the battery status in string format
-     *
-     * @return status in string format
-     */
-    @SuppressWarnings("unused")
-    public String getBatteryStatusString() {
-        return getBatteryStatusString(this.status);
-    }
-
-    /**
-     * Get the battery health in string format
-     *
-     * @return health in string format
-     */
-    @SuppressWarnings("unused")
-    public String getBatteryHealthString() {
-        return getBatteryHealthString(this.health);
-    }
-
-    private static String getPluggedString(int pluggedType) {
-
-        if (pluggedType == BATTERY_PLUGGED_USB) {
-            return "usb";
-        }
-        else if (pluggedType == BATTERY_PLUGGED_AC) {
-            return "ac";
-        }
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && pluggedType == BATTERY_PLUGGED_WIRELESS) {
-            return "wireless";
-        }
-        else {
-            return "unknown";
-        }
-    }
-
-    private static String getBatteryStatusString(int status) {
-
-        switch (status) {
-
-            case BatteryManager.BATTERY_STATUS_CHARGING:
-                return "charging";
-
-            case BatteryManager.BATTERY_STATUS_DISCHARGING:
-                return "discharging";
-
-            case BatteryManager.BATTERY_STATUS_FULL:
-                return "full";
-
-            case BatteryManager.BATTERY_STATUS_NOT_CHARGING:
-                return "not Charging";
-
-            case BatteryManager.BATTERY_STATUS_UNKNOWN:
-                return "unknown";
-
-            default:
-                return "unsupported";
-        }
-    }
-
-    private String getBatteryHealthString(int health) {
-
-        switch (health) {
-
-            case BatteryManager.BATTERY_HEALTH_COLD:
-                return "cold";
-
-            case BatteryManager.BATTERY_HEALTH_DEAD:
-                return "dead";
-
-            case BatteryManager.BATTERY_HEALTH_GOOD:
-                return "good";
-
-            case BatteryManager.BATTERY_HEALTH_OVERHEAT:
-                return "over heat";
-
-            case BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE:
-                return "over voltage";
-
-            case BatteryManager.BATTERY_HEALTH_UNKNOWN:
-                return "unknown";
-
-            case BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE:
-                return "failure";
-
-            default:
-                return "unsupported";
-        }
     }
 
 }

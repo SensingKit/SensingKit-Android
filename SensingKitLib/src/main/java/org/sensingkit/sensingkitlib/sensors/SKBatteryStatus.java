@@ -46,9 +46,9 @@ public class SKBatteryStatus extends SKAbstractSensor {
     private int mLastScaleSensed = Integer.MAX_VALUE;
     private int mLastTemperatureSensed = Integer.MAX_VALUE;
     private int mLastVoltageSensed = Integer.MAX_VALUE;
-    private int mLastPluggedSensed = Integer.MAX_VALUE;
-    private int mLastStatusSensed = Integer.MAX_VALUE;
-    private int mLastHealthSensed = Integer.MAX_VALUE;
+    private SKBatteryStatusData.SKBatteryPlugged mLastPluggedSensed = null;
+    private SKBatteryStatusData.SKBatteryStatus mLastStatusSensed = null;
+    private SKBatteryStatusData.SKBatteryHealth mLastHealthSensed = null;
 
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -112,9 +112,9 @@ public class SKBatteryStatus extends SKAbstractSensor {
         mLastScaleSensed = Integer.MAX_VALUE;
         mLastTemperatureSensed = Integer.MAX_VALUE;
         mLastVoltageSensed = Integer.MAX_VALUE;
-        mLastPluggedSensed = Integer.MAX_VALUE;
-        mLastStatusSensed = Integer.MAX_VALUE;
-        mLastHealthSensed = Integer.MAX_VALUE;
+        mLastPluggedSensed = null;
+        mLastStatusSensed = null;
+        mLastHealthSensed = null;
     }
 
     private void registerLocalBroadcastManager() {
@@ -145,9 +145,9 @@ public class SKBatteryStatus extends SKAbstractSensor {
         int scale = batteryData.getScale();
         int temperature = batteryData.getTemperature();
         int voltage = batteryData.getVoltage();
-        int plugged = batteryData.getPlugged();
-        int status = batteryData.getBatteryStatus();
-        int health = batteryData.getBatteryHealth();
+        SKBatteryStatusData.SKBatteryPlugged plugged = batteryData.getBatteryPlugged();
+        SKBatteryStatusData.SKBatteryStatus status = batteryData.getBatteryStatus();
+        SKBatteryStatusData.SKBatteryHealth health = batteryData.getBatteryHealth();
 
         // Ignore Temperature and Voltage
         boolean shouldPost = (mLastLevelSensed != level ||
