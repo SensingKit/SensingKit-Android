@@ -92,7 +92,7 @@ public class SKLocation extends SKAbstractSensor {
 
         // Configure the LocationRequest
         mLocationRequest = LocationRequest.create();
-        mLocationRequest.setPriority(locationConfiguration.getPriority());
+        mLocationRequest.setPriority(locationConfiguration.getPriority().getPriorityCode());
         mLocationRequest.setInterval(locationConfiguration.getInterval());
         mLocationRequest.setFastestInterval(locationConfiguration.getFastestInterval());
     }

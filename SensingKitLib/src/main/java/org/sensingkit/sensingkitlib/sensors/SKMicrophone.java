@@ -80,9 +80,9 @@ public class SKMicrophone extends SKAbstractSensor {
         mMediaRecorder.reset();
 
         // Set configuration
-        mMediaRecorder.setAudioSource(microphoneConfiguration.getAudioSource());
-        mMediaRecorder.setOutputFormat(microphoneConfiguration.getOutputFormat());
-        mMediaRecorder.setAudioEncoder(microphoneConfiguration.getAudioEncoder());
+        mMediaRecorder.setAudioSource(microphoneConfiguration.getAudioSource().getAudioSourceCode());
+        mMediaRecorder.setOutputFormat(microphoneConfiguration.getOutputFormat().getOutputFormatCode());
+        mMediaRecorder.setAudioEncoder(microphoneConfiguration.getAudioEncoder().getAudioEncoderCode());
         mMediaRecorder.setOutputFile(microphoneConfiguration.getRecordingPath());
         mMediaRecorder.setAudioEncodingBitRate(microphoneConfiguration.getBitrate());
         mMediaRecorder.setAudioSamplingRate(microphoneConfiguration.getSamplingRate());

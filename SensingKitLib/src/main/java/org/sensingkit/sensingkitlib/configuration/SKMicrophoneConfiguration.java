@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.configuration;
 
 import android.media.MediaRecorder;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 
@@ -31,51 +32,176 @@ import java.io.File;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class SKMicrophoneConfiguration extends SKAbstractConfiguration {
 
-    public final class SKAudioSource {
+    public enum SKAudioSource {
 
-        public static final int CAMCORDER = MediaRecorder.AudioSource.CAMCORDER;
-        public static final int MIC = MediaRecorder.AudioSource.MIC;
-        public static final int VOICE_CALL = MediaRecorder.AudioSource.VOICE_CALL;
-        public static final int VOICE_COMMUNICATION = MediaRecorder.AudioSource.VOICE_COMMUNICATION;
-        public static final int VOICE_DOWNLINK = MediaRecorder.AudioSource.VOICE_DOWNLINK;
-        public static final int VOICE_RECOGNITION = MediaRecorder.AudioSource.VOICE_RECOGNITION;
-        public static final int VOICE_UPLINK = MediaRecorder.AudioSource.VOICE_UPLINK;
+        /**
+         * TODO
+         */
+        CAMCORDER("Camcorder", MediaRecorder.AudioSource.CAMCORDER),
 
-        SKAudioSource() {
-            throw new RuntimeException();
+        /**
+         * TODO
+         */
+        MIC("Mic", MediaRecorder.AudioSource.MIC),
+
+        /**
+         * TODO
+         */
+        VOICE_CALL("Voice Call", MediaRecorder.AudioSource.VOICE_CALL),
+
+        /**
+         * TODO
+         */
+        VOICE_COMMUNICATION("Voice Communication", MediaRecorder.AudioSource.VOICE_COMMUNICATION),
+
+        /**
+         * TODO
+         */
+        VOICE_DOWNLINK("Voice Downlink", MediaRecorder.AudioSource.VOICE_DOWNLINK),
+
+        /**
+         * TODO
+         */
+        VOICE_RECOGNITION("Voice Recognition", MediaRecorder.AudioSource.VOICE_RECOGNITION),
+
+        /**
+         * TODO
+         */
+        VOICE_UPLINK("Voice Uplink", MediaRecorder.AudioSource.VOICE_UPLINK);
+
+        private final String name;
+        private final int audioSourceCode;
+
+        SKAudioSource(final @NonNull String name, final int audioSourceCode) {
+            this.name = name;
+            this.audioSourceCode = audioSourceCode;
+        }
+
+        @SuppressWarnings("unused")
+        public @NonNull String getName() {
+            return this.name;
+        }
+
+        public int getAudioSourceCode() {
+            return audioSourceCode;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return this.getName();
         }
     }
 
-    public final class SKOutputFormat {
+    public enum SKOutputFormat {
 
-        public static final int AAC_ADTS = MediaRecorder.OutputFormat.AAC_ADTS;
-        public static final int AMR_NB = MediaRecorder.OutputFormat.AMR_NB;
-        public static final int AMR_WB = MediaRecorder.OutputFormat.AMR_WB;
-        public static final int MPEG_4 = MediaRecorder.OutputFormat.MPEG_4;
+        /**
+         * TODO
+         */
+        AAC_ADTS("AAC ADTS", MediaRecorder.OutputFormat.AAC_ADTS, "m4a"),
 
-        SKOutputFormat() {
-            throw new RuntimeException();
+        /**
+         * TODO
+         */
+        AMR_NB("AMR NB", MediaRecorder.OutputFormat.AMR_NB, "amr"),
+
+        /**
+         * TODO
+         */
+        AMR_WB("AMR WB", MediaRecorder.OutputFormat.AMR_WB, "awb"),
+
+        /**
+         * TODO
+         */
+        MPEG_4("MPEG 4", MediaRecorder.OutputFormat.MPEG_4, "m4a");
+
+        private final String name;
+        private final int outputFormatCode;
+        private final @NonNull String extension;
+
+        SKOutputFormat(final @NonNull String name, final int outputFormatCode, final @NonNull String extension) {
+            this.name = name;
+            this.outputFormatCode = outputFormatCode;
+            this.extension = extension;
+        }
+
+        @SuppressWarnings("unused")
+        public @NonNull String getName() {
+            return this.name;
+        }
+
+        public int getOutputFormatCode() {
+            return outputFormatCode;
+        }
+
+        @NonNull
+        public String getExtension() {
+            return extension;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return this.getName();
         }
     }
 
-    public final class SKAudioEncoder {
+    public enum SKAudioEncoder {
 
-        public static final int AAC = MediaRecorder.AudioEncoder.AAC;
-        public static final int AAC_ELD = MediaRecorder.AudioEncoder.AAC_ELD;
-        public static final int AMR_NB = MediaRecorder.AudioEncoder.AMR_NB;
-        public static final int AMR_WB = MediaRecorder.AudioEncoder.AMR_WB;
-        public static final int HE_AAC = MediaRecorder.AudioEncoder.HE_AAC;
+        /**
+         * TODO
+         */
+        AAC("AAC", MediaRecorder.AudioEncoder.AAC),
 
-        SKAudioEncoder() {
-            throw new RuntimeException();
+        /**
+         * TODO
+         */
+        AAC_ELD("AAC ELD", MediaRecorder.AudioEncoder.AAC_ELD),
+
+        /**
+         * TODO
+         */
+        AMR_NB("AMR NB", MediaRecorder.AudioEncoder.AMR_NB),
+
+        /**
+         * TODO
+         */
+        AMR_WB("AMW WB", MediaRecorder.AudioEncoder.AMR_WB),
+
+        /**
+         * TODO
+         */
+        HE_AAC("HE AAC", MediaRecorder.AudioEncoder.HE_AAC);
+
+        private final String name;
+        private final int audioEncoderCode;
+
+        SKAudioEncoder(final @NonNull String name, final int audioEncoderCode) {
+            this.name = name;
+            this.audioEncoderCode = audioEncoderCode;
+        }
+
+        @SuppressWarnings("unused")
+        public @NonNull String getName() {
+            return this.name;
+        }
+
+        public int getAudioEncoderCode() {
+            return audioEncoderCode;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return this.getName();
         }
     }
 
     private String filename;
     private File outputDirectory;
-    private int audioSource;
-    private int outputFormat;
-    private int audioEncoder;
+    private SKAudioSource audioSource;
+    private SKOutputFormat outputFormat;
+    private SKAudioEncoder audioEncoder;
     private int bitrate;
     private int samplingRate;
     private int audioChannels;
@@ -136,7 +262,7 @@ public class SKMicrophoneConfiguration extends SKAbstractConfiguration {
     public File getRecordingFile() {
 
         // filename.extension
-        String filename = this.filename + "." + SKMicrophoneConfiguration.getRecordingExtension(this.outputFormat);
+        String filename = this.filename + "." + outputFormat.getExtension();
 
         // return the full path
         return new File(this.outputDirectory, filename);
@@ -149,53 +275,33 @@ public class SKMicrophoneConfiguration extends SKAbstractConfiguration {
     }
 
     @SuppressWarnings("unused")
-    public int getAudioSource() {
+    public SKAudioSource getAudioSource() {
         return audioSource;
     }
 
     @SuppressWarnings("unused")
-    public void setAudioSource(final int audioSource) {
+    public void setAudioSource(final SKAudioSource audioSource) {
         this.audioSource = audioSource;
     }
 
     @SuppressWarnings("unused")
-    public int getOutputFormat() {
+    public SKOutputFormat getOutputFormat() {
         return outputFormat;
     }
 
     @SuppressWarnings("unused")
-    public void setOutputFormat(final int outputFormat) {
+    public void setOutputFormat(final SKOutputFormat outputFormat) {
         this.outputFormat = outputFormat;
     }
 
     @SuppressWarnings("unused")
-    public int getAudioEncoder() {
+    public SKAudioEncoder getAudioEncoder() {
         return audioEncoder;
     }
 
     @SuppressWarnings("unused")
-    public void setAudioEncoder(final int audioEncoder) {
+    public void setAudioEncoder(final SKAudioEncoder audioEncoder) {
         this.audioEncoder = audioEncoder;
-    }
-
-    private static String getRecordingExtension(final int outputFormat) {
-
-        switch (outputFormat) {
-            case SKOutputFormat.AAC_ADTS:
-                return "m4a";
-
-            case SKOutputFormat.AMR_NB:
-                return "amr";
-
-            case SKOutputFormat.AMR_WB:
-                return "awb";
-
-            case SKOutputFormat.MPEG_4:
-                return "m4a";
-
-            default:
-                throw new RuntimeException();
-        }
     }
 
     @SuppressWarnings("unused")

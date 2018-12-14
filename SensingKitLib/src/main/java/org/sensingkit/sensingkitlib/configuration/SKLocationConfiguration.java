@@ -21,6 +21,8 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
+import android.support.annotation.NonNull;
+
 import com.google.android.gms.location.LocationRequest;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
@@ -28,19 +30,54 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 public class SKLocationConfiguration extends SKAbstractConfiguration {
 
     @SuppressWarnings({"WeakerAccess", "unused"})
-    public final class SKPriority {
+    public enum SKPriority {
 
-        public static final int HIGH_ACCURACY           = LocationRequest.PRIORITY_HIGH_ACCURACY;
-        public static final int BALANCED_POWER_ACCURACY = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY;
-        public static final int LOW_POWER               = LocationRequest.PRIORITY_LOW_POWER;
-        public static final int NO_POWER                = LocationRequest.PRIORITY_NO_POWER;
+        /**
+         * TODO
+         */
+        HIGH_ACCURACY("High Accuracy", LocationRequest.PRIORITY_HIGH_ACCURACY),
 
-        SKPriority() {
-            throw new RuntimeException();
+        /**
+         * TODO
+         */
+        BALANCED_POWER_ACCURACY("Balanced Power Accuracy", LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY),
+
+        /**
+         * TODO
+         */
+        LOW_POWER("Low Power", LocationRequest.PRIORITY_LOW_POWER),
+
+        /**
+         * TODO
+         */
+        NO_POWER("No Power", LocationRequest.PRIORITY_NO_POWER);
+
+        private final int priorityCode;
+        private final @NonNull String name;
+
+        SKPriority(final @NonNull String name, final int priorityCode) {
+            this.name = name;
+            this.priorityCode = priorityCode;
+        }
+
+        @SuppressWarnings("unused")
+        public @NonNull String getName() {
+            return this.name;
+        }
+
+        @SuppressWarnings("unused")
+        public int getPriorityCode() {
+            return this.priorityCode;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return this.getName();
         }
     }
 
-    private int priority;
+    private SKPriority priority;
     private int interval;
     private int fastestInterval;
 
@@ -67,12 +104,12 @@ public class SKLocationConfiguration extends SKAbstractConfiguration {
     }
 
     @SuppressWarnings("unused")
-    public int getPriority() {
+    public SKPriority getPriority() {
         return priority;
     }
 
     @SuppressWarnings("unused")
-    public void setPriority(final int priority) {
+    public void setPriority(final SKPriority priority) {
         this.priority = priority;
     }
 
