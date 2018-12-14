@@ -88,8 +88,6 @@ public enum SKExceptionErrorCode {
      */
     CONFIGURATION_NOT_VALID,
 
-    //CONFIGURATION_EDDYSTONE_PROXIMITY_NAMESPACE_NOT_VALID,
-
 
     // Permissions
 
