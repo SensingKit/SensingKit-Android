@@ -27,14 +27,15 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 
 public class SKLocationConfiguration extends SKAbstractConfiguration {
 
-    public final class Priority {
+    @SuppressWarnings({"WeakerAccess", "unused"})
+    public final class SKPriority {
 
         public static final int HIGH_ACCURACY           = LocationRequest.PRIORITY_HIGH_ACCURACY;
         public static final int BALANCED_POWER_ACCURACY = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY;
         public static final int LOW_POWER               = LocationRequest.PRIORITY_LOW_POWER;
         public static final int NO_POWER                = LocationRequest.PRIORITY_NO_POWER;
 
-        Priority() {
+        SKPriority() {
             throw new RuntimeException();
         }
     }
@@ -47,7 +48,7 @@ public class SKLocationConfiguration extends SKAbstractConfiguration {
         super();
 
         // Set default values
-        this.priority = Priority.HIGH_ACCURACY;
+        this.priority = SKPriority.HIGH_ACCURACY;
         this.interval = 1000;
         this.fastestInterval = 500;
     }
