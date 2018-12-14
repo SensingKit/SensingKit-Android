@@ -34,6 +34,7 @@ import org.sensingkit.sensingkitlib.data.SKAbstractData;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("WeakerAccess")
 public abstract class SKAbstractSensor implements SKSensor {
 
     @SuppressWarnings("unused")
@@ -64,6 +65,7 @@ public abstract class SKAbstractSensor implements SKSensor {
 
     protected abstract void initSensor(final @NonNull Context context, final SKSensorType sensorType, final @NonNull SKConfiguration configuration) throws SKException;
 
+    @SuppressWarnings("unused")
     protected abstract void updateSensor(final @NonNull Context context, final SKSensorType sensorType, final @NonNull SKConfiguration configuration) throws SKException;
 
     @CallSuper

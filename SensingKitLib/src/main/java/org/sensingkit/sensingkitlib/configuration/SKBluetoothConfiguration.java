@@ -31,6 +31,7 @@ public class SKBluetoothConfiguration extends SKAbstractConfiguration {
         // Set default values
     }
 
+    @SuppressWarnings("unused")
     public SKBluetoothConfiguration(SKBluetoothConfiguration configuration) {
         super();
     }

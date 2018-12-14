@@ -32,6 +32,7 @@ public class SKNotificationConfiguration extends SKAbstractConfiguration {
         // Set default values
     }
 
+    @SuppressWarnings("unused")
     public SKNotificationConfiguration(SKNotificationConfiguration configuration) {
         super();
     }

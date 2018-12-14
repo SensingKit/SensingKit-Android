@@ -37,6 +37,7 @@ import org.sensingkit.sensingkitlib.configuration.SKAbstractNativeSensorConfigur
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.data.SKAbstractData;
 
+@SuppressWarnings("WeakerAccess")
 public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
 
     @SuppressWarnings("unused")

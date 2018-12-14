@@ -41,6 +41,7 @@ public class SKMotionActivityData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKMotionActivityData.class.getSimpleName();
 
+    @SuppressWarnings("WeakerAccess")
     public enum SKActivityType {
 
         /**
@@ -137,6 +138,7 @@ public class SKMotionActivityData extends SKAbstractData {
             this.transitionTypeCode = transitionTypeCode;
         }
 
+        @SuppressWarnings("WeakerAccess")
         public static SKTransitionType valueOf(final int transitionTypeCode) {
 
             switch (transitionTypeCode) {

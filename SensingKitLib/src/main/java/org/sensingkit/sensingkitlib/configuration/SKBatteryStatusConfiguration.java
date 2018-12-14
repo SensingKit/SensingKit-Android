@@ -31,6 +31,7 @@ public class SKBatteryStatusConfiguration extends SKAbstractConfiguration {
         // Set default values
     }
 
+    @SuppressWarnings("unused")
     public SKBatteryStatusConfiguration(SKBatteryStatusConfiguration configuration) {
         super();
     }

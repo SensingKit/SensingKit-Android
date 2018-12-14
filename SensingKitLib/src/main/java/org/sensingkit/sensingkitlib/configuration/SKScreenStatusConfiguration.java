@@ -31,6 +31,7 @@ public class SKScreenStatusConfiguration extends SKAbstractConfiguration {
         // Set default values
     }
 
+    @SuppressWarnings("unused")
     public SKScreenStatusConfiguration(SKScreenStatusConfiguration configuration) {
         super();
     }

@@ -88,10 +88,7 @@ public enum SKExceptionErrorCode {
      */
     CONFIGURATION_NOT_VALID,
 
-    /**
-     * Eddystone Proximity Namespace is not valid.
-     */
-    CONFIGURATION_EDDYSTONE_PROXIMITY_NAMESPACE_NOT_VALID,
+    //CONFIGURATION_EDDYSTONE_PROXIMITY_NAMESPACE_NOT_VALID,
 
 
     // Permissions

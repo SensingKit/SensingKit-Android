@@ -23,6 +23,7 @@ package org.sensingkit.sensingkitlib.configuration;
 
 import android.hardware.SensorManager;
 
+@SuppressWarnings("WeakerAccess")
 public abstract class SKAbstractNativeSensorConfiguration extends SKAbstractConfiguration {
 
     @SuppressWarnings({"unused", "WeakerAccess"})

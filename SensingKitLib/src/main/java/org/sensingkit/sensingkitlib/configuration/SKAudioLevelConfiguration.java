@@ -31,6 +31,7 @@ public class SKAudioLevelConfiguration extends SKAbstractConfiguration {
         // Set default values
     }
 
+    @SuppressWarnings("unused")
     public SKAudioLevelConfiguration(SKAudioLevelConfiguration configuration) {
         super();
     }

@@ -28,6 +28,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 /*
 Abstract class for sensor data
  */
+@SuppressWarnings("WeakerAccess")
 public abstract class SKAbstractData implements SKSensorData {
     @SuppressWarnings("unused")
     private static final String TAG = SKAbstractData.class.getSimpleName();
