@@ -104,5 +104,5 @@ public enum SKExceptionErrorCode {
     /**
      * TODO
      */
-    FILE_EXISTS
+    FILE_ALREADY_EXISTS
 }

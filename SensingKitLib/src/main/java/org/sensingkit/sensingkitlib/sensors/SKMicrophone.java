@@ -74,7 +74,7 @@ public class SKMicrophone extends SKAbstractSensor {
         // Check if file already exists
         if (microphoneConfiguration.getRecordingFile().exists()) {
             throw new SKException(TAG, "Filename already exists (" +
-                    microphoneConfiguration.getRecordingFile() + ").", SKExceptionErrorCode.FILE_EXISTS);
+                    microphoneConfiguration.getRecordingFile() + ").", SKExceptionErrorCode.FILE_ALREADY_EXISTS);
         }
 
         mMediaRecorder.reset();
