@@ -40,7 +40,7 @@ public interface SKSensor {
 
     void subscribeSensorDataHandler(final @NonNull SKSensorDataHandler handler) throws SKException;
     void unsubscribeSensorDataHandler(final @NonNull SKSensorDataHandler handler) throws SKException;
-    void unsubscribeAllSensorDataHandlers() throws SKException;
+    void unsubscribeAllSensorDataHandlers();
 
     void setConfiguration(final @NonNull SKConfiguration configuration) throws SKException;
     @NonNull SKConfiguration getConfiguration();

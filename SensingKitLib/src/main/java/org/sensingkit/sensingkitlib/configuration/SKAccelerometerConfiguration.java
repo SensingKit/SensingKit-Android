@@ -22,7 +22,6 @@
 package org.sensingkit.sensingkitlib.configuration;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
-import org.sensingkit.sensingkitlib.sensors.SKAccelerometer;
 
 public class SKAccelerometerConfiguration extends SKAbstractNativeSensorConfiguration {
 

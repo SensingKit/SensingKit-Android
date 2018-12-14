@@ -33,7 +33,6 @@ import org.sensingkit.sensingkitlib.configuration.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @SuppressWarnings({"StaticFieldLeak"})

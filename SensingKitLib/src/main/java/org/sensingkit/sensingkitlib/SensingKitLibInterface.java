@@ -36,7 +36,7 @@ public interface SensingKitLibInterface {
      *
      *  @return TRUE if the sensor is available on the device, or FALSE if it is not.
      */
-    boolean isSensorAvailable(final SKSensorType sensorType) throws SKException;
+    boolean isSensorAvailable(final SKSensorType sensorType);
 
     /**
      *  A Boolean value that indicates whether the sensor is registered.
@@ -45,7 +45,7 @@ public interface SensingKitLibInterface {
      *
      *  @return TRUE if the sensor is registered or FALSE if it is not.
      */
-    boolean isSensorRegistered(final SKSensorType sensorType) throws SKException;
+    boolean isSensorRegistered(final SKSensorType sensorType);
 
     /**
      *  A Boolean value that indicates whether the sensor is currently sensing.
@@ -125,7 +125,7 @@ public interface SensingKitLibInterface {
      *  @return A String with the CSV header.
      */
     @NonNull
-    String csvHeaderForSensor(final SKSensorType sensorType) throws SKException;
+    String csvHeaderForSensor(final SKSensorType sensorType);
 
     // TODO documentation
     boolean isPermissionGrantedForSensor(final SKSensorType sensorType) throws SKException;

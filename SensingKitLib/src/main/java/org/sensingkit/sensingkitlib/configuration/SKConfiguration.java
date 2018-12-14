@@ -26,6 +26,7 @@ import org.sensingkit.sensingkitlib.SKSensorType;
 @SuppressWarnings("unused")
 public interface SKConfiguration {
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     boolean isValidForSensor(final SKSensorType sensorType);
 
     void setRequestWakeLock(final boolean requestWakeLock);
