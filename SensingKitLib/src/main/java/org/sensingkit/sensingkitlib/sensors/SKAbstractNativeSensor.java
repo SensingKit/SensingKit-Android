@@ -28,6 +28,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -51,6 +52,7 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
 
     @Override
     protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "initSensor");}
 
         mSensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
 
@@ -88,11 +90,14 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
 
     @Override
     protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        if (shouldDebugSensor()) {Log.i(TAG, "updateSensor [" + sensorType.getName() + "]");}
+
         // Not required for this type of sensor
     }
 
     @Override
     public void startSensing() throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "startSensing [" + mSensorType.getName() + "]");}
 
         super.startSensing();
 
@@ -108,6 +113,7 @@ public abstract class SKAbstractNativeSensor extends SKAbstractSensor {
 
     @Override
     public void stopSensing() throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "stopSensing [" + mSensorType.getName() + "]");}
 
         mSensorManager.unregisterListener(mSensorEventListener);
 

@@ -43,8 +43,7 @@ public class SKBarometer extends SKAbstractNativeSensor {
 
     @Override
     @NonNull
-    protected SKAbstractData buildData(final @NonNull SensorEvent event)
-    {
+    protected SKAbstractData buildData(final @NonNull SensorEvent event) {
         return new SKBarometerData(System.currentTimeMillis(), event.values[0]);
     }
 

@@ -54,6 +54,7 @@ public class SKAudioLevel extends SKAbstractSensor {
 
     @Override
     protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        if (shouldDebugSensor()) {Log.i(TAG, "initSensing [" + mSensorType.getName() + "]");}
 
         this.bufferSize = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT) * bufferSizeFactor;
         Log.i(TAG, "Init sensor with BufferSize: " + this.bufferSize);
@@ -67,6 +68,8 @@ public class SKAudioLevel extends SKAbstractSensor {
 
     @Override
     protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        if (shouldDebugSensor()) {Log.i(TAG, "updateSensing [" + mSensorType.getName() + "]");}
+
         // Not required for this type of sensor
     }
 
@@ -85,6 +88,7 @@ public class SKAudioLevel extends SKAbstractSensor {
 
     @Override
     public void startSensing() throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "startSensing [" + mSensorType.getName() + "]");}
 
         super.startSensing();
 
@@ -105,6 +109,7 @@ public class SKAudioLevel extends SKAbstractSensor {
 
     @Override
     public void stopSensing() throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "stopSensing [" + mSensorType.getName() + "]");}
 
         audioRecord.stop();
 

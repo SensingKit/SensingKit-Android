@@ -43,8 +43,7 @@ public class SKRotation extends SKAbstractNativeSensor {
 
     @Override
     @NonNull
-    protected SKAbstractData buildData(final @NonNull SensorEvent event)
-    {
+    protected SKAbstractData buildData(final @NonNull SensorEvent event) {
         if (event.values.length >= 6) {
             return new SKRotationData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2], event.values[3], event.values[4]);
         }

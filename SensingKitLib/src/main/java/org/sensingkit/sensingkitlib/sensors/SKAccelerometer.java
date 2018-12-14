@@ -43,8 +43,7 @@ public class SKAccelerometer extends SKAbstractNativeSensor {
 
     @Override
     @NonNull
-    protected SKAbstractData buildData(final SensorEvent event)
-    {
+    protected SKAbstractData buildData(final SensorEvent event) {
         return new SKAccelerometerData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
     }
 

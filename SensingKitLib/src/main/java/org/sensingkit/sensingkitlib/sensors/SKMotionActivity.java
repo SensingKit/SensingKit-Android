@@ -67,6 +67,8 @@ public class SKMotionActivity extends SKAbstractSensor {
 
     @Override
     protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        if (shouldDebugSensor()) {Log.i(TAG, "initSensing [" + mSensorType.getName() + "]");}
+
         mActivityRecognitionClient = ActivityRecognition.getClient(mApplicationContext);
         mLocalBroadcastManager = LocalBroadcastManager.getInstance(mApplicationContext);
 
@@ -79,6 +81,7 @@ public class SKMotionActivity extends SKAbstractSensor {
 
     @Override
     protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        if (shouldDebugSensor()) {Log.i(TAG, "updateSensing [" + mSensorType.getName() + "]");}
 
         // Cast the configuration instance
         SKMotionActivityConfiguration motionActivityConfiguration = (SKMotionActivityConfiguration)mConfiguration;
@@ -132,6 +135,7 @@ public class SKMotionActivity extends SKAbstractSensor {
     }
 
     private void registerTrackedActivity(@NonNull List<ActivityTransition> transitions, final int activity) {
+        if (shouldDebugSensor()) {Log.i(TAG, "registerTrackedActivity");}
 
         transitions.add(
                 new ActivityTransition.Builder()
@@ -148,6 +152,7 @@ public class SKMotionActivity extends SKAbstractSensor {
 
     @Override
     public void startSensing() throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "startSensing [" + mSensorType.getName() + "]");}
 
         super.startSensing();
 
@@ -182,6 +187,7 @@ public class SKMotionActivity extends SKAbstractSensor {
 
     @Override
     public void stopSensing() throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "stopSensing [" + mSensorType.getName() + "]");}
 
         @SuppressLint("MissingPermission")
         Task<Void> task = mActivityRecognitionClient.removeActivityTransitionUpdates(mActivityRecognitionPendingIntent);

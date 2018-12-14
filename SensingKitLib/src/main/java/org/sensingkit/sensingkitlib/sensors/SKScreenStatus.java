@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
@@ -83,6 +84,7 @@ public class SKScreenStatus extends SKAbstractSensor {
 
     @Override
     protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        if (shouldDebugSensor()) {Log.i(TAG, "initSensing [" + mSensorType.getName() + "]");}
         // Not required for this type of sensor
 
         // configure sensor
@@ -91,6 +93,7 @@ public class SKScreenStatus extends SKAbstractSensor {
 
     @Override
     protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        if (shouldDebugSensor()) {Log.i(TAG, "updateSensing [" + mSensorType.getName() + "]");}
         // Not required for this type of sensor
     }
 
@@ -109,6 +112,7 @@ public class SKScreenStatus extends SKAbstractSensor {
 
     @Override
     public void startSensing() throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "startSensing [" + mSensorType.getName() + "]");}
 
         super.startSensing();
 
@@ -117,6 +121,7 @@ public class SKScreenStatus extends SKAbstractSensor {
 
     @Override
     public void stopSensing() throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "stopSensing [" + mSensorType.getName() + "]");}
 
         unregisterLocalBroadcastManager();
 

@@ -29,6 +29,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
@@ -95,6 +96,7 @@ public class SKBluetooth extends SKAbstractSensor {
 
     @Override
     protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "initSensing [" + mSensorType.getName() + "]");}
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mBluetoothDevices = new ArrayList<>();
@@ -109,6 +111,7 @@ public class SKBluetooth extends SKAbstractSensor {
 
     @Override
     protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        if (shouldDebugSensor()) {Log.i(TAG, "updateSensing [" + mSensorType.getName() + "]");}
         // Not required for this type of sensor
     }
 
@@ -127,6 +130,7 @@ public class SKBluetooth extends SKAbstractSensor {
 
     @Override
     public void startSensing() throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "startSensing [" + mSensorType.getName() + "]");}
 
         if (mBluetoothAdapter == null) {
             throw new SKException(TAG, "Bluetooth sensor is not supported from the device.", SKExceptionErrorCode.SENSOR_NOT_AVAILABLE);
@@ -146,6 +150,7 @@ public class SKBluetooth extends SKAbstractSensor {
 
     @Override
     public void stopSensing() throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "stopSensing [" + mSensorType.getName() + "]");}
 
         // Stop Bluetooth Scanning
         mBluetoothAdapter.cancelDiscovery();

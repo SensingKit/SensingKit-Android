@@ -143,6 +143,10 @@ public abstract class SKAbstractSensor implements SKSensor {
 
     protected abstract boolean shouldPostSensorData(final @NonNull SKAbstractData data);
 
+    protected boolean shouldDebugSensor() {
+        return mConfiguration.getDebugStatus();
+    }
+
     protected void submitSensorData(final @NonNull SKAbstractData data) {
 
         // If there is a significant change

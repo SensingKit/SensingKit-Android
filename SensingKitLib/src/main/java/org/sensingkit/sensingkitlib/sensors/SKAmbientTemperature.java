@@ -43,8 +43,7 @@ public class SKAmbientTemperature extends SKAbstractNativeSensor {
 
     @Override
     @NonNull
-    protected SKAbstractData buildData(final SensorEvent event)
-    {
+    protected SKAbstractData buildData(final SensorEvent event) {
         return new SKAmbientTemperatureData(System.currentTimeMillis(), event.values[0]);
     }
 

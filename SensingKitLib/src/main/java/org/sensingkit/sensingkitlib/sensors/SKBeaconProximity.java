@@ -92,6 +92,8 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
     @Override
     protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        if (shouldDebugSensor()) {Log.i(TAG, "initSensing [" + mSensorType.getName() + "]");}
+
         // Init BeaconManager
         mBeaconManager = BeaconManager.getInstanceForApplication(mApplicationContext);
         //BeaconManager.setDebug(true);  // Debug only
@@ -102,6 +104,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
     @Override
     protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        if (shouldDebugSensor()) {Log.i(TAG, "updateSensing [" + mSensorType.getName() + "]");}
 
         // Unbind first if needed
         if (mBeaconManager.isBound(this)) {
@@ -134,8 +137,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
     @Override
     public void onBeaconServiceConnect() {
-
-        Log.i(TAG, "Beacon Service Connected!");
+        if (shouldDebugSensor()) {Log.i(TAG, "onBeaconServiceConnect [" + mSensorType.getName() + "]");}
     }
 
     @Override
@@ -145,11 +147,15 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
     @Override
     public void unbindService(final @NonNull ServiceConnection serviceConnection) {
+        if (shouldDebugSensor()) {Log.i(TAG, "unbindService [" + mSensorType.getName() + "]");}
+
         mApplicationContext.unbindService(serviceConnection);
     }
 
     @Override
     public boolean bindService(final @NonNull Intent intent, final @NonNull ServiceConnection serviceConnection, final int i) {
+        if (shouldDebugSensor()) {Log.i(TAG, "bindService [" + mSensorType.getName() + "]");}
+
         return mApplicationContext.bindService(intent, serviceConnection, i);
     }
 
@@ -162,6 +168,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
     @Override
     public void startSensing() throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "startSensing [" + mSensorType.getName() + "]");}
 
         super.startSensing();
 
@@ -180,6 +187,7 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
 
     @Override
     public void stopSensing() throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "stopSensing [" + mSensorType.getName() + "]");}
 
         try {
             mBeaconManager.stopRangingBeaconsInRegion(mRegion);

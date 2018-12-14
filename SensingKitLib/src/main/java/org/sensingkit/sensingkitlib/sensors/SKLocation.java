@@ -26,6 +26,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Location;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -55,6 +56,7 @@ public class SKLocation extends SKAbstractSensor {
             super.onLocationResult(locationResult);
 
             if (locationResult == null) {
+                if (shouldDebugSensor()) {Log.i(TAG, "locationResult is null");}
                 return;
             }
 
@@ -73,6 +75,8 @@ public class SKLocation extends SKAbstractSensor {
 
     @Override
     protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        if (shouldDebugSensor()) {Log.i(TAG, "initSensing [" + mSensorType.getName() + "]");}
+
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
 
         // configure sensor
@@ -81,6 +85,7 @@ public class SKLocation extends SKAbstractSensor {
 
     @Override
     protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) {
+        if (shouldDebugSensor()) {Log.i(TAG, "updateSensing [" + mSensorType.getName() + "]");}
 
         // Cast the configuration instance
         SKLocationConfiguration locationConfiguration = (SKLocationConfiguration)mConfiguration;
@@ -95,6 +100,7 @@ public class SKLocation extends SKAbstractSensor {
     @SuppressLint("MissingPermission")
     @Override
     public void startSensing() throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "startSensing [" + mSensorType.getName() + "]");}
 
         super.startSensing();
 
@@ -106,6 +112,7 @@ public class SKLocation extends SKAbstractSensor {
 
     @Override
     public void stopSensing() throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "stopSensing [" + mSensorType.getName() + "]");}
 
         mFusedLocationClient.removeLocationUpdates(mLocationCallback);
 

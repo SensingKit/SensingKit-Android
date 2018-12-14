@@ -50,6 +50,8 @@ public class SKMicrophone extends SKAbstractSensor {
 
     @Override
     protected void initSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "initSensing [" + mSensorType.getName() + "]");}
+
         mMediaRecorder = new MediaRecorder();
 
         // configure sensor
@@ -58,6 +60,7 @@ public class SKMicrophone extends SKAbstractSensor {
 
     @Override
     protected void updateSensor(@NonNull Context context, SKSensorType sensorType, @NonNull SKConfiguration configuration) throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "updateSensing [" + mSensorType.getName() + "]");}
 
         // Cast the configuration instance
         SKMicrophoneConfiguration microphoneConfiguration = (SKMicrophoneConfiguration)configuration;
@@ -109,6 +112,7 @@ public class SKMicrophone extends SKAbstractSensor {
 
     @Override
     public void startSensing() throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "startSensing [" + mSensorType.getName() + "]");}
 
         super.startSensing();
 
@@ -123,6 +127,7 @@ public class SKMicrophone extends SKAbstractSensor {
 
     @Override
     public void stopSensing() throws SKException {
+        if (shouldDebugSensor()) {Log.i(TAG, "stopSensing [" + mSensorType.getName() + "]");}
 
         // Stop recording
         mMediaRecorder.stop();

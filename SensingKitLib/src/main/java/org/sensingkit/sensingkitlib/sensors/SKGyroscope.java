@@ -43,8 +43,7 @@ public class SKGyroscope extends SKAbstractNativeSensor {
 
     @Override
     @NonNull
-    protected SKAbstractData buildData(final @NonNull SensorEvent event)
-    {
+    protected SKAbstractData buildData(final @NonNull SensorEvent event) {
         return new SKGyroscopeData(System.currentTimeMillis(), event.values[0], event.values[1], event.values[2]);
     }
 
