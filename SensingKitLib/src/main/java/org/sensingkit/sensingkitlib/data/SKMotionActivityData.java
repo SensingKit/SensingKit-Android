@@ -41,45 +41,150 @@ public class SKMotionActivityData extends SKAbstractData {
     @SuppressWarnings("unused")
     private static final String TAG = SKMotionActivityData.class.getSimpleName();
 
-    public final class ActivityType {
+    public enum SKActivityType {
 
-        public static final int STATIONARY  = DetectedActivity.STILL;
-        public static final int WALKING     = DetectedActivity.WALKING;
-        public static final int RUNNING     = DetectedActivity.RUNNING;
-        public static final int AUTOMOTIVE  = DetectedActivity.IN_VEHICLE;
-        public static final int CYCLING     = DetectedActivity.ON_BICYCLE;
+        /**
+         * TODO
+         */
+        STATIONARY("Still", DetectedActivity.STILL),
 
-        ActivityType() {
-            throw new RuntimeException();
+        /**
+         * TODO
+         */
+        WALKING("Walking", DetectedActivity.WALKING),
+
+        /**
+         * TODO
+         */
+        RUNNING("Running", DetectedActivity.RUNNING),
+
+        /**
+         * TODO
+         */
+        AUTOMOTIVE("Automotive", DetectedActivity.IN_VEHICLE),
+
+        /**
+         * TODO
+         */
+        CYCLING("Cycling", DetectedActivity.ON_BICYCLE);
+
+        private final @NonNull String activityType;
+        private final int activityTypeCode;
+
+        SKActivityType(final @NonNull String activityType, final int activityTypeCode) {
+            this.activityType = activityType;
+            this.activityTypeCode = activityTypeCode;
+        }
+
+        public static SKActivityType valueOf(final int activityTypeCode) {
+
+            switch (activityTypeCode) {
+
+                case DetectedActivity.STILL:
+                    return STATIONARY;
+
+                case DetectedActivity.WALKING:
+                    return WALKING;
+
+                case DetectedActivity.RUNNING:
+                    return RUNNING;
+
+                case DetectedActivity.IN_VEHICLE:
+                    return AUTOMOTIVE;
+
+                case DetectedActivity.ON_BICYCLE:
+                    return CYCLING;
+
+                default:
+                    throw new RuntimeException("Unsupported SKActivityType with code: " + activityTypeCode);
+            }
+        }
+
+        @SuppressWarnings("unused")
+        public @NonNull String getActivityType() {
+            return this.activityType;
+        }
+
+        @SuppressWarnings("unused")
+        public int getActivityTypeCode() {
+            return this.activityTypeCode;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return this.getActivityType();
         }
     }
 
-    public final class TransitionType {
+    public enum SKTransitionType {
 
-        public static final int ENTER  = ActivityTransition.ACTIVITY_TRANSITION_ENTER;
-        public static final int EXIT  = ActivityTransition.ACTIVITY_TRANSITION_EXIT;
+        /**
+         * TODO
+         */
+        ENTER("Enter", ActivityTransition.ACTIVITY_TRANSITION_ENTER),
 
-        TransitionType() {
-            throw new RuntimeException();
+        /**
+         * TODO
+         */
+        EXIT("Exit", ActivityTransition.ACTIVITY_TRANSITION_EXIT);
+
+        private final @NonNull String transitionType;
+        private final int transitionTypeCode;
+
+        SKTransitionType(final @NonNull String transitionType, final int transitionTypeCode) {
+            this.transitionType = transitionType;
+            this.transitionTypeCode = transitionTypeCode;
+        }
+
+        public static SKTransitionType valueOf(final int transitionTypeCode) {
+
+            switch (transitionTypeCode) {
+
+                case ActivityTransition.ACTIVITY_TRANSITION_ENTER:
+                    return ENTER;
+
+                case ActivityTransition.ACTIVITY_TRANSITION_EXIT:
+                    return EXIT;
+
+                default:
+                    throw new RuntimeException("Unsupported SKTransitionType with code: " + transitionTypeCode);
+            }
+        }
+
+        @SuppressWarnings("unused")
+        public @NonNull String getTransitionType() {
+            return this.transitionType;
+        }
+
+        @SuppressWarnings("unused")
+        public int getTransitionTypeCode() {
+            return this.transitionTypeCode;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return this.getTransitionType();
         }
     }
 
-    private final int activityType;
-    private final int transitionType;
+    private final SKActivityType activityType;
+    private final SKTransitionType transitionType;
 
     /**
      * Initialize the instance
      *
      * @param timestamp    Time in milliseconds (the difference between the current time and midnight, January 1, 1970 UTC)
-     * @param activityType The type of the activity
-     * @param transitionType Confidence percentage for the most probable activity
+     * @param activityTypeCode The type of the activity
+     * @param transitionTypeCode TODO
      */
-    public SKMotionActivityData(final long timestamp, final int activityType, final int transitionType) {
+    public SKMotionActivityData(final long timestamp, final int activityTypeCode, final int transitionTypeCode) {
 
         super(SKSensorType.MOTION_ACTIVITY, timestamp);
 
-        this.activityType = activityType;
-        this.transitionType = transitionType;
+        this.activityType = SKActivityType.valueOf(activityTypeCode);
+        this.transitionType = SKTransitionType.valueOf(transitionTypeCode);
     }
 
     /**
@@ -90,7 +195,7 @@ public class SKMotionActivityData extends SKAbstractData {
     @SuppressWarnings({"unused", "SameReturnValue"})
     @NonNull
     public static String csvHeader() {
-        return "timeIntervalSince1970,activity,activityString,transition,transitionString";
+        return "timeIntervalSince1970,activityCode,activityString,transitionCode,transitionString";
     }
 
     /**
@@ -102,7 +207,7 @@ public class SKMotionActivityData extends SKAbstractData {
     @Override
     @NonNull
     public String getDataInCSV() {
-        return String.format(Locale.US, "%d,%d,%s", this.timestamp, this.activityType, getActivityString());
+        return String.format(Locale.US, "%d,%d,%s", this.timestamp, this.activityType.getActivityTypeCode(), this.activityType.getActivityType());
     }
 
     /**
@@ -121,10 +226,10 @@ public class SKMotionActivityData extends SKAbstractData {
             jsonObject.put("timestamp", this.timestamp);
 
             JSONObject subJsonObject = new JSONObject();
-            subJsonObject.put("activity", this.activityType);
-            subJsonObject.put("activityString", getActivityString());
-            subJsonObject.put("transition", this.transitionType);
-            subJsonObject.put("transitionString", this.getTransitionString());
+            subJsonObject.put("activity", this.activityType.getActivityTypeCode());
+            subJsonObject.put("activityString", this.activityType.getActivityType());
+            subJsonObject.put("transition", this.transitionType.getTransitionTypeCode());
+            subJsonObject.put("transitionString", this.transitionType.getTransitionType());
 
             jsonObject.put("motionActivity", subJsonObject);
 
@@ -141,18 +246,8 @@ public class SKMotionActivityData extends SKAbstractData {
      * @return Activity type
      */
     @SuppressWarnings("unused")
-    public int getActivityType() {
+    public SKActivityType getActivityType() {
         return this.activityType;
-    }
-
-    /**
-     * Get the name of the activity type
-     *
-     * @return Name of the activity type
-     */
-    @SuppressWarnings("unused")
-    public String getActivityString() {
-        return getNameFromActivityType(this.activityType);
     }
 
     /**
@@ -162,72 +257,8 @@ public class SKMotionActivityData extends SKAbstractData {
      *
      */
     @SuppressWarnings("unused")
-    public int getTransitionType() {
+    public SKTransitionType getTransitionType() {
         return this.transitionType;
-    }
-
-    /**
-     * Get the name of the activity type
-     *
-     * @return Name of the activity type
-     */
-    @SuppressWarnings("unused")
-    public String getTransitionString() {
-        return getNameFromTransitionType(this.transitionType);
-    }
-
-    /**
-     * Get the name of an activity type
-     *
-     * @param activityType The type of the activity
-     * @return name
-     */
-    public static String getNameFromActivityType(int activityType) {
-
-        switch (activityType) {
-
-            case ActivityType.STATIONARY:
-                return "stationary";
-
-            case ActivityType.WALKING:
-                return "walking";
-
-            case ActivityType.RUNNING:
-                return "running";
-
-            case ActivityType.AUTOMOTIVE:
-                return "automotive";
-
-            case ActivityType.CYCLING:
-                return "cycling";
-
-            default:
-                return "unsupported";
-        }
-
-    }
-
-    /**
-     * Get the name of an activity type
-     *
-     * @param transitionType The type of the transition (i.e. 'enter' or 'exit')
-     *
-     * @return name
-     */
-    public static String getNameFromTransitionType(int transitionType) {
-
-        switch (transitionType) {
-
-            case TransitionType.ENTER:
-                return "enter";
-
-            case TransitionType.EXIT:
-                return "exit";
-
-            default:
-                return "unsupported";
-        }
-
     }
 
 }
