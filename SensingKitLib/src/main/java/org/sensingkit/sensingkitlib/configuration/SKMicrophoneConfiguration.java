@@ -31,7 +31,7 @@ import java.io.File;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class SKMicrophoneConfiguration extends SKAbstractConfiguration {
 
-    public final class AudioSource {
+    public final class SKAudioSource {
 
         public static final int CAMCORDER = MediaRecorder.AudioSource.CAMCORDER;
         public static final int MIC = MediaRecorder.AudioSource.MIC;
@@ -41,24 +41,24 @@ public class SKMicrophoneConfiguration extends SKAbstractConfiguration {
         public static final int VOICE_RECOGNITION = MediaRecorder.AudioSource.VOICE_RECOGNITION;
         public static final int VOICE_UPLINK = MediaRecorder.AudioSource.VOICE_UPLINK;
 
-        AudioSource() {
+        SKAudioSource() {
             throw new RuntimeException();
         }
     }
 
-    public final class OutputFormat {
+    public final class SKOutputFormat {
 
         public static final int AAC_ADTS = MediaRecorder.OutputFormat.AAC_ADTS;
         public static final int AMR_NB = MediaRecorder.OutputFormat.AMR_NB;
         public static final int AMR_WB = MediaRecorder.OutputFormat.AMR_WB;
         public static final int MPEG_4 = MediaRecorder.OutputFormat.MPEG_4;
 
-        OutputFormat() {
+        SKOutputFormat() {
             throw new RuntimeException();
         }
     }
 
-    public final class AudioEncoder {
+    public final class SKAudioEncoder {
 
         public static final int AAC = MediaRecorder.AudioEncoder.AAC;
         public static final int AAC_ELD = MediaRecorder.AudioEncoder.AAC_ELD;
@@ -66,7 +66,7 @@ public class SKMicrophoneConfiguration extends SKAbstractConfiguration {
         public static final int AMR_WB = MediaRecorder.AudioEncoder.AMR_WB;
         public static final int HE_AAC = MediaRecorder.AudioEncoder.HE_AAC;
 
-        AudioEncoder() {
+        SKAudioEncoder() {
             throw new RuntimeException();
         }
     }
@@ -86,9 +86,9 @@ public class SKMicrophoneConfiguration extends SKAbstractConfiguration {
         // Set default values
         this.filename = "recording";
         this.outputDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-        this.audioSource = AudioSource.MIC;
-        this.outputFormat = OutputFormat.MPEG_4;
-        this.audioEncoder = AudioEncoder.AAC;
+        this.audioSource = SKAudioSource.MIC;
+        this.outputFormat = SKOutputFormat.MPEG_4;
+        this.audioEncoder = SKAudioEncoder.AAC;
         this.bitrate = 96000;
         this.samplingRate = 44100;
         this.audioChannels = 1;
@@ -181,16 +181,16 @@ public class SKMicrophoneConfiguration extends SKAbstractConfiguration {
     private static String getRecordingExtension(final int outputFormat) {
 
         switch (outputFormat) {
-            case OutputFormat.AAC_ADTS:
+            case SKOutputFormat.AAC_ADTS:
                 return "m4a";
 
-            case OutputFormat.AMR_NB:
+            case SKOutputFormat.AMR_NB:
                 return "amr";
 
-            case OutputFormat.AMR_WB:
+            case SKOutputFormat.AMR_WB:
                 return "awb";
 
-            case OutputFormat.MPEG_4:
+            case SKOutputFormat.MPEG_4:
                 return "m4a";
 
             default:
