@@ -46,6 +46,11 @@ public class SKBatteryStatusData extends SKAbstractData {
         /**
          * TODO
          */
+        UNPLUGGED("Unplugged", 0),
+
+        /**
+         * TODO
+         */
         USB("USB", BatteryManager.BATTERY_PLUGGED_USB),
 
         /**
@@ -71,6 +76,8 @@ public class SKBatteryStatusData extends SKAbstractData {
         public static SKBatteryPlugged valueOf(final int batteryPluggedCode) {
 
             switch (batteryPluggedCode) {
+                case 0:
+                    return UNPLUGGED;
 
                 case BatteryManager.BATTERY_PLUGGED_USB:
                     return USB;
