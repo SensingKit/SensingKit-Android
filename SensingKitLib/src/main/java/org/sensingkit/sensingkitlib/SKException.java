@@ -30,9 +30,9 @@ public class SKException extends Exception {
 
     /**
      *
-     * @param TAG - TAG
-     * @param message - error message
-     * @param errorCode - error code
+     * @param TAG Class TAG that this exception was invoked from.
+     * @param message Error message
+     * @param errorCode Error code
      */
     public SKException(final @NonNull String TAG, final @NonNull String message, final SKExceptionErrorCode errorCode) {
         super(message);
@@ -43,7 +43,7 @@ public class SKException extends Exception {
     /**
      * Get the error code
      *
-     * @return error code
+     * @return The error code
      */
     @SuppressWarnings("unused")
     public SKExceptionErrorCode getErrorCode() {
@@ -51,9 +51,9 @@ public class SKException extends Exception {
     }
 
     /**
-     * Get the tag
+     * Get the Class TAG that this exception was invoked from.
      *
-     * @return tag
+     * @return Class TAG
      */
     @SuppressWarnings("unused")
     public @NonNull String getTAG() {

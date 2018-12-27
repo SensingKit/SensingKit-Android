@@ -64,32 +64,32 @@ public interface SensingKitLibInterface {
     void registerSensor(final SKSensorType sensorType) throws SKException;
 
     /**
-     *  Initializes and registers a sensor into the library with a default sensor configuration.
+     *  Initializes and registers a sensor into the library with a custom sensor configuration.
      *
      *  @param sensorType The type of the sensor that will be initialized and registered in the library.
-     *  @param configuration ...
+     *  @param configuration A configuration object that conforms to SKConfiguration. If no configuration is specified, it will default to a pre-determined sensor configuration.
      */
     void registerSensor(final SKSensorType sensorType, final SKConfiguration configuration) throws SKException;
 
     /**
-     *  Deregisters a sensor from the library. Sensor should not be actively sensing when this method is called. All previously subscribed blocks will also be unsubscribed.
+     *  Deregisters a sensor from the library. Sensor should not be actively sensing when this method is called. All previously subscribed data handlers will also be unsubscribed.
      *
      *  @param sensorType The type of the sensor that will be deregistered.
      */
     void deregisterSensor(final SKSensorType sensorType) throws SKException;
 
     /**
-     *  TODO
+     *  Provides custom configuration to a sensor.
      *
-     *  @param configuration TODO
-     *  @param sensorType TODO
+     *  @param configuration A configuration object that conforms to SKConfiguration. If no configuration is specified, it will default to a pre-determined sensor configuration.
+     *  @param sensorType The type of the sensor that will be configured.
      */
     void setConfiguration(final SKConfiguration configuration, final SKSensorType sensorType) throws SKException;
 
     /**
-     *  TODO
+     *  Gets the configuration of a sensor.
      *
-     *  @param sensorType TODO
+     *  @param sensorType The type of the sensor.
      */
     @NonNull
     SKConfiguration getConfiguration(final SKSensorType sensorType) throws SKException;
@@ -127,13 +127,29 @@ public interface SensingKitLibInterface {
     @NonNull
     String csvHeaderForSensor(final SKSensorType sensorType);
 
-    // TODO documentation
+    /**
+     * TODO:
+     *
+     * @param sensorType
+     * @return
+     * @throws SKException
+     */
     boolean isPermissionGrantedForSensor(final SKSensorType sensorType) throws SKException;
 
-    // TODO documentation
+    /**
+     * TODO:
+     *
+     * @param sensorType
+     * @param activity
+     * @throws SKException
+     */
     void requestPermissionForSensor(final SKSensorType sensorType, final @NonNull Activity activity) throws SKException ;
 
-    // TODO documentation
+    /**
+     * TODO:
+     *
+     * @param activity
+     */
     void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity);
 
     /**
@@ -173,5 +189,4 @@ public interface SensingKitLibInterface {
      *  @return current time in nanoseconds
      */
     long getNanoTime();
-
 }

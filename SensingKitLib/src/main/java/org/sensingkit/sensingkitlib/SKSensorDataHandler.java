@@ -34,7 +34,5 @@ public interface SKSensorDataHandler {
      *  parameter sensorType The type of the sensor producing the SKSensorData object.<br>
      *  parameter sensorData The new sensor data produced by the SKSensorType sensor.
      */
-
     void onDataReceived(final SKSensorType sensorType, final @NonNull SKSensorData sensorData);
-
 }

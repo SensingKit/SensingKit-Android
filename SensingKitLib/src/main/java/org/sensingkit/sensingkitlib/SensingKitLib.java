@@ -33,11 +33,14 @@ public class SensingKitLib implements SensingKitLibInterface {
 
     @SuppressWarnings("unused")
     private static final String TAG = SensingKitLib.class.getSimpleName();
-
     private static SensingKitLib sSensingKitLib;
-
     private final SKSensorManager mSensorManager;
 
+    /**
+     *
+     * @param context
+     * @return
+     */
     @SuppressWarnings("unused")
     public static SensingKitLibInterface sharedSensingKitLib(final @NonNull Context context) {
 
@@ -48,6 +51,10 @@ public class SensingKitLib implements SensingKitLibInterface {
         return sSensingKitLib;
     }
 
+    /**
+     *
+     * @param context
+     */
     private SensingKitLib(final @NonNull Context context) {
         mSensorManager = SKSensorManager.getSensorManager(context);
     }
@@ -113,11 +120,23 @@ public class SensingKitLib implements SensingKitLibInterface {
         mSensorManager.deregisterSensor(sensorType);
     }
 
+    /**
+     *
+     * @param configuration A configuration object that conforms to SKConfiguration. If no configuration is specified, it will default to a pre-determined sensor configuration.
+     * @param sensorType The type of the sensor that will be configured.
+     * @throws SKException
+     */
     @Override
     public void setConfiguration(final SKConfiguration configuration, final SKSensorType sensorType) throws SKException {
         mSensorManager.setConfiguration(configuration, sensorType);
     }
 
+    /**
+     *
+     * @param sensorType The type of the sensor.
+     * @return
+     * @throws SKException
+     */
     @Override
     public @NonNull SKConfiguration getConfiguration(final SKSensorType sensorType) throws SKException {
         return mSensorManager.getConfiguration(sensorType);
@@ -167,17 +186,32 @@ public class SensingKitLib implements SensingKitLibInterface {
         return SKSensorUtilities.csvHeaderForSensor(sensorType);
     }
 
+    /**
+     *
+     * @param sensorType
+     * @return
+     * @throws SKException
+     */
     @Override
     public boolean isPermissionGrantedForSensor(final SKSensorType sensorType) throws SKException {
         return mSensorManager.isPermissionGrantedForSensor(sensorType);
     }
 
+    /**
+     *
+     * @param sensorType
+     * @param activity
+     * @throws SKException
+     */
     @Override
     public void requestPermissionForSensor(final SKSensorType sensorType, final @NonNull Activity activity) throws SKException {
         mSensorManager.requestPermissionForSensor(sensorType, activity);
     }
 
-    // TODO documentation
+    /**
+     *
+     * @param activity
+     */
     @Override
     public void requestPermissionForAllRegisteredSensors(final @NonNull Activity activity) {
         mSensorManager.requestPermissionForAllRegisteredSensors(activity);

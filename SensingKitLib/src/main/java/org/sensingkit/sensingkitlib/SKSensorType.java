@@ -144,21 +144,37 @@ public enum SKSensorType {
         this.nonspacedName = nonspacedName;
     }
 
+    /**
+     *
+     * @return Total number of sensors supported by SensingKit-Android
+     */
     @SuppressWarnings("unused")
     public static int getLength() {
         return SKSensorType.length;
     }
 
+    /**
+     *
+     * @return The sensor's name
+     */
     @SuppressWarnings("unused")
     public @NonNull String getName() {
         return this.name;
     }
 
+    /**
+     *
+     * @return A monospaced version of the sensor's name
+     */
     @SuppressWarnings("unused")
     public @NonNull String getNonspacedName() {
         return this.nonspacedName;
     }
 
+    /**
+     *
+     * @return The sensor's name
+     */
     @NonNull
     @Override
     public String toString() {

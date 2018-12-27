@@ -24,7 +24,7 @@ package org.sensingkit.sensingkitlib;
 public enum SKExceptionErrorCode {
 
     /**
-     * Unknown error..
+     * Unknown error.
      */
     UNKNOWN_ERROR,
 
@@ -92,17 +92,17 @@ public enum SKExceptionErrorCode {
     // Permissions
 
     /**
-     * TODO
+     * Permission is missing from the manifest file
      */
     PERMISSION_MISSING,
 
     /**
-     * TODO
+     * File writer does not have access to write in the this path
      */
     FILE_WRITER_PERMISSION_DENIED,
 
     /**
-     * TODO
+     * File already exists
      */
     FILE_ALREADY_EXISTS
 }
