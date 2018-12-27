@@ -166,7 +166,7 @@ class SKSensorManager {
 
         for (String permission : permissions) {
 
-            if (SKUtilities.isPermissionGranted(permission, mApplicationContext)) {
+            if (!SKUtilities.isPermissionGranted(permission, mApplicationContext)) {
                 permissionsList.add(permission);
             }
         }
@@ -186,7 +186,7 @@ class SKSensorManager {
         else {
             // Only keep permissions that are not granted
             String[] filteredPermissions = filterPermissions(permissions);
-            return(filteredPermissions.length != 0);
+            return(filteredPermissions.length == 0);
         }
     }
 
