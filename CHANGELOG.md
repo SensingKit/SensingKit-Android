@@ -1,6 +1,6 @@
 # Changelog
 
-### 0.5.0 (??, 2018)
+### 0.5.0 (??, 2019)
 - Added Documentation using javadoc generator (thanks to Susan Crayne @crayne)
 - Added support for Permissions (Android 6.0 or greater)
 - Added support for Sensor Configuration
@@ -12,7 +12,7 @@
 - Added missing SKMicrophoneData object
 - Added support for Exceptions (SKExceptions)
 - Added support for JSON data format (thanks to Mo, Fan Vincent @mofanv)
-- Added support for Android Studio 3.2
+- Added support for Android Studio 3.3
 - Added support for Android 8 SDK (Pie)
 - Added support for maven distribution (jCenter and Maven Central)
 - Renamed Activity sensor to Motion Activity
