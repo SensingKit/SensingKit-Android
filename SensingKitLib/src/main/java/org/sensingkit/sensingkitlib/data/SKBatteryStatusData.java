@@ -258,6 +258,9 @@ public class SKBatteryStatusData extends SKAbstractData {
                 case BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE:
                     return UNSPECIFIED_FAILURE;
 
+                case 9:
+                    return UNKNOWN;  // TODO: Check what this 9 constant is.
+
                 default:
                     throw new RuntimeException("Unsupported SKBatteryHealth with code: " + batteryHealthCode);
             }
