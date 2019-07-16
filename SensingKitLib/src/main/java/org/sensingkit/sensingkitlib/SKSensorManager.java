@@ -213,7 +213,7 @@ class SKSensorManager {
             SKSensor sensor = mSensors.get(i);
             if (sensor != null) {
 
-                String permissions[] = sensor.getRequiredPermissions();
+                String[] permissions = sensor.getRequiredPermissions();
 
                 // Only keep permissions that are not granted
                 String[] filteredPermissions = filterPermissions(permissions);
