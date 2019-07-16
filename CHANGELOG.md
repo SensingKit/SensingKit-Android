@@ -23,7 +23,7 @@
 - Renamed all sensor modules into sensors
 - Updated deprecated code for Location and Motion Activity sensors
 - Updated SensingKit-Android API (thanks to Ming-Jiun Huang @U3D3)
-- Updated Google Play Services to 16.0.0
+- Updated Google Play Services to 17.0.0
 - Migrated to AndroidX (moved from old Android Support Classes)
 
 ### 0.2.0 (July 30, 2015)
