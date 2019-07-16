@@ -96,11 +96,7 @@ public class SKAudioLevel extends SKAbstractSensor {
         audioRecord.startRecording();
 
         // init the thread that read the audio buffer
-        Thread thread = new Thread(new Runnable() {
-            public void run() {
-                readAudioBuffer();
-            }
-        });
+        Thread thread = new Thread(this::readAudioBuffer);
 
         // Set priority to max and start the thread that reads the audio level
         thread.setPriority(Thread.currentThread().getThreadGroup().getMaxPriority());
