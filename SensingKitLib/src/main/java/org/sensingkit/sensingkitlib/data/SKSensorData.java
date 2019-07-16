@@ -22,7 +22,7 @@
 package org.sensingkit.sensingkitlib.data;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.json.JSONObject;

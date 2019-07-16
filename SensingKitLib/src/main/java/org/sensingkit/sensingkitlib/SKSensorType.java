@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  *  These constants indicate the type of the sensor.

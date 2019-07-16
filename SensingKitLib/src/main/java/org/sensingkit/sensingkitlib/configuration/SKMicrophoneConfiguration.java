@@ -23,7 +23,7 @@ package org.sensingkit.sensingkitlib.configuration;
 
 import android.media.MediaRecorder;
 import android.os.Environment;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 

@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.configuration;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.SKSensorType;
 

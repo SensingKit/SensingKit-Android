@@ -22,7 +22,7 @@
 
 package org.sensingkit.sensingkitlib.data;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.Identifier;

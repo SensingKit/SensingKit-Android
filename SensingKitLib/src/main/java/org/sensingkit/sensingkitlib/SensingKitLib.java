@@ -23,7 +23,7 @@ package org.sensingkit.sensingkitlib;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.sensingkit.sensingkitlib.configuration.SKConfiguration;
 import org.sensingkit.sensingkitlib.sensors.SKSensorUtilities;

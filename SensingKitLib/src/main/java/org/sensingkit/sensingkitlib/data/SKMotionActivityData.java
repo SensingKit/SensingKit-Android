@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib.data;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.google.android.gms.location.ActivityTransition;
 import com.google.android.gms.location.DetectedActivity;

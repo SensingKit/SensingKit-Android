@@ -21,7 +21,7 @@
 
 package org.sensingkit.sensingkitlib;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public class SKException extends Exception {
 
