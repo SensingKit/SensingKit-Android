@@ -36,8 +36,6 @@ import com.google.android.gms.location.ActivityRecognitionClient;
 import com.google.android.gms.location.ActivityTransition;
 import com.google.android.gms.location.ActivityTransitionRequest;
 import com.google.android.gms.location.DetectedActivity;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 
@@ -167,21 +165,13 @@ public class SKMotionActivity extends SKAbstractSensor {
         Task<Void> task = mActivityRecognitionClient.requestActivityTransitionUpdates(request, mActivityRecognitionPendingIntent);
 
         task.addOnSuccessListener(
-                new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void result) {
-                        // Handle success
-                    }
+                result -> {
+                    // Handle success
                 }
         );
 
         task.addOnFailureListener(
-                new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e(TAG, e.getMessage());
-                    }
-                }
+                e -> Log.e(TAG, e.getMessage())
         );
     }
 
@@ -193,20 +183,10 @@ public class SKMotionActivity extends SKAbstractSensor {
         Task<Void> task = mActivityRecognitionClient.removeActivityTransitionUpdates(mActivityRecognitionPendingIntent);
 
         task.addOnSuccessListener(
-                new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void result) {
-                        mActivityRecognitionPendingIntent.cancel();
-                    }
-                });
+                result -> mActivityRecognitionPendingIntent.cancel());
 
         task.addOnFailureListener(
-                new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e(TAG, e.getMessage());
-                    }
-                });
+                e -> Log.e(TAG, e.getMessage()));
 
         // Unregister receiver
         this.mLocalBroadcastManager.unregisterReceiver(mBroadcastReceiver);

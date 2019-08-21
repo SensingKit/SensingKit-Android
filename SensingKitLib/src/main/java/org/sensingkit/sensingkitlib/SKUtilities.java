@@ -43,6 +43,7 @@ final class SKUtilities {
      *
      * @return 1 if permission is granted; 0 if it is not
      */
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     static boolean isPermissionGranted(final @NonNull String permission, final @NonNull Context context) {
 
         int res = ContextCompat.checkSelfPermission(context, permission);

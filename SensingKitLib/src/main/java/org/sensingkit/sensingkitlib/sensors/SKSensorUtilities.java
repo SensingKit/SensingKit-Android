@@ -129,17 +129,11 @@ public final class SKSensorUtilities {
         switch (sensorType) {
 
             case ACCELEROMETER:
-                return packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER);
-
             case GRAVITY:
-                return packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER);
-
             case LINEAR_ACCELERATION:
                 return packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER);
 
             case GYROSCOPE:
-                return packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_GYROSCOPE);
-
             case ROTATION:
                 return packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_GYROSCOPE);
 
@@ -169,14 +163,10 @@ public final class SKSensorUtilities {
                 return isGooglePlayServicesAvailable(context);
 
             case BATTERY_STATUS:
-                return true;
-
             case SCREEN_STATUS:
                 return true;
 
             case MICROPHONE:
-                return packageManager.hasSystemFeature(PackageManager.FEATURE_MICROPHONE);
-
             case AUDIO_LEVEL:
                 return packageManager.hasSystemFeature(PackageManager.FEATURE_MICROPHONE);
 

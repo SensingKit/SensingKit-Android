@@ -47,7 +47,6 @@ import org.sensingkit.sensingkitlib.data.SKBeaconProximityCollectionData;
 import org.sensingkit.sensingkitlib.data.SKBeaconProximityData;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 @SuppressWarnings("ResourceType")
 public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsumer {
@@ -60,29 +59,25 @@ public class SKBeaconProximity extends SKAbstractSensor implements BeaconConsume
     private BeaconManager mBeaconManager;
     private Region mRegion;
 
-    private final RangeNotifier mRangeNotifier = new RangeNotifier() {
+    private final RangeNotifier mRangeNotifier = (beacons, region) -> {
 
-        @Override
-        public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
+        if (beacons.size() > 0) {
 
-            if (beacons.size() > 0) {
+            // Get the timestamp
+            long timestamp = System.currentTimeMillis();
 
-                // Get the timestamp
-                long timestamp = System.currentTimeMillis();
+            // Create the SKBeaconProximityData objects and add them to a new list
+            ArrayList<SKBeaconProximityData> deviceData = new ArrayList<>(beacons.size());
 
-                // Create the SKBeaconProximityData objects and add them to a new list
-                ArrayList<SKBeaconProximityData> deviceData = new ArrayList<>(beacons.size());
-
-                for (Beacon beacon : beacons) {
-                    deviceData.add(new SKBeaconProximityData(timestamp, beacon));
-                }
-
-                // Build the data object
-                SKAbstractData data = new SKBeaconProximityCollectionData(timestamp, deviceData);
-
-                // Submit sensor data object
-                submitSensorData(data);
+            for (Beacon beacon : beacons) {
+                deviceData.add(new SKBeaconProximityData(timestamp, beacon));
             }
+
+            // Build the data object
+            SKAbstractData data = new SKBeaconProximityCollectionData(timestamp, deviceData);
+
+            // Submit sensor data object
+            submitSensorData(data);
         }
     };
 
