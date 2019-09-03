@@ -13,7 +13,7 @@
 - Added support for Exceptions (SKExceptions)
 - Added support for JSON data format (thanks to Mo, Fan Vincent @mofanv)
 - Added support for Android Studio 3.5
-- Added support for Android 9 SDK (Pie)
+- Added support for Android 10 SDK
 - Added support for maven distribution (jCenter and Maven Central)
 - Renamed Activity sensor to Motion Activity
 - Renamed Audio sensor to Microphone
