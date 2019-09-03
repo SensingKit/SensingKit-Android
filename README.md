@@ -1,4 +1,5 @@
 # SensingKit-Android Library
+[![Build Status](https://travis-ci.com/SensingKit/SensingKit-Android.svg?branch=develop)](https://travis-ci.com/SensingKit/SensingKit-Android)
 
 An Android library that provides Continuous Sensing functionality to your applications. For more information, please refer to the [project website](https://www.sensingkit.org).
 
