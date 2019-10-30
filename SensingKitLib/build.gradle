@@ -27,6 +27,6 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.annotation:annotation:1.1.0'
-    implementation 'org.altbeacon:android-beacon-library:2.16.2'
+    implementation 'org.altbeacon:android-beacon-library:2.16.3'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 }

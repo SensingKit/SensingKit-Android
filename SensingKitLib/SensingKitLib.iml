@@ -122,6 +122,6 @@
     <orderEntry type="library" name="Gradle: androidx.documentfile:documentfile:1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.print:print:1.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: org.altbeacon:android-beacon-library:2.16.2@aar" level="project" />
+    <orderEntry type="library" name="Gradle: org.altbeacon:android-beacon-library:2.16.3@aar" level="project" />
   </component>
 </module>
